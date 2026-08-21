@@ -8,9 +8,7 @@ import {
   TextReveal, 
   ScrollReveal, 
   StaggerContainer, 
-  StaggerItem,
-  HoverCard3D,
-  GlowSpotlight
+  StaggerItem
 } from '@/components/animations/MotionWrappers';
 import { ShieldCheck, Heart, Sparkles, Target, Users, ArrowRight } from 'lucide-react';
 
@@ -43,67 +41,51 @@ export default function AboutPage() {
       {/* Core Principles Grid */}
       <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <StaggerItem>
-          <GlowSpotlight glowColor="rgba(79, 163, 205, 0.12)">
-            <HoverCard3D glowColor="rgba(79, 163, 205, 0.15)">
-              <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full">
-                <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-brand-sky flex items-center justify-center">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Learn by Doing</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Financial wisdom is not learned from lectures; it is built through everyday habits. By connecting chores, stars, rewards, and savings goals, children develop an intuitive relationship between responsibility and earning.
-                </p>
-              </div>
-            </HoverCard3D>
-          </GlowSpotlight>
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full hover:border-brand-sky/40 hover:shadow-md transition-all">
+            <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-brand-sky flex items-center justify-center">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Learn by Doing</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Financial wisdom is not learned from lectures; it is built through everyday habits. By connecting chores, stars, rewards, and savings goals, children develop an intuitive relationship between responsibility and earning.
+            </p>
+          </div>
         </StaggerItem>
 
         <StaggerItem>
-          <GlowSpotlight glowColor="rgba(16, 185, 129, 0.12)">
-            <HoverCard3D glowColor="rgba(16, 185, 129, 0.15)">
-              <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 flex items-center justify-center">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Trust and Privacy First</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  We treat child data as strictly confidential. COPPA compliance, parental consent controls, zero data sale, and complete isolation between adult finances and child spaces are built into the bedrock of our software.
-                </p>
-              </div>
-            </HoverCard3D>
-          </GlowSpotlight>
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full hover:border-emerald-500/40 hover:shadow-md transition-all">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Trust and Privacy First</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              We treat child data as strictly confidential. COPPA compliance, parental consent controls, zero data sale, and complete isolation between adult finances and child spaces are built into the bedrock of our software.
+            </p>
+          </div>
         </StaggerItem>
 
         <StaggerItem>
-          <GlowSpotlight glowColor="rgba(79, 163, 205, 0.12)">
-            <HoverCard3D glowColor="rgba(79, 163, 205, 0.15)">
-              <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full">
-                <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-slate-800 text-brand-navy dark:text-brand-softBlue flex items-center justify-center">
-                  <Target className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Context Over Clutter</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  More financial data does not always mean more clarity. We design tools that cut through repetitive friction to show you what came in, what went out, what is coming next, and where you stand.
-                </p>
-              </div>
-            </HoverCard3D>
-          </GlowSpotlight>
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full hover:border-brand-softBlue/40 hover:shadow-md transition-all">
+            <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-slate-800 text-brand-navy dark:text-brand-softBlue flex items-center justify-center">
+              <Target className="w-5 h-5" />
+            </div>
+            <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Context Over Clutter</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              More financial data does not always mean more clarity. We design tools that cut through repetitive friction to show you what came in, what went out, what is coming next, and where you stand.
+            </p>
+          </div>
         </StaggerItem>
 
         <StaggerItem>
-          <GlowSpotlight glowColor="rgba(245, 158, 11, 0.12)">
-            <HoverCard3D glowColor="rgba(245, 158, 11, 0.15)">
-              <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 flex items-center justify-center">
-                  <Users className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Designed to Grow With You</h2>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  What begins with a child earning their first stars develops into personal budgeting, household coordination, investing, and estate planning as life unfolds.
-                </p>
-              </div>
-            </HoverCard3D>
-          </GlowSpotlight>
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 h-full hover:border-amber-400/40 hover:shadow-md transition-all">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 flex items-center justify-center">
+              <Users className="w-5 h-5" />
+            </div>
+            <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Designed to Grow With You</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              What begins with a child earning their first stars develops into personal budgeting, household coordination, investing, and estate planning as life unfolds.
+            </p>
+          </div>
         </StaggerItem>
       </StaggerContainer>
 

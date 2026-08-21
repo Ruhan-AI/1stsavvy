@@ -9,9 +9,7 @@ import {
   TextReveal, 
   ScrollReveal, 
   StaggerContainer, 
-  StaggerItem,
-  HoverCard3D,
-  GlowSpotlight
+  StaggerItem
 } from '@/components/animations/MotionWrappers';
 import { 
   Wallet, 
@@ -126,33 +124,25 @@ export default function PersonalFinancePage() {
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: EVERYTHING IN VIEW WITH 3D FLOW WAVE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="absolute inset-0 h-64 pointer-events-none opacity-40 dark:opacity-60 -z-10">
-          <FinancialWaveCanvas />
-        </div>
-
+      {/* 2. SECTION: EVERYTHING IN VIEW */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
-          <GlowSpotlight glowColor="rgba(16, 185, 129, 0.12)">
-            <HoverCard3D glowColor="rgba(16, 185, 129, 0.15)">
-              <div className="p-8 sm:p-14 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-6">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Everything in View</span>
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-                  <TextReveal text="Your financial life should not require five different places to understand. Bring the pieces together." />
-                </h2>
-                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                  See connected and manually managed accounts alongside the financial activity around them, giving you a clearer view without constantly moving between banking apps, spreadsheets, and separate tools.
-                </p>
-                <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {['Accounts', 'Balances', 'Transactions', 'Activity'].map((l) => (
-                    <span key={l} className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
-                      {l}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </HoverCard3D>
-          </GlowSpotlight>
+          <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-6 hover:shadow-md transition-shadow duration-300">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Everything in View</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+              <TextReveal text="Your financial life should not require five different places to understand. Bring the pieces together." />
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              See connected and manually managed accounts alongside the financial activity around them, giving you a clearer view without constantly moving between banking apps, spreadsheets, and separate tools.
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 pt-2">
+              {['Accounts', 'Balances', 'Transactions', 'Activity'].map((l) => (
+                <span key={l} className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
+                  {l}
+                </span>
+              ))}
+            </div>
+          </div>
         </ScrollReveal>
       </section>
 

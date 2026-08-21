@@ -9,13 +9,11 @@ import {
   FadeIn, 
   AuroraBackground, 
   FloatingBadge, 
-  HoverCard3D, 
   CountUp,
   TextReveal,
   ScrollReveal,
   StaggerContainer,
-  StaggerItem,
-  GlowSpotlight
+  StaggerItem
 } from '@/components/animations/MotionWrappers';
 import { 
   ArrowRight, 
@@ -144,21 +142,17 @@ export default function HomePage() {
       </section>
 
       {/* 2. SECTION: MONEY IS CONNECTED */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
-          <GlowSpotlight glowColor="rgba(79, 163, 205, 0.16)">
-            <HoverCard3D glowColor="rgba(79, 163, 205, 0.18)">
-              <div className="p-8 sm:p-14 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-4">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
-                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-                  <TextReveal text="Your financial tools should be too." />
-                </h2>
-                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                  A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. FirstSavvy brings them into a more connected financial experience.
-                </p>
-              </div>
-            </HoverCard3D>
-          </GlowSpotlight>
+          <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-4 hover:shadow-md transition-shadow duration-300">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+              <TextReveal text="Your financial tools should be too." />
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. FirstSavvy brings them into a more connected financial experience.
+            </p>
+          </div>
         </ScrollReveal>
       </section>
 

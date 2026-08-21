@@ -9,8 +9,7 @@ import {
   CountUp, 
   HoverCard3D, 
   TextReveal, 
-  ScrollReveal, 
-  GlowSpotlight 
+  ScrollReveal 
 } from '@/components/animations/MotionWrappers';
 import { FinancialWaveCanvas } from '@/components/3d/FinancialWaveCanvas';
 import { 

@@ -8,9 +8,7 @@ import {
   TextReveal, 
   ScrollReveal, 
   StaggerContainer, 
-  StaggerItem,
-  HoverCard3D,
-  GlowSpotlight
+  StaggerItem
 } from '@/components/animations/MotionWrappers';
 import { 
   Sparkles, 
@@ -122,9 +120,8 @@ export default function FamilyPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="right">
-            <HoverCard3D glowColor="rgba(245, 158, 11, 0.15)">
-              <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Sample Assigned Tasks</div>
+            <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 hover:shadow-md transition-shadow duration-300">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Sample Assigned Tasks</div>
                 <div className="space-y-3">
                   {[
                     { title: 'Tidy Bedroom & Make Bed', stars: '2 Stars', schedule: 'Daily' },
@@ -146,7 +143,6 @@ export default function FamilyPage() {
                   ))}
                 </div>
               </div>
-            </HoverCard3D>
           </ScrollReveal>
         </div>
       </section>
