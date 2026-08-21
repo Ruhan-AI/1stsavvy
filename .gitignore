@@ -35,3 +35,7 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 node_modules
+
+# Large Raw Video Files
+*.mov
+public/brand/Loader.mov
