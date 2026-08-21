@@ -39,7 +39,7 @@ export default function PersonalFinancePage() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="my-2 hover:scale-105 transition-transform duration-300">
+            <div className="my-2">
               <WealthGlobeCanvas size={220} />
             </div>
           </FadeIn>
