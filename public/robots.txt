@@ -1,0 +1,30 @@
+# FirstSavvy robots.txt
+User-agent: *
+Allow: /
+Allow: /family
+Allow: /personal-finance
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /updates
+Allow: /privacy
+Allow: /terms
+Allow: /beta-terms
+Allow: /children-privacy
+Allow: /cookies
+
+# Disallow private application & auth routes
+Disallow: /dashboard
+Disallow: /banking
+Disallow: /budgeting
+Disallow: /goals
+Disallow: /calendar
+Disallow: /net-worth
+Disallow: /investments
+Disallow: /contacts
+Disallow: /profiles
+Disallow: /kid-view
+Disallow: /settings
+Disallow: /api/
+
+Sitemap: https://1stsavvy.com/sitemap.xml

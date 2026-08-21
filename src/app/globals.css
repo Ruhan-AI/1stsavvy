@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 14% 97%; /* #F9F7F8 */
+    --foreground: 216 39% 19%; /* #1D2D42 */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 216 39% 19%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 39% 19%;
+    
+    --primary: 214 26% 26%; /* #324154 */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 214 26% 26%;
+    
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 47%; /* #64748B */
+    
+    --accent: 200 56% 55%; /* #4FA3CD */
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 4 86% 41%; /* #B42318 */
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 32 90% 37%; /* #B45309 */
+    --warning-foreground: 0 0% 100%;
+
+    --success: 175 77% 26%; /* #0F766E */
+    --success-foreground: 0 0% 100%;
+    
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 200 56% 55%;
+    
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 214 29% 15%; /* #1c2633 */
+    --foreground: 210 20% 98%;
+    
+    --card: 214 28% 19%; /* #222f3e */
+    --card-foreground: 210 20% 98%;
+    
+    --popover: 214 28% 19%;
+    --popover-foreground: 210 20% 98%;
+    
+    --primary: 200 56% 55%; /* #4FA3CD */
+    --primary-foreground: 214 29% 15%;
+    
+    --secondary: 214 26% 26%;
+    --secondary-foreground: 210 20% 98%;
+    
+    --muted: 214 26% 24%;
+    --muted-foreground: 215 16% 65%;
+    
+    --accent: 200 56% 55%;
+    --accent-foreground: 214 29% 15%;
+    
+    --destructive: 4 86% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 32 90% 48%;
+    --warning-foreground: 0 0% 100%;
+
+    --success: 175 77% 38%;
+    --success-foreground: 0 0% 100%;
+    
+    --border: 214 26% 28%;
+    --input: 214 26% 28%;
+    --ring: 200 56% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-brand-sky/20 selection:text-brand-navyDark;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.4);
+}
+
+/* Glass & Card Treatments */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .glass-panel {
+  background: rgba(34, 47, 62, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(50, 65, 84, 0.6);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, #324154 0%, #4FA3CD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .brand-gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #A4CDE1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="100%" height="100%" fill="none">
+  <!-- Circular stylized Lion / F-S crest emblem -->
+  <g transform="translate(130, 20) scale(0.7)">
+    <circle cx="100" cy="100" r="90" stroke="#4FA3CD" stroke-width="6" stroke-dasharray="480 60" fill="none" stroke-linecap="round"/>
+    
+    <!-- Stylized Lion Mane / F Line -->
+    <path d="M 65 50 C 95 35, 140 45, 160 80 C 175 110, 165 140, 145 165 C 130 180, 100 190, 80 170" 
+          stroke="#4FA3CD" stroke-width="6" stroke-linecap="round" fill="none"/>
+    
+    <!-- Lion Face Profile & Snout -->
+    <path d="M 125 75 C 145 75, 165 90, 165 105 C 165 115, 155 125, 145 125 C 158 135, 152 150, 138 152" 
+          stroke="#4FA3CD" stroke-width="5" stroke-linecap="round" fill="none"/>
+          
+    <!-- S Curve in Center -->
+    <path d="M 100 70 C 70 75, 70 110, 105 120 C 135 130, 125 170, 85 170" 
+          stroke="#4FA3CD" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+    <!-- Subtle Crown / Fur Accent -->
+    <path d="M 90 40 L 105 55 M 120 42 L 130 60" 
+          stroke="#4FA3CD" stroke-width="4" stroke-linecap="round"/>
+          
+    <!-- Micro Tag text at base -->
+    <text x="100" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#4FA3CD" letter-spacing="1">08:18</text>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="200" y="240" text-anchor="middle" font-family="'Cormorant Garamond', 'Libre Baskerville', Georgia, serif" font-size="44" font-weight="600" fill="#324154" letter-spacing="0.5">FirstSavvy</text>
+  
+  <!-- Subtitle -->
+  <text x="200" y="272" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#4FA3CD" letter-spacing="6">STARS TO LEGACY</text>
+</svg>
