@@ -42,17 +42,17 @@ export function InitialSplashScreen() {
       // proceed to show
     }
 
-    // Minimum display time
+    // Minimum display time (increased for better animation completion)
     const minTimer = setTimeout(() => {
       if (videoRef.current?.ended) {
         triggerExit();
       }
-    }, 3800);
+    }, 5500);
 
     // Maximum display time fallback
     const maxTimer = setTimeout(() => {
       triggerExit();
-    }, 5500);
+    }, 7000);
 
     return () => {
       clearTimeout(minTimer);
@@ -62,7 +62,7 @@ export function InitialSplashScreen() {
 
   const handleVideoEnded = useCallback(() => {
     const elapsed = Date.now() - mountTime.current;
-    if (elapsed >= 3500) {
+    if (elapsed >= 5200) {
       triggerExit();
     }
   }, [triggerExit]);
@@ -91,7 +91,7 @@ export function InitialSplashScreen() {
         }}
       />
 
-      <div className="relative flex flex-col items-center justify-center gap-6">
+      <div className="relative flex flex-col items-center justify-center">
         {/* Brand Loader Video — Centered, well-sized, clean white blend */}
         <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center overflow-hidden">
           <video
@@ -117,27 +117,13 @@ export function InitialSplashScreen() {
           </video>
         </div>
 
-        {/* Brand tagline */}
-        <div className="text-center space-y-1.5 select-none -mt-4">
-          <p
-            className="text-xs sm:text-sm font-bold uppercase tracking-[0.32em] text-[#1D2D42]"
-          >
-            FirstSavvy
-          </p>
-          <p
-            className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#66AFD3]"
-          >
-            From Stars to Legacy
-          </p>
-        </div>
-
-        {/* Progress bar */}
-        <div className="w-44 sm:w-56 h-[3px] rounded-full overflow-hidden bg-slate-200/80 mt-1">
+        {/* Progress bar placed closely right below the video */}
+        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 -mt-2">
           <div
             className="h-full rounded-full"
             style={{
               background: 'linear-gradient(90deg, #66AFD3, #1D2D42)',
-              animation: 'splash-progress 4.8s ease-out forwards',
+              animation: 'splash-progress 6.2s ease-out forwards',
             }}
           />
         </div>
@@ -147,9 +133,9 @@ export function InitialSplashScreen() {
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes splash-progress {
           0% { width: 0%; }
-          45% { width: 60%; }
-          80% { width: 88%; }
-          95% { width: 97%; }
+          35% { width: 45%; }
+          70% { width: 80%; }
+          92% { width: 95%; }
           100% { width: 100%; }
         }
       `}} />
