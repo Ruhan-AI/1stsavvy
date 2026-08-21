@@ -80,44 +80,60 @@ export default function PersonalFinancePage() {
 
         {/* 4 Feature Pillars Grid with Stagger */}
         <ScrollReveal delay={0.2} direction="up">
-          <StaggerContainer className="mt-12 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StaggerContainer className="mt-12 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             <StaggerItem>
-              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-brand-sky/40 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-brand-sky flex items-center justify-center">
-                  <Layers className="w-5 h-5" />
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-brand-sky/40 transition-all duration-300 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-11 h-11 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-brand-sky flex items-center justify-center shadow-xs">
+                    <Layers className="w-5 h-5" />
+                  </div>
+                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">Unified Accounts</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Plaid sandbox & manual tracking for complete asset visibility.
+                  </div>
                 </div>
-                <div className="font-bold text-sm text-brand-navy dark:text-white">Unified Accounts</div>
-                <div className="text-xs text-slate-500">Plaid sandbox & manual tracking for complete asset visibility.</div>
               </div>
             </StaggerItem>
 
             <StaggerItem>
-              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-emerald-500/40 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center">
-                  <PieChart className="w-5 h-5" />
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
+                    <PieChart className="w-5 h-5" />
+                  </div>
+                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">Connected Budgets</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Planned vs. actual spending compared dynamically as the month unfolds.
+                  </div>
                 </div>
-                <div className="font-bold text-sm text-brand-navy dark:text-white">Connected Budgets</div>
-                <div className="text-xs text-slate-500">Planned vs. actual spending compared dynamically as the month unfolds.</div>
               </div>
             </StaggerItem>
 
             <StaggerItem>
-              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-amber-400/40 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center">
-                  <Calendar className="w-5 h-5" />
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-amber-400/40 transition-all duration-300 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center shadow-xs">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">Financial Calendar</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Anticipate recurring bills and payday events before they arrive.
+                  </div>
                 </div>
-                <div className="font-bold text-sm text-brand-navy dark:text-white">Financial Calendar</div>
-                <div className="text-xs text-slate-500">Anticipate recurring bills and payday events before they arrive.</div>
               </div>
             </StaggerItem>
 
             <StaggerItem>
-              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-brand-softBlue/40 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-slate-800 text-brand-navy dark:text-brand-softBlue flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5" />
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-indigo-400/40 transition-all duration-300 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs">
+                    <TrendingUp className="w-5 h-5" />
+                  </div>
+                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">True Net Worth</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Assets and liabilities combined into your real financial direction.
+                  </div>
                 </div>
-                <div className="font-bold text-sm text-brand-navy dark:text-white">True Net Worth</div>
-                <div className="text-xs text-slate-500">Assets and liabilities combined into your real financial direction.</div>
               </div>
             </StaggerItem>
           </StaggerContainer>
