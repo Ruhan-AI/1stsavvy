@@ -3,44 +3,36 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
- * InitialSplashScreen — Full-screen brand loader that plays on the FIRST page load.
+ * InitialSplashScreen — Full-screen brand loader on first visit.
  *
- * Next.js loading.tsx only fires during route transitions (Suspense boundaries),
- * not on the initial cold page load. This component fills that gap by rendering
- * a full-screen overlay with the brand video animation that fades out once
- * the page is ready.
- *
- * - Shows for a minimum of 2.2s (so the animation has time to play).
- * - Dismissed after video ends OR after a max timeout of 4s (whichever is first).
- * - Only shows once per session (sessionStorage flag).
+ * Light mode #F9F7F8 background (matching homepage).
+ * Video black background is converted to transparent white via invert + hue-rotate + multiply blend,
+ * rendering the logo in crisp, deep FirstSavvy brand navy/blue without any black rectangle.
  */
 export function InitialSplashScreen() {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hasTriggeredExit = useRef(false);
+  const mountTime = useRef(Date.now());
 
   const triggerExit = useCallback(() => {
     if (hasTriggeredExit.current) return;
     hasTriggeredExit.current = true;
 
-    // Start fade out animation
     setFadeOut(true);
 
-    // Remove from DOM after fade animation completes
     setTimeout(() => {
       setVisible(false);
-      // Mark as shown for this session
       try {
         sessionStorage.setItem('fs-splash-shown', '1');
       } catch {
-        // sessionStorage not available (SSR / incognito edge cases)
+        // sessionStorage not available
       }
-    }, 600);
+    }, 700);
   }, []);
 
   useEffect(() => {
-    // Don't show if already shown this session
     try {
       if (sessionStorage.getItem('fs-splash-shown') === '1') {
         setVisible(false);
@@ -50,18 +42,17 @@ export function InitialSplashScreen() {
       // proceed to show
     }
 
-    // Minimum display time — let the animation breathe
+    // Minimum display time
     const minTimer = setTimeout(() => {
-      // After minimum time, check if video already ended
       if (videoRef.current?.ended) {
         triggerExit();
       }
-    }, 2200);
+    }, 3800);
 
-    // Maximum display time — never block the user for too long
+    // Maximum display time fallback
     const maxTimer = setTimeout(() => {
       triggerExit();
-    }, 4000);
+    }, 5500);
 
     return () => {
       clearTimeout(minTimer);
@@ -70,21 +61,19 @@ export function InitialSplashScreen() {
   }, [triggerExit]);
 
   const handleVideoEnded = useCallback(() => {
-    // Only exit if minimum time has passed
-    const minElapsed = 2200;
-    // We set a small delay to ensure minimum time
-    setTimeout(() => {
+    const elapsed = Date.now() - mountTime.current;
+    if (elapsed >= 3500) {
       triggerExit();
-    }, 100);
+    }
   }, [triggerExit]);
 
   if (!visible) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-all duration-500 ease-out ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-all duration-700 ease-out ${
         fadeOut
-          ? 'opacity-0 scale-105 pointer-events-none'
+          ? 'opacity-0 scale-[1.03] pointer-events-none'
           : 'opacity-100 scale-100'
       }`}
       style={{
@@ -93,65 +82,74 @@ export function InitialSplashScreen() {
       aria-label="Loading FirstSavvy"
       role="progressbar"
     >
-      {/* Subtle radial glow behind the loader */}
+      {/* Soft radial glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102,175,211,0.08) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102,175,211,0.12) 0%, transparent 70%)',
         }}
       />
 
-      <div className="relative flex flex-col items-center justify-center gap-5">
-        {/* Brand Loader Video */}
-        <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center overflow-hidden rounded-2xl">
+      <div className="relative flex flex-col items-center justify-center gap-6">
+        {/* Brand Loader Video — Centered, well-sized, clean white blend */}
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
+            loop
             muted
             playsInline
-            poster="/brand/loader-poster.png"
             onEnded={handleVideoEnded}
-            className="w-full h-full object-contain pointer-events-none select-none drop-shadow-sm"
+            className="w-full h-full object-contain pointer-events-none select-none"
+            style={{
+              filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
+              mixBlendMode: 'multiply',
+            }}
           >
             <source src="/brand/loader.webm" type="video/webm" />
             <source src="/brand/loader.mp4" type="video/mp4" />
             <img
               src="/brand/logo-mark.png"
               alt="FirstSavvy"
-              className="w-full h-full object-contain animate-pulse"
+              className="w-24 h-24 object-contain animate-pulse"
             />
           </video>
         </div>
 
         {/* Brand tagline */}
-        <div className="text-center space-y-1.5 select-none">
+        <div className="text-center space-y-1.5 select-none -mt-4">
           <p
-            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.3em]"
-            style={{ color: '#66AFD3' }}
+            className="text-xs sm:text-sm font-bold uppercase tracking-[0.32em] text-[#1D2D42]"
           >
-            Stars to Legacy
+            FirstSavvy
+          </p>
+          <p
+            className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-[#66AFD3]"
+          >
+            From Stars to Legacy
           </p>
         </div>
 
-        {/* Subtle loading bar */}
-        <div className="w-32 h-[2px] rounded-full overflow-hidden bg-slate-200/60">
+        {/* Progress bar */}
+        <div className="w-44 sm:w-56 h-[3px] rounded-full overflow-hidden bg-slate-200/80 mt-1">
           <div
             className="h-full rounded-full"
             style={{
-              background: 'linear-gradient(90deg, #66AFD3, #5BA0C4)',
-              animation: 'splash-progress 3s ease-out forwards',
+              background: 'linear-gradient(90deg, #66AFD3, #1D2D42)',
+              animation: 'splash-progress 4.8s ease-out forwards',
             }}
           />
         </div>
       </div>
 
-      {/* Inline keyframes for the progress bar */}
+      {/* Inline keyframes for progress bar */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes splash-progress {
           0% { width: 0%; }
-          60% { width: 70%; }
-          90% { width: 92%; }
+          45% { width: 60%; }
+          80% { width: 88%; }
+          95% { width: 97%; }
           100% { width: 100%; }
         }
       `}} />
