@@ -63,10 +63,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/brand/logo-mark.svg', type: 'image/svg+xml' },
-      { url: '/brand/favicon.ico' },
+      { url: '/brand/logo-mark.png', type: 'image/png' },
+      { url: '/brand/logo-mark.png' },
     ],
-    apple: '/brand/apple-touch-icon.png',
+    apple: '/brand/logo-mark.png',
   },
 };
 
@@ -78,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/brand/logo-mark.svg" type="image/svg+xml" />
+        <link rel="icon" href="/brand/logo-mark.png" type="image/png" />
       </head>
       <body className="min-h-screen bg-[#F9F7F8] dark:bg-[#1A232E] text-[#1D2D42] dark:text-slate-100 font-sans antialiased">
         <SmoothScrollProvider>
