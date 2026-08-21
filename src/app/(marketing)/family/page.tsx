@@ -2,6 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
+import { FamilyStarFlowCanvas } from '@/components/3d/FamilyStarFlowCanvas';
+import { 
+  FadeIn, 
+  TextReveal, 
+  ScrollReveal, 
+  StaggerContainer, 
+  StaggerItem,
+  HoverCard3D,
+  GlowSpotlight
+} from '@/components/animations/MotionWrappers';
 import { 
   Sparkles, 
   Star, 
@@ -18,72 +28,86 @@ import {
 
 export default function FamilyPage() {
   return (
-    <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden">
-      {/* 1. HERO SECTION */}
+    <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
+      {/* 1. HERO SECTION WITH 3D STAR FLOW */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-brand-sky/20 text-brand-sky text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Family Financial Education</span>
-          </div>
+        <div className="absolute inset-0 max-w-6xl mx-auto h-[480px] pointer-events-none z-0 opacity-70 dark:opacity-90">
+          <FamilyStarFlowCanvas />
+        </div>
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-tight">
-            Money habits start early.
-            <span className="block text-brand-sky mt-2 italic font-normal">
-              Give them a better place to begin.
-            </span>
-          </h1>
+        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
+          <FadeIn delay={0.05}>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-brand-sky/20 text-brand-sky text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Family Financial Education</span>
+            </div>
+          </FadeIn>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-            FirstSavvy gives kids a practical way to experience responsibility, earning, saving, and progress, while parents stay connected and in control. It starts with stars and grows into real financial understanding.
-          </p>
+          <FadeIn delay={0.15}>
+            <h1 className="text-4xl sm:text-6xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-tight">
+              <TextReveal text="Money habits start early." />
+              <span className="block text-brand-sky mt-2 italic font-normal">
+                <TextReveal text="Give them a better place to begin." delay={0.25} />
+              </span>
+            </h1>
+          </FadeIn>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center justify-center gap-2"
-            >
-              <span>Create a Child Profile</span>
-              <ArrowRight className="w-5 h-5 text-brand-sky" />
-            </Link>
-          </div>
+          <FadeIn delay={0.3}>
+            <p className="max-w-2xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+              FirstSavvy gives kids a practical way to experience responsibility, earning, saving, and progress, while parents stay connected and in control. It starts with stars and grows into real financial understanding.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/signup"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center justify-center gap-2"
+              >
+                <span>Create a Child Profile</span>
+                <ArrowRight className="w-5 h-5 text-brand-sky" />
+              </Link>
+            </div>
+          </FadeIn>
         </div>
 
         {/* Visual Family Hub Mockup */}
-        <div className="mt-12 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-4 rounded-2xl bg-sky-50/60 dark:bg-sky-950/40 border border-brand-sky/20 space-y-2 text-center">
-            <div className="w-10 h-10 rounded-full bg-brand-sky text-white flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-5 h-5" />
+        <ScrollReveal delay={0.3} direction="up">
+          <div className="mt-12 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="p-4 rounded-2xl bg-sky-50/60 dark:bg-sky-950/40 border border-brand-sky/20 space-y-2 text-center hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-brand-sky text-white flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <div className="font-bold text-sm text-brand-navy dark:text-white">Everyday Tasks</div>
+              <div className="text-xs text-slate-500">Chores, homework & responsibilities tailored by age.</div>
             </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">Everyday Tasks</div>
-            <div className="text-xs text-slate-500">Chores, homework & responsibilities tailored by age.</div>
-          </div>
 
-          <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-300/30 space-y-2 text-center">
-            <div className="w-10 h-10 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center mx-auto">
-              <Star className="w-5 h-5 fill-slate-900" />
+            <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-300/30 space-y-2 text-center hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center mx-auto">
+                <Star className="w-5 h-5 fill-slate-900" />
+              </div>
+              <div className="font-bold text-sm text-brand-navy dark:text-white">Star Rewards Ledger</div>
+              <div className="text-xs text-slate-500">Immutable ledger that connects effort directly to earning.</div>
             </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">Star Rewards Ledger</div>
-            <div className="text-xs text-slate-500">Immutable ledger that connects effort directly to earning.</div>
-          </div>
 
-          <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-300/30 space-y-2 text-center">
-            <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center mx-auto">
-              <Target className="w-5 h-5" />
+            <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-300/30 space-y-2 text-center hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center mx-auto">
+                <Target className="w-5 h-5" />
+              </div>
+              <div className="font-bold text-sm text-brand-navy dark:text-white">Goal Building</div>
+              <div className="text-xs text-slate-500">Learning delayed gratification and saving patience.</div>
             </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">Goal Building</div>
-            <div className="text-xs text-slate-500">Learning delayed gratification and saving patience.</div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* 2. SECTION: IT STARTS WITH RESPONSIBILITY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
+          <ScrollReveal direction="left" className="space-y-6">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">It Starts With Responsibility</span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-              Before kids manage money, they can learn what it means to earn it.
+              <TextReveal text="Before kids manage money, they can learn what it means to earn it." />
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
               Create everyday tasks and responsibilities your child can understand and complete. As they make progress, they begin connecting effort with earning and seeing that money is something to understand, not simply receive.
@@ -95,48 +119,54 @@ export default function FamilyPage() {
                 </span>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Sample Assigned Tasks</div>
-            <div className="space-y-3">
-              {[
-                { title: 'Tidy Bedroom & Make Bed', stars: '2 Stars', schedule: 'Daily' },
-                { title: 'Feed & Walk the Family Pet', stars: '3 Stars', schedule: 'Daily' },
-                { title: 'Complete Math & Reading Time', stars: '4 Stars', schedule: 'Weekdays' },
-              ].map((t, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-xs">
-                  <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-brand-sky" />
-                    <div>
-                      <div className="font-bold text-slate-800 dark:text-slate-200">{t.title}</div>
-                      <div className="text-[10px] text-slate-500">{t.schedule}</div>
+          <ScrollReveal direction="right">
+            <HoverCard3D glowColor="rgba(245, 158, 11, 0.15)">
+              <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Sample Assigned Tasks</div>
+                <div className="space-y-3">
+                  {[
+                    { title: 'Tidy Bedroom & Make Bed', stars: '2 Stars', schedule: 'Daily' },
+                    { title: 'Feed & Walk the Family Pet', stars: '3 Stars', schedule: 'Daily' },
+                    { title: 'Complete Math & Reading Time', stars: '4 Stars', schedule: 'Weekdays' },
+                  ].map((t, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-xs">
+                      <div className="flex items-center gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-brand-sky" />
+                        <div>
+                          <div className="font-bold text-slate-800 dark:text-slate-200">{t.title}</div>
+                          <div className="text-[10px] text-slate-500">{t.schedule}</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-amber-500 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 px-2 py-1 rounded">
+                        +{t.stars}
+                      </span>
                     </div>
-                  </div>
-                  <span className="font-bold text-amber-500 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 px-2 py-1 rounded">
-                    +{t.stars}
-                  </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            </HoverCard3D>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* 3. SECTION: FROM STARS TO REWARDS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl text-center max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-softBlue">From Stars to Rewards</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold">
-            Make progress visible. Let accomplishment mean something.
-          </h2>
-          <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
-            For younger children, the journey can start simply: complete a task, earn stars, and work toward a reward. As they grow, those early experiences can progress toward allowances, saving, and more meaningful money decisions.
-          </p>
-          <div className="pt-2 text-sm font-serif italic text-brand-sky font-bold">
-            First the stars. Then the lesson behind them.
+        <ScrollReveal direction="scale">
+          <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl text-center max-w-4xl mx-auto space-y-6">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-softBlue">From Stars to Rewards</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold">
+              <TextReveal text="Make progress visible. Let accomplishment mean something." />
+            </h2>
+            <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
+              For younger children, the journey can start simply: complete a task, earn stars, and work toward a reward. As they grow, those early experiences can progress toward allowances, saving, and more meaningful money decisions.
+            </p>
+            <div className="pt-2 text-sm font-serif italic text-brand-sky font-bold">
+              First the stars. Then the lesson behind them.
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* 4. SECTION: ALLOWANCES AND GOALS */}

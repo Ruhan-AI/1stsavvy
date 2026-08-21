@@ -10,7 +10,12 @@ import {
   AuroraBackground, 
   FloatingBadge, 
   HoverCard3D, 
-  CountUp 
+  CountUp,
+  TextReveal,
+  ScrollReveal,
+  StaggerContainer,
+  StaggerItem,
+  GlowSpotlight
 } from '@/components/animations/MotionWrappers';
 import { 
   ArrowRight, 
@@ -47,11 +52,11 @@ export default function HomePage() {
           </FadeIn>
 
           {/* Headline */}
-          <FadeIn delay={0.2}>
+          <FadeIn delay={0.15}>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-[1.1]">
-              Your family. Your money.
+              <TextReveal text="Your family. Your money." />
               <span className="block mt-2 text-brand-sky font-normal italic">
-                From stars to legacy.
+                <TextReveal text="From stars to legacy." delay={0.3} />
               </span>
             </h1>
           </FadeIn>
@@ -98,14 +103,14 @@ export default function HomePage() {
         </div>
 
         {/* Hero Composed Product UI Preview */}
-        <FadeIn delay={0.7} distance={40}>
+        <ScrollReveal delay={0.2} direction="up" distance={30}>
           <div className="mt-12 sm:mt-16">
             <HeroPreview />
           </div>
-        </FadeIn>
+        </ScrollReveal>
 
         {/* Dynamic Animated Platform Statistics Strip */}
-        <FadeIn delay={0.8}>
+        <ScrollReveal delay={0.3} direction="up">
           <div className="mt-14 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
             <div className="p-4 rounded-2xl bg-white/70 dark:bg-[#1E293B]/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs">
               <div className="text-2xl sm:text-3xl font-bold font-serif text-brand-navy dark:text-white">
@@ -135,68 +140,76 @@ export default function HomePage() {
               <div className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">COPPA Child Safe</div>
             </div>
           </div>
-        </FadeIn>
+        </ScrollReveal>
       </section>
 
       {/* 2. SECTION: MONEY IS CONNECTED */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn>
-          <HoverCard3D glowColor="rgba(79, 163, 205, 0.18)">
-            <div className="p-8 sm:p-14 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-                Your financial tools should be too.
-              </h2>
-              <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. FirstSavvy brings them into a more connected financial experience.
-              </p>
-            </div>
-          </HoverCard3D>
-        </FadeIn>
+        <ScrollReveal direction="up">
+          <GlowSpotlight glowColor="rgba(79, 163, 205, 0.16)">
+            <HoverCard3D glowColor="rgba(79, 163, 205, 0.18)">
+              <div className="p-8 sm:p-14 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-4">
+                <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+                  <TextReveal text="Your financial tools should be too." />
+                </h2>
+                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+                  A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. FirstSavvy brings them into a more connected financial experience.
+                </p>
+              </div>
+            </HoverCard3D>
+          </GlowSpotlight>
+        </ScrollReveal>
       </section>
 
       {/* 3. SECTION: THE FIRSTSAVVY WAY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn>
+        <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">The FirstSavvy Way</span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white mt-2">
-              More than tracking money. Learn it. Manage it. Grow it.
+              <TextReveal text="More than tracking money. Learn it. Manage it. Grow it." />
             </h2>
           </div>
-        </FadeIn>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/60 flex items-center justify-center text-brand-sky">
-              <Sparkles className="w-6 h-6" />
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <StaggerItem>
+            <div className="p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 hover:border-brand-sky/40 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/60 flex items-center justify-center text-brand-sky">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Learn It</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Learn real money skills through earning, saving, responsibility, and working toward goals.
+              </p>
             </div>
-            <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Learn It</h3>
-            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-              Learn real money skills through earning, saving, responsibility, and working toward goals.
-            </p>
-          </div>
+          </StaggerItem>
 
-          <div className="p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600">
-              <Wallet className="w-6 h-6" />
+          <StaggerItem>
+            <div className="p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 hover:border-emerald-500/40 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600">
+                <Wallet className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Manage It</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Manage accounts, transactions, budgets, and recurring financial activity in one place.
+              </p>
             </div>
-            <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Manage It</h3>
-            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-              Manage accounts, transactions, budgets, and recurring financial activity in one place.
-            </p>
-          </div>
+          </StaggerItem>
 
-          <div className="p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="w-12 h-12 rounded-xl bg-navy-50 dark:bg-slate-800 flex items-center justify-center text-brand-navy dark:text-brand-softBlue">
-              <TrendingUp className="w-6 h-6" />
+          <StaggerItem>
+            <div className="p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 hover:border-brand-softBlue/40 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-navy-50 dark:bg-slate-800 flex items-center justify-center text-brand-navy dark:text-brand-softBlue">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Grow It</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Grow your understanding of net worth and the bigger financial picture as life changes.
+              </p>
             </div>
-            <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">Grow It</h3>
-            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-              Grow your understanding of net worth and the bigger financial picture as life changes.
-            </p>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
       </section>
 
       {/* 4. SECTION: PERSONAL FINANCE HIGHLIGHT */}

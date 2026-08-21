@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation, useInView, type Variants } from 'framer-motion';
 
 /**
  * 1. FadeIn & Stagger Entrance
@@ -236,6 +236,311 @@ export function AuroraBackground() {
         }}
         className="absolute -bottom-40 left-1/3 w-[30rem] h-[30rem] rounded-full bg-emerald-500/10 dark:bg-brand-softBlue/10 blur-[120px]"
       />
+    </div>
+  );
+}
+
+/**
+ * 6. Word-by-Word Text Reveal Animation
+ */
+interface TextRevealProps {
+  text: string;
+  className?: string;
+  delay?: number;
+  stagger?: number;
+  as?: 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'div';
+}
+
+export function TextReveal({
+  text,
+  className = '',
+  delay = 0,
+  stagger = 0.035,
+  as: Component = 'span',
+}: TextRevealProps) {
+  const words = text.split(' ');
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: stagger,
+        delayChildren: delay,
+      },
+    },
+  };
+
+  const wordVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 16,
+      filter: 'blur(4px)',
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  return (
+    <motion.span
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-20px' }}
+      className={`inline-block ${className}`}
+    >
+      {words.map((word, idx) => (
+        <motion.span
+          key={idx}
+          variants={wordVariants}
+          className="inline-block mr-[0.28em] last:mr-0"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
+/**
+ * 7. Kinetic Letter-by-Letter Pull Up Animation
+ */
+export function LetterPullUp({
+  text,
+  className = '',
+  delay = 0,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+}) {
+  const letters = text.split('');
+
+  const container: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.02,
+        delayChildren: delay,
+      },
+    },
+  };
+
+  const item: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  return (
+    <motion.span
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className={`inline-flex flex-wrap ${className}`}
+    >
+      {letters.map((char, i) => (
+        <motion.span
+          key={i}
+          variants={item}
+          className={char === ' ' ? 'mr-2' : ''}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
+/**
+ * 8. Viewport Scroll-Triggered Reveal
+ */
+interface ScrollRevealProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  direction?: 'up' | 'down' | 'left' | 'right' | 'scale';
+  distance?: number;
+  duration?: number;
+  once?: boolean;
+}
+
+export function ScrollReveal({
+  children,
+  className = '',
+  delay = 0,
+  direction = 'up',
+  distance = 24,
+  duration = 0.65,
+  once = true,
+}: ScrollRevealProps) {
+  const getVariants = () => {
+    switch (direction) {
+      case 'up':
+        return {
+          hidden: { opacity: 0, y: distance },
+          visible: { opacity: 1, y: 0 },
+        };
+      case 'down':
+        return {
+          hidden: { opacity: 0, y: -distance },
+          visible: { opacity: 1, y: 0 },
+        };
+      case 'left':
+        return {
+          hidden: { opacity: 0, x: distance },
+          visible: { opacity: 1, x: 0 },
+        };
+      case 'right':
+        return {
+          hidden: { opacity: 0, x: -distance },
+          visible: { opacity: 1, x: 0 },
+        };
+      case 'scale':
+        return {
+          hidden: { opacity: 0, scale: 0.94 },
+          visible: { opacity: 1, scale: 1 },
+        };
+    }
+  };
+
+  const variants = getVariants();
+
+  return (
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, margin: '-40px' }}
+      transition={{
+        duration,
+        delay,
+        ease: 'easeOut',
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * 9. Staggered Grid Container and Items
+ */
+export function StaggerContainer({
+  children,
+  className = '',
+  stagger = 0.1,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  stagger?: number;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-40px' }}
+      variants={{
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: stagger,
+            delayChildren: delay,
+          },
+        },
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function StaggerItem({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 20, scale: 0.98 },
+        show: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          transition: {
+            duration: 0.55,
+            ease: 'easeOut',
+          },
+        },
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * 10. Interactive Mouse Cursor Spotlight Glow
+ */
+export function GlowSpotlight({
+  children,
+  className = '',
+  glowColor = 'rgba(79, 163, 205, 0.12)',
+}: {
+  children: React.ReactNode;
+  className?: string;
+  glowColor?: string;
+}) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setPos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setOpacity(1)}
+      onMouseLeave={() => setOpacity(0)}
+      className={`relative overflow-hidden ${className}`}
+    >
+      <div
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-0"
+        style={{
+          opacity,
+          background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, ${glowColor}, transparent 80%)`,
+        }}
+      />
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

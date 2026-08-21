@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -80,7 +81,9 @@ export default function RootLayout({
         <link rel="icon" href="/brand/logo-mark.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-screen bg-[#F9F7F8] dark:bg-[#1A232E] text-[#1D2D42] dark:text-slate-100 font-sans antialiased">
-        {children}
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );

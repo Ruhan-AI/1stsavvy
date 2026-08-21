@@ -6,7 +6,7 @@ import { useFirstSavvyStore } from '@/lib/store';
 import { Interactive3DStarBadge } from '@/components/3d/Interactive3DStarBadge';
 import { Confetti } from '@/components/ui/Confetti';
 import { playChime } from '@/lib/utils/sound';
-import { HoverCard3D, FadeIn } from '@/components/animations/MotionWrappers';
+import { HoverCard3D, FadeIn, TextReveal, ScrollReveal } from '@/components/animations/MotionWrappers';
 import { 
   Star, 
   Sparkles, 
@@ -104,7 +104,7 @@ export default function KidViewPage() {
             <span>Hello, {currentChild.displayName}!</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-serif font-bold">
-            Ready to earn some stars today?
+            <TextReveal text="Ready to earn some stars today?" />
           </h1>
           <p className="text-xs sm:text-sm text-sky-100 max-w-md">
             Complete your everyday tasks, collect stars, and work toward your goals!

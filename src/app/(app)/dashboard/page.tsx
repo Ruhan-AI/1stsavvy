@@ -4,7 +4,15 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useFirstSavvyStore } from '@/lib/store';
 import { formatMoney, formatCompactMoney, calculateNetWorth } from '@/lib/utils/format';
-import { FadeIn, CountUp, HoverCard3D } from '@/components/animations/MotionWrappers';
+import { 
+  FadeIn, 
+  CountUp, 
+  HoverCard3D, 
+  TextReveal, 
+  ScrollReveal, 
+  GlowSpotlight 
+} from '@/components/animations/MotionWrappers';
+import { FinancialWaveCanvas } from '@/components/3d/FinancialWaveCanvas';
 import { 
   TrendingUp, 
   Wallet, 
@@ -71,7 +79,7 @@ export default function DashboardPage() {
             <span>{state.currentHousehold.name}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-brand-navy dark:text-white mt-1">
-            Financial & Household Overview
+            <TextReveal text="Financial & Household Overview" />
           </h1>
         </div>
 

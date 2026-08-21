@@ -2,7 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { WealthGlobeCanvas } from '@/components/3d/WealthGlobeCanvas';
+import { FinancialWaveCanvas } from '@/components/3d/FinancialWaveCanvas';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
+import { 
+  FadeIn, 
+  TextReveal, 
+  ScrollReveal, 
+  StaggerContainer, 
+  StaggerItem,
+  HoverCard3D,
+  GlowSpotlight
+} from '@/components/animations/MotionWrappers';
 import { 
   Wallet, 
   TrendingUp, 
@@ -12,106 +22,138 @@ import {
   ShieldCheck, 
   Sparkles, 
   CreditCard, 
-  Briefcase,
+  Briefcase, 
   PieChart,
   Repeat
 } from 'lucide-react';
 
 export default function PersonalFinancePage() {
   return (
-    <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden">
-      {/* 1. HERO SECTION */}
+    <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
+      {/* 1. HERO SECTION WITH 3D WEALTH GLOBE & WAVE */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <Wallet className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Personal & Household Finance</span>
-          </div>
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 flex flex-col items-center relative z-10">
+          <FadeIn delay={0.05}>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
+              <Wallet className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Personal & Household Finance</span>
+            </div>
+          </FadeIn>
 
-          <div className="my-2">
-            <WealthGlobeCanvas size={220} />
-          </div>
+          <FadeIn delay={0.15}>
+            <div className="my-2 hover:scale-105 transition-transform duration-300">
+              <WealthGlobeCanvas size={220} />
+            </div>
+          </FadeIn>
 
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-tight">
-            Your money tells a bigger story.
-            <span className="block text-brand-sky mt-2 italic font-normal">
-              See the whole picture.
-            </span>
-          </h1>
+          <FadeIn delay={0.25}>
+            <h1 className="text-4xl sm:text-6xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-tight">
+              <TextReveal text="Your money tells a bigger story." />
+              <span className="block text-brand-sky mt-2 italic font-normal">
+                <TextReveal text="See the whole picture." delay={0.3} />
+              </span>
+            </h1>
+          </FadeIn>
 
-          <p className="max-w-3xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-            FirstSavvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized financial experience. Understand where your money is, how it is moving, what is coming next, and how your overall financial position is changing.
-          </p>
+          <FadeIn delay={0.35}>
+            <p className="max-w-3xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+              FirstSavvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized financial experience. Understand where your money is, how it is moving, what is coming next, and how your overall financial position is changing.
+            </p>
+          </FadeIn>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center justify-center gap-2"
-            >
-              <span>Build Your Financial View</span>
-              <ArrowRight className="w-5 h-5 text-brand-sky" />
-            </Link>
-          </div>
+          <FadeIn delay={0.45}>
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/signup"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center justify-center gap-2"
+              >
+                <span>Build Your Financial View</span>
+                <ArrowRight className="w-5 h-5 text-brand-sky" />
+              </Link>
+            </div>
+          </FadeIn>
 
-          <div className="pt-2 text-xs font-serif italic font-semibold text-brand-sky">
-            Know where you stand. See what comes next.
-          </div>
+          <FadeIn delay={0.55}>
+            <div className="pt-2 text-xs font-serif italic font-semibold text-brand-sky">
+              Know where you stand. See what comes next.
+            </div>
+          </FadeIn>
         </div>
 
-        {/* 4 Feature Pillars Grid */}
-        <div className="mt-12 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-brand-sky flex items-center justify-center">
-              <Layers className="w-5 h-5" />
-            </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">Unified Accounts</div>
-            <div className="text-xs text-slate-500">Plaid sandbox & manual tracking for complete asset visibility.</div>
-          </div>
+        {/* 4 Feature Pillars Grid with Stagger */}
+        <ScrollReveal delay={0.2} direction="up">
+          <StaggerContainer className="mt-12 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <StaggerItem>
+              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-brand-sky/40 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-brand-sky flex items-center justify-center">
+                  <Layers className="w-5 h-5" />
+                </div>
+                <div className="font-bold text-sm text-brand-navy dark:text-white">Unified Accounts</div>
+                <div className="text-xs text-slate-500">Plaid sandbox & manual tracking for complete asset visibility.</div>
+              </div>
+            </StaggerItem>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center">
-              <PieChart className="w-5 h-5" />
-            </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">Connected Budgets</div>
-            <div className="text-xs text-slate-500">Planned vs. actual spending compared dynamically as the month unfolds.</div>
-          </div>
+            <StaggerItem>
+              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-emerald-500/40 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center">
+                  <PieChart className="w-5 h-5" />
+                </div>
+                <div className="font-bold text-sm text-brand-navy dark:text-white">Connected Budgets</div>
+                <div className="text-xs text-slate-500">Planned vs. actual spending compared dynamically as the month unfolds.</div>
+              </div>
+            </StaggerItem>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">Financial Calendar</div>
-            <div className="text-xs text-slate-500">Anticipate recurring bills and payday events before they arrive.</div>
-          </div>
+            <StaggerItem>
+              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-amber-400/40 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <div className="font-bold text-sm text-brand-navy dark:text-white">Financial Calendar</div>
+                <div className="text-xs text-slate-500">Anticipate recurring bills and payday events before they arrive.</div>
+              </div>
+            </StaggerItem>
 
-          <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-slate-800 text-brand-navy dark:text-brand-softBlue flex items-center justify-center">
-              <TrendingUp className="w-5 h-5" />
-            </div>
-            <div className="font-bold text-sm text-brand-navy dark:text-white">True Net Worth</div>
-            <div className="text-xs text-slate-500">Assets and liabilities combined into your real financial direction.</div>
-          </div>
-        </div>
+            <StaggerItem>
+              <div className="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2 hover:border-brand-softBlue/40 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-navy-50 dark:bg-slate-800 text-brand-navy dark:text-brand-softBlue flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <div className="font-bold text-sm text-brand-navy dark:text-white">True Net Worth</div>
+                <div className="text-xs text-slate-500">Assets and liabilities combined into your real financial direction.</div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+        </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: EVERYTHING IN VIEW */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Everything in View</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-            Your financial life should not require five different places to understand. Bring the pieces together.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            See connected and manually managed accounts alongside the financial activity around them, giving you a clearer view without constantly moving between banking apps, spreadsheets, and separate tools.
-          </p>
-          <div className="flex flex-wrap justify-center gap-2 pt-2">
-            {['Accounts', 'Balances', 'Transactions', 'Activity'].map((l) => (
-              <span key={l} className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
-                {l}
-              </span>
-            ))}
-          </div>
+      {/* 2. SECTION: EVERYTHING IN VIEW WITH 3D FLOW WAVE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="absolute inset-0 h-64 pointer-events-none opacity-40 dark:opacity-60 -z-10">
+          <FinancialWaveCanvas />
         </div>
+
+        <ScrollReveal direction="up">
+          <GlowSpotlight glowColor="rgba(16, 185, 129, 0.12)">
+            <HoverCard3D glowColor="rgba(16, 185, 129, 0.15)">
+              <div className="p-8 sm:p-14 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-6">
+                <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Everything in View</span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+                  <TextReveal text="Your financial life should not require five different places to understand. Bring the pieces together." />
+                </h2>
+                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+                  See connected and manually managed accounts alongside the financial activity around them, giving you a clearer view without constantly moving between banking apps, spreadsheets, and separate tools.
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 pt-2">
+                  {['Accounts', 'Balances', 'Transactions', 'Activity'].map((l) => (
+                    <span key={l} className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
+                      {l}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </HoverCard3D>
+          </GlowSpotlight>
+        </ScrollReveal>
       </section>
 
       {/* 3. SECTION: TRANSACTIONS & LESS REPETITION */}
