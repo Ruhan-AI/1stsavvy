@@ -39,12 +39,6 @@ export default function HomePage() {
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
         <HeroConstellationCanvas />
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-3 sm:space-y-4">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/25 text-brand-navy dark:text-brand-softBlue text-xs font-bold tracking-wider uppercase backdrop-blur-md shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-brand-sky" />
-            <span>FirstSavvy — Stars to Legacy</span>
-          </div>
-
           {/* Headline */}
           <FadeIn delay={0.15}>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-[1.1]">
@@ -206,10 +200,9 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-              <Wallet className="w-3.5 h-3.5" />
-              <span>Personal Finance</span>
-            </div>
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 block">
+              Personal Finance
+            </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               Now look at the bigger picture. Know what your money is doing.
             </h2>
@@ -277,10 +270,9 @@ export default function HomePage() {
           </div>
 
           <div className="order-1 lg:order-2 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 dark:bg-sky-950/50 text-brand-sky text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Family Experience</span>
-            </div>
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky block">
+              Family Experience
+            </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               Money habits start before the first paycheck. Let kids learn by doing.
             </h2>

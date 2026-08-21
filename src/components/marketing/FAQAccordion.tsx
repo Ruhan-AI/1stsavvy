@@ -36,10 +36,9 @@ export function FAQAccordion({
       {/* Header */}
       <div className="text-center space-y-3 mb-10">
         {eyebrow && (
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/20 text-brand-sky text-xs font-bold uppercase tracking-wider">
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>{eyebrow}</span>
-          </div>
+          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky block">
+            {eyebrow}
+          </span>
         )}
         <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
           {title}

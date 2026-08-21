@@ -35,10 +35,9 @@ export default function FamilyPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
           <FadeIn delay={0.05}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 dark:bg-sky-950/60 border border-brand-sky/20 text-brand-sky text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Family Financial Education</span>
-            </div>
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">
+              Family Financial Education
+            </span>
           </FadeIn>
 
           <FadeIn delay={0.15}>

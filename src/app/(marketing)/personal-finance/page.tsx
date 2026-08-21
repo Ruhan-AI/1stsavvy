@@ -32,10 +32,9 @@ export default function PersonalFinancePage() {
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 flex flex-col items-center relative z-10">
           <FadeIn delay={0.05}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-              <Wallet className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Personal & Household Finance</span>
-            </div>
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+              Personal & Household Finance
+            </span>
           </FadeIn>
 
           <FadeIn delay={0.15}>
