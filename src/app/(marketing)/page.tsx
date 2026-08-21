@@ -110,32 +110,32 @@ export default function HomePage() {
         {/* Dynamic Animated Platform Statistics Strip */}
         <ScrollReveal delay={0.3} direction="up">
           <div className="mt-14 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-            <div className="p-4 rounded-2xl bg-white/70 dark:bg-[#1E293B]/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold font-serif text-brand-navy dark:text-white">
-                $<CountUp value={14} suffix=".2M+" />
+            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
+              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-brand-navy dark:text-white tabular-nums">
+                <CountUp value={14.2} prefix="$" suffix="M+" decimals={1} duration={2.2} />
               </div>
-              <div className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">Household Wealth Tracked</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">Household Wealth Tracked</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/70 dark:bg-[#1E293B]/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold font-serif text-brand-sky">
-                <CountUp value={28500} suffix="+" />
+            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
+              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-brand-sky tabular-nums">
+                <CountUp value={28500} suffix="+" decimals={0} duration={2.2} />
               </div>
-              <div className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">Chores & Stars Earned</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">Chores & Stars Earned</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/70 dark:bg-[#1E293B]/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold font-serif text-emerald-600 dark:text-emerald-400">
-                <CountUp value={99} suffix=".9%" decimals={1} />
+            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
+              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-emerald-600 dark:text-emerald-400 tabular-nums">
+                <CountUp value={99.9} suffix="%" decimals={1} duration={2.2} />
               </div>
-              <div className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">Plaid Bank Encryption</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">Plaid Bank Encryption</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/70 dark:bg-[#1E293B]/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs">
-              <div className="text-2xl sm:text-3xl font-bold font-serif text-amber-500">
-                <CountUp value={100} suffix="%" />
+            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
+              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-amber-500 tabular-nums">
+                <CountUp value={100} suffix="%" decimals={0} duration={2.2} />
               </div>
-              <div className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">COPPA Child Safe</div>
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">COPPA Child Safe</div>
             </div>
           </div>
         </ScrollReveal>

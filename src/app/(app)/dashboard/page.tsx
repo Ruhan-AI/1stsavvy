@@ -110,7 +110,7 @@ export default function DashboardPage() {
               <span>Total Net Worth</span>
               <TrendingUp className="w-4 h-4 text-emerald-600" />
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-brand-navy dark:text-white mt-2">
+            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-brand-navy dark:text-white mt-2">
               $<CountUp value={netWorthCents / 100} decimals={2} />
             </div>
             <div className="text-[11px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
@@ -131,7 +131,7 @@ export default function DashboardPage() {
               <span>August Spending</span>
               <Wallet className="w-4 h-4 text-brand-sky" />
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-brand-navy dark:text-white mt-2">
+            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-brand-navy dark:text-white mt-2">
               $<CountUp value={totalSpendingCents / 100} decimals={2} />
             </div>
             <div className="text-[11px] text-slate-500 mt-1">
@@ -152,7 +152,7 @@ export default function DashboardPage() {
               <span>Cash In / Out</span>
               <Scale className="w-4 h-4 text-amber-500" />
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2">
+            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-emerald-600 dark:text-emerald-400 mt-2">
               +$<CountUp value={(totalIncomeCents - totalSpendingCents) / 100} decimals={2} />
             </div>
             <div className="text-[11px] text-slate-500 mt-1">
@@ -173,7 +173,7 @@ export default function DashboardPage() {
               <span>Cash & Liquid Assets</span>
               <PiggyBank className="w-4 h-4 text-brand-softBlue" />
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-brand-navy dark:text-white mt-2">
+            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-brand-navy dark:text-white mt-2">
               $<CountUp
                 value={
                   state.accounts

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, useInView, type Variants } from 'framer-motion';
 
 /**
@@ -66,8 +66,14 @@ export function CountUp({
   className = '',
 }: CountUpProps) {
   const [displayValue, setDisplayValue] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
+    if (!isInView || hasAnimated.current) return;
+    hasAnimated.current = true;
+
     let startTimestamp: number | null = null;
     const startValue = 0;
 
@@ -80,18 +86,20 @@ export function CountUp({
 
       if (progress < 1) {
         requestAnimationFrame(step);
+      } else {
+        setDisplayValue(value);
       }
     };
 
     requestAnimationFrame(step);
-  }, [value, duration]);
+  }, [isInView, value, duration]);
 
   const formatted = decimals > 0
     ? displayValue.toFixed(decimals)
     : Math.round(displayValue).toLocaleString();
 
   return (
-    <span className={className}>
+    <span ref={ref} className={className}>
       {prefix}{formatted}{suffix}
     </span>
   );
