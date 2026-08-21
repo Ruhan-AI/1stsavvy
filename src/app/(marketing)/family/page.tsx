@@ -29,7 +29,7 @@ export default function FamilyPage() {
     <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
       {/* 1. HERO SECTION WITH 3D STAR FLOW */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 max-w-6xl mx-auto h-[480px] pointer-events-none z-0 opacity-70 dark:opacity-90">
+        <div className="absolute inset-0 max-w-6xl mx-auto h-[480px] pointer-events-none z-0 opacity-30 dark:opacity-40">
           <FamilyStarFlowCanvas />
         </div>
 

@@ -49,23 +49,27 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
     const group = new THREE.Group();
     scene.add(group);
 
-    // Create 3D Gold Coin/Star Objects
-    const starGeom = new THREE.OctahedronGeometry(0.5, 0);
+    // Create 3D Gold Coin/Star Objects with subtle opacity
+    const starGeom = new THREE.OctahedronGeometry(0.35, 0);
     const starMat = new THREE.MeshStandardMaterial({
       color: 0xf59e0b,
       metalness: 0.8,
-      roughness: 0.2,
+      roughness: 0.4,
+      transparent: true,
+      opacity: 0.3,
       emissive: 0xd97706,
-      emissiveIntensity: 0.3,
+      emissiveIntensity: 0.15,
     });
 
-    const coinGeom = new THREE.CylinderGeometry(0.4, 0.4, 0.1, 16);
+    const coinGeom = new THREE.CylinderGeometry(0.28, 0.28, 0.08, 16);
     const coinMat = new THREE.MeshStandardMaterial({
       color: 0x38bdf8,
       metalness: 0.7,
-      roughness: 0.3,
+      roughness: 0.4,
+      transparent: true,
+      opacity: 0.25,
       emissive: 0x0284c7,
-      emissiveIntensity: 0.2,
+      emissiveIntensity: 0.15,
     });
 
     const objects: {
@@ -78,14 +82,14 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
       baseY: number;
     }[] = [];
 
-    const numItems = 28;
+    const numItems = 20;
     for (let i = 0; i < numItems; i++) {
       const isStar = i % 2 === 0;
       const mesh = new THREE.Mesh(isStar ? starGeom : coinGeom, isStar ? starMat : coinMat);
 
-      const radius = 3.5 + Math.random() * 6;
+      const radius = 5.0 + Math.random() * 6.5;
       const angle = (i / numItems) * Math.PI * 2 + Math.random();
-      const baseY = (Math.random() - 0.5) * 8;
+      const baseY = (Math.random() - 0.5) * 9;
 
       mesh.position.set(
         Math.cos(angle) * radius,
@@ -93,16 +97,16 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
         Math.sin(angle) * (radius * 0.6)
       );
 
-      const scale = 0.5 + Math.random() * 0.7;
+      const scale = 0.35 + Math.random() * 0.4;
       mesh.scale.set(scale, scale, scale);
 
       group.add(mesh);
 
       objects.push({
         mesh,
-        rotSpeedX: (Math.random() - 0.5) * 0.04,
-        rotSpeedY: (Math.random() - 0.5) * 0.04,
-        orbitSpeed: 0.003 + Math.random() * 0.005,
+        rotSpeedX: (Math.random() - 0.5) * 0.03,
+        rotSpeedY: (Math.random() - 0.5) * 0.03,
+        orbitSpeed: 0.002 + Math.random() * 0.004,
         radius,
         angle,
         baseY,
@@ -110,7 +114,7 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
     }
 
     // Sparkle Particle Field
-    const sparkleCount = 120;
+    const sparkleCount = 80;
     const sparklePositions = new Float32Array(sparkleCount * 3);
     const sparkleColors = new Float32Array(sparkleCount * 3);
 
@@ -118,8 +122,8 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
     const cSky = new THREE.Color(0x7dd3fc);
 
     for (let i = 0; i < sparkleCount; i++) {
-      sparklePositions[i * 3] = (Math.random() - 0.5) * 25;
-      sparklePositions[i * 3 + 1] = (Math.random() - 0.5) * 16;
+      sparklePositions[i * 3] = (Math.random() - 0.5) * 28;
+      sparklePositions[i * 3 + 1] = (Math.random() - 0.5) * 18;
       sparklePositions[i * 3 + 2] = (Math.random() - 0.5) * 15;
 
       const c = Math.random() > 0.5 ? cStar : cSky;
@@ -133,10 +137,10 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
     sparkleGeom.setAttribute('color', new THREE.BufferAttribute(sparkleColors, 3));
 
     const sparkleMat = new THREE.PointsMaterial({
-      size: 0.12,
+      size: 0.08,
       vertexColors: true,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.25,
       blending: THREE.AdditiveBlending,
     });
 
