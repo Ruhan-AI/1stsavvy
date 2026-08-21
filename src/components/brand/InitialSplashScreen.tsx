@@ -42,17 +42,17 @@ export function InitialSplashScreen() {
       // proceed to show
     }
 
-    // Minimum display time (increased for better animation completion)
+    // Minimum display time (4.5s)
     const minTimer = setTimeout(() => {
       if (videoRef.current?.ended) {
         triggerExit();
       }
-    }, 5500);
+    }, 4500);
 
     // Maximum display time fallback
     const maxTimer = setTimeout(() => {
       triggerExit();
-    }, 7000);
+    }, 6000);
 
     return () => {
       clearTimeout(minTimer);
@@ -62,7 +62,7 @@ export function InitialSplashScreen() {
 
   const handleVideoEnded = useCallback(() => {
     const elapsed = Date.now() - mountTime.current;
-    if (elapsed >= 5200) {
+    if (elapsed >= 4200) {
       triggerExit();
     }
   }, [triggerExit]);
@@ -123,7 +123,7 @@ export function InitialSplashScreen() {
             className="h-full rounded-full"
             style={{
               background: 'linear-gradient(90deg, #66AFD3, #1D2D42)',
-              animation: 'splash-progress 6.2s ease-out forwards',
+              animation: 'splash-progress 5.0s ease-out forwards',
             }}
           />
         </div>
