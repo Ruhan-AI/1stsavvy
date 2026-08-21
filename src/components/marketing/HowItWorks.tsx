@@ -130,7 +130,7 @@ export function HowItWorks() {
         </p>
       </div>
 
-      {/* Interactive Step Navigation Tabs with sliding pill */}
+      {/* Interactive Step Navigation Tabs with fluid directional fill & drain wipe */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
         {STEPS.map((s, idx) => {
           const StepIcon = s.icon;
@@ -141,53 +141,71 @@ export function HowItWorks() {
             <button
               key={s.step}
               onClick={() => handleStepChange(idx)}
-              className="relative p-3.5 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky group cursor-pointer"
+              className="relative p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-slate-50 dark:bg-slate-800/80 text-left transition-all duration-200 flex flex-col justify-between overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky group cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 shadow-xs"
             >
-              {/* Animated Active Background Highlight */}
-              {isActive && (
-                <motion.div
-                  layoutId="activeStepPill"
-                  className="absolute inset-0 bg-brand-navy dark:bg-slate-900 border border-brand-sky/40 shadow-md"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
-
-              {/* Inactive Background */}
-              {!isActive && (
-                <div className="absolute inset-0 bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 group-hover:bg-slate-100 dark:group-hover:bg-slate-700/80 transition-colors" />
-              )}
-
-              <div className="relative z-10 flex items-center justify-between w-full mb-2.5">
-                <span 
-                  className={`text-[11px] font-bold px-2 py-0.5 rounded-md transition-colors ${
-                    isActive 
-                      ? 'bg-brand-sky text-white' 
-                      : isPassed
-                      ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
-                      : 'bg-slate-200/80 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
-                  }`}
-                >
-                  Step {s.step}
-                </span>
-
-                <StepIcon 
-                  className={`w-4 h-4 transition-colors ${
-                    isActive 
-                      ? 'text-brand-sky' 
-                      : isPassed
-                      ? 'text-emerald-500'
-                      : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'
-                  }`} 
-                />
+              {/* 1. Base Inactive Layer (Visible when card is not filled) */}
+              <div className="relative z-0 flex flex-col justify-between h-full w-full">
+                <div className="flex items-center justify-between w-full mb-2.5">
+                  <span 
+                    className={`text-[11px] font-bold px-2 py-0.5 rounded-md transition-colors ${
+                      isPassed 
+                        ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300' 
+                        : 'bg-slate-200/80 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
+                    }`}
+                  >
+                    Step {s.step}
+                  </span>
+                  <StepIcon 
+                    className={`w-4 h-4 transition-colors ${
+                      isPassed 
+                        ? 'text-emerald-500' 
+                        : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300'
+                    }`} 
+                  />
+                </div>
+                <div className="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">
+                  {s.title}
+                </div>
               </div>
 
-              <div 
-                className={`relative z-10 text-xs font-bold truncate transition-colors ${
-                  isActive ? 'text-white' : 'text-slate-700 dark:text-slate-200'
-                }`}
+              {/* 2. Animated Color Fill Layer (Smoothly wipes in from start and drains out to next card) */}
+              <motion.div
+                className="absolute inset-0 bg-brand-navy dark:bg-slate-900 border border-brand-sky/40 shadow-md p-3.5 flex flex-col justify-between z-10 overflow-hidden pointer-events-none"
+                initial={false}
+                animate={{
+                  scaleX: isActive ? 1 : 0,
+                  opacity: isActive ? 1 : 0,
+                }}
+                style={{
+                  transformOrigin: isActive 
+                    ? (direction > 0 ? 'left center' : 'right center')
+                    : (direction > 0 ? 'right center' : 'left center'),
+                }}
+                transition={{
+                  duration: 0.45,
+                  ease: [0.25, 1, 0.5, 1],
+                }}
               >
-                {s.title}
-              </div>
+                <div className="flex items-center justify-between w-full mb-2.5">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-brand-sky text-white shadow-xs">
+                    Step {s.step}
+                  </span>
+                  <StepIcon className="w-4 h-4 text-brand-sky" />
+                </div>
+                <div className="text-xs font-bold text-white truncate">
+                  {s.title}
+                </div>
+
+                {/* Micro Ambient Shimmer line along the bottom of active card */}
+                {isActive && (
+                  <motion.div 
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-sky via-white to-brand-sky"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  />
+                )}
+              </motion.div>
             </button>
           );
         })}
