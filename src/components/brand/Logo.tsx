@@ -18,15 +18,15 @@ export function Logo({
 }: LogoProps) {
   // Dimensions map
   const dimensions = {
-    sm: { mark: 32, height: 32, text: 'text-lg', sub: 'text-[9px] tracking-[0.25em]' },
-    md: { mark: 40, height: 44, text: 'text-2xl', sub: 'text-[10px] tracking-[0.3em]' },
-    lg: { mark: 52, height: 56, text: 'text-3xl', sub: 'text-xs tracking-[0.35em]' },
-    xl: { mark: 72, height: 80, text: 'text-4xl', sub: 'text-sm tracking-[0.4em]' },
+    sm: { mark: 34, height: 34, text: 'text-xl', sub: 'text-[9px] tracking-[0.24em]' },
+    md: { mark: 44, height: 44, text: 'text-2xl sm:text-[1.65rem]', sub: 'text-[10px] tracking-[0.28em]' },
+    lg: { mark: 56, height: 56, text: 'text-3xl', sub: 'text-xs tracking-[0.32em]' },
+    xl: { mark: 76, height: 76, text: 'text-4xl sm:text-5xl', sub: 'text-sm tracking-[0.36em]' },
   }[size];
 
   const content = (
-    <div className={`inline-flex items-center gap-3 transition-opacity hover:opacity-95 ${className}`}>
-      {/* Precision Circular Lion & F/S Crest Icon */}
+    <div className={`inline-flex items-center gap-3.5 transition-opacity hover:opacity-95 group ${className}`}>
+      {/* Precision Circular Lion & F/S Monogram Crest Icon */}
       <div 
         className="relative shrink-0 flex items-center justify-center"
         style={{ width: dimensions.mark, height: dimensions.mark }}
@@ -37,56 +37,93 @@ export function Logo({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Outer Ring */}
-          <circle 
-            cx="100" 
-            cy="100" 
-            r="90" 
+          {/* Outer Sweeping Arc */}
+          <path 
+            d="M 82 178 C 50 164, 34 128, 38 90 C 44 52, 74 26, 114 26 C 142 26, 168 44, 176 76" 
             stroke="#4FA3CD" 
-            strokeWidth="7" 
-            strokeDasharray="480 60" 
+            strokeWidth="6.5" 
             strokeLinecap="round"
           />
-          {/* Lion Mane & F Shape */}
+
+          {/* Top Mane Crown Rays */}
           <path 
-            d="M 65 50 C 95 35, 140 45, 160 80 C 175 110, 165 140, 145 165 C 130 180, 100 190, 80 170" 
-            stroke="#4FA3CD" 
-            strokeWidth="7" 
-            strokeLinecap="round"
-          />
-          {/* Lion Face Profile */}
-          <path 
-            d="M 125 75 C 145 75, 165 90, 165 105 C 165 115, 155 125, 145 125 C 158 135, 152 150, 138 152" 
-            stroke="#4FA3CD" 
-            strokeWidth="6" 
-            strokeLinecap="round"
-          />
-          {/* Center S Curve */}
-          <path 
-            d="M 100 70 C 70 75, 70 110, 105 120 C 135 130, 125 170, 85 170" 
-            stroke="#4FA3CD" 
-            strokeWidth="7" 
-            strokeLinecap="round"
-          />
-          {/* Top Crown / Mane accents */}
-          <path 
-            d="M 90 40 L 105 55 M 120 42 L 130 60" 
+            d="M 92 42 C 108 38, 128 42, 142 56" 
             stroke="#4FA3CD" 
             strokeWidth="5" 
             strokeLinecap="round"
           />
-          {/* Micro DB:18 Tag */}
+
+          {/* Letter F: Vertical Left Stem */}
+          <path 
+            d="M 66 60 L 66 150" 
+            stroke="#4FA3CD" 
+            strokeWidth="6.5" 
+            strokeLinecap="round"
+          />
+
+          {/* Letter F: Top Bar sweeping into Mane & Ear */}
+          <path 
+            d="M 66 60 C 86 58, 108 56, 124 66 C 128 54, 138 56, 140 68" 
+            stroke="#4FA3CD" 
+            strokeWidth="6" 
+            strokeLinecap="round"
+          />
+
+          {/* Letter F: Middle Horizontal Bar */}
+          <path 
+            d="M 66 98 L 96 98" 
+            stroke="#4FA3CD" 
+            strokeWidth="6" 
+            strokeLinecap="round"
+          />
+
+          {/* Lion Face Profile: Brow, Nose, Snout & Open Roar Mouth */}
+          <path 
+            d="M 140 68 C 146 78, 154 88, 164 96 C 168 100, 172 102, 172 107 C 170 112, 162 114, 158 115 C 166 118, 162 126, 154 128 C 146 130, 142 138, 142 148 C 142 160, 134 170, 118 176" 
+            stroke="#4FA3CD" 
+            strokeWidth="5.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+
+          {/* Lion Eye Feature */}
+          <path 
+            d="M 140 92 Q 146 88 152 92" 
+            stroke="#4FA3CD" 
+            strokeWidth="4" 
+            strokeLinecap="round"
+          />
+
+          {/* Letter S: Nested Center Flow Monogram */}
+          <path 
+            d="M 116 102 C 104 90, 78 92, 78 114 C 78 136, 115 132, 115 154 C 115 174, 88 174, 72 156" 
+            stroke="#4FA3CD" 
+            strokeWidth="6" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+
+          {/* Scripture Reference Pill (D8:18) */}
+          <rect 
+            x="86" 
+            y="178" 
+            width="28" 
+            height="12" 
+            rx="3" 
+            fill="#4FA3CD" 
+            fillOpacity="0.15" 
+          />
           <text 
             x="100" 
-            y="195" 
+            y="187" 
             textAnchor="middle" 
             fontFamily="Inter, sans-serif" 
-            fontSize="9" 
-            fontWeight="700" 
+            fontSize="8" 
+            fontWeight="800" 
             fill="#4FA3CD" 
-            letterSpacing="1"
+            letterSpacing="0.8"
           >
-            08:18
+            D8:18
           </text>
         </svg>
       </div>
@@ -98,13 +135,14 @@ export function Logo({
             className={`font-serif font-bold leading-none tracking-tight ${dimensions.text} ${
               variant === 'dark' ? 'text-white' : 'text-brand-navy dark:text-white'
             }`}
+            style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", serif)' }}
           >
             FirstSavvy
           </span>
           {showTagline && (
             <span 
-              className={`font-sans font-bold uppercase mt-1 ${dimensions.sub} ${
-                variant === 'dark' ? 'text-brand-softBlue' : 'text-brand-sky dark:text-brand-softBlue'
+              className={`font-sans font-bold uppercase mt-1.5 ${dimensions.sub} ${
+                variant === 'dark' ? 'text-brand-sky' : 'text-brand-sky dark:text-brand-softBlue'
               }`}
             >
               Stars To Legacy
