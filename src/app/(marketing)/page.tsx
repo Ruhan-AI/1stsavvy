@@ -40,14 +40,10 @@ export default function HomePage() {
         <HeroConstellationCanvas />
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-3 sm:space-y-4">
           {/* Eyebrow */}
-          <FadeIn delay={0.05}>
-            <FloatingBadge duration={5} className="inline-block">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/25 text-brand-navy dark:text-brand-softBlue text-xs font-bold tracking-wider uppercase backdrop-blur-md shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-brand-sky" />
-                <span>FirstSavvy — Stars to Legacy</span>
-              </div>
-            </FloatingBadge>
-          </FadeIn>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/25 text-brand-navy dark:text-brand-softBlue text-xs font-bold tracking-wider uppercase backdrop-blur-md shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-brand-sky" />
+            <span>FirstSavvy — Stars to Legacy</span>
+          </div>
 
           {/* Headline */}
           <FadeIn delay={0.15}>
