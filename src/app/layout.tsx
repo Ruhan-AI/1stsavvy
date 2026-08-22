@@ -68,10 +68,7 @@ export const metadata: Metadata = {
     images: ['/brand/og-image.png'],
   },
   icons: {
-    icon: [
-      { url: '/brand/logo-mark.png', type: 'image/png' },
-      { url: '/brand/logo-mark.png' },
-    ],
+    icon: '/brand/logo-mark.png',
     apple: '/brand/logo-mark.png',
   },
   robots: {
@@ -142,14 +139,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/brand/logo-mark.png" type="image/png" />
+      <body className="min-h-screen bg-[#F9F7F8] dark:bg-[#1A232E] text-[#1D2D42] dark:text-slate-100 font-sans antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="min-h-screen bg-[#F9F7F8] dark:bg-[#1A232E] text-[#1D2D42] dark:text-slate-100 font-sans antialiased">
         <InitialSplashScreen />
         <SmoothScrollProvider>
           {children}

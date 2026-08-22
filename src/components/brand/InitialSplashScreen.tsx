@@ -10,11 +10,12 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
  * - Sleek progress bar right beneath.
  */
 export function InitialSplashScreen() {
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hasTriggeredExit = useRef(false);
-  const mountTime = useRef(Date.now());
+  const mountTime = useRef(0);
 
   const triggerExit = useCallback(() => {
     if (hasTriggeredExit.current) return;
@@ -25,7 +26,9 @@ export function InitialSplashScreen() {
     setTimeout(() => {
       setVisible(false);
       try {
-        sessionStorage.setItem('fs-splash-shown', '1');
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('fs-splash-shown', '1');
+        }
       } catch {
         // sessionStorage not available
       }
@@ -33,8 +36,11 @@ export function InitialSplashScreen() {
   }, []);
 
   useEffect(() => {
+    setMounted(true);
+    mountTime.current = Date.now();
+
     try {
-      if (sessionStorage.getItem('fs-splash-shown') === '1') {
+      if (typeof window !== 'undefined' && sessionStorage.getItem('fs-splash-shown') === '1') {
         setVisible(false);
         return;
       }
@@ -67,7 +73,8 @@ export function InitialSplashScreen() {
     }
   }, [triggerExit]);
 
-  if (!visible) return null;
+  // Prevent SSR / hydration mismatch
+  if (!mounted || !visible) return null;
 
   return (
     <div
@@ -128,17 +135,6 @@ export function InitialSplashScreen() {
           />
         </div>
       </div>
-
-      {/* Inline keyframes for progress bar */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes splash-progress {
-          0% { width: 0%; }
-          35% { width: 45%; }
-          70% { width: 80%; }
-          92% { width: 95%; }
-          100% { width: 100%; }
-        }
-      `}} />
     </div>
   );
 }
