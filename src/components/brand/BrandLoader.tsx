@@ -23,8 +23,8 @@ export function BrandLoader({
   }[size];
 
   const loaderElement = (
-    <div className={`flex flex-col items-center justify-center gap-3 ${className}`}>
-      {/* Optimized Video Animation Container */}
+    <div className={`flex flex-col items-center justify-center gap-2 ${className}`}>
+      {/* Optimized Video Animation Container - focused on crest */}
       <div className={`relative ${sizeStyles} flex items-center justify-center overflow-hidden rounded-2xl`}>
         <video
           autoPlay
@@ -32,7 +32,7 @@ export function BrandLoader({
           muted
           playsInline
           poster="/brand/loader-poster.png"
-          className="w-full h-full object-contain pointer-events-none drop-shadow-sm select-none scale-[1.3] -translate-y-2"
+          className="w-full h-full object-contain pointer-events-none drop-shadow-sm select-none scale-[1.9] -translate-y-4"
           style={{
             filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
             mixBlendMode: 'multiply',
@@ -50,7 +50,7 @@ export function BrandLoader({
       </div>
 
       {/* Brand Title with Space */}
-      <div className="text-center space-y-1 select-none animate-fade-in">
+      <div className="text-center space-y-0.5 select-none animate-fade-in">
         <span 
           className="font-serif font-bold text-lg text-brand-navy dark:text-white tracking-tight"
           style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}

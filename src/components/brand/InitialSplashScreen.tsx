@@ -6,8 +6,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
  * InitialSplashScreen — Full-screen brand loader on first visit.
  *
  * - Light mode #F9F7F8 background (matching homepage).
- * - Focuses on the animated Lion crest from the video with pure brand navy/blue.
- * - Displays official "First Savvy" wordmark with proper gap & typography.
+ * - Focused 100% on the animated Lion Crest (zoomed past the video's baked-in text).
+ * - Single, clean typography rendering "First Savvy" (with space) & "Stars To Legacy".
  */
 export function InitialSplashScreen() {
   const [visible, setVisible] = useState(true);
@@ -91,9 +91,9 @@ export function InitialSplashScreen() {
         }}
       />
 
-      <div className="relative flex flex-col items-center justify-center gap-3">
-        {/* Animated Lion Crest Container */}
-        <div className="relative w-48 h-40 sm:w-56 sm:h-44 flex items-center justify-center overflow-hidden">
+      <div className="relative flex flex-col items-center justify-center">
+        {/* Animated Lion Crest ONLY (crops out duplicate video text) */}
+        <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
@@ -101,7 +101,7 @@ export function InitialSplashScreen() {
             muted
             playsInline
             onEnded={handleVideoEnded}
-            className="w-full h-full object-contain pointer-events-none select-none scale-[1.38] -translate-y-3"
+            className="w-full h-full object-contain pointer-events-none select-none scale-[1.95] -translate-y-6 sm:-translate-y-8"
             style={{
               filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
               mixBlendMode: 'multiply',
@@ -111,27 +111,27 @@ export function InitialSplashScreen() {
             <source src="/brand/loader.mp4" type="video/mp4" />
             <img
               src="/brand/logo-mark.png"
-              alt="First Savvy"
+              alt="First Savvy Crest"
               className="w-24 h-24 object-contain animate-pulse"
             />
           </video>
         </div>
 
-        {/* Crisp Brand Typography with 'First Savvy' (with gap) */}
-        <div className="flex flex-col items-center select-none text-center -mt-2">
+        {/* Single Crisp Typography Wordmark with 'First Savvy' (with gap) */}
+        <div className="flex flex-col items-center select-none text-center mt-2">
           <span 
-            className="font-serif font-bold text-2xl sm:text-[1.75rem] text-[#1D2D42] dark:text-white tracking-tight"
+            className="font-serif font-bold text-2xl sm:text-3xl text-brand-navy dark:text-white tracking-tight"
             style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
           >
             First Savvy
           </span>
-          <span className="font-sans font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[#66AFD3] mt-1">
+          <span className="font-sans font-bold text-[10px] sm:text-xs uppercase tracking-[0.28em] text-brand-sky mt-1">
             Stars To Legacy
           </span>
         </div>
 
         {/* Sleek Progress bar placed right below */}
-        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 mt-2">
+        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 mt-3">
           <div
             className="h-full rounded-full"
             style={{
