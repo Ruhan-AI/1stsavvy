@@ -20,11 +20,23 @@ const SecurityShieldCanvas = dynamic(
   { ssr: false }
 );
 
+const HeroConstellationCanvas = dynamic(
+  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
+  { ssr: false }
+);
+
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-16 space-y-16">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-16 space-y-16 relative">
+      {/* 3D Background Canvas */}
+      <div className="absolute inset-0 max-w-5xl mx-auto h-[480px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
+        <CanvasErrorBoundary>
+          <HeroConstellationCanvas />
+        </CanvasErrorBoundary>
+      </div>
+
       {/* Header with 3D Security Shield Ring */}
-      <div className="text-center space-y-4 relative">
+      <div className="text-center space-y-4 relative z-10">
         <FadeIn delay={0.05}>
           <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Our Philosophy</span>
         </FadeIn>

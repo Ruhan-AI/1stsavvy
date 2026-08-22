@@ -2,9 +2,16 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Mail, Send, CheckCircle2, MessageSquare, Shield, HelpCircle, Building, ArrowRight, Sparkles, Clock, FileQuestion } from 'lucide-react';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
 import { ScrollReveal, TextReveal, FadeIn } from '@/components/animations/MotionWrappers';
+import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+
+const HeroConstellationCanvas = dynamic(
+  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
+  { ssr: false }
+);
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -43,9 +50,16 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-20 space-y-16">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-20 space-y-16 relative">
+      {/* 3D Background Canvas */}
+      <div className="absolute inset-0 max-w-5xl mx-auto h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
+        <CanvasErrorBoundary>
+          <HeroConstellationCanvas />
+        </CanvasErrorBoundary>
+      </div>
+
       {/* 1. Header */}
-      <div className="text-center space-y-3">
+      <div className="text-center space-y-3 relative z-10">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Get in Touch</span>
         <h1 className="text-4xl sm:text-5xl font-serif font-bold text-brand-navy dark:text-white">Contact First Savvy</h1>
         <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">

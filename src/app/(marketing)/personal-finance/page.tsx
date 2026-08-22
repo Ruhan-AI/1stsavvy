@@ -45,6 +45,12 @@ export default function PersonalFinancePage() {
     <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
       {/* 1. HERO SECTION */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 max-w-6xl mx-auto h-[480px] pointer-events-none -z-0 opacity-25 dark:opacity-35 overflow-hidden">
+          <CanvasErrorBoundary>
+            <FinancialWaveCanvas className="w-full h-full" />
+          </CanvasErrorBoundary>
+        </div>
+
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 flex flex-col items-center relative z-10">
           <FadeIn delay={0.05}>
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">

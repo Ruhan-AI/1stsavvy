@@ -2,8 +2,15 @@
 
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
+import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
 import { ArrowRight } from 'lucide-react';
+
+const HeroConstellationCanvas = dynamic(
+  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
+  { ssr: false }
+);
 
 const FAQS = [
   {
@@ -46,13 +53,22 @@ const FAQS = [
 
 export default function FAQPage() {
   return (
-    <div className="py-8 space-y-8">
-      <FAQAccordion
-        eyebrow="Got Questions?"
-        title="Frequently Asked Questions"
-        subtitle="Everything you need to know about First Savvy's family experience, security, and personal finance tools."
-        items={FAQS}
-      />
+    <div className="py-8 space-y-8 relative">
+      {/* 3D Background Canvas */}
+      <div className="absolute inset-0 max-w-5xl mx-auto h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
+        <CanvasErrorBoundary>
+          <HeroConstellationCanvas />
+        </CanvasErrorBoundary>
+      </div>
+
+      <div className="relative z-10">
+        <FAQAccordion
+          eyebrow="Got Questions?"
+          title="Frequently Asked Questions"
+          subtitle="Everything you need to know about First Savvy's family experience, security, and personal finance tools."
+          items={FAQS}
+        />
+      </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 sm:p-10 rounded-3xl bg-brand-navy text-white text-center space-y-4 shadow-xl">
