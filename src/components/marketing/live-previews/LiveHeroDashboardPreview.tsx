@@ -2,48 +2,38 @@
 
 import React, { useState } from 'react';
 import { 
-  TrendingUp, 
-  Wallet, 
-  ShieldCheck, 
-  Star, 
-  CheckCircle2, 
-  Sparkles, 
-  Layers, 
-  Calendar, 
+  LayoutDashboard, 
+  Landmark, 
+  PieChart, 
   Target, 
-  ArrowUpRight, 
-  ArrowDownLeft,
-  ChevronRight,
-  Landmark,
-  PiggyBank,
-  LayoutDashboard,
-  CreditCard,
-  PieChart,
-  ListTodo,
-  Lock,
-  Contact2,
-  Settings,
-  Bell,
-  Search,
-  User,
-  Plus,
+  Calendar, 
+  TrendingUp, 
+  Briefcase, 
+  Users, 
+  ListTodo, 
+  Lock, 
+  Settings, 
+  CreditCard, 
+  Star, 
+  Sparkles, 
+  ShieldCheck, 
+  Check, 
+  X, 
+  Plus, 
+  Search, 
+  Award, 
+  Smile, 
+  LockKeyhole,
+  CheckCircle2,
   Car,
   Home,
-  Check,
-  X,
-  FileText,
-  Shield,
-  Key,
-  Award,
-  Smile,
-  Gift,
-  LockKeyhole
+  FileText
 } from 'lucide-react';
 
 export function LiveHeroDashboardPreview() {
   const [userRole, setUserRole] = useState<'parent' | 'child'>('parent');
   const [activeNav, setActiveNav] = useState<
-    'dashboard' | 'banking' | 'transactions' | 'budgets' | 'goals' | 'tasks' | 'net-worth' | 'vault' | 'contacts' | 'settings' | 'kid-tasks' | 'kid-goals' | 'kid-badges'
+    'dashboard' | 'banking' | 'budgeting' | 'goals' | 'calendar' | 'net-worth' | 'investments' | 'contacts' | 'tasks' | 'vault' | 'settings' | 'kid-tasks' | 'kid-goals' | 'kid-badges'
   >('dashboard');
   const [completedTasks, setCompletedTasks] = useState<number[]>([0]);
   const [transFilter, setTransFilter] = useState<'all' | 'posted' | 'pending'>('all');
@@ -63,19 +53,22 @@ export function LiveHeroDashboardPreview() {
     );
   };
 
+  // Exact Main Navigation set from the real First Savvy webapp Sidebar
   const parentNavItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'banking', label: 'Banking', icon: Landmark },
-    { id: 'transactions', label: 'Transactions', icon: CreditCard },
-    { id: 'budgets', label: 'Budgets', icon: PieChart },
-    { id: 'goals', label: 'Goals', icon: Target },
-    { id: 'tasks', label: 'Tasks & Chores', icon: ListTodo, badge: '4★' },
+    { id: 'budgeting', label: 'Budgeting', icon: PieChart },
+    { id: 'goals', label: 'Goals & Savings', icon: Target },
+    { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'net-worth', label: 'Net Worth', icon: TrendingUp },
-    { id: 'vault', label: 'Vault', icon: Lock },
-    { id: 'contacts', label: 'Contacts', icon: Contact2 },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: 'investments', label: 'Investments', icon: Briefcase },
+    { id: 'contacts', label: 'Contacts', icon: Users },
+    { id: 'tasks', label: 'Tasks & Chores', icon: ListTodo, badge: '4★' },
+    { id: 'vault', label: 'Password Vault', icon: Lock },
+    { id: 'settings', label: 'Profile Settings', icon: Settings },
   ];
 
+  // Dedicated Kid Navigation set
   const kidNavItems = [
     { id: 'kid-tasks', label: 'My Tasks & Chores', icon: ListTodo, badge: 'Active' },
     { id: 'kid-goals', label: 'My Reward Goals', icon: Target, badge: '75%' },
@@ -152,12 +145,12 @@ export function LiveHeroDashboardPreview() {
           </div>
         </div>
 
-        {/* WebApp Workspace Split */}
-        <div className="flex bg-slate-950/95 min-h-[510px]">
-          {/* Sidebar */}
-          <aside className="w-48 bg-slate-900/90 border-r border-slate-800/80 p-3 hidden md:flex flex-col justify-between shrink-0">
+        {/* WebApp Workspace Split: Real Sidebar + Dynamic Main View */}
+        <div className="flex bg-slate-950/95 min-h-[520px]">
+          {/* Real App Sidebar with Exact Brand Logo & Exact Lucide Icons */}
+          <aside className="w-52 bg-slate-900/95 border-r border-slate-800/80 p-3 hidden md:flex flex-col justify-between shrink-0">
             <div className="space-y-4">
-              {/* Brand Logo */}
+              {/* Authentic First Savvy Crest Logo Lockup */}
               <div className="flex items-center gap-2.5 px-2 py-1.5">
                 <img 
                   src="/brand/logo-mark.png" 
@@ -169,7 +162,7 @@ export function LiveHeroDashboardPreview() {
                 </div>
               </div>
 
-              {/* Navigation Links based on Role */}
+              {/* Navigation Links with Exact WebApp Icons */}
               <nav className="space-y-1">
                 {userRole === 'parent' ? (
                   parentNavItems.map((item) => {
@@ -180,7 +173,7 @@ export function LiveHeroDashboardPreview() {
                         key={item.id}
                         type="button"
                         onClick={() => setActiveNav(item.id as any)}
-                        className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                           isActive
                             ? 'bg-[#52A5CE] text-white shadow-sm'
                             : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
@@ -233,7 +226,7 @@ export function LiveHeroDashboardPreview() {
               </nav>
             </div>
 
-            {/* Bottom Profile Switcher Box */}
+            {/* Bottom Profile Card / Switcher */}
             <div 
               onClick={() => {
                 if (userRole === 'parent') {
@@ -274,10 +267,10 @@ export function LiveHeroDashboardPreview() {
 
           {/* MAIN VIEW */}
           <main className="flex-1 p-4 sm:p-6 space-y-5 overflow-hidden">
-            {/* IF CHILD VIEW (KID DASHBOARD) */}
+            {/* CHILD VIEW */}
             {userRole === 'child' ? (
               <div className="space-y-5">
-                {/* Kid Welcome Header */}
+                {/* Kid Banner */}
                 <div className="p-4 rounded-2xl bg-gradient-to-r from-[#EFCE7B]/20 via-[#52A5CE]/20 to-[#AACC96]/20 border border-[#EFCE7B]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-2xl bg-[#EFCE7B] text-slate-950 flex items-center justify-center font-bold text-2xl shadow-md">
@@ -286,7 +279,7 @@ export function LiveHeroDashboardPreview() {
                     <div>
                       <h2 className="text-xl font-extrabold text-white">Welcome back, Emma!</h2>
                       <p className="text-xs text-amber-200/90 font-medium">
-                        You have <span className="font-bold text-[#EFCE7B]">45 Stars</span> saved. Complete tasks to earn more!
+                        You have <span className="font-bold text-[#EFCE7B]">45 Stars</span> in your bank. Complete chores to level up!
                       </p>
                     </div>
                   </div>
@@ -304,7 +297,7 @@ export function LiveHeroDashboardPreview() {
                   </button>
                 </div>
 
-                {/* Kid Stat Badges */}
+                {/* Kid Stat Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                   <div className="p-4 rounded-xl bg-slate-900 border border-[#EFCE7B]/40 shadow-sm text-center sm:text-left">
                     <div className="text-xs text-slate-400 font-medium">My Star Bank</div>
@@ -329,7 +322,7 @@ export function LiveHeroDashboardPreview() {
                   </div>
                 </div>
 
-                {/* Kid Chores List with Fun Checkboxes */}
+                {/* Kid Chore Cards */}
                 <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-sm text-white flex items-center gap-2">
@@ -385,7 +378,7 @@ export function LiveHeroDashboardPreview() {
                 )}
               </div>
             ) : (
-              /* PARENT VIEW (FULL ADULT FINANCIAL DASHBOARD) */
+              /* PARENT VIEW (FULL ADULT FINANCIAL HUB) */
               <div className="space-y-4">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-slate-800/80">
@@ -393,25 +386,27 @@ export function LiveHeroDashboardPreview() {
                     <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight capitalize">
                       {activeNav === 'dashboard' && 'Household Financial Hub (Parent Admin)'}
                       {activeNav === 'banking' && 'Connected Bank Accounts'}
-                      {activeNav === 'transactions' && 'All Household Transactions'}
-                      {activeNav === 'budgets' && 'Monthly Budgeting & Limits'}
+                      {activeNav === 'budgeting' && 'Monthly Budgeting & Limits'}
                       {activeNav === 'goals' && 'Family Savings & Reward Goals'}
-                      {activeNav === 'tasks' && 'Family Chores & Task Ledger'}
+                      {activeNav === 'calendar' && 'Financial Calendar & Bills'}
                       {activeNav === 'net-worth' && 'Household True Net Worth'}
-                      {activeNav === 'vault' && 'Encrypted Family Vault'}
+                      {activeNav === 'investments' && 'Investment Portfolios & 401(k)'}
                       {activeNav === 'contacts' && 'Household Professional Contacts'}
+                      {activeNav === 'tasks' && 'Family Chores & Task Ledger'}
+                      {activeNav === 'vault' && 'Encrypted Password Vault'}
                       {activeNav === 'settings' && 'Family Workspace Settings'}
                     </h2>
                     <p className="text-xs text-slate-400">
                       {activeNav === 'dashboard' && 'Full visibility into household balance sheet, Plaid accounts, and children\'s chores.'}
                       {activeNav === 'banking' && 'Plaid 256-bit encrypted institution sync and manual cash accounts.'}
-                      {activeNav === 'transactions' && 'Search, filter, and categorize everyday income and spending activity.'}
-                      {activeNav === 'budgets' && '50/30/20 category breakdown with live planned vs. actual progress.'}
+                      {activeNav === 'budgeting' && '50/30/20 category breakdown with live planned vs. actual progress.'}
                       {activeNav === 'goals' && 'Track progress toward milestone rewards, gadgets, and family experiences.'}
-                      {activeNav === 'tasks' && 'Assign supervised chores and homework with star weights.'}
+                      {activeNav === 'calendar' && 'Upcoming automated bills, recurring payrolls, and family events.'}
                       {activeNav === 'net-worth' && 'Complete balance sheet of liquid cash, real estate, vehicles, and debts.'}
-                      {activeNav === 'vault' && 'Secure repository for insurance policies, estate deeds, and credentials.'}
+                      {activeNav === 'investments' && 'Vanguard index funds, Roth IRA, 401(k), and brokerage accounts.'}
                       {activeNav === 'contacts' && 'Financial advisors, estate attorneys, CPAs, and family contacts.'}
+                      {activeNav === 'tasks' && 'Assign supervised chores and homework with star weights.'}
+                      {activeNav === 'vault' && 'Secure repository for insurance policies, estate deeds, and credentials.'}
                       {activeNav === 'settings' && 'COPPA child privacy controls, PIN authentication, and preferences.'}
                     </p>
                   </div>
@@ -452,7 +447,7 @@ export function LiveHeroDashboardPreview() {
                       </div>
 
                       <div 
-                        onClick={() => setActiveNav('budgets')}
+                        onClick={() => setActiveNav('budgeting')}
                         className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 shadow-sm cursor-pointer hover:border-[#52A5CE]/40 transition-colors"
                       >
                         <div className="flex items-center justify-between text-slate-400 text-xs font-medium">
@@ -498,10 +493,10 @@ export function LiveHeroDashboardPreview() {
                             <span className="text-xs font-bold text-white">Recent Transactions</span>
                           </div>
                           <span 
-                            onClick={() => setActiveNav('transactions')}
+                            onClick={() => setActiveNav('banking')}
                             className="text-[11px] font-semibold text-[#52A5CE] hover:underline cursor-pointer"
                           >
-                            View All (5) →
+                            View Banking (5) →
                           </span>
                         </div>
 
@@ -528,7 +523,7 @@ export function LiveHeroDashboardPreview() {
                             <span className="text-xs font-bold text-white">Emma's Active Chores</span>
                           </div>
                           <span className="text-[10px] uppercase font-bold text-[#EFCE7B] bg-[#EFCE7B]/10 px-2 py-0.5 rounded">
-                            Parent Approval Required
+                            Parent Supervised
                           </span>
                         </div>
 
@@ -624,74 +619,8 @@ export function LiveHeroDashboardPreview() {
                   </div>
                 )}
 
-                {/* TAB: TRANSACTIONS */}
-                {activeNav === 'transactions' && (
-                  <div className="space-y-3">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                      <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800">
-                        {(['all', 'posted', 'pending'] as const).map((f) => (
-                          <button
-                            key={f}
-                            type="button"
-                            onClick={() => setTransFilter(f)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-colors ${
-                              transFilter === f ? 'bg-[#52A5CE] text-white shadow-sm' : 'text-slate-400 hover:text-white'
-                            }`}
-                          >
-                            {f} ({f === 'all' ? transactionsList.length : transactionsList.filter(t => t.status === f).length})
-                          </button>
-                        ))}
-                      </div>
-
-                      <div className="relative w-full sm:w-60">
-                        <Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-slate-500" />
-                        <input
-                          type="text"
-                          value={transSearch}
-                          onChange={(e) => setTransSearch(e.target.value)}
-                          placeholder="Filter transactions..."
-                          className="w-full pl-8 pr-3 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="overflow-x-auto rounded-xl border border-slate-800">
-                      <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-900 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
-                          <tr>
-                            <th className="py-3 px-3.5">Date</th>
-                            <th className="py-3 px-3.5">Merchant / Description</th>
-                            <th className="py-3 px-3.5">Category</th>
-                            <th className="py-3 px-3.5">Account</th>
-                            <th className="py-3 px-3.5 text-right">Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-800/60 bg-slate-950">
-                          {transactionsList
-                            .filter(t => (transFilter === 'all' || t.status === transFilter) && t.name.toLowerCase().includes(transSearch.toLowerCase()))
-                            .map((item) => (
-                              <tr key={item.id} className="hover:bg-slate-900/50 transition-colors">
-                                <td className="py-3 px-3.5 font-mono text-slate-400 whitespace-nowrap text-[11px]">{item.date}</td>
-                                <td className="py-3 px-3.5 font-semibold text-slate-200">{item.name}</td>
-                                <td className="py-3 px-3.5">
-                                  <span className={`px-2 py-0.5 rounded-md border text-[10px] font-semibold ${item.color}`}>
-                                    {item.cat}
-                                  </span>
-                                </td>
-                                <td className="py-3 px-3.5 text-slate-400 text-[11px] truncate max-w-[140px]">{item.account}</td>
-                                <td className={`py-3 px-3.5 text-right font-mono font-bold text-sm ${item.amount.startsWith('+') ? 'text-[#AACC96]' : 'text-slate-200'}`}>
-                                  {item.amount}
-                                </td>
-                              </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                )}
-
-                {/* TAB: BUDGETS */}
-                {activeNav === 'budgets' && (
+                {/* TAB: BUDGETING */}
+                {activeNav === 'budgeting' && (
                   <div className="space-y-4">
                     <div className="grid grid-cols-3 gap-3">
                       <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-center">
@@ -769,6 +698,123 @@ export function LiveHeroDashboardPreview() {
                   </div>
                 )}
 
+                {/* TAB: CALENDAR */}
+                {activeNav === 'calendar' && (
+                  <div className="space-y-3">
+                    <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+                      <span className="font-bold text-white">August & September 2026 Schedule</span>
+                      <span className="text-[#52A5CE] font-semibold">4 Upcoming Payments</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      {[
+                        { date: 'Aug 25', title: 'Car Insurance Auto-Debit', amount: '$145.00', cat: 'Geico' },
+                        { date: 'Sept 01', title: 'Rocket Mortgage Payment', amount: '$2,450.00', cat: 'Housing' },
+                        { date: 'Sept 04', title: 'Acme Corp Payroll Deposit', amount: '+$4,750.00', cat: 'Salary' },
+                        { date: 'Sept 15', title: 'Sapphire Preferred Statement Due', amount: '$1,240.50', cat: 'Credit Card' },
+                      ].map((item, idx) => (
+                        <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+                          <div className="flex items-center gap-3">
+                            <span className="font-mono px-2 py-1 rounded bg-slate-800 text-slate-300 text-[11px] font-bold">
+                              {item.date}
+                            </span>
+                            <div>
+                              <div className="font-semibold text-white">{item.title}</div>
+                              <div className="text-[10px] text-slate-400">{item.cat}</div>
+                            </div>
+                          </div>
+                          <span className={`font-mono font-bold ${item.amount.startsWith('+') ? 'text-[#AACC96]' : 'text-slate-200'}`}>
+                            {item.amount}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB: NET WORTH */}
+                {activeNav === 'net-worth' && (
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+                      <div>
+                        <div className="text-xs uppercase font-bold text-slate-400">Total True Net Worth</div>
+                        <div className="text-2xl font-extrabold text-[#AACC96] mt-0.5">$437,407.70</div>
+                      </div>
+                      <div className="text-right text-xs">
+                        <div className="text-slate-300">Total Assets: <span className="text-emerald-400 font-bold">$926,450.00</span></div>
+                        <div className="text-slate-300">Total Debts: <span className="text-rose-400 font-bold">-$489,042.30</span></div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { name: 'Primary Residence (Home)', val: '$620,000.00', type: 'Real Estate' },
+                        { name: 'Vanguard 401(k) & Roth IRA', val: '$210,000.00', type: 'Investments' },
+                        { name: '2023 Tesla Model Y & CR-V', val: '$64,000.00', type: 'Vehicles' },
+                        { name: '30-Year Fixed Mortgage', val: '-$465,042.30', type: 'Liabilities' },
+                      ].map((a, idx) => (
+                        <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+                          <div>
+                            <div className="font-semibold text-white">{a.name}</div>
+                            <div className="text-[10px] text-slate-400">{a.type}</div>
+                          </div>
+                          <div className={`font-mono font-bold ${a.val.startsWith('-') ? 'text-rose-400' : 'text-slate-200'}`}>{a.val}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB: INVESTMENTS */}
+                {activeNav === 'investments' && (
+                  <div className="space-y-3">
+                    <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+                      <div>
+                        <div className="font-bold text-white">Investment Portfolios & Retirement</div>
+                        <div className="text-slate-400 text-[10px]">Vanguard, Fidelity & Roth IRAs</div>
+                      </div>
+                      <div className="font-mono font-bold text-sm text-[#EFCE7B]">$210,000.00</div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { name: 'Vanguard 500 Index Fund (VFIAX)', val: '$124,500.00', change: '+8.4% YTD' },
+                        { name: 'Fidelity Traditional 401(k)', val: '$62,400.00', change: '+6.1% YTD' },
+                        { name: 'Backdoor Roth IRA Portfolio', val: '$18,600.00', change: '+9.2% YTD' },
+                        { name: '529 College Savings Plan', val: '$4,500.00', change: '+4.5% YTD' },
+                      ].map((inv, idx) => (
+                        <div key={idx} className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                          <div className="font-bold text-xs text-white">{inv.name}</div>
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-mono text-slate-300">{inv.val}</span>
+                            <span className="text-[#AACC96] text-[10px] font-semibold">{inv.change}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB: CONTACTS */}
+                {activeNav === 'contacts' && (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { name: 'Robert Vance, CFP®', role: 'Financial Advisor', firm: 'Vance Wealth Management', phone: '(555) 234-8901' },
+                        { name: 'Sarah Jenkins, Esq.', role: 'Estate Attorney', firm: 'Jenkins & Associates', phone: '(555) 789-1234' },
+                        { name: 'David Lee, CPA', role: 'Certified Public Accountant', firm: 'Lee Tax Advisory', phone: '(555) 456-7890' },
+                        { name: 'Dr. Emily Carter', role: 'Family Pediatrician', firm: 'Northside Medical Group', phone: '(555) 987-6543' },
+                      ].map((c, idx) => (
+                        <div key={idx} className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                          <div className="font-bold text-xs text-white">{c.name}</div>
+                          <div className="text-[10px] text-[#52A5CE] font-semibold">{c.role} • {c.firm}</div>
+                          <div className="text-[10px] text-slate-400">{c.phone}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* TAB: TASKS & CHORES */}
                 {activeNav === 'tasks' && (
                   <div className="space-y-4">
@@ -822,39 +868,6 @@ export function LiveHeroDashboardPreview() {
                   </div>
                 )}
 
-                {/* TAB: NET WORTH */}
-                {activeNav === 'net-worth' && (
-                  <div className="space-y-4">
-                    <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-                      <div>
-                        <div className="text-xs uppercase font-bold text-slate-400">Total True Net Worth</div>
-                        <div className="text-2xl font-extrabold text-[#AACC96] mt-0.5">$437,407.70</div>
-                      </div>
-                      <div className="text-right text-xs">
-                        <div className="text-slate-300">Total Assets: <span className="text-emerald-400 font-bold">$926,450.00</span></div>
-                        <div className="text-slate-300">Total Debts: <span className="text-rose-400 font-bold">-$489,042.30</span></div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { name: 'Primary Residence (Home)', val: '$620,000.00', type: 'Real Estate' },
-                        { name: 'Vanguard 401(k) & Roth IRA', val: '$210,000.00', type: 'Investments' },
-                        { name: '2023 Tesla Model Y & CR-V', val: '$64,000.00', type: 'Vehicles' },
-                        { name: '30-Year Fixed Mortgage', val: '-$465,042.30', type: 'Liabilities' },
-                      ].map((a, idx) => (
-                        <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
-                          <div>
-                            <div className="font-semibold text-white">{a.name}</div>
-                            <div className="text-[10px] text-slate-400">{a.type}</div>
-                          </div>
-                          <div className={`font-mono font-bold ${a.val.startsWith('-') ? 'text-rose-400' : 'text-slate-200'}`}>{a.val}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 {/* TAB: VAULT */}
                 {activeNav === 'vault' && (
                   <div className="space-y-3">
@@ -879,26 +892,6 @@ export function LiveHeroDashboardPreview() {
                             <span>{v.cat}</span>
                             <span className="text-[#52A5CE]">{v.items}</span>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* TAB: CONTACTS */}
-                {activeNav === 'contacts' && (
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { name: 'Robert Vance, CFP®', role: 'Financial Advisor', firm: 'Vance Wealth Management', phone: '(555) 234-8901' },
-                        { name: 'Sarah Jenkins, Esq.', role: 'Estate Attorney', firm: 'Jenkins & Associates', phone: '(555) 789-1234' },
-                        { name: 'David Lee, CPA', role: 'Certified Public Accountant', firm: 'Lee Tax Advisory', phone: '(555) 456-7890' },
-                        { name: 'Dr. Emily Carter', role: 'Family Pediatrician', firm: 'Northside Medical Group', phone: '(555) 987-6543' },
-                      ].map((c, idx) => (
-                        <div key={idx} className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                          <div className="font-bold text-xs text-white">{c.name}</div>
-                          <div className="text-[10px] text-[#52A5CE] font-semibold">{c.role} • {c.firm}</div>
-                          <div className="text-[10px] text-slate-400">{c.phone}</div>
                         </div>
                       ))}
                     </div>
