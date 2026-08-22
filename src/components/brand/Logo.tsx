@@ -30,13 +30,13 @@ export function Logo({
       <div className={`inline-block ${className}`}>
         <img
           src="/brand/logo-light.jpg"
-          alt="FirstSavvy - Stars to Legacy"
+          alt="First Savvy - Stars to Legacy"
           className="dark:hidden rounded-xl max-w-full h-auto shadow-xs"
           style={{ width: dimensions.mark * 3 }}
         />
         <img
           src="/brand/logo-dark.jpg"
-          alt="FirstSavvy - Stars to Legacy"
+          alt="First Savvy - Stars to Legacy"
           className="hidden dark:block rounded-xl max-w-full h-auto shadow-xs"
           style={{ width: dimensions.mark * 3 }}
         />
@@ -53,7 +53,7 @@ export function Logo({
       >
         <img 
           src="/brand/logo-mark.png" 
-          alt="FirstSavvy Crest"
+          alt="First Savvy Crest"
           className="w-full h-full object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-105"
         />
       </div>
@@ -67,7 +67,7 @@ export function Logo({
             }`}
             style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
           >
-            FirstSavvy
+            First Savvy
           </span>
           {showTagline && (
             <span 
@@ -85,7 +85,7 @@ export function Logo({
 
   if (href) {
     return (
-      <Link href={href} className="group inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky rounded-lg p-0.5" aria-label="FirstSavvy Home">
+      <Link href={href} className="group inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky rounded-lg p-0.5" aria-label="First Savvy Home">
         {content}
       </Link>
     );

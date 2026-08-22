@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
       <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5">
         <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
         <div>
-          <strong>Important Notice:</strong> FirstSavvy takes family and child privacy seriously. We never sell your personal information or your children's data to third parties, data brokers, or advertisers.
+          <strong>Important Notice:</strong> First Savvy takes family and child privacy seriously. We never sell your personal information or your children's data to third parties, data brokers, or advertisers.
         </div>
       </div>
 
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">1. Introduction</h2>
           <p>
-            FirstSavvy, Inc. ("FirstSavvy", "we", "us", or "our") provides a family financial education and personal finance management platform. This Privacy Policy describes how we collect, use, process, and protect your personal information when you visit our website (<code>1stsavvy.com</code>) or use our application (<code>app.firstsavvy.com</code>).
+            First Savvy, Inc. ("First Savvy", "we", "us", or "our") provides a family financial education and personal finance management platform. This Privacy Policy describes how we collect, use, process, and protect your personal information when you visit our website (<code>1stsavvy.com</code>) or use our application (<code>app.firstsavvy.com</code>).
           </p>
         </section>
 
@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">3. Third-Party Service Providers</h2>
           <p>
-            We partner with vetted, industry-leading infrastructure and service providers to operate FirstSavvy securely:
+            We partner with vetted, industry-leading infrastructure and service providers to operate First Savvy securely:
           </p>
           <ul className="list-disc pl-5 space-y-1">
             <li><strong>Hosting & Database:</strong> Supabase / Amazon Web Services (AWS) with Row Level Security (RLS) and AES-256 encryption at rest.</li>
@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">4. Children's Online Privacy (COPPA)</h2>
           <p>
-            FirstSavvy complies with the Children’s Online Privacy Protection Act (COPPA). We do not permit children under 13 to create independent accounts. Child profiles are created strictly by an authenticated parent or legal guardian who provides explicit consent. For complete details, see our <Link href="/children-privacy" className="text-brand-sky font-semibold underline">Children's Privacy Notice</Link>.
+            First Savvy complies with the Children’s Online Privacy Protection Act (COPPA). We do not permit children under 13 to create independent accounts. Child profiles are created strictly by an authenticated parent or legal guardian who provides explicit consent. For complete details, see our <Link href="/children-privacy" className="text-brand-sky font-semibold underline">Children's Privacy Notice</Link>.
           </p>
         </section>
 

@@ -42,7 +42,7 @@ export default function CookiePreferencesPage() {
         <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Privacy Controls</span>
         <h1 className="text-4xl font-serif font-bold text-brand-navy dark:text-white">Cookie Preferences</h1>
         <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-          Manage how cookies and local storage tokens are used on FirstSavvy. We only use essential session cookies by default.
+          Manage how cookies and local storage tokens are used on First Savvy. We only use essential session cookies by default.
         </p>
       </div>
 

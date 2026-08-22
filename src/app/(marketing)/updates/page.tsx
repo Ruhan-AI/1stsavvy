@@ -42,7 +42,7 @@ export default function UpdatesPage() {
       <div className="text-center space-y-4">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Roadmap & Changelog</span>
         <h1 className="text-4xl sm:text-5xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
-          What we're building next at FirstSavvy
+          What we're building next at First Savvy
         </h1>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Follow our latest feature releases and join early access lists for upcoming family, personal finance, and estate capabilities.

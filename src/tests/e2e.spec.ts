@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('FirstSavvy Full Platform E2E Flows', () => {
+test.describe('First Savvy Full Platform E2E Flows', () => {
   test('1. Marketing homepage loads with canonical copy and logo', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/FirstSavvy/);
+    await expect(page).toHaveTitle(/First Savvy/);
     await expect(page.locator('h1')).toContainText('Your family. Your money.');
     await expect(page.getByText('From stars to legacy.')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Get Started for Free' }).first()).toBeVisible();

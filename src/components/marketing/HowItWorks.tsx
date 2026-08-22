@@ -121,7 +121,7 @@ export function HowItWorks() {
     <div className="py-16 bg-white dark:bg-[#1E293B] rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">How FirstSavvy Works</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">How First Savvy Works</span>
         <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white mt-2">
           From first stars to lifelong financial clarity
         </h2>

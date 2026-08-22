@@ -52,14 +52,14 @@ export default function HomePage() {
           {/* Body */}
           <FadeIn delay={0.3}>
             <p className="max-w-3xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-              FirstSavvy brings family money management and personal finance into one connected experience. 
+              First Savvy brings family money management and personal finance into one connected experience. 
               See your accounts, budgets, transactions, bills, and net worth in one place, while giving your kids a practical way to learn earning, saving, responsibility, and progress.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.4}>
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-              As life becomes more complex, FirstSavvy is designed to grow with you.
+              As life becomes more complex, First Savvy is designed to grow with you.
             </p>
           </FadeIn>
 
@@ -140,7 +140,7 @@ export default function HomePage() {
               <TextReveal text="Your financial tools should be too." />
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-              A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. FirstSavvy brings them into a more connected financial experience.
+              A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. First Savvy brings them into a more connected financial experience.
             </p>
           </div>
         </ScrollReveal>
@@ -150,7 +150,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">The FirstSavvy Way</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">The First Savvy Way</span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white mt-2">
               <TextReveal text="More than tracking money. Learn it. Manage it. Grow it." />
             </h2>
@@ -207,7 +207,7 @@ export default function HomePage() {
               Now look at the bigger picture. Know what your money is doing.
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-              FirstSavvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized view, helping you understand what came in, what went out, what is coming next, and how your overall financial position is changing.
+              First Savvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized view, helping you understand what came in, what went out, what is coming next, and how your overall financial position is changing.
             </p>
 
             <div className="flex flex-wrap gap-2 pt-2">
@@ -277,7 +277,7 @@ export default function HomePage() {
               Money habits start before the first paycheck. Let kids learn by doing.
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-              FirstSavvy gives children a supervised way to build real money skills through everyday responsibility. It starts with stars. Kids complete tasks, earn rewards, receive allowances, save toward goals, and gradually begin understanding the relationship between responsibility and money. Parents stay connected with control over profiles, tasks, allowances, rewards, permissions, and approvals.
+              First Savvy gives children a supervised way to build real money skills through everyday responsibility. It starts with stars. Kids complete tasks, earn rewards, receive allowances, save toward goals, and gradually begin understanding the relationship between responsibility and money. Parents stay connected with control over profiles, tasks, allowances, rewards, permissions, and approvals.
             </p>
 
             <div className="flex flex-wrap gap-2 pt-2">
@@ -309,7 +309,7 @@ export default function HomePage() {
             Your balance is not your financial position. See the number behind the numbers.
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            FirstSavvy brings assets and liabilities together so you can understand your net worth and follow how your financial position changes over time. Budgeting adds context by showing how what you planned compares with what actually happened. Your financial calendar helps you see recurring bills, income, and important dates before they arrive.
+            First Savvy brings assets and liabilities together so you can understand your net worth and follow how your financial position changes over time. Budgeting adds context by showing how what you planned compares with what actually happened. Your financial calendar helps you see recurring bills, income, and important dates before they arrive.
           </p>
           <div className="pt-2 text-sm font-serif italic text-brand-sky font-semibold">
             Know where you stand. See what comes next.
@@ -322,7 +322,7 @@ export default function HomePage() {
         <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl text-center max-w-4xl mx-auto space-y-6">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-softBlue">Built to Grow With You</span>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold">
-            Your financial life evolves. FirstSavvy is designed to grow with it.
+            Your financial life evolves. First Savvy is designed to grow with it.
           </h2>
           <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
             What begins with a child earning their first stars can grow into a deeper understanding of money, greater clarity around personal finances, increasingly complex financial lives, and eventually the decisions surrounding what you build and leave behind.
@@ -342,30 +342,30 @@ export default function HomePage() {
       <FAQAccordion
         eyebrow="Platform FAQs"
         title="Frequently Asked Questions"
-        subtitle="Common questions about how FirstSavvy unifies family chore routines and adult household finances."
+        subtitle="Common questions about how First Savvy unifies family chore routines and adult household finances."
         items={[
           {
-            question: 'How does FirstSavvy combine family chore tracking with adult personal finance?',
+            question: 'How does First Savvy combine family chore tracking with adult personal finance?',
             answer:
-              'FirstSavvy connects household routines with real financial management in a single platform. Parents manage real-world accounts, budgets, bills, and net worth in their private dashboard, while assigning supervised chores, stars, allowances, and savings goals to kids in a dedicated, age-appropriate Kid Space.',
+              'First Savvy connects household routines with real financial management in a single platform. Parents manage real-world accounts, budgets, bills, and net worth in their private dashboard, while assigning supervised chores, stars, allowances, and savings goals to kids in a dedicated, age-appropriate Kid Space.',
           },
           {
             question: 'Is my banking information secure and encrypted?',
             answer:
-              'Yes. FirstSavvy uses bank-grade 256-bit AES encryption and integrates with Plaid to securely connect your accounts in read-only mode. We never store or access your banking credentials.',
+              'Yes. First Savvy uses bank-grade 256-bit AES encryption and integrates with Plaid to securely connect your accounts in read-only mode. We never store or access your banking credentials.',
           },
           {
             question: 'Can both parents manage the household together?',
             answer:
-              'Absolutely. FirstSavvy supports multi-parent households where both parents can create chores, approve star redemptions, adjust budgets, and review family financial progress collaboratively.',
+              'Absolutely. First Savvy supports multi-parent households where both parents can create chores, approve star redemptions, adjust budgets, and review family financial progress collaboratively.',
           },
           {
-            question: 'Is FirstSavvy compliant with child privacy laws (COPPA)?',
+            question: 'Is First Savvy compliant with child privacy laws (COPPA)?',
             answer:
               'Yes, 100%. We enforce verifiable parental consent before creating any child profile. We never collect personal contact information, emails, or behavioral ad data from children.',
           },
           {
-            question: 'Can I start using FirstSavvy for free?',
+            question: 'Can I start using First Savvy for free?',
             answer:
               'Yes! You can get started for free immediately during our early access release with full access to family chore routines, star ledgers, budget planning, and manual account tracking.',
           },
@@ -377,7 +377,7 @@ export default function HomePage() {
         <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-6">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Feature Updates</span>
           <h2 className="text-3xl font-serif font-bold text-brand-navy dark:text-white">
-            Want to know what FirstSavvy builds next?
+            Want to know what First Savvy builds next?
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
             Join the feature updates waitlist and be the first to hear when new Family tools and experiences become available.
@@ -397,10 +397,10 @@ export default function HomePage() {
 
           <span className="text-xs font-bold uppercase tracking-widest text-brand-sky relative z-10">Early Access</span>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold relative z-10">
-            FirstSavvy is entering its first chapter. Be early enough to help shape the next one.
+            First Savvy is entering its first chapter. Be early enough to help shape the next one.
           </h2>
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed relative z-10">
-            We're opening FirstSavvy to an initial group of users as we refine the experience around real families and real financial lives. How early users experience the platform, what they return to, and the feedback they share will help guide how FirstSavvy continues to evolve.
+            We're opening First Savvy to an initial group of users as we refine the experience around real families and real financial lives. How early users experience the platform, what they return to, and the feedback they share will help guide how First Savvy continues to evolve.
           </p>
           <div className="pt-4 relative z-10">
             <Link

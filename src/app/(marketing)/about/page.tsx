@@ -33,7 +33,7 @@ export default function AboutPage() {
 
         <FadeIn delay={0.25}>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            FirstSavvy was created to solve a fundamental disconnect in modern life: our financial education, household budgeting, and personal wealth management have historically lived in separate worlds.
+            First Savvy was created to solve a fundamental disconnect in modern life: our financial education, household budgeting, and personal wealth management have historically lived in separate worlds.
           </p>
         </FadeIn>
       </div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
       {/* About & Mission FAQ Accordion */}
       <FAQAccordion
         eyebrow="Mission FAQs"
-        title="Frequently Asked Questions About FirstSavvy"
+        title="Frequently Asked Questions About First Savvy"
         subtitle="Learn more about our philosophy, product principles, and future roadmap."
         items={[
           {
@@ -101,14 +101,14 @@ export default function AboutPage() {
               'It represents our guiding product thesis: financial literacy begins with simple childhood habits (earning star points for completing chores) and naturally matures into budgeting, smart spending, generational investing, and legacy estate planning as your family grows.',
           },
           {
-            question: 'How does FirstSavvy ensure user and family data privacy?',
+            question: 'How does First Savvy ensure user and family data privacy?',
             answer:
-              'FirstSavvy is built with zero-knowledge encryption architecture for sensitive vault assets, bank-grade 256-bit AES encryption for transaction logs, and full compliance with COPPA (Children\'s Online Privacy Protection Act). We never sell family data or advertise to children.',
+              'First Savvy is built with zero-knowledge encryption architecture for sensitive vault assets, bank-grade 256-bit AES encryption for transaction logs, and full compliance with COPPA (Children\'s Online Privacy Protection Act). We never sell family data or advertise to children.',
           },
           {
-            question: 'What is planned on the FirstSavvy roadmap?',
+            question: 'What is planned on the First Savvy roadmap?',
             answer:
-              'We are currently expanding support for FirstSavvy Business accounts, automated credit score monitoring, AI financial insights, and comprehensive multi-generation estate planning vaults.',
+              'We are currently expanding support for First Savvy Business accounts, automated credit score monitoring, AI financial insights, and comprehensive multi-generation estate planning vaults.',
           },
         ]}
       />

@@ -16,7 +16,7 @@ export default function ChildrenPrivacyNoticePage() {
         <div className="space-y-1">
           <div className="font-serif font-bold text-base text-brand-navy dark:text-white">Our Family Privacy Commitment</div>
           <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-            FirstSavvy is built around the principle that children should learn healthy money habits in a safe, ad-free, and private environment. We never sell child data, we never serve behavioral ads, and we strictly enforce parental consent controls.
+            First Savvy is built around the principle that children should learn healthy money habits in a safe, ad-free, and private environment. We never sell child data, we never serve behavioral ads, and we strictly enforce parental consent controls.
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@ export default function ChildrenPrivacyNoticePage() {
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">2. What Information We Collect About Children</h2>
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Profile Information:</strong> Child's first or display name, selected avatar icon and color, and optional date of birth (used strictly for age-appropriate task scheduling).</li>
-            <li><strong>Child Credentials:</strong> A simple username and a 4-digit PIN. <em>Technical note:</em> PINs are cryptographically hashed on the server with strong one-way hashing algorithms. PINs are never stored in raw plaintext and cannot be viewed by FirstSavvy staff. Parents can reset their child's PIN at any time.</li>
+            <li><strong>Child Credentials:</strong> A simple username and a 4-digit PIN. <em>Technical note:</em> PINs are cryptographically hashed on the server with strong one-way hashing algorithms. PINs are never stored in raw plaintext and cannot be viewed by First Savvy staff. Parents can reset their child's PIN at any time.</li>
             <li><strong>Activity & Progress Data:</strong> Completed tasks, star ledger entries, reward redemption requests, and savings goal progress.</li>
           </ul>
         </section>

@@ -20,11 +20,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'FirstSavvy — From Stars to Legacy | Family & Personal Finance',
-    template: '%s | FirstSavvy',
+    default: 'First Savvy — From Stars to Legacy | Family & Personal Finance',
+    template: '%s | First Savvy',
   },
   description:
-    'FirstSavvy brings family money management and personal finance into one connected experience. From earning stars and saving allowances to budgets, accounts, and net worth.',
+    'First Savvy brings family money management and personal finance into one connected experience. From earning stars and saving allowances to budgets, accounts, and net worth.',
   keywords: [
     'Family finance',
     'Financial education for kids',
@@ -35,15 +35,15 @@ export const metadata: Metadata = {
     'Net worth tracker',
     'Household budgeting',
   ],
-  authors: [{ name: 'FirstSavvy' }],
-  creator: 'FirstSavvy',
+  authors: [{ name: 'First Savvy' }],
+  creator: 'First Savvy',
   metadataBase: new URL('https://1stsavvy.com'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://1stsavvy.com',
-    siteName: 'FirstSavvy',
-    title: 'FirstSavvy — From Stars to Legacy',
+    siteName: 'First Savvy',
+    title: 'First Savvy — From Stars to Legacy',
     description:
       'The connected platform for family financial education and personal finance management.',
     images: [
@@ -51,13 +51,13 @@ export const metadata: Metadata = {
         url: '/brand/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'FirstSavvy — From Stars to Legacy',
+        alt: 'First Savvy — From Stars to Legacy',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FirstSavvy — From Stars to Legacy',
+    title: 'First Savvy — From Stars to Legacy',
     description:
       'The connected platform for family financial education and personal finance management.',
     images: ['/brand/og-image.png'],

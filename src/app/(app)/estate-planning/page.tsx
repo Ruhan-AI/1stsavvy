@@ -27,7 +27,7 @@ export default function EstatePlanningPage() {
       <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5">
         <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
         <div>
-          <strong>Legal Disclaimer:</strong> FirstSavvy provides software organization tools and does not provide legal advice, attorney representation, or estate execution services. All legal documents require qualified legal review.
+          <strong>Legal Disclaimer:</strong> First Savvy provides software organization tools and does not provide legal advice, attorney representation, or estate execution services. All legal documents require qualified legal review.
         </div>
       </div>
 

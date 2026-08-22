@@ -115,7 +115,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
         <div className="overflow-y-auto p-4 space-y-4 flex-1">
           {!query ? (
             <div className="text-center py-8 text-xs text-slate-400 space-y-2">
-              <p>Type keywords or click any tag to search across your entire FirstSavvy household.</p>
+              <p>Type keywords or click any tag to search across your entire First Savvy household.</p>
               <div className="flex flex-wrap justify-center gap-2 pt-2">
                 {['Checking', 'Groceries', 'Mortgage', 'Bike', 'Homework', 'Piano', 'Advisor'].map((chip) => (
                   <button

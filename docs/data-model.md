@@ -1,6 +1,6 @@
-# FirstSavvy Data Model & Schema Reference
+# First Savvy Data Model & Schema Reference
 
-FirstSavvy uses a strongly typed PostgreSQL schema with 37+ entities, strict foreign key constraints, indexes, and Row Level Security (RLS) policies.
+First Savvy uses a strongly typed PostgreSQL schema with 37+ entities, strict foreign key constraints, indexes, and Row Level Security (RLS) policies.
 
 ## 1. Core Principles
 

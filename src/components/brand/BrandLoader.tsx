@@ -39,7 +39,7 @@ export function BrandLoader({
           {/* Fallback image if video is not supported */}
           <img
             src="/brand/logo-mark.png"
-            alt="FirstSavvy Loading..."
+            alt="First Savvy Loading..."
             className="w-full h-full object-contain animate-pulse"
           />
         </video>

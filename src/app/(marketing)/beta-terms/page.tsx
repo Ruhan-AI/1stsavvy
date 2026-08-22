@@ -14,14 +14,14 @@ export default function BetaTermsPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">1. Beta Program Scope</h2>
           <p>
-            FirstSavvy is currently operating an early access beta program to refine and optimize the user experience with real families. Features labeled "Beta" or "Early Access" are provided for testing and evaluation.
+            First Savvy is currently operating an early access beta program to refine and optimize the user experience with real families. Features labeled "Beta" or "Early Access" are provided for testing and evaluation.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">2. Feedback & Iteration</h2>
           <p>
-            Participants are encouraged to provide feedback, report unexpected issues, and suggest improvements. Any feedback, ideas, or suggestions provided become the property of FirstSavvy without obligation for compensation.
+            Participants are encouraged to provide feedback, report unexpected issues, and suggest improvements. Any feedback, ideas, or suggestions provided become the property of First Savvy without obligation for compensation.
           </p>
         </section>
 

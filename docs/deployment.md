@@ -1,4 +1,4 @@
-# FirstSavvy Production Deployment Guide
+# First Savvy Production Deployment Guide
 
 This guide outlines deployment steps for both the public marketing domain (`1stsavvy.com`) and the authenticated application subdomain (`app.firstsavvy.com`).
 

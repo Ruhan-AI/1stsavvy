@@ -1,8 +1,8 @@
-# FirstSavvy — From Stars to Legacy
+# First Savvy — From Stars to Legacy
 
 > The connected platform for family financial education and personal finance management.
 
-FirstSavvy brings family money management and personal finance into one unified platform. Parents can help children learn responsibility, earning, saving, patience, and progress through tasks, stars, rewards, allowances, and goals. Adults can manage accounts, transactions, budgets, recurring bills, calendars, investments, and net worth.
+First Savvy brings family money management and personal finance into one unified platform. Parents can help children learn responsibility, earning, saving, patience, and progress through tasks, stars, rewards, allowances, and goals. Adults can manage accounts, transactions, budgets, recurring bills, calendars, investments, and net worth.
 
 ---
 
@@ -34,7 +34,7 @@ FirstSavvy brings family money management and personal finance into one unified 
 
 ## 🚀 Quick Start & Local Development
 
-FirstSavvy runs out-of-the-box in standalone demo mode pre-seeded with "The Miller Family" (adult owner, spouse, 2 kids, 8+ accounts, 3 months of transactions, tasks, budgets, and goals).
+First Savvy runs out-of-the-box in standalone demo mode pre-seeded with "The Miller Family" (adult owner, spouse, 2 kids, 8+ accounts, 3 months of transactions, tasks, budgets, and goals).
 
 ```bash
 # 1. Install dependencies

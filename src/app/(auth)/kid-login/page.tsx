@@ -162,7 +162,7 @@ export default function KidLoginPage() {
               <span>Forgot your PIN?</span>
             </div>
             <p className="text-[11px] leading-relaxed">
-              Ask your mom or dad! Parents can easily reset your PIN from their FirstSavvy dashboard.
+              Ask your mom or dad! Parents can easily reset your PIN from their First Savvy dashboard.
             </p>
           </div>
 
@@ -179,7 +179,7 @@ export default function KidLoginPage() {
 
             {showPrivacyModal && (
               <div className="mt-3 p-3 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-left text-xs text-slate-700 dark:text-slate-300 space-y-1 animate-in fade-in duration-200">
-                <div className="font-bold text-brand-navy dark:text-white">Your Privacy at FirstSavvy:</div>
+                <div className="font-bold text-brand-navy dark:text-white">Your Privacy at First Savvy:</div>
                 <div>• We only show your own chores, stars, and goals.</div>
                 <div>• You cannot see adult bank balances or bills.</div>
                 <div>• We never share your name or show ads to kids.</div>

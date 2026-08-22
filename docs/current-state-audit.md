@@ -1,6 +1,6 @@
-# FirstSavvy Current State Audit & Resolution Report
+# First Savvy Current State Audit & Resolution Report
 
-This document records the architectural and UX audit of the legacy product states, identifying confirmed defects and detailing their resolution in the unified FirstSavvy platform.
+This document records the architectural and UX audit of the legacy product states, identifying confirmed defects and detailing their resolution in the unified First Savvy platform.
 
 ## Summary of 14 Confirmed Defects & Resolutions
 

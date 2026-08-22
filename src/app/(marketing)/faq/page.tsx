@@ -7,16 +7,16 @@ import { ArrowRight } from 'lucide-react';
 
 const FAQS = [
   {
-    question: 'Is FirstSavvy a bank?',
-    answer: 'No. FirstSavvy is a family financial education and personal finance management platform, not a bank. We do not hold depository deposits or move real customer money directly. All bank connectivity is handled securely through industry-standard aggregators like Plaid in sandbox/read-only mode.',
+    question: 'Is First Savvy a bank?',
+    answer: 'No. First Savvy is a family financial education and personal finance management platform, not a bank. We do not hold depository deposits or move real customer money directly. All bank connectivity is handled securely through industry-standard aggregators like Plaid in sandbox/read-only mode.',
   },
   {
     question: 'How does Plaid integration work?',
-    answer: 'We use Plaid Link to securely connect with over 12,000 financial institutions. Plaid retrieves read-only balances and transaction history. FirstSavvy never sees, handles, or stores your banking passwords or raw account credentials.',
+    answer: 'We use Plaid Link to securely connect with over 12,000 financial institutions. Plaid retrieves read-only balances and transaction history. First Savvy never sees, handles, or stores your banking passwords or raw account credentials.',
   },
   {
-    question: 'Can I use FirstSavvy manually without connecting bank accounts?',
-    answer: 'Yes! FirstSavvy has comprehensive manual account support. You can track cash accounts, manual checking, savings, vehicles, property valuations, loans, and investment holdings with manually entered journals and transactions.',
+    question: 'Can I use First Savvy manually without connecting bank accounts?',
+    answer: 'Yes! First Savvy has comprehensive manual account support. You can track cash accounts, manual checking, savings, vehicles, property valuations, loans, and investment holdings with manually entered journals and transactions.',
   },
   {
     question: 'How do family permissions and child access work?',
@@ -31,8 +31,8 @@ const FAQS = [
     answer: 'Parents assign tasks with specific star values (e.g. 2 stars for making the bed, 4 stars for homework). When kids complete a task, stars are awarded to their immutable ledger. Kids can then request to redeem stars for custom parent-approved rewards or allocate stars toward long-term savings goals.',
   },
   {
-    question: 'What age ranges is FirstSavvy designed for?',
-    answer: 'FirstSavvy is designed to grow with your family: young kids (ages 4–9) thrive on star rewards and visual chores; older kids and teens (ages 10–17) transition to allowances, budgeting, and monetary savings goals; and adults use the full personal finance suite for net worth, budgeting, and investments.',
+    question: 'What age ranges is First Savvy designed for?',
+    answer: 'First Savvy is designed to grow with your family: young kids (ages 4–9) thrive on star rewards and visual chores; older kids and teens (ages 10–17) transition to allowances, budgeting, and monetary savings goals; and adults use the full personal finance suite for net worth, budgeting, and investments.',
   },
   {
     question: 'How do data export and account deletion work?',
@@ -50,7 +50,7 @@ export default function FAQPage() {
       <FAQAccordion
         eyebrow="Got Questions?"
         title="Frequently Asked Questions"
-        subtitle="Everything you need to know about FirstSavvy's family experience, security, and personal finance tools."
+        subtitle="Everything you need to know about First Savvy's family experience, security, and personal finance tools."
         items={FAQS}
       />
 

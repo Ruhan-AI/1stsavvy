@@ -27,7 +27,7 @@ export default function PasswordVaultPage() {
           <span>Security Architecture Notice</span>
         </div>
         <p className="leading-relaxed">
-          FirstSavvy does not store raw passwords, recovery keys, or unencrypted secrets in the general database. A dedicated zero-knowledge, end-to-end encrypted (E2EE) cryptographic vault is currently being architected and will undergo independent third-party penetration audits prior to launch.
+          First Savvy does not store raw passwords, recovery keys, or unencrypted secrets in the general database. A dedicated zero-knowledge, end-to-end encrypted (E2EE) cryptographic vault is currently being architected and will undergo independent third-party penetration audits prior to launch.
         </p>
       </div>
 

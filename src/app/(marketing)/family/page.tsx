@@ -51,7 +51,7 @@ export default function FamilyPage() {
 
           <FadeIn delay={0.3}>
             <p className="max-w-2xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-              FirstSavvy gives kids a practical way to experience responsibility, earning, saving, and progress, while parents stay connected and in control. It starts with stars and grows into real financial understanding.
+              First Savvy gives kids a practical way to experience responsibility, earning, saving, and progress, while parents stay connected and in control. It starts with stars and grows into real financial understanding.
             </p>
           </FadeIn>
 
@@ -199,7 +199,7 @@ export default function FamilyPage() {
               More than simply handing over money. Give it a purpose.
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-              FirstSavvy helps turn allowances into part of a larger financial experience. Kids can see what they are earning, understand what they have available, and work toward things that matter to them. Goals introduce another important lesson: not everything needs to happen today.
+              First Savvy helps turn allowances into part of a larger financial experience. Kids can see what they are earning, understand what they have available, and work toward things that matter to them. Goals introduce another important lesson: not everything needs to happen today.
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
               {['Earn', 'Save', 'Work Toward Something'].map((label) => (
@@ -230,7 +230,7 @@ export default function FamilyPage() {
             Their independence. Your visibility.
           </h3>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Create child profiles, assign responsibilities, review completed tasks, manage allowances and rewards, and control how each child participates. FirstSavvy gives kids room to learn while keeping parents connected to the experience. Different access. Same family.
+            Create child profiles, assign responsibilities, review completed tasks, manage allowances and rewards, and control how each child participates. First Savvy gives kids room to learn while keeping parents connected to the experience. Different access. Same family.
           </p>
           <div className="pt-2">
             <Link href="/signup" className="text-xs font-bold text-brand-sky hover:underline">
@@ -257,7 +257,7 @@ export default function FamilyPage() {
               What they need today will not be what they need tomorrow. Start simple. Build from there.
             </h3>
             <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl mx-auto">
-              A first task can become a first reward. Stars can lead to allowances. Small savings goals can eventually become bigger financial conversations. FirstSavvy is designed around that progression, helping parents introduce financial responsibility in ways that make sense as their children grow.
+              A first task can become a first reward. Stars can lead to allowances. Small savings goals can eventually become bigger financial conversations. First Savvy is designed around that progression, helping parents introduce financial responsibility in ways that make sense as their children grow.
             </p>
             <div className="text-xs font-serif italic font-bold text-brand-sky pt-2">
               From their first stars to their first real financial decisions.
@@ -273,7 +273,7 @@ export default function FamilyPage() {
         subtitle="Everything parents want to know about stars, chore routines, child safety, and allowance tracking."
         items={[
           {
-            question: 'How do kids earn and redeem stars for real rewards in FirstSavvy?',
+            question: 'How do kids earn and redeem stars for real rewards in First Savvy?',
             answer:
               'Parents set up age-appropriate chores and responsibilities with assigned star values. When a child marks a chore done in their Kid Space, parents review and approve it. Accumulated stars can be redeemed for parent-created custom rewards (like movie nights, toy purchases, or special outings) or converted into savings goals.',
           },
@@ -283,19 +283,19 @@ export default function FamilyPage() {
               'Each child account is secured with a simple 4-digit PIN configured by parents. Children only see their assigned chores, star balance, personal wishlists, and rewards. They never see adult bank account balances, sensitive transactions, or household net worth.',
           },
           {
-            question: 'How does FirstSavvy comply with the Children’s Online Privacy Protection Act (COPPA)?',
+            question: 'How does First Savvy comply with the Children’s Online Privacy Protection Act (COPPA)?',
             answer:
-              'Before any child profile can be created, parents must review and complete a verifiable parental consent check. FirstSavvy does not collect emails, phone numbers, location data, or behavioral tracking information from children.',
+              'Before any child profile can be created, parents must review and complete a verifiable parental consent check. First Savvy does not collect emails, phone numbers, location data, or behavioral tracking information from children.',
           },
           {
             question: 'Can I automate weekly allowance payouts alongside chore earnings?',
             answer:
-              'Yes! FirstSavvy allows parents to schedule recurring allowances (weekly, bi-weekly, or monthly) with optional conditional chore-completion thresholds.',
+              'Yes! First Savvy allows parents to schedule recurring allowances (weekly, bi-weekly, or monthly) with optional conditional chore-completion thresholds.',
           },
           {
-            question: 'What ages is the FirstSavvy Family experience built for?',
+            question: 'What ages is the First Savvy Family experience built for?',
             answer:
-              'FirstSavvy is tailored for kids aged 5 to 17. Younger children engage through visual 3D star trophies and fun rewards, while teenagers can track monetary savings goals, chores, and basic budgeting habits as they prepare for adulthood.',
+              'First Savvy is tailored for kids aged 5 to 17. Younger children engage through visual 3D star trophies and fun rewards, while teenagers can track monetary savings goals, chores, and basic budgeting habits as they prepare for adulthood.',
           },
         ]}
       />
@@ -308,7 +308,7 @@ export default function FamilyPage() {
             There is more ahead. Want to see what comes next?
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            We're continuing to explore new ways for families to build financial understanding together. Join the feature updates list and be among the first to hear when new FirstSavvy Family experiences become available.
+            We're continuing to explore new ways for families to build financial understanding together. Join the feature updates list and be among the first to hear when new First Savvy Family experiences become available.
           </p>
           <div className="max-w-md mx-auto pt-2">
             <WaitlistForm category="family" buttonText="Join Feature Updates" />

@@ -116,7 +116,7 @@ export function WaitlistForm({
           className="mt-0.5 w-4 h-4 rounded border-slate-300 text-brand-sky focus:ring-brand-sky"
         />
         <label htmlFor={`consent-${category}`} className="text-xs text-slate-500 dark:text-slate-400 leading-tight select-none">
-          I agree to receive occasional updates about FirstSavvy. We never sell your personal data. You can unsubscribe at any time.
+          I agree to receive occasional updates about First Savvy. We never sell your personal data. You can unsubscribe at any time.
         </label>
       </div>
 

@@ -349,7 +349,7 @@ export default function SignupPage() {
                     className="mt-0.5 w-4 h-4 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
                   />
                   <label htmlFor="terms" className="text-xs text-slate-700 dark:text-slate-300 leading-tight select-none">
-                    I agree to the <Link href="/terms" target="_blank" className="text-brand-sky underline font-semibold">Terms of Use</Link> and understand FirstSavvy is not a bank.
+                    I agree to the <Link href="/terms" target="_blank" className="text-brand-sky underline font-semibold">Terms of Use</Link> and understand First Savvy is not a bank.
                   </label>
                 </div>
 

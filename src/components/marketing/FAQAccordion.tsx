@@ -20,7 +20,7 @@ interface FAQAccordionProps {
 
 export function FAQAccordion({
   title = 'Frequently Asked Questions',
-  subtitle = 'Everything you need to know about how FirstSavvy works for your family and personal finances.',
+  subtitle = 'Everything you need to know about how First Savvy works for your family and personal finances.',
   eyebrow = 'Got Questions?',
   items,
   className = '',

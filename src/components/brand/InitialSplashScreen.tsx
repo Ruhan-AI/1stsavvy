@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
  *
  * Light mode #F9F7F8 background (matching homepage).
  * Video black background is converted to transparent white via invert + hue-rotate + multiply blend,
- * rendering the logo in crisp, deep FirstSavvy brand navy/blue without any black rectangle.
+ * rendering the logo in crisp, deep First Savvy brand navy/blue without any black rectangle.
  */
 export function InitialSplashScreen() {
   const [visible, setVisible] = useState(true);
@@ -79,7 +79,7 @@ export function InitialSplashScreen() {
       style={{
         backgroundColor: '#F9F7F8',
       }}
-      aria-label="Loading FirstSavvy"
+      aria-label="Loading First Savvy"
       role="progressbar"
     >
       {/* Soft radial glow */}
@@ -111,7 +111,7 @@ export function InitialSplashScreen() {
             <source src="/brand/loader.mp4" type="video/mp4" />
             <img
               src="/brand/logo-mark.png"
-              alt="FirstSavvy"
+              alt="First Savvy"
               className="w-24 h-24 object-contain animate-pulse"
             />
           </video>

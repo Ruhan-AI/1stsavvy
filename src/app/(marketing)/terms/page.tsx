@@ -14,14 +14,14 @@ export default function TermsOfUsePage() {
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">1. Acceptance of Terms</h2>
           <p>
-            By creating an account, accessing, or using FirstSavvy, you agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree, do not use the platform.
+            By creating an account, accessing, or using First Savvy, you agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree, do not use the platform.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">2. Not a Bank / Financial Advice Disclaimer</h2>
           <p>
-            FirstSavvy is an educational and personal financial organization tool. FirstSavvy is not a bank, broker-dealer, financial planner, investment advisor, or tax authority. All calculations, net worth trends, and budgeting estimates are for informational and educational purposes only.
+            First Savvy is an educational and personal financial organization tool. First Savvy is not a bank, broker-dealer, financial planner, investment advisor, or tax authority. All calculations, net worth trends, and budgeting estimates are for informational and educational purposes only.
           </p>
         </section>
 
@@ -35,7 +35,7 @@ export default function TermsOfUsePage() {
         <section className="space-y-3">
           <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">4. Parental Supervision of Child Profiles</h2>
           <p>
-            Parents and legal guardians are solely responsible for supervising their children's activities on FirstSavvy, setting appropriate task rewards, and approving redemptions.
+            Parents and legal guardians are solely responsible for supervising their children's activities on First Savvy, setting appropriate task rewards, and approving redemptions.
           </p>
         </section>
 

@@ -22,7 +22,7 @@ export default function ReferralPage() {
           Refer a Family & Affiliate Program
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Share FirstSavvy with friends and earn priority early access rewards for your household.
+          Share First Savvy with friends and earn priority early access rewards for your household.
         </p>
       </div>
 
@@ -30,7 +30,7 @@ export default function ReferralPage() {
       <div className="p-8 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl space-y-6">
         <div className="space-y-2">
           <div className="text-xs font-bold uppercase tracking-wider text-brand-softBlue">Your Unique Household Link</div>
-          <h2 className="text-2xl font-serif font-bold">Invite friends & relatives to FirstSavvy</h2>
+          <h2 className="text-2xl font-serif font-bold">Invite friends & relatives to First Savvy</h2>
           <p className="text-slate-300 text-xs sm:text-sm max-w-lg">
             When a family signs up using your link, they will bypass the early access waitlist automatically.
           </p>

@@ -12,7 +12,7 @@ export function MarketingFooter() {
           <div className="lg:col-span-2 space-y-4">
             <Logo variant="dark" size="md" href="/" />
             <p className="text-sm text-slate-300/90 leading-relaxed max-w-sm">
-              From stars to legacy. FirstSavvy brings family financial education and personal finance management into one connected experience.
+              From stars to legacy. First Savvy brings family financial education and personal finance management into one connected experience.
             </p>
             <div className="pt-2 flex items-center gap-2 text-xs text-brand-softBlue">
               <ShieldCheck className="w-4 h-4 text-brand-sky" />
@@ -54,7 +54,7 @@ export function MarketingFooter() {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/about" className="hover:text-brand-sky transition-colors">
-                  About FirstSavvy
+                  About First Savvy
                 </Link>
               </li>
               <li>
@@ -111,7 +111,7 @@ export function MarketingFooter() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} FirstSavvy, Inc. All rights reserved. FirstSavvy is a financial management platform, not a bank.
+            © {new Date().getFullYear()} First Savvy, Inc. All rights reserved. First Savvy is a financial management platform, not a bank.
           </div>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-slate-200 transition-colors">Privacy</Link>

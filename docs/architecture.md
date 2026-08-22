@@ -1,6 +1,6 @@
-# FirstSavvy System Architecture & Technical Specifications
+# First Savvy System Architecture & Technical Specifications
 
-FirstSavvy is a unified platform combining family financial education and personal finance management into one connected, resilient architecture.
+First Savvy is a unified platform combining family financial education and personal finance management into one connected, resilient architecture.
 
 ## 1. Domain Separation & Routing
 

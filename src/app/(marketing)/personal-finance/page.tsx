@@ -54,7 +54,7 @@ export default function PersonalFinancePage() {
 
           <FadeIn delay={0.35}>
             <p className="max-w-3xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-              FirstSavvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized financial experience. Understand where your money is, how it is moving, what is coming next, and how your overall financial position is changing.
+              First Savvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized financial experience. Understand where your money is, how it is moving, what is coming next, and how your overall financial position is changing.
             </p>
           </FadeIn>
 
@@ -169,7 +169,7 @@ export default function PersonalFinancePage() {
             Every transaction is part of a larger picture. Know where your money is moving.
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-            Search, review, categorize, and organize financial activity so individual transactions become useful information rather than an endless feed of numbers. FirstSavvy helps you understand what came in, what went out, and where recurring patterns are beginning to form.
+            Search, review, categorize, and organize financial activity so individual transactions become useful information rather than an endless feed of numbers. First Savvy helps you understand what came in, what went out, and where recurring patterns are beginning to form.
           </p>
 
           <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
@@ -214,7 +214,7 @@ export default function PersonalFinancePage() {
             Planning is only half the picture. See how the plan compares with reality.
           </h3>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Set expected income and spending, then follow how actual financial activity compares as the month unfolds. Instead of treating a budget as a static plan, FirstSavvy keeps it connected to what is actually happening with your money.
+            Set expected income and spending, then follow how actual financial activity compares as the month unfolds. Instead of treating a budget as a static plan, First Savvy keeps it connected to what is actually happening with your money.
           </p>
           <div className="flex gap-2 pt-2">
             {['Planned', 'Actual', 'Remaining'].map((l) => (
@@ -231,7 +231,7 @@ export default function PersonalFinancePage() {
             An account balance tells you what is there. Net worth tells you where you stand.
           </h3>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            FirstSavvy brings assets and liabilities together to give you a broader view of your financial position. Follow how that position changes over time and move beyond simply asking what you spent toward understanding the direction of your finances.
+            First Savvy brings assets and liabilities together to give you a broader view of your financial position. Follow how that position changes over time and move beyond simply asking what you spent toward understanding the direction of your finances.
           </p>
           <div className="text-xs font-serif italic font-bold text-brand-sky pt-2">
             See the number behind the numbers.
@@ -247,7 +247,7 @@ export default function PersonalFinancePage() {
             Transactions tell you what happened. See what is coming next.
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            Recurring bills, income, payments, and important financial dates become easier to understand when you can see them ahead of time. FirstSavvy brings financial activity into a calendar view so you can look forward instead of only reviewing the past.
+            Recurring bills, income, payments, and important financial dates become easier to understand when you can see them ahead of time. First Savvy brings financial activity into a calendar view so you can look forward instead of only reviewing the past.
           </p>
           <div className="flex flex-wrap justify-center gap-2 pt-2">
             {['Bills', 'Income', 'Recurring Activity', 'Reminders'].map((l) => (
@@ -263,7 +263,7 @@ export default function PersonalFinancePage() {
               More information does not always mean more clarity. Bring context to the numbers.
             </h3>
             <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl mx-auto">
-              Accounts, transactions, budgets, recurring activity, your calendar, and net worth each tell part of the story. FirstSavvy brings those perspectives closer together so you can understand what is happening with your money and how the pieces relate to your broader financial life.
+              Accounts, transactions, budgets, recurring activity, your calendar, and net worth each tell part of the story. First Savvy brings those perspectives closer together so you can understand what is happening with your money and how the pieces relate to your broader financial life.
             </p>
             <div className="pt-2">
               <Link
@@ -285,9 +285,9 @@ export default function PersonalFinancePage() {
         subtitle="Answers to common questions about bank connections, Plaid security, budgets, and net worth tracking."
         items={[
           {
-            question: 'How do bank connections and account syncing work in FirstSavvy?',
+            question: 'How do bank connections and account syncing work in First Savvy?',
             answer:
-              'FirstSavvy integrates with Plaid to securely connect with over 12,000 financial institutions across the US and Canada. Syncing is read-only, meaning FirstSavvy can never initiate transactions or move money on your behalf.',
+              'First Savvy integrates with Plaid to securely connect with over 12,000 financial institutions across the US and Canada. Syncing is read-only, meaning First Savvy can never initiate transactions or move money on your behalf.',
           },
           {
             question: 'Can I create custom transaction rules and auto-categorization?',
@@ -297,10 +297,10 @@ export default function PersonalFinancePage() {
           {
             question: 'How does the Net Worth Tracker handle assets and liabilities?',
             answer:
-              'FirstSavvy aggregates real-time balances from checking, savings, brokerage, 401(k), and crypto accounts as assets, while tracking credit cards, mortgages, auto loans, and student loans as liabilities. You also get a historical progression chart showing your net worth growth over time.',
+              'First Savvy aggregates real-time balances from checking, savings, brokerage, 401(k), and crypto accounts as assets, while tracking credit cards, mortgages, auto loans, and student loans as liabilities. You also get a historical progression chart showing your net worth growth over time.',
           },
           {
-            question: 'Will FirstSavvy remind me before upcoming recurring bills are due?',
+            question: 'Will First Savvy remind me before upcoming recurring bills are due?',
             answer:
               'Yes. The Financial Calendar automatically schedules your detected recurring bills, subscriptions, and payday deposits, providing advance alerts so you avoid overdraft fees.',
           },
@@ -320,7 +320,7 @@ export default function PersonalFinancePage() {
             Your financial life doesn't stop at personal. Business is coming next.
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            FirstSavvy is expanding toward a deeper financial experience for entrepreneurs and business owners, bringing more of your financial life into one connected platform. Join the Business waitlist to be among the first to hear when access becomes available.
+            First Savvy is expanding toward a deeper financial experience for entrepreneurs and business owners, bringing more of your financial life into one connected platform. Join the Business waitlist to be among the first to hear when access becomes available.
           </p>
           <div className="max-w-md mx-auto pt-2">
             <WaitlistForm category="business" buttonText="Join the Business Waitlist" />

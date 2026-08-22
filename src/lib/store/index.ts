@@ -79,7 +79,7 @@ const getInitialState = (): AppState => {
       try {
         return JSON.parse(saved);
       } catch (e) {
-        console.error('Failed to parse stored FirstSavvy state', e);
+        console.error('Failed to parse stored First Savvy state', e);
       }
     }
   }

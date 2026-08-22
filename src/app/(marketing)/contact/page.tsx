@@ -47,7 +47,7 @@ export default function ContactPage() {
       {/* 1. Header */}
       <div className="text-center space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Get in Touch</span>
-        <h1 className="text-4xl sm:text-5xl font-serif font-bold text-brand-navy dark:text-white">Contact FirstSavvy</h1>
+        <h1 className="text-4xl sm:text-5xl font-serif font-bold text-brand-navy dark:text-white">Contact First Savvy</h1>
         <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
           Have a question about our family tools, personal finance features, or security? Our team is here to help.
         </p>
@@ -184,7 +184,7 @@ export default function ContactPage() {
         subtitle="Quick answers to common questions about getting help, response times, and account management."
         items={[
           {
-            question: 'How fast does FirstSavvy customer support respond?',
+            question: 'How fast does First Savvy customer support respond?',
             answer:
               'Our support team typically responds to all inquiries within 1 business day (often within a few hours). Dedicated priority support is active for all onboarded household accounts.',
           },
@@ -199,7 +199,7 @@ export default function ContactPage() {
               'In strict compliance with COPPA and privacy standards, you can request full data purge anytime. Select "Privacy, COPPA & Data Requests" above or email privacy@1stsavvy.com. All linked accounts, star ledgers, and profile histories are permanently erased.',
           },
           {
-            question: 'Can schools, coaches, or organizations partner with FirstSavvy?',
+            question: 'Can schools, coaches, or organizations partner with First Savvy?',
             answer:
               'Yes! We partner with educational programs, homeschooling networks, and family advisors. Choose "Partnerships & Financial Education" in the inquiry form or reach out to partners@1stsavvy.com.',
           },
