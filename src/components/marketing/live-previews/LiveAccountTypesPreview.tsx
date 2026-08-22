@@ -22,9 +22,6 @@ export function LiveAccountTypesPreview() {
           <span className="w-2.5 h-2.5 rounded-full bg-[#EF6F3C]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#EFCE7B]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#AACC96]" />
-          <span className="ml-2 font-mono text-[11px] text-slate-400 hidden sm:inline">
-            https://app.firstsavvy.com/net-worth
-          </span>
         </div>
         <span className="text-[11px] font-semibold text-slate-300">Unified Balance Sheet</span>
       </div>

@@ -96,9 +96,6 @@ export function LiveHeroDashboardPreview() {
             <span className="w-3 h-3 rounded-full bg-[#EF6F3C]" />
             <span className="w-3 h-3 rounded-full bg-[#EFCE7B]" />
             <span className="w-3 h-3 rounded-full bg-[#AACC96]" />
-            <span className="ml-3 font-mono text-[11px] text-slate-400 hidden sm:inline">
-              https://app.firstsavvy.com/{userRole === 'parent' ? activeNav : 'kid-view'}
-            </span>
           </div>
 
           {/* Mode Switcher Toggle Pill */}

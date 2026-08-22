@@ -29,9 +29,6 @@ export function LiveTransactionsTablePreview() {
           <span className="w-2.5 h-2.5 rounded-full bg-[#EF6F3C]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#EFCE7B]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#AACC96]" />
-          <span className="ml-2 font-mono text-[11px] text-slate-400 hidden sm:inline">
-            https://app.firstsavvy.com/transactions
-          </span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-[11px] font-semibold text-[#AACC96] bg-[#25533F]/30 px-2.5 py-0.5 rounded border border-[#AACC96]/30">
