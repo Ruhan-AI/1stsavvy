@@ -1,18 +1,80 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Landmark, Car, Home, TrendingUp, CreditCard, Layers, Plus } from 'lucide-react';
+import { Landmark, Car, Home, TrendingUp, CreditCard, Plus, Check } from 'lucide-react';
 
 export function LiveAccountTypesPreview() {
   const [selected, setSelected] = useState<string>('banking');
 
   const categories = [
-    { id: 'banking', name: 'Liquid Banking', icon: Landmark, balance: '$32,450.00', desc: 'Checking, Savings, Cash', color: 'text-[#52A5CE]', border: 'border-[#52A5CE]/40' },
-    { id: 'vehicles', name: 'Vehicles', icon: Car, balance: '$64,000.00', desc: '2023 Tesla Model Y, 2021 CR-V', color: 'text-[#D3B6D3]', border: 'border-[#D3B6D3]/40' },
-    { id: 'property', name: 'Real Estate & Property', icon: Home, balance: '$620,000.00', desc: 'Primary Home & Rental Unit', color: 'text-[#AACC96]', border: 'border-[#AACC96]/40' },
-    { id: 'investments', name: 'Investments & 401(k)', icon: TrendingUp, balance: '$210,000.00', desc: 'Vanguard, Roth IRA, ETFs', color: 'text-[#EFCE7B]', border: 'border-[#EFCE7B]/40' },
-    { id: 'debt', name: 'Loans & Liabilities', icon: CreditCard, balance: '-$489,042.30', desc: 'Fixed Mortgage, Auto Debt', color: 'text-[#EF6F3C]', border: 'border-[#EF6F3C]/40' },
+    { 
+      id: 'banking', 
+      name: 'Liquid Banking', 
+      icon: Landmark, 
+      balance: '$32,450.20', 
+      desc: 'Checking & Savings', 
+      color: 'text-[#52A5CE]', 
+      border: 'border-[#52A5CE]/50',
+      items: [
+        { name: 'Chase Total Checking (...4921)', val: '$18,450.20', status: 'Plaid Sync' },
+        { name: 'Chase High Yield Savings (...9021)', val: '$14,000.00', status: '4.85% APY' }
+      ]
+    },
+    { 
+      id: 'vehicles', 
+      name: 'Vehicles', 
+      icon: Car, 
+      balance: '$64,000.00', 
+      desc: 'EV & Family SUVs', 
+      color: 'text-[#D3B6D3]', 
+      border: 'border-[#D3B6D3]/50',
+      items: [
+        { name: '2023 Tesla Model Y Long Range', val: '$42,000.00', status: 'KBB Valuation' },
+        { name: '2021 Honda CR-V Touring', val: '$22,000.00', status: 'Owned' }
+      ]
+    },
+    { 
+      id: 'property', 
+      name: 'Real Estate & Property', 
+      icon: Home, 
+      balance: '$620,000.00', 
+      desc: 'Primary Residence', 
+      color: 'text-[#AACC96]', 
+      border: 'border-[#AACC96]/50',
+      items: [
+        { name: 'Single Family Residence (Columbus, OH)', val: '$620,000.00', status: 'Zillow Linked' }
+      ]
+    },
+    { 
+      id: 'investments', 
+      name: 'Investments & 401(k)', 
+      icon: TrendingUp, 
+      balance: '$210,000.00', 
+      desc: 'Vanguard & Roth IRAs', 
+      color: 'text-[#EFCE7B]', 
+      border: 'border-[#EFCE7B]/50',
+      items: [
+        { name: 'Vanguard 500 Index Fund (VFIAX)', val: '$124,500.00', status: '+8.4% YTD' },
+        { name: 'Fidelity Traditional 401(k)', val: '$62,400.00', status: 'Employer Match' },
+        { name: 'Backdoor Roth IRA', val: '$23,100.00', status: 'Tax-Free' }
+      ]
+    },
+    { 
+      id: 'debt', 
+      name: 'Loans & Liabilities', 
+      icon: CreditCard, 
+      balance: '-$489,042.30', 
+      desc: 'Fixed Mortgage & Debt', 
+      color: 'text-[#EF6F3C]', 
+      border: 'border-[#EF6F3C]/50',
+      items: [
+        { name: 'Rocket Mortgage (30-Yr Fixed @ 3.25%)', val: '-$465,042.30', status: 'Monthly Escrow' },
+        { name: 'Chase Sapphire Credit Card', val: '-$1,240.50', status: 'Due Sept 15' }
+      ]
+    },
   ];
+
+  const activeCategory = categories.find(c => c.id === selected) || categories[0];
 
   return (
     <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
@@ -27,8 +89,8 @@ export function LiveAccountTypesPreview() {
       </div>
 
       {/* Grid of Asset Categories */}
-      <div className="p-4 sm:p-5 bg-slate-950/95 space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="p-4 sm:p-5 bg-slate-950/95 space-y-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSel = selected === cat.id;
@@ -37,39 +99,57 @@ export function LiveAccountTypesPreview() {
               <div
                 key={cat.id}
                 onClick={() => setSelected(cat.id)}
-                className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
+                className={`p-3 rounded-xl border transition-all cursor-pointer ${
                   isSel
                     ? `bg-slate-900 ${cat.border} shadow-md`
                     : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className={`p-2 rounded-lg bg-slate-900 border border-slate-800 ${cat.color}`}>
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-xs text-white">{cat.name}</div>
-                      <div className="text-[10px] text-slate-400">{cat.desc}</div>
+                <div className="flex items-center gap-2">
+                  <div className={`p-1.5 rounded-lg bg-slate-900 border border-slate-800 ${cat.color}`}>
+                    <Icon className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="truncate">
+                    <div className="font-bold text-xs text-white truncate">{cat.name}</div>
+                    <div className={`font-mono font-bold text-[11px] ${cat.balance.startsWith('-') ? 'text-[#EF6F3C]' : 'text-slate-200'}`}>
+                      {cat.balance}
                     </div>
                   </div>
-                </div>
-                <div className="mt-2.5 pt-2 border-t border-slate-800/60 flex items-center justify-between text-xs">
-                  <span className="text-[10px] text-slate-500">Class Balance</span>
-                  <span className={`font-mono font-bold ${cat.balance.startsWith('-') ? 'text-[#EF6F3C]' : 'text-slate-200'}`}>
-                    {cat.balance}
-                  </span>
                 </div>
               </div>
             );
           })}
         </div>
 
+        {/* Selected Category Sub-Accounts View */}
+        <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+          <div className="flex items-center justify-between text-xs pb-1 border-b border-slate-800">
+            <span className="font-bold text-white flex items-center gap-1.5">
+              <span className={activeCategory.color}>●</span> {activeCategory.name} Accounts ({activeCategory.items.length})
+            </span>
+            <span className="font-mono font-bold text-slate-200">{activeCategory.balance}</span>
+          </div>
+
+          <div className="space-y-1.5">
+            {activeCategory.items.map((it, idx) => (
+              <div key={idx} className="flex items-center justify-between p-2 rounded-lg bg-slate-950 text-xs">
+                <div>
+                  <div className="font-semibold text-slate-200 text-[11px]">{it.name}</div>
+                  <div className="text-[9px] text-slate-500">{it.status}</div>
+                </div>
+                <div className={`font-mono font-bold text-xs ${it.val.startsWith('-') ? 'text-rose-400' : 'text-emerald-400'}`}>
+                  {it.val}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Calculated Net Worth Summary Footer */}
-        <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+        <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
           <div>
             <div className="text-[10px] uppercase font-bold text-slate-400">Total True Net Worth</div>
-            <div className="text-[11px] text-slate-500">5 Categories • Plaid & Manual Assets</div>
+            <div className="text-[10px] text-slate-500">Assets: $926,450 • Debts: -$489,042</div>
           </div>
           <div className="text-right">
             <div className="font-mono font-extrabold text-base text-[#AACC96]">$437,407.70</div>

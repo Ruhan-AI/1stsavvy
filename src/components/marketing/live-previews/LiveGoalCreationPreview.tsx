@@ -4,10 +4,17 @@ import React, { useState } from 'react';
 import { Target, Star, Gift, Sparkles, X, Check } from 'lucide-react';
 
 export function LiveGoalCreationPreview() {
+  const [goalTitle, setGoalTitle] = useState('Nintendo Switch OLED — Mario Edition');
   const [targetStars, setTargetStars] = useState(60);
   const [category, setCategory] = useState('Electronics');
+  const [isCreated, setIsCreated] = useState(false);
   const currentStars = 45;
   const progress = Math.round((currentStars / targetStars) * 100);
+
+  const handleCreate = () => {
+    setIsCreated(true);
+    setTimeout(() => setIsCreated(false), 4000);
+  };
 
   return (
     <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
@@ -26,20 +33,20 @@ export function LiveGoalCreationPreview() {
         </button>
       </div>
 
-      {/* Interactive Form Content matching app.firstsavvy.com */}
+      {/* Interactive Form Content */}
       <div className="p-5 bg-slate-950/95 space-y-4 text-xs">
         {/* Goal Title */}
         <div className="space-y-1.5">
           <label className="block text-slate-400 font-semibold text-[11px]">Goal / Reward Title</label>
           <input
             type="text"
-            readOnly
-            value="Nintendo Switch OLED — Mario Edition"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none"
+            value={goalTitle}
+            onChange={(e) => setGoalTitle(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
           />
         </div>
 
-        {/* Target Stars Slider / Picker */}
+        {/* Target Stars Selector */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-slate-400 font-semibold text-[11px]">Target Star Points</label>
@@ -51,10 +58,10 @@ export function LiveGoalCreationPreview() {
                 key={val}
                 type="button"
                 onClick={() => setTargetStars(val)}
-                className={`py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   targetStars === val
                     ? 'bg-[#EFCE7B] text-slate-950 shadow-sm ring-1 ring-[#EFCE7B]'
-                    : 'bg-slate-900 text-[#EFCE7B]/80 border border-slate-800'
+                    : 'bg-slate-900 text-[#EFCE7B]/80 border border-slate-800 hover:border-slate-700'
                 }`}
               >
                 {val} Stars
@@ -97,7 +104,7 @@ export function LiveGoalCreationPreview() {
                 key={cat.id}
                 type="button"
                 onClick={() => setCategory(cat.id)}
-                className={`py-1.5 px-2.5 rounded-lg text-[11px] font-medium border text-left transition-all ${
+                className={`py-1.5 px-2.5 rounded-lg text-[11px] font-medium border text-left transition-all cursor-pointer ${
                   category === cat.id
                     ? 'bg-[#52A5CE]/15 border-[#52A5CE] text-white font-bold'
                     : 'bg-slate-900 border-slate-800 text-slate-400'
@@ -109,15 +116,23 @@ export function LiveGoalCreationPreview() {
           </div>
         </div>
 
-        {/* Real App Submit Button */}
-        <div className="pt-2">
-          <button
-            type="button"
-            className="w-full bg-[#52A5CE] hover:bg-[#4392be] text-white text-xs font-semibold px-4 sm:px-6 py-2.5 h-10 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-colors"
-          >
-            <Target className="w-3.5 h-3.5" />
-            <span>Create Goal ({targetStars} Stars Target)</span>
-          </button>
+        {/* Submit Button */}
+        <div className="pt-1">
+          {isCreated ? (
+            <div className="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center font-bold flex items-center justify-center gap-2 animate-in fade-in">
+              <Check className="w-4 h-4 text-emerald-400" />
+              <span>Goal &ldquo;{goalTitle}&rdquo; Created with {targetStars} Stars Target!</span>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleCreate}
+              className="w-full bg-[#52A5CE] hover:bg-[#4392be] text-white text-xs font-semibold px-4 sm:px-6 py-2.5 h-10 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <Target className="w-3.5 h-3.5" />
+              <span>Create Goal ({targetStars} Stars Target)</span>
+            </button>
+          )}
         </div>
       </div>
     </div>

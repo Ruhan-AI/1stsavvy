@@ -1,13 +1,27 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Star, CheckCircle2, Calendar, User, Sparkles, X, ShieldCheck } from 'lucide-react';
+import { Star, CheckCircle2, Calendar, User, Sparkles, X, ShieldCheck, Check } from 'lucide-react';
 
 export function LiveTaskCreationPreview() {
+  const [taskTitle, setTaskTitle] = useState('Daily Math Practice & Reading Chapter');
   const [stars, setStars] = useState(4);
   const [schedule, setSchedule] = useState('Weekdays');
   const [child, setChild] = useState('Emma (Age 9)');
   const [requireApproval, setRequireApproval] = useState(true);
+  const [isCreated, setIsCreated] = useState(false);
+
+  const presets = [
+    'Tidy Bedroom & Make Bed',
+    'Walk & Feed Pet Dog',
+    'Daily Math Practice & Reading',
+    'Help Wash Family Car'
+  ];
+
+  const handleCreate = () => {
+    setIsCreated(true);
+    setTimeout(() => setIsCreated(false), 4000);
+  };
 
   return (
     <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
@@ -26,16 +40,31 @@ export function LiveTaskCreationPreview() {
         </button>
       </div>
 
-      {/* Interactive Form Fields matching app.firstsavvy.com */}
+      {/* Interactive Form Fields */}
       <div className="p-5 bg-slate-950/95 space-y-4 text-xs">
         {/* Task Title Field */}
         <div className="space-y-1.5">
-          <label className="block text-slate-400 font-semibold text-[11px]">Task Title & Details</label>
+          <div className="flex items-center justify-between">
+            <label className="block text-slate-400 font-semibold text-[11px]">Task Title & Details</label>
+            <div className="flex items-center gap-1">
+              <span className="text-[10px] text-slate-500">Presets:</span>
+              {presets.slice(0, 2).map((p, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setTaskTitle(p)}
+                  className="text-[10px] text-[#52A5CE] hover:underline"
+                >
+                  {p.split(' ')[0]}
+                </button>
+              ))}
+            </div>
+          </div>
           <input
             type="text"
-            readOnly
-            value="Daily Math Practice & Reading Chapter"
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none"
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
           />
         </div>
 
@@ -51,7 +80,7 @@ export function LiveTaskCreationPreview() {
                 key={val}
                 type="button"
                 onClick={() => setStars(val)}
-                className={`py-2 rounded-lg font-bold text-center transition-all ${
+                className={`py-2 rounded-lg font-bold text-center transition-all cursor-pointer ${
                   stars === val
                     ? 'bg-[#EFCE7B] text-slate-950 shadow-md ring-2 ring-[#EFCE7B]/60'
                     : 'bg-slate-900 text-[#EFCE7B]/80 border border-slate-800 hover:border-slate-700'
@@ -72,10 +101,10 @@ export function LiveTaskCreationPreview() {
                 key={sch}
                 type="button"
                 onClick={() => setSchedule(sch)}
-                className={`py-1.5 rounded-lg text-[11px] font-semibold text-center transition-all ${
+                className={`py-1.5 rounded-lg text-[11px] font-semibold text-center transition-all cursor-pointer ${
                   schedule === sch
                     ? 'bg-[#52A5CE] text-white shadow-sm'
-                    : 'bg-slate-900 text-slate-400 border border-slate-800'
+                    : 'bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700'
                 }`}
               >
                 {sch}
@@ -96,7 +125,7 @@ export function LiveTaskCreationPreview() {
                 key={ch.name}
                 type="button"
                 onClick={() => setChild(ch.name)}
-                className={`py-2 px-3 rounded-lg text-[11px] font-semibold flex items-center justify-between border transition-all ${
+                className={`py-2 px-3 rounded-lg text-[11px] font-semibold flex items-center justify-between border transition-all cursor-pointer ${
                   child === ch.name
                     ? 'bg-slate-900 border-[#52A5CE] text-white'
                     : 'bg-slate-950 border-slate-800 text-slate-400'
@@ -128,15 +157,23 @@ export function LiveTaskCreationPreview() {
           </div>
         </div>
 
-        {/* Exact button style from app.firstsavvy.com bundle */}
-        <div className="pt-2">
-          <button
-            type="button"
-            className="w-full bg-[#52A5CE] hover:bg-[#4392be] text-white text-xs font-semibold px-4 sm:px-6 py-2.5 h-10 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#EFCE7B]" />
-            <span>Create Task (+{stars} Stars)</span>
-          </button>
+        {/* Action Button & Confirmation */}
+        <div className="pt-1">
+          {isCreated ? (
+            <div className="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center font-bold flex items-center justify-center gap-2 animate-in fade-in">
+              <Check className="w-4 h-4 text-emerald-400" />
+              <span>Chore &ldquo;{taskTitle}&rdquo; (+{stars}★) Assigned to {child.split(' ')[0]}!</span>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleCreate}
+              className="w-full bg-[#52A5CE] hover:bg-[#4392be] text-white text-xs font-semibold px-4 sm:px-6 py-2.5 h-10 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#EFCE7B]" />
+              <span>Create Task (+{stars} Stars)</span>
+            </button>
+          )}
         </div>
       </div>
     </div>
