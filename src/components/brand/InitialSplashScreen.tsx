@@ -6,8 +6,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
  * InitialSplashScreen — Full-screen brand loader on first visit.
  *
  * - Light mode #F9F7F8 background (matching homepage).
- * - Focused 100% on the animated Lion Crest (zoomed past the video's baked-in text).
- * - Single, clean typography rendering "First Savvy" (with space) & "Stars To Legacy".
+ * - Full original video animation (animated crest + brand).
+ * - Sleek progress bar right beneath.
  */
 export function InitialSplashScreen() {
   const [visible, setVisible] = useState(true);
@@ -92,8 +92,8 @@ export function InitialSplashScreen() {
       />
 
       <div className="relative flex flex-col items-center justify-center">
-        {/* Animated Lion Crest ONLY (crops out duplicate video text) */}
-        <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center overflow-hidden">
+        {/* Full Brand Loader Video */}
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
@@ -101,7 +101,7 @@ export function InitialSplashScreen() {
             muted
             playsInline
             onEnded={handleVideoEnded}
-            className="w-full h-full object-contain pointer-events-none select-none scale-[1.95] -translate-y-6 sm:-translate-y-8"
+            className="w-full h-full object-contain pointer-events-none select-none"
             style={{
               filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
               mixBlendMode: 'multiply',
@@ -111,27 +111,14 @@ export function InitialSplashScreen() {
             <source src="/brand/loader.mp4" type="video/mp4" />
             <img
               src="/brand/logo-mark.png"
-              alt="First Savvy Crest"
+              alt="First Savvy"
               className="w-24 h-24 object-contain animate-pulse"
             />
           </video>
         </div>
 
-        {/* Single Crisp Typography Wordmark with 'First Savvy' (with gap) */}
-        <div className="flex flex-col items-center select-none text-center mt-2">
-          <span 
-            className="font-serif font-bold text-2xl sm:text-3xl text-brand-navy dark:text-white tracking-tight"
-            style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
-          >
-            First Savvy
-          </span>
-          <span className="font-sans font-bold text-[10px] sm:text-xs uppercase tracking-[0.28em] text-brand-sky mt-1">
-            Stars To Legacy
-          </span>
-        </div>
-
-        {/* Sleek Progress bar placed right below */}
-        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 mt-3">
+        {/* Sleek Progress bar placed closely right below the video */}
+        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 -mt-2">
           <div
             className="h-full rounded-full"
             style={{
