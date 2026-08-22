@@ -319,58 +319,182 @@ export function LiveHeroDashboardPreview() {
                   </div>
                 </div>
 
-                {/* Kid Chore Cards */}
-                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-sm text-white flex items-center gap-2">
-                      <ListTodo className="w-4 h-4 text-[#52A5CE]" /> Tap When You Finish a Chore:
-                    </span>
-                    <span className="text-xs text-[#EFCE7B] font-bold">Mom & Dad will verify</span>
-                  </div>
+                {/* TAB 1: KID TASKS & CHORES */}
+                {activeNav === 'kid-tasks' && (
+                  <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-sm text-white flex items-center gap-2">
+                        <ListTodo className="w-4 h-4 text-[#52A5CE]" /> Tap When You Finish a Chore:
+                      </span>
+                      <span className="text-xs text-[#EFCE7B] font-bold">Mom & Dad will verify</span>
+                    </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {[
-                      { title: 'Tidy Bedroom & Make Bed', stars: 2, icon: '🛏️', time: 'Every Morning' },
-                      { title: 'Feed & Walk Pet Dog', stars: 3, icon: '🐕', time: 'Morning & Evening' },
-                      { title: 'Daily Math & 30 Mins Reading', stars: 4, icon: '📚', time: 'After School' },
-                      { title: 'Help Wash Family Car', stars: 5, icon: '🚗', time: 'Weekend Bonus' },
-                    ].map((task, idx) => {
-                      const isDone = completedTasks.includes(idx);
-                      return (
-                        <div
-                          key={idx}
-                          onClick={() => toggleTask(idx)}
-                          className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
-                            isDone
-                              ? 'bg-[#25533F]/30 border-[#AACC96]/50 shadow-md'
-                              : 'bg-slate-950 border-slate-800 hover:border-[#EFCE7B]/50'
-                          }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="text-2xl">{task.icon}</div>
-                            <div>
-                              <div className={`font-bold text-xs ${isDone ? 'line-through text-slate-400' : 'text-white'}`}>
-                                {task.title}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {[
+                        { title: 'Tidy Bedroom & Make Bed', stars: 2, icon: '🛏️', time: 'Every Morning' },
+                        { title: 'Feed & Walk Pet Dog', stars: 3, icon: '🐕', time: 'Morning & Evening' },
+                        { title: 'Daily Math & 30 Mins Reading', stars: 4, icon: '📚', time: 'After School' },
+                        { title: 'Help Wash Family Car', stars: 5, icon: '🚗', time: 'Weekend Bonus' },
+                      ].map((task, idx) => {
+                        const isDone = completedTasks.includes(idx);
+                        return (
+                          <div
+                            key={idx}
+                            onClick={() => toggleTask(idx)}
+                            className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
+                              isDone
+                                ? 'bg-[#25533F]/30 border-[#AACC96]/50 shadow-md'
+                                : 'bg-slate-950 border-slate-800 hover:border-[#EFCE7B]/50'
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="text-2xl">{task.icon}</div>
+                              <div>
+                                <div className={`font-bold text-xs ${isDone ? 'line-through text-slate-400' : 'text-white'}`}>
+                                  {task.title}
+                                </div>
+                                <div className="text-[10px] text-slate-400">{task.time}</div>
                               </div>
-                              <div className="text-[10px] text-slate-400">{task.time}</div>
+                            </div>
+
+                            <div className={`px-2.5 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 ${
+                              isDone ? 'bg-[#AACC96] text-slate-950' : 'bg-[#EFCE7B] text-slate-950'
+                            }`}>
+                              {isDone ? 'Done! ✓' : `+${task.stars} ⭐`}
                             </div>
                           </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
-                          <div className={`px-2.5 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1 ${
-                            isDone ? 'bg-[#AACC96] text-slate-950' : 'bg-[#EFCE7B] text-slate-950'
-                          }`}>
-                            {isDone ? 'Done! ✓' : `+${task.stars} ⭐`}
+                {/* TAB 2: KID REWARD GOALS */}
+                {activeNav === 'kid-goals' && (
+                  <div className="space-y-3.5">
+                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+                      <div className="flex items-center gap-2">
+                        <Target className="w-4 h-4 text-[#EFCE7B]" />
+                        <span className="font-bold text-white">Emma's Active Savings & Reward Goals</span>
+                      </div>
+                      <span className="text-[#EFCE7B] font-bold">45 Stars in Bank</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {/* Goal 1 */}
+                      <div className="p-4 rounded-xl bg-slate-900 border border-[#52A5CE]/40 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl">🎮</span>
+                            <div>
+                              <div className="font-bold text-xs text-white">Nintendo Switch OLED</div>
+                              <div className="text-[10px] text-slate-400">Electronics • Target: 60 Stars</div>
+                            </div>
+                          </div>
+                          <span className="text-xs font-bold text-[#EFCE7B]">45 / 60 ⭐</span>
+                        </div>
+
+                        <div className="space-y-1">
+                          <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                            <div className="h-full rounded-full bg-gradient-to-r from-[#EFCE7B] to-[#52A5CE] w-[75%]" />
+                          </div>
+                          <div className="flex items-center justify-between text-[10px] text-slate-400">
+                            <span>15 Stars to go!</span>
+                            <span className="text-[#52A5CE] font-bold">75% Complete</span>
                           </div>
                         </div>
-                      );
-                    })}
+                      </div>
+
+                      {/* Goal 2 */}
+                      <div className="p-4 rounded-xl bg-slate-900 border border-emerald-500/40 space-y-3">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl">🎁</span>
+                            <div>
+                              <div className="font-bold text-xs text-white">Roblox Robux Gift Pack</div>
+                              <div className="text-[10px] text-slate-400">Gaming Pass • Target: 20 Stars</div>
+                            </div>
+                          </div>
+                          <span className="text-xs font-bold text-[#AACC96]">20 / 20 ⭐</span>
+                        </div>
+
+                        <div className="space-y-1">
+                          <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                            <div className="h-full rounded-full bg-[#AACC96] w-[100%]" />
+                          </div>
+                          <div className="flex items-center justify-between text-[10px]">
+                            <span className="text-[#AACC96] font-bold">100% Unlocked!</span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setShowStarCelebration(true);
+                                setTimeout(() => setShowStarCelebration(false), 3500);
+                              }}
+                              className="px-2.5 py-1 rounded-lg bg-[#AACC96] text-slate-950 font-bold text-[10px] cursor-pointer hover:scale-105 transition-transform"
+                            >
+                              Claim Reward 🎉
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {/* TAB 3: KID BADGES & LEVEL */}
+                {activeNav === 'kid-badges' && (
+                  <div className="space-y-3.5">
+                    {/* Level Progress Bar */}
+                    <div className="p-4 rounded-xl bg-slate-900 border border-[#AACC96]/40 space-y-2">
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-2">
+                          <Award className="w-4 h-4 text-[#AACC96]" />
+                          <span className="font-bold text-white">Level 2 Star Explorer</span>
+                        </div>
+                        <span className="text-xs font-bold text-[#AACC96]">45 / 50 XP (90%)</span>
+                      </div>
+                      <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                        <div className="h-full rounded-full bg-gradient-to-r from-[#52A5CE] to-[#AACC96] w-[90%]" />
+                      </div>
+                      <div className="text-[10px] text-slate-400 flex items-center justify-between">
+                        <span>5 more Stars to reach Level 3 Star Captain!</span>
+                        <span className="text-[#EFCE7B] font-semibold">8 Days Streak Active 🔥</span>
+                      </div>
+                    </div>
+
+                    {/* Unlocked Badges Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                      {[
+                        { title: 'Early Riser', desc: 'Made bed 7 days in a row', icon: '🥇', unlocked: true },
+                        { title: 'Math Wizard', desc: 'Completed 10 homework tasks', icon: '🧮', unlocked: true },
+                        { title: 'Pet Champion', desc: 'Fed & walked pet daily', icon: '🐕', unlocked: true },
+                        { title: 'Super Saver', desc: 'Saved 30+ stars in bank', icon: '💎', unlocked: true },
+                        { title: 'Tidy Champ', desc: 'Cleaned bedroom 14 days', icon: '🧹', unlocked: true },
+                        { title: 'Star Captain', desc: 'Reach Level 3 rank', icon: '🔒', unlocked: false },
+                      ].map((badge, idx) => (
+                        <div
+                          key={idx}
+                          className={`p-3 rounded-xl border flex items-center gap-2.5 text-xs ${
+                            badge.unlocked
+                              ? 'bg-slate-900/90 border-[#EFCE7B]/30 text-white'
+                              : 'bg-slate-950/60 border-slate-800 text-slate-500 opacity-60'
+                          }`}
+                        >
+                          <div className="text-xl">{badge.icon}</div>
+                          <div>
+                            <div className="font-bold text-[11px]">{badge.title}</div>
+                            <div className="text-[9px] text-slate-400">{badge.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Star Celebration Toast Banner */}
                 {showStarCelebration && (
                   <div className="p-3 rounded-xl bg-gradient-to-r from-[#EFCE7B] to-[#52A5CE] text-slate-950 font-bold text-xs text-center animate-bounce shadow-lg">
-                    🎉 Woohoo! Awesome job, Emma! Task submitted to Mom & Dad for Star approval! ⭐
+                    🎉 Woohoo! Awesome job, Emma! Task & Reward submitted to Mom & Dad! ⭐
                   </div>
                 )}
               </div>
