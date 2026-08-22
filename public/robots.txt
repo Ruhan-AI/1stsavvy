@@ -1,4 +1,6 @@
-# FirstSavvy robots.txt
+# First Savvy robots.txt
+# Optimized per Claude SEO standards for Search Engines & AI Discoverability
+
 User-agent: *
 Allow: /
 Allow: /family
@@ -12,8 +14,9 @@ Allow: /terms
 Allow: /beta-terms
 Allow: /children-privacy
 Allow: /cookies
+Allow: /llms.txt
 
-# Disallow private application & auth routes
+# Disallow private user dashboards and API endpoints
 Disallow: /dashboard
 Disallow: /banking
 Disallow: /budgeting
@@ -25,6 +28,41 @@ Disallow: /contacts
 Disallow: /profiles
 Disallow: /kid-view
 Disallow: /settings
+Disallow: /api/
+
+# AI Crawlers & Search Engines
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Disallow: /dashboard
+Disallow: /banking
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Disallow: /dashboard
+Disallow: /banking
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Disallow: /dashboard
+Disallow: /banking
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Disallow: /dashboard
+Disallow: /banking
+Disallow: /api/
+
+User-agent: Applebot
+Allow: /
+Disallow: /dashboard
+Disallow: /banking
 Disallow: /api/
 
 Sitemap: https://1stsavvy.com/sitemap.xml

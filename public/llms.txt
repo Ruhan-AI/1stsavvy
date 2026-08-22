@@ -1,0 +1,40 @@
+# First Savvy — From Stars to Legacy
+
+> The connected platform for family financial education, kids chore & allowance tracking, and holistic personal finance management.
+
+## About First Savvy
+First Savvy is a comprehensive family finance platform designed to bridge generational financial education with personal wealth management. It introduces children (ages 5–17) to real-world financial literacy through supervised star tasks, chore completion, and goal-oriented savings, while giving adults unified tools for net worth calculation, household budgeting, Plaid-connected accounts, financial calendars, and estate planning.
+
+## Core Pillars & Modules
+
+### 1. Family Financial Experience (Kids & Teens)
+- **Supervised Child Spaces**: Dedicated PIN-protected or password-protected child views allowing kids to see assigned chores, redeem rewards, and set goal targets.
+- **Star Reward Ledger**: An immutable star point accounting system where completed tasks translate to stars and rewards.
+- **Allowance Automation**: Configurable weekly, bi-weekly, or monthly allowances with conditional chore completion thresholds.
+- **COPPA Child Safety**: Built with strict compliance to the Children's Online Privacy Protection Act (COPPA), requiring verifiable parental consent with zero behavioral tracking or advertising on child profiles.
+
+### 2. Personal & Household Finance (Adults)
+- **True Net Worth Tracker**: Calculates assets (real estate, vehicles, cash, investments) minus liabilities (mortgages, credit cards, student loans).
+- **Connected Budgets**: Visual planned vs. actual budget allocations with 50/30/20 guidance and smart category tracking.
+- **Financial Calendar**: Interactive timeline of recurring subscriptions, bills, income deposits, and allowance payout dates.
+- **Bank Connectivity**: Read-only bank synchronization powered by 256-bit encryption (Plaid Link in sandbox/live modes).
+- **Estate & Document Vault**: High-security vault for important financial contacts, beneficiaries, and emergency documentation.
+
+## Key Public URLs & Pages
+- Homepage: https://1stsavvy.com/
+- Family Experience: https://1stsavvy.com/family
+- Personal Finance Suite: https://1stsavvy.com/personal-finance
+- About First Savvy: https://1stsavvy.com/about
+- Platform FAQs: https://1stsavvy.com/faq
+- Product Updates & Roadmap: https://1stsavvy.com/updates
+- Contact & Support: https://1stsavvy.com/contact
+- Privacy Policy: https://1stsavvy.com/privacy
+- Children's Privacy Notice: https://1stsavvy.com/children-privacy
+- Terms of Use: https://1stsavvy.com/terms
+- Cookie Policy: https://1stsavvy.com/cookies
+
+## Technical Architecture
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS & Vanilla CSS design tokens with Dark/Light mode support
+- **3D Graphics**: Interactive Three.js canvas components for particle star flows and financial globes
+- **Data Persistence**: Offline-first Zustand client state with encrypted local storage and optional Supabase backend

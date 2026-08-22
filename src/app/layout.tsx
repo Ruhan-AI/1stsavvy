@@ -34,10 +34,15 @@ export const metadata: Metadata = {
     'Personal finance management',
     'Net worth tracker',
     'Household budgeting',
+    'COPPA compliant family finance',
   ],
   authors: [{ name: 'First Savvy' }],
   creator: 'First Savvy',
+  publisher: 'First Savvy',
   metadataBase: new URL('https://1stsavvy.com'),
+  alternates: {
+    canonical: 'https://1stsavvy.com',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -69,6 +74,65 @@ export const metadata: Metadata = {
     ],
     apple: '/brand/logo-mark.png',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://1stsavvy.com/#organization',
+      name: 'First Savvy',
+      alternateName: ['1stSavvy', 'FirstSavvy', '1st Savvy'],
+      url: 'https://1stsavvy.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://1stsavvy.com/brand/logo-mark.png',
+      },
+      sameAs: [
+        'https://twitter.com/1stsavvy',
+        'https://github.com/Ruhan-AI/1stsavvy',
+      ],
+      description: 'Family financial education and personal finance management platform.',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://1stsavvy.com/#website',
+      url: 'https://1stsavvy.com',
+      name: 'First Savvy',
+      publisher: {
+        '@id': 'https://1stsavvy.com/#organization',
+      },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://1stsavvy.com/#software',
+      name: 'First Savvy',
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Web, iOS, Android',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      description:
+        'Connected platform for kids chore & star tracking, allowance automation, household budgeting, and net worth calculation.',
+      provider: {
+        '@id': 'https://1stsavvy.com/#organization',
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -80,6 +144,10 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/brand/logo-mark.png" type="image/png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-screen bg-[#F9F7F8] dark:bg-[#1A232E] text-[#1D2D42] dark:text-slate-100 font-sans antialiased">
         <InitialSplashScreen />
