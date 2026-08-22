@@ -1,9 +1,12 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
-import { WealthGlobeCanvas } from '@/components/3d/WealthGlobeCanvas';
-import { FinancialWaveCanvas } from '@/components/3d/FinancialWaveCanvas';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
+import { ProductScreenshot } from '@/components/marketing/ProductScreenshot';
+import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
 import { 
   FadeIn, 
   TextReveal, 
@@ -25,10 +28,20 @@ import {
   Repeat
 } from 'lucide-react';
 
+const WealthGlobeCanvas = dynamic(
+  () => import('@/components/3d/WealthGlobeCanvas').then(mod => mod.WealthGlobeCanvas),
+  { ssr: false }
+);
+
+const FinancialWaveCanvas = dynamic(
+  () => import('@/components/3d/FinancialWaveCanvas').then(mod => mod.FinancialWaveCanvas),
+  { ssr: false }
+);
+
 export default function PersonalFinancePage() {
   return (
     <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
-      {/* 1. HERO SECTION WITH 3D WEALTH GLOBE & WAVE */}
+      {/* 1. HERO SECTION */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 flex flex-col items-center relative z-10">
           <FadeIn delay={0.05}>
@@ -38,12 +51,6 @@ export default function PersonalFinancePage() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="my-2">
-              <WealthGlobeCanvas size={220} />
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.25}>
             <h1 className="text-4xl sm:text-6xl font-serif font-bold text-brand-navy dark:text-white tracking-tight leading-tight">
               <TextReveal text="Your money tells a bigger story." />
               <span className="block text-brand-sky mt-2 italic font-normal">
@@ -52,13 +59,13 @@ export default function PersonalFinancePage() {
             </h1>
           </FadeIn>
 
-          <FadeIn delay={0.35}>
+          <FadeIn delay={0.25}>
             <p className="max-w-3xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               First Savvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized financial experience. Understand where your money is, how it is moving, what is coming next, and how your overall financial position is changing.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.45}>
+          <FadeIn delay={0.35}>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/signup"
@@ -70,283 +77,198 @@ export default function PersonalFinancePage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.55}>
+          <FadeIn delay={0.45}>
             <div className="pt-2 text-xs font-serif italic font-semibold text-brand-sky">
               Know where you stand. See what comes next.
             </div>
           </FadeIn>
         </div>
 
-        {/* 4 Feature Pillars Grid with Stagger */}
-        <ScrollReveal delay={0.2} direction="up">
-          <StaggerContainer className="mt-12 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            <StaggerItem>
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-brand-sky/40 transition-all duration-300 flex flex-col justify-between h-full">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-brand-sky flex items-center justify-center shadow-xs">
-                    <Layers className="w-5 h-5" />
-                  </div>
-                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">Unified Accounts</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Plaid sandbox & manual tracking for complete asset visibility.
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
+        {/* Hero Product Composite: Transactions with Floating Account Types */}
+        <ScrollReveal delay={0.3} direction="up">
+          <div className="mt-12 max-w-5xl mx-auto relative">
+            <ProductScreenshot
+              src="/images/app/transactions.jpg"
+              alt="First Savvy unified transaction hub with search, filters, and pending items"
+              label="Transaction & Cash Flow Workspace"
+              variant="browser"
+              aspectRatio="16/9"
+              priority={true}
+            />
 
-            <StaggerItem>
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between h-full">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
-                    <PieChart className="w-5 h-5" />
-                  </div>
-                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">Connected Budgets</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Planned vs. actual spending compared dynamically as the month unfolds.
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-amber-400/40 transition-all duration-300 flex flex-col justify-between h-full">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center shadow-xs">
-                    <Calendar className="w-5 h-5" />
-                  </div>
-                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">Financial Calendar</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Anticipate recurring bills and payday events before they arrive.
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs hover:shadow-md hover:border-indigo-400/40 transition-all duration-300 flex flex-col justify-between h-full">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs">
-                    <TrendingUp className="w-5 h-5" />
-                  </div>
-                  <div className="font-bold text-base text-brand-navy dark:text-white mt-3.5 mb-1.5">True Net Worth</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Assets and liabilities combined into your real financial direction.
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-          </StaggerContainer>
+            {/* Floating Card: Account Types */}
+            <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-6 w-[55%] sm:w-[42%] max-w-sm hidden xs:block z-20 hover:scale-105 transition-transform duration-300">
+              <ProductScreenshot
+                src="/images/app/account-types.jpg"
+                alt="First Savvy account types covering banking, vehicle, property, and loans"
+                label="Asset & Liability Classes"
+                variant="floating"
+                aspectRatio="4/3"
+                enableLightbox={true}
+              />
+            </div>
+          </div>
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: EVERYTHING IN VIEW */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up">
-          <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-6 hover:shadow-md transition-shadow duration-300">
+      {/* 2. SECTION: EVERYTHING IN VIEW (Account Types Screenshot) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+          <ScrollReveal direction="left" className="lg:col-span-5 space-y-6">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Everything in View</span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-              <TextReveal text="Your financial life should not require five different places to understand. Bring the pieces together." />
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+              <TextReveal text="Banking, assets, vehicles, properties, and loans. In one place." />
             </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-              See connected and manually managed accounts alongside the financial activity around them, giving you a clearer view without constantly moving between banking apps, spreadsheets, and separate tools.
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              Stop checking five different apps to understand your balance sheet. First Savvy organizes every asset and liability category so you can see your liquid cash, investments, real estate, vehicles, and debts side by side.
             </p>
-            <div className="flex flex-wrap justify-center gap-2 pt-2">
-              {['Accounts', 'Balances', 'Transactions', 'Activity'].map((l) => (
-                <span key={l} className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
-                  {l}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {['Banking', 'Vehicles', 'Property', 'Investments', 'Loans & Debt'].map((label) => (
+                <span key={label} className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-slate-200">
+                  {label}
                 </span>
               ))}
             </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" className="lg:col-span-7">
+            <ProductScreenshot
+              src="/images/app/account-types.jpg"
+              alt="First Savvy account types selection dialog with custom asset creation"
+              label="Account & Asset Categorization"
+              caption="Track multiple asset classes from standard checking to real estate and auto loans."
+              variant="browser"
+              aspectRatio="16/10"
+            />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 3. SECTION: TRANSACTIONS & LESS REPETITION (Wide Table Screenshot) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 block">
+              Transactions & Cash Flow
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+              Organize transactions without the manual repetitive headache.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              Filter by date, category, status, and account. Exclude transfers, split categories, and see upcoming scheduled payments in seconds.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <ProductScreenshot
+              src="/images/app/transactions.jpg"
+              alt="First Savvy transaction details table with search, categories, and account filters"
+              label="Transaction Management & Filters"
+              caption="Review, search, filter, and organize financial activity from one workspace."
+              variant="browser"
+              aspectRatio="16/9"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 4. SECTION: BUDGETING (Budget Setup Screenshot) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+          <ScrollReveal direction="left" className="order-2 lg:order-1 lg:col-span-7">
+            <ProductScreenshot
+              src="/images/app/budget-setup.jpg"
+              alt="First Savvy budget creation modal with categories, spending limits, and intervals"
+              label="Budget Limit & Category Setup"
+              caption="Set monthly category targets and follow planned vs. actual progress."
+              variant="browser"
+              aspectRatio="4/3"
+            />
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" className="order-1 lg:order-2 lg:col-span-5 space-y-6">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Budgeting</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+              Planned. Actual. Remaining.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              Budgeting works best when it is simple to follow. First Savvy compares what you planned with what actually happened, keeping you aware of how much room remains in each category before the month is over.
+            </p>
+            <div className="space-y-3 pt-2">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
+                <span className="font-bold text-slate-700 dark:text-slate-300">50/30/20 Rule Ready</span>
+                <span className="text-brand-sky font-semibold">Needs • Wants • Savings</span>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
+                <span className="font-bold text-slate-700 dark:text-slate-300">Live Progress Bars</span>
+                <span className="text-emerald-600 font-semibold">Instant Visual Alert</span>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 5. 3D FINANCIAL WAVE SECTION */}
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="relative rounded-3xl bg-slate-900 text-white p-8 sm:p-14 overflow-hidden border border-slate-800 shadow-2xl">
+          <div className="absolute inset-0 opacity-40">
+            <CanvasErrorBoundary>
+              <FinancialWaveCanvas />
+            </CanvasErrorBoundary>
+          </div>
+
+          <div className="relative z-10 max-w-2xl space-y-4">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Connected Wealth Architecture</span>
+            <h3 className="text-3xl sm:text-4xl font-serif font-bold leading-tight">
+              Built for where your wealth is heading.
+            </h3>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              From day-to-day transaction flow to generational estate contacts and password records, First Savvy provides the infrastructure you need to protect and grow your legacy.
+            </p>
+            <div className="pt-4">
+              <Link
+                href="/signup"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-sm font-bold shadow-md transition-colors"
+              >
+                <span>Get Started</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. EARLY ACCESS CTA */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy dark:bg-[#15202B] text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div className="relative z-10 space-y-4 max-w-xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Early Access</span>
+              <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">
+                Take control of your household finances.
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Join families building smarter financial foundations with First Savvy.
+              </p>
+              <div className="pt-4">
+                <WaitlistForm />
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 3. SECTION: TRANSACTIONS & LESS REPETITION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Transactions</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-            Every transaction is part of a larger picture. Know where your money is moving.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-            Search, review, categorize, and organize financial activity so individual transactions become useful information rather than an endless feed of numbers. First Savvy helps you understand what came in, what went out, and where recurring patterns are beginning to form.
-          </p>
-
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Less Repetition</span>
-            <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">
-              Some financial activity keeps repeating. Your organization shouldn't have to.
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-              Transaction rules help reduce repetitive work around familiar activity, while recurring transaction visibility makes it easier to recognize the payments and income that continue to return.
-            </p>
-            <div className="text-xs font-serif italic font-bold text-brand-sky pt-1">
-              Spend less time organizing. More time understanding.
-            </div>
-            <div className="pt-2">
-              <Link href="/signup" className="text-xs font-bold text-brand-navy dark:text-white hover:text-brand-sky underline">
-                Start Organizing Your Finances →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-8 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl space-y-4">
-          <div className="text-xs font-bold uppercase tracking-wider text-brand-softBlue">Transaction Rules Engine</div>
-          <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 space-y-2 text-xs">
-            <div className="font-bold text-amber-300">Rule #1: Whole Foods Market</div>
-            <div className="text-slate-300">IF merchant contains "Whole Foods" THEN set category to "Groceries"</div>
-            <div className="text-[10px] text-emerald-400">✓ Matched 14 transactions this month</div>
-          </div>
-          <div className="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 space-y-2 text-xs">
-            <div className="font-bold text-amber-300">Rule #2: Shell Oil & Gas</div>
-            <div className="text-slate-300">IF description matches "Shell" THEN set category to "Vehicle & Gas"</div>
-            <div className="text-[10px] text-emerald-400">✓ Matched 6 transactions this month</div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. SECTION: BUDGETING & NET WORTH */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">Budgeting</span>
-          <h3 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">
-            Planning is only half the picture. See how the plan compares with reality.
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Set expected income and spending, then follow how actual financial activity compares as the month unfolds. Instead of treating a budget as a static plan, First Savvy keeps it connected to what is actually happening with your money.
-          </p>
-          <div className="flex gap-2 pt-2">
-            {['Planned', 'Actual', 'Remaining'].map((l) => (
-              <span key={l} className="px-3 py-1 rounded bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
-                {l}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Net Worth</span>
-          <h3 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">
-            An account balance tells you what is there. Net worth tells you where you stand.
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            First Savvy brings assets and liabilities together to give you a broader view of your financial position. Follow how that position changes over time and move beyond simply asking what you spent toward understanding the direction of your finances.
-          </p>
-          <div className="text-xs font-serif italic font-bold text-brand-sky pt-2">
-            See the number behind the numbers.
-          </div>
-        </div>
-      </section>
-
-      {/* 5. SECTION: FINANCIAL CALENDAR & ONE FINANCIAL PICTURE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Financial Calendar</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-            Transactions tell you what happened. See what is coming next.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            Recurring bills, income, payments, and important financial dates become easier to understand when you can see them ahead of time. First Savvy brings financial activity into a calendar view so you can look forward instead of only reviewing the past.
-          </p>
-          <div className="flex flex-wrap justify-center gap-2 pt-2">
-            {['Bills', 'Income', 'Recurring Activity', 'Reminders'].map((l) => (
-              <span key={l} className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-slate-200">
-                {l}
-              </span>
-            ))}
-          </div>
-
-          <div className="pt-8 border-t border-slate-200 dark:border-slate-700 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">One Financial Picture</span>
-            <h3 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">
-              More information does not always mean more clarity. Bring context to the numbers.
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl mx-auto">
-              Accounts, transactions, budgets, recurring activity, your calendar, and net worth each tell part of the story. First Savvy brings those perspectives closer together so you can understand what is happening with your money and how the pieces relate to your broader financial life.
-            </p>
-            <div className="pt-2">
-              <Link
-                href="/signup"
-                className="px-6 py-3 rounded-lg bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2"
-              >
-                <span>See Your Financial Picture</span>
-                <ArrowRight className="w-3.5 h-3.5 text-brand-sky" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. PERSONAL FINANCE FAQ SECTION */}
-      <FAQAccordion
-        eyebrow="Personal Finance FAQs"
-        title="Frequently Asked Questions About Personal Finance"
-        subtitle="Answers to common questions about bank connections, Plaid security, budgets, and net worth tracking."
-        items={[
-          {
-            question: 'How do bank connections and account syncing work in First Savvy?',
-            answer:
-              'First Savvy integrates with Plaid to securely connect with over 12,000 financial institutions across the US and Canada. Syncing is read-only, meaning First Savvy can never initiate transactions or move money on your behalf.',
-          },
-          {
-            question: 'Can I create custom transaction rules and auto-categorization?',
-            answer:
-              'Yes! You can create custom keyword and merchant rules (e.g., automatically categorize "Whole Foods" as Groceries) so transactions are categorized instantly as soon as they sync.',
-          },
-          {
-            question: 'How does the Net Worth Tracker handle assets and liabilities?',
-            answer:
-              'First Savvy aggregates real-time balances from checking, savings, brokerage, 401(k), and crypto accounts as assets, while tracking credit cards, mortgages, auto loans, and student loans as liabilities. You also get a historical progression chart showing your net worth growth over time.',
-          },
-          {
-            question: 'Will First Savvy remind me before upcoming recurring bills are due?',
-            answer:
-              'Yes. The Financial Calendar automatically schedules your detected recurring bills, subscriptions, and payday deposits, providing advance alerts so you avoid overdraft fees.',
-          },
-          {
-            question: 'Can I export my financial data and budget reports?',
-            answer:
-              'Yes, you can export your complete transaction history, spending breakdowns, and net worth summaries to CSV format anytime for tax or accounting purposes.',
-          },
-        ]}
-      />
-
-      {/* 7. SECTION: WHAT'S NEXT (BUSINESS WAITLIST) */}
+      {/* 7. FAQ SECTION */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">What's Next</span>
-          <h2 className="text-3xl font-serif font-bold text-brand-navy dark:text-white">
-            Your financial life doesn't stop at personal. Business is coming next.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            First Savvy is expanding toward a deeper financial experience for entrepreneurs and business owners, bringing more of your financial life into one connected platform. Join the Business waitlist to be among the first to hear when access becomes available.
-          </p>
-          <div className="max-w-md mx-auto pt-2">
-            <WaitlistForm category="business" buttonText="Join the Business Waitlist" />
+        <ScrollReveal>
+          <div className="text-center mb-12 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Financial Questions</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+              Frequently asked about personal finance
+            </h2>
           </div>
-        </div>
-      </section>
-
-      {/* 8. FINAL CTA */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy text-white shadow-2xl text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold">
-            Your finances are already connected by the life behind them. Give yourself a clearer view of it.
-          </h2>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Bring your accounts, activity, budgets, and broader financial position into one experience designed to help you understand where you stand and what comes next.
-          </p>
-          <div className="pt-4">
-            <Link
-              href="/signup"
-              className="px-8 py-4 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-base font-semibold shadow-lg transition-all duration-200 inline-flex items-center gap-2"
-            >
-              <span>Start Your Financial View</span>
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
+        </ScrollReveal>
+        <FAQAccordion />
       </section>
     </div>
   );

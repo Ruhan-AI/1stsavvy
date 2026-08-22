@@ -1,19 +1,22 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { HeroPreview } from '@/components/marketing/HeroPreview';
 import { HowItWorks } from '@/components/marketing/HowItWorks';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
-import { HeroConstellationCanvas } from '@/components/3d/HeroConstellationCanvas';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
+import { ProductScreenshot } from '@/components/marketing/ProductScreenshot';
+import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
 import { 
   FadeIn, 
   AuroraBackground, 
-  FloatingBadge, 
   CountUp,
-  TextReveal,
-  ScrollReveal,
-  StaggerContainer,
-  StaggerItem
+  TextReveal, 
+  ScrollReveal, 
+  StaggerContainer, 
+  StaggerItem 
 } from '@/components/animations/MotionWrappers';
 import { 
   ArrowRight, 
@@ -30,6 +33,12 @@ import {
   DollarSign
 } from 'lucide-react';
 
+// Dynamically import Three.js scene with ssr: false
+const HeroConstellationCanvas = dynamic(
+  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
+  { ssr: false }
+);
+
 export default function HomePage() {
   return (
     <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
@@ -37,7 +46,10 @@ export default function HomePage() {
 
       {/* 1. HERO SECTION */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
-        <HeroConstellationCanvas />
+        <CanvasErrorBoundary>
+          <HeroConstellationCanvas />
+        </CanvasErrorBoundary>
+
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-3 sm:space-y-4">
           {/* Headline */}
           <FadeIn delay={0.15}>
@@ -131,17 +143,39 @@ export default function HomePage() {
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: MONEY IS CONNECTED */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. SECTION: MONEY IS CONNECTED (With Global Search Screenshot) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
-          <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-4 hover:shadow-md transition-shadow duration-300">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-              <TextReveal text="Your financial tools should be too." />
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-              A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. First Savvy brings them into a more connected financial experience.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+            <div className="lg:col-span-5 space-y-4 text-left">
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+                <TextReveal text="Your financial tools should be too." />
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+                A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. First Savvy brings them into a more connected financial experience.
+              </p>
+              <div className="pt-2">
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-sky hover:text-brand-navyDark transition-colors group"
+                >
+                  <span>Experience Connected Finance</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <ProductScreenshot
+                src="/images/app/global-search.jpg"
+                alt="First Savvy global search finding accounts, transactions, and family activity"
+                label="Instant Household Search"
+                caption="Search across accounts, transactions, contacts, and household activity."
+                variant="browser"
+                aspectRatio="16/10"
+              />
+            </div>
           </div>
         </ScrollReveal>
       </section>
@@ -196,222 +230,153 @@ export default function HomePage() {
         </StaggerContainer>
       </section>
 
-      {/* 4. SECTION: PERSONAL FINANCE HIGHLIGHT */}
+      {/* 4. SECTION: PERSONAL FINANCE PREVIEW (Wide Transaction Workspace) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
+        <div className="space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 block">
-              Personal Finance
+              Personal Finance Preview
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
-              Now look at the bigger picture. Know what your money is doing.
+              Review, filter, and organize every dollar in one workspace.
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-              First Savvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized view, helping you understand what came in, what went out, what is coming next, and how your overall financial position is changing.
+              First Savvy brings accounts, transactions, budgets, recurring activity, and net worth into one organized view.
             </p>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              {['Accounts', 'Transactions', 'Budgets', 'Recurring Activity', 'Net Worth'].map((label) => (
-                <span key={label} className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-brand-navy dark:text-slate-200">
-                  {label}
-                </span>
-              ))}
-            </div>
-
-            <div className="pt-2">
-              <Link
-                href="/personal-finance"
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand-sky hover:text-brand-navyDark transition-colors group"
-              >
-                <span>Explore Personal Finance</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl space-y-6">
-            <div className="text-xs font-bold uppercase tracking-wider text-brand-softBlue">Your Money, in One View</div>
-            <h3 className="text-2xl font-serif font-bold leading-snug">
-              Stop checking five places to understand one financial picture. See where you stand.
-            </h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Bring connected and manually managed accounts into one financial view. Review balances, organize transactions, identify recurring activity, and reduce repetitive financial organization without piecing everything together across different apps and spreadsheets.
+          <div className="max-w-5xl mx-auto">
+            <ProductScreenshot
+              src="/images/app/transactions.jpg"
+              alt="First Savvy transaction search, filters, category tagging, and pending items"
+              label="Transaction & Cash Flow Hub"
+              caption="Review, search, filter, and organize financial activity from one workspace."
+              variant="browser"
+              aspectRatio="16/9"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 5. SECTION: FAMILY PREVIEW (Split Tasks & Goals Cards) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky block">
+              Family Experience Preview
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+              Turn responsibility into visible progress through tasks, stars, and goals.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              Kids complete tasks, earn rewards, receive allowances, and save toward goals with supervised clarity.
             </p>
-            <div className="pt-4 border-t border-slate-700">
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <ProductScreenshot
+              src="/images/app/task-creation.jpg"
+              alt="First Savvy task creation modal with star values and assignment"
+              label="Task & Responsibility Setup"
+              caption="Assign chores, set recurring schedules, and allocate star values."
+              variant="browser"
+              aspectRatio="4/3"
+            />
+            <ProductScreenshot
+              src="/images/app/goal-creation.jpg"
+              alt="First Savvy reward goal setup with target milestones"
+              label="Star Reward & Goal Milestone"
+              caption="Set saving goals, reward items, and teach delayed gratification."
+              variant="browser"
+              aspectRatio="4/3"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 6. SECTION: SEE MORE THAN A BALANCE (With Account Types Screenshot) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="lg:col-span-5 space-y-4 text-left">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">See More Than a Balance</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+              Your balance is not your financial position.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              First Savvy organizes banking, vehicles, properties, investments, and liabilities so you understand your true net worth and can follow how your financial standing evolves.
+            </p>
+            <div className="pt-2">
               <Link
                 href="/signup"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold shadow transition-colors"
-              >
-                <span>See Your Financial Picture</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. SECTION: FAMILY EXPERIENCE HIGHLIGHT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1 p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-            <div className="text-xs font-bold uppercase tracking-wider text-brand-sky">Built for Parents Too</div>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-brand-navy dark:text-white leading-snug">
-              Their independence. Your visibility.
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-              Children get a simpler financial experience designed around what matters to them, without gaining access to the parent's broader financial environment. Parents keep the visibility and control needed to guide the experience. Different access. Same family.
-            </p>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
-              <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
-                COPPA-compliant parental consent workflow with audit trails and isolated permissions.
-              </div>
-            </div>
-          </div>
-
-          <div className="order-1 lg:order-2 space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky block">
-              Family Experience
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
-              Money habits start before the first paycheck. Let kids learn by doing.
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-              First Savvy gives children a supervised way to build real money skills through everyday responsibility. It starts with stars. Kids complete tasks, earn rewards, receive allowances, save toward goals, and gradually begin understanding the relationship between responsibility and money. Parents stay connected with control over profiles, tasks, allowances, rewards, permissions, and approvals.
-            </p>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              {['Tasks', 'Stars and Rewards', 'Allowances', 'Goals'].map((label) => (
-                <span key={label} className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-brand-navy dark:text-slate-200">
-                  {label}
-                </span>
-              ))}
-            </div>
-
-            <div className="pt-2">
-              <Link
-                href="/family"
                 className="inline-flex items-center gap-2 text-sm font-bold text-brand-sky hover:text-brand-navyDark transition-colors group"
               >
-                <span>Explore Family</span>
+                <span>Track Your Net Worth</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* 6. SECTION: SEE MORE THAN A BALANCE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">See More Than a Balance</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-            Your balance is not your financial position. See the number behind the numbers.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            First Savvy brings assets and liabilities together so you can understand your net worth and follow how your financial position changes over time. Budgeting adds context by showing how what you planned compares with what actually happened. Your financial calendar helps you see recurring bills, income, and important dates before they arrive.
-          </p>
-          <div className="pt-2 text-sm font-serif italic text-brand-sky font-semibold">
-            Know where you stand. See what comes next.
+          <div className="lg:col-span-7">
+            <ProductScreenshot
+              src="/images/app/account-types.jpg"
+              alt="First Savvy asset, liability, banking, property, and vehicle category controls"
+              label="Unified Wealth & Asset Classes"
+              caption="Organize every asset, liability, debt, and vehicle in one unified picture."
+              variant="browser"
+              aspectRatio="16/10"
+            />
           </div>
         </div>
       </section>
 
-      {/* 7. SECTION: BUILT TO GROW WITH YOU */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl text-center max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-softBlue">Built to Grow With You</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold">
-            Your financial life evolves. First Savvy is designed to grow with it.
-          </h2>
-          <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
-            What begins with a child earning their first stars can grow into a deeper understanding of money, greater clarity around personal finances, increasingly complex financial lives, and eventually the decisions surrounding what you build and leave behind.
-          </p>
-          <div className="pt-4 text-base font-serif italic text-brand-sky font-bold">
-            From stars to legacy.
+      {/* 7. HOW IT WORKS */}
+      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Simple, Transparent Steps</span>
+            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-brand-navy dark:text-white">
+              How First Savvy works
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+              Getting started is straightforward. Designed for the whole family in three steps.
+            </p>
           </div>
-        </div>
-      </section>
+        </ScrollReveal>
 
-      {/* 8. INTERACTIVE HOW IT WORKS SEQUENCE */}
-      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <HowItWorks />
       </section>
 
-      {/* 9. PLATFORM FAQ SECTION */}
-      <FAQAccordion
-        eyebrow="Platform FAQs"
-        title="Frequently Asked Questions"
-        subtitle="Common questions about how First Savvy unifies family chore routines and adult household finances."
-        items={[
-          {
-            question: 'How does First Savvy combine family chore tracking with adult personal finance?',
-            answer:
-              'First Savvy connects household routines with real financial management in a single platform. Parents manage real-world accounts, budgets, bills, and net worth in their private dashboard, while assigning supervised chores, stars, allowances, and savings goals to kids in a dedicated, age-appropriate Kid Space.',
-          },
-          {
-            question: 'Is my banking information secure and encrypted?',
-            answer:
-              'Yes. First Savvy uses bank-grade 256-bit AES encryption and integrates with Plaid to securely connect your accounts in read-only mode. We never store or access your banking credentials.',
-          },
-          {
-            question: 'Can both parents manage the household together?',
-            answer:
-              'Absolutely. First Savvy supports multi-parent households where both parents can create chores, approve star redemptions, adjust budgets, and review family financial progress collaboratively.',
-          },
-          {
-            question: 'Is First Savvy compliant with child privacy laws (COPPA)?',
-            answer:
-              'Yes, 100%. We enforce verifiable parental consent before creating any child profile. We never collect personal contact information, emails, or behavioral ad data from children.',
-          },
-          {
-            question: 'Can I start using First Savvy for free?',
-            answer:
-              'Yes! You can get started for free immediately during our early access release with full access to family chore routines, star ledgers, budget planning, and manual account tracking.',
-          },
-        ]}
-      />
-
-      {/* 10. SECTION: FEATURE UPDATES WAITLIST */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Feature Updates</span>
-          <h2 className="text-3xl font-serif font-bold text-brand-navy dark:text-white">
-            Want to know what First Savvy builds next?
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            Join the feature updates waitlist and be the first to hear when new Family tools and experiences become available.
-          </p>
-          <div className="max-w-md mx-auto pt-2">
-            <WaitlistForm category="feature_updates" buttonText="Join the Waitlist" />
+      {/* 8. EARLY ACCESS & FINAL CTA */}
+      <section id="early-access" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy dark:bg-[#15202B] text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div className="relative z-10 space-y-4 max-w-xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Early Access</span>
+              <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">
+                Be among the first families to experience First Savvy.
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Join our early access group. Get updates as new features launch and help shape the future of family financial tools.
+              </p>
+              <div className="pt-4">
+                <WaitlistForm />
+              </div>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
-      {/* 11. SECTION: EARLY ACCESS */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-slate-900 text-white shadow-2xl text-center space-y-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-8 opacity-10">
-            <Sparkles className="w-48 h-48" />
+      {/* 9. FAQ SECTION */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="text-center mb-12 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Frequently Asked Questions</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+              Answers for curious minds
+            </h2>
           </div>
-
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky relative z-10">Early Access</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold relative z-10">
-            First Savvy is entering its first chapter. Be early enough to help shape the next one.
-          </h2>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed relative z-10">
-            We're opening First Savvy to an initial group of users as we refine the experience around real families and real financial lives. How early users experience the platform, what they return to, and the feedback they share will help guide how First Savvy continues to evolve.
-          </p>
-          <div className="pt-4 relative z-10">
-            <Link
-              href="/signup"
-              className="px-8 py-4 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-base font-semibold shadow-lg transition-all duration-200 inline-flex items-center gap-2"
-            >
-              <span>Get Started for Free</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
+        </ScrollReveal>
+        <FAQAccordion />
       </section>
     </div>
   );

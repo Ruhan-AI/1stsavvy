@@ -11,7 +11,6 @@ import {
   TextReveal, 
   ScrollReveal 
 } from '@/components/animations/MotionWrappers';
-import { FinancialWaveCanvas } from '@/components/3d/FinancialWaveCanvas';
 import { 
   TrendingUp, 
   Wallet, 

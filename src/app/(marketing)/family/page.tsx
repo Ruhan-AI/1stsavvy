@@ -1,8 +1,12 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
-import { FamilyStarFlowCanvas } from '@/components/3d/FamilyStarFlowCanvas';
+import { ProductScreenshot } from '@/components/marketing/ProductScreenshot';
+import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
 import { 
   FadeIn, 
   TextReveal, 
@@ -24,13 +28,20 @@ import {
   Layers
 } from 'lucide-react';
 
+const FamilyStarFlowCanvas = dynamic(
+  () => import('@/components/3d/FamilyStarFlowCanvas').then(mod => mod.FamilyStarFlowCanvas),
+  { ssr: false }
+);
+
 export default function FamilyPage() {
   return (
     <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
-      {/* 1. HERO SECTION WITH 3D STAR FLOW */}
+      {/* 1. HERO SECTION */}
       <section className="relative pt-2 sm:pt-4 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 max-w-6xl mx-auto h-[480px] pointer-events-none z-0 opacity-30 dark:opacity-40">
-          <FamilyStarFlowCanvas />
+          <CanvasErrorBoundary>
+            <FamilyStarFlowCanvas />
+          </CanvasErrorBoundary>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
@@ -68,40 +79,37 @@ export default function FamilyPage() {
           </FadeIn>
         </div>
 
-        {/* Visual Family Hub Mockup */}
+        {/* Family Hero Product Preview with Floating Goal Card */}
         <ScrollReveal delay={0.3} direction="up">
-          <div className="mt-12 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white/90 dark:bg-[#1E293B]/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="p-4 rounded-2xl bg-sky-50/60 dark:bg-sky-950/40 border border-brand-sky/20 space-y-2 text-center hover:scale-105 transition-transform">
-              <div className="w-10 h-10 rounded-full bg-brand-sky text-white flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <div className="font-bold text-sm text-brand-navy dark:text-white">Everyday Tasks</div>
-              <div className="text-xs text-slate-500">Chores, homework & responsibilities tailored by age.</div>
-            </div>
+          <div className="mt-12 max-w-5xl mx-auto relative">
+            <ProductScreenshot
+              src="/images/app/dashboard-family.jpg"
+              alt="First Savvy parent and child family dashboard with chore tracking and allowance ledger"
+              label="Family Activity & Learning Hub"
+              variant="browser"
+              aspectRatio="16/9"
+              priority={true}
+            />
 
-            <div className="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-300/30 space-y-2 text-center hover:scale-105 transition-transform">
-              <div className="w-10 h-10 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center mx-auto">
-                <Star className="w-5 h-5 fill-slate-900" />
-              </div>
-              <div className="font-bold text-sm text-brand-navy dark:text-white">Star Rewards Ledger</div>
-              <div className="text-xs text-slate-500">Immutable ledger that connects effort directly to earning.</div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-300/30 space-y-2 text-center hover:scale-105 transition-transform">
-              <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center mx-auto">
-                <Target className="w-5 h-5" />
-              </div>
-              <div className="font-bold text-sm text-brand-navy dark:text-white">Goal Building</div>
-              <div className="text-xs text-slate-500">Learning delayed gratification and saving patience.</div>
+            {/* Floating Goal Card */}
+            <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-6 w-[55%] sm:w-[40%] max-w-xs hidden xs:block z-20 hover:scale-105 transition-transform duration-300">
+              <ProductScreenshot
+                src="/images/app/goal-creation.jpg"
+                alt="First Savvy reward goal setup"
+                label="Goal Milestone"
+                variant="floating"
+                aspectRatio="4/3"
+                enableLightbox={true}
+              />
             </div>
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: IT STARTS WITH RESPONSIBILITY */}
+      {/* 2. SECTION: IT STARTS WITH RESPONSIBILITY (Task Creation with Callouts) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <ScrollReveal direction="left" className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+          <ScrollReveal direction="left" className="lg:col-span-5 space-y-6">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">It Starts With Responsibility</span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
               <TextReveal text="Before kids manage money, they can learn what it means to earn it." />
@@ -109,232 +117,137 @@ export default function FamilyPage() {
             <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
               Create everyday tasks and responsibilities your child can understand and complete. As they make progress, they begin connecting effort with earning and seeing that money is something to understand, not simply receive.
             </p>
+
+            {/* Highlighted Field Callouts */}
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              {[
+                { label: 'Task Details', desc: 'Clear title & description' },
+                { label: 'Star Value', desc: 'Weighted by effort' },
+                { label: 'Schedule', desc: 'Daily or weekly rhythm' },
+                { label: 'Assign to Child', desc: 'Personalized space' },
+              ].map((callout, idx) => (
+                <div key={idx} className="p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs">
+                  <div className="font-bold text-xs text-brand-navy dark:text-white flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-sky" />
+                    {callout.label}
+                  </div>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{callout.desc}</div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" className="lg:col-span-7">
+            <ProductScreenshot
+              src="/images/app/task-creation.jpg"
+              alt="First Savvy task creation modal showing task title, stars, schedule, and child assignment"
+              label="Task & Chore Assignment"
+              caption="Assign tasks with custom star rewards and recurring schedules."
+              variant="browser"
+              aspectRatio="4/3"
+            />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 3. SECTION: FROM STARS TO REWARDS & GOALS (Goal Creation Visual) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+          <ScrollReveal direction="left" className="order-2 lg:order-1 lg:col-span-7">
+            <ProductScreenshot
+              src="/images/app/goal-creation.jpg"
+              alt="First Savvy goal creation with target star cost and assignment"
+              label="Reward & Saving Goal Builder"
+              caption="Turn stars into tangible rewards and long-term saving goals."
+              variant="browser"
+              aspectRatio="4/3"
+            />
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" className="order-1 lg:order-2 lg:col-span-5 space-y-6">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">From Stars to Rewards and Goals</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+              Earn stars. Choose rewards. Save toward goals.
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              When tasks are completed, kids earn stars. Stars can be redeemed for small rewards or saved toward larger goals. As children grow, the same framework supports allowances, giving them a structured way to practice making choices with money they earned.
+            </p>
             <div className="flex flex-wrap gap-2 pt-2">
-              {['Tasks', 'Responsibilities', 'Progress'].map((label) => (
+              {['Stars', 'Rewards', 'Allowances', 'Goals'].map((label) => (
                 <span key={label} className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-slate-200">
                   {label}
                 </span>
               ))}
             </div>
           </ScrollReveal>
-
-          <ScrollReveal direction="right">
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 hover:shadow-md transition-shadow duration-300">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Sample Assigned Tasks</div>
-                <div className="space-y-3">
-                  {[
-                    { title: 'Tidy Bedroom & Make Bed', stars: '2 Stars', schedule: 'Daily' },
-                    { title: 'Feed & Walk the Family Pet', stars: '3 Stars', schedule: 'Daily' },
-                    { title: 'Complete Math & Reading Time', stars: '4 Stars', schedule: 'Weekdays' },
-                  ].map((t, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-xs">
-                      <div className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-brand-sky" />
-                        <div>
-                          <div className="font-bold text-slate-800 dark:text-slate-200">{t.title}</div>
-                          <div className="text-[10px] text-slate-500">{t.schedule}</div>
-                        </div>
-                      </div>
-                      <span className="font-bold text-amber-500 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 px-2 py-1 rounded">
-                        +{t.stars}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-          </ScrollReveal>
         </div>
       </section>
 
-      {/* 3. SECTION: FROM STARS TO REWARDS */}
+      {/* 4. SECTION: THEIR EXPERIENCE AND YOUR VISIBILITY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="scale">
-          <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl text-center max-w-4xl mx-auto space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-softBlue">From Stars to Rewards</span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold">
-              <TextReveal text="Make progress visible. Let accomplishment mean something." />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="lg:col-span-5 space-y-4 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/20 text-brand-sky text-xs font-bold uppercase tracking-wider">
+              Different access. Same family.
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+              Their experience. Your visibility.
             </h2>
-            <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
-              For younger children, the journey can start simply: complete a task, earn stars, and work toward a reward. As they grow, those early experiences can progress toward allowances, saving, and more meaningful money decisions.
+            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              Kids see what they need to see: their tasks, their stars, their rewards, and their goals. Parents manage the system, approve tasks, set allowances, and keep full visibility into the family environment without giving children access to adult finances.
             </p>
-            <div className="pt-2 text-sm font-serif italic text-brand-sky font-bold">
-              First the stars. Then the lesson behind them.
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center gap-3">
+              <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+              <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                PIN-protected or password-protected child spaces with isolated parent controls.
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <ProductScreenshot
+              src="/images/app/dashboard-family.jpg"
+              alt="First Savvy clean dashboard preview showing supervised family workspace"
+              label="Supervised Family Space"
+              caption="Different access. Same family."
+              variant="browser"
+              aspectRatio="16/10"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 5. EARLY ACCESS CTA */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy dark:bg-[#15202B] text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div className="relative z-10 space-y-4 max-w-xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Start Early</span>
+              <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">
+                Give your kids a better place to begin.
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Join our early access program and begin building lasting financial habits with your family today.
+              </p>
+              <div className="pt-4">
+                <WaitlistForm />
+              </div>
             </div>
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 4. SECTION: ALLOWANCES AND GOALS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center">
-                <Target className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="font-serif font-bold text-lg text-brand-navy dark:text-white">Goal: Mountain Bike</div>
-                <div className="text-xs text-slate-500">Leo's Personal Goal • Target: 80 Stars</div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex justify-between text-xs font-bold">
-                <span className="text-slate-600 dark:text-slate-300">Progress</span>
-                <span className="text-brand-sky">42 / 80 Stars (52%)</span>
-              </div>
-              <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-brand-sky to-emerald-500 rounded-full" style={{ width: '52%' }} />
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-500 dark:text-slate-400 italic">
-              "Goals introduce another important lesson: not everything needs to happen today."
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Allowances and Goals</span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-              More than simply handing over money. Give it a purpose.
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-              First Savvy helps turn allowances into part of a larger financial experience. Kids can see what they are earning, understand what they have available, and work toward things that matter to them. Goals introduce another important lesson: not everything needs to happen today.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {['Earn', 'Save', 'Work Toward Something'].map((label) => (
-                <span key={label} className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-slate-200">
-                  {label}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. SECTION: THEIR EXPERIENCE vs BUILT FOR PARENTS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Their Experience</span>
-          <h3 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">
-            Simple enough for them. Separate from yours.
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Kids get their own supervised space centered around tasks, stars, rewards, allowances, and goals without gaining access to the broader financial world their parents manage. The experience is theirs. The control stays with you.
-          </p>
-        </div>
-
-        <div className="p-8 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">Built for Parents Too</span>
-          <h3 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">
-            Their independence. Your visibility.
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Create child profiles, assign responsibilities, review completed tasks, manage allowances and rewards, and control how each child participates. First Savvy gives kids room to learn while keeping parents connected to the experience. Different access. Same family.
-          </p>
-          <div className="pt-2">
-            <Link href="/signup" className="text-xs font-bold text-brand-sky hover:underline">
-              Get Started as a Parent →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. SECTION: MORE THAN MONEY & GROWING WITH THEM */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 text-center max-w-4xl mx-auto space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">More Than Money</span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-            The lesson goes beyond dollars. Build the habits behind better financial decisions.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            Responsibility. Patience. Choices. Progress. Everyday moments can become opportunities to help children understand how earning works, why saving matters, and what it means to work toward something over time. The goal is not simply to teach them what money is worth. It is to help them understand what goes into building it.
-          </p>
-
-          <div className="pt-6 border-t border-slate-200 dark:border-slate-700 space-y-3">
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Growing With Them</div>
-            <h3 className="text-xl font-serif font-bold text-brand-navy dark:text-white">
-              What they need today will not be what they need tomorrow. Start simple. Build from there.
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm max-w-2xl mx-auto">
-              A first task can become a first reward. Stars can lead to allowances. Small savings goals can eventually become bigger financial conversations. First Savvy is designed around that progression, helping parents introduce financial responsibility in ways that make sense as their children grow.
-            </p>
-            <div className="text-xs font-serif italic font-bold text-brand-sky pt-2">
-              From their first stars to their first real financial decisions.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. FAMILY FAQ SECTION */}
-      <FAQAccordion
-        eyebrow="Family & Kid Space FAQs"
-        title="Frequently Asked Questions About Family Tools"
-        subtitle="Everything parents want to know about stars, chore routines, child safety, and allowance tracking."
-        items={[
-          {
-            question: 'How do kids earn and redeem stars for real rewards in First Savvy?',
-            answer:
-              'Parents set up age-appropriate chores and responsibilities with assigned star values. When a child marks a chore done in their Kid Space, parents review and approve it. Accumulated stars can be redeemed for parent-created custom rewards (like movie nights, toy purchases, or special outings) or converted into savings goals.',
-          },
-          {
-            question: 'What parental controls and PIN protections are in place for child accounts?',
-            answer:
-              'Each child account is secured with a simple 4-digit PIN configured by parents. Children only see their assigned chores, star balance, personal wishlists, and rewards. They never see adult bank account balances, sensitive transactions, or household net worth.',
-          },
-          {
-            question: 'How does First Savvy comply with the Children’s Online Privacy Protection Act (COPPA)?',
-            answer:
-              'Before any child profile can be created, parents must review and complete a verifiable parental consent check. First Savvy does not collect emails, phone numbers, location data, or behavioral tracking information from children.',
-          },
-          {
-            question: 'Can I automate weekly allowance payouts alongside chore earnings?',
-            answer:
-              'Yes! First Savvy allows parents to schedule recurring allowances (weekly, bi-weekly, or monthly) with optional conditional chore-completion thresholds.',
-          },
-          {
-            question: 'What ages is the First Savvy Family experience built for?',
-            answer:
-              'First Savvy is tailored for kids aged 5 to 17. Younger children engage through visual 3D star trophies and fun rewards, while teenagers can track monetary savings goals, chores, and basic budgeting habits as they prepare for adulthood.',
-          },
-        ]}
-      />
-
-      {/* 8. FEATURE UPDATES */}
+      {/* 6. FAQ SECTION */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Feature Updates</span>
-          <h2 className="text-3xl font-serif font-bold text-brand-navy dark:text-white">
-            There is more ahead. Want to see what comes next?
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            We're continuing to explore new ways for families to build financial understanding together. Join the feature updates list and be among the first to hear when new First Savvy Family experiences become available.
-          </p>
-          <div className="max-w-md mx-auto pt-2">
-            <WaitlistForm category="family" buttonText="Join Feature Updates" />
+        <ScrollReveal>
+          <div className="text-center mb-12 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Family Questions</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+              Frequently asked about family features
+            </h2>
           </div>
-        </div>
-      </section>
-
-      {/* 8. FINAL CTA */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy text-white shadow-2xl text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold">
-            What they learn about money starts long before their first paycheck. Help them start well.
-          </h2>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Give your child a practical place to learn responsibility, earning, saving, and progress while you stay connected along the way.
-          </p>
-          <div className="pt-4">
-            <Link
-              href="/signup"
-              className="px-8 py-4 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-base font-semibold shadow-lg transition-all duration-200 inline-flex items-center gap-2"
-            >
-              <span>Start Their Money Journey</span>
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
+        </ScrollReveal>
+        <FAQAccordion />
       </section>
     </div>
   );

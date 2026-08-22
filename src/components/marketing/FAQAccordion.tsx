@@ -14,15 +14,43 @@ interface FAQAccordionProps {
   title?: string;
   subtitle?: string;
   eyebrow?: string;
-  items: FAQItem[];
+  items?: FAQItem[];
   className?: string;
 }
+
+const DEFAULT_FAQS: FAQItem[] = [
+  {
+    question: 'How does First Savvy help kids learn about money?',
+    answer:
+      'First Savvy uses an immutable star ledger where kids earn stars by completing supervised chores and homework. Stars can be redeemed for parent-approved rewards, saved toward long-term goals, or converted into scheduled allowances.',
+  },
+  {
+    question: 'Is First Savvy compliant with children’s online privacy laws (COPPA)?',
+    answer:
+      'Yes, First Savvy is strictly compliant with the Children’s Online Privacy Protection Act (COPPA). We isolate child spaces, require verifiable parental consent, and never allow third-party tracking, behavioral advertising, or data sharing on child accounts.',
+  },
+  {
+    question: 'How do personal finance accounts connect to First Savvy?',
+    answer:
+      'We provide secure read-only bank synchronization powered by Plaid with 256-bit encryption. You can also manually add and track cash, vehicles, real estate, and customized debt accounts.',
+  },
+  {
+    question: 'Can kids see my bank balances or household net worth?',
+    answer:
+      'No. Child profiles are completely segregated with custom PIN or password controls. Kids only see their personal tasks, earned stars, and assigned goals.',
+  },
+  {
+    question: 'Can I export my household financial data at any time?',
+    answer:
+      'Yes. You maintain full ownership of your data and can export an encrypted JSON backup of your entire household workspace anytime from Settings.',
+  },
+];
 
 export function FAQAccordion({
   title = 'Frequently Asked Questions',
   subtitle = 'Everything you need to know about how First Savvy works for your family and personal finances.',
   eyebrow = 'Got Questions?',
-  items,
+  items = DEFAULT_FAQS,
   className = '',
 }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -32,24 +60,7 @@ export function FAQAccordion({
   };
 
   return (
-    <section className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ${className}`}>
-      {/* Header */}
-      <div className="text-center space-y-3 mb-10">
-        {eyebrow && (
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-sky block">
-            {eyebrow}
-          </span>
-        )}
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
-          {title}
-        </h2>
-        {subtitle && (
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
-            {subtitle}
-          </p>
-        )}
-      </div>
-
+    <div className={`max-w-4xl mx-auto py-6 ${className}`}>
       {/* Accordion Items */}
       <div className="space-y-3">
         {items.map((item, idx) => {
@@ -104,6 +115,6 @@ export function FAQAccordion({
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }

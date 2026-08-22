@@ -1,177 +1,174 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { isWebGLAvailable } from '@/lib/webgl';
 
 interface Interactive3DStarBadgeProps {
+  stars?: number;
   size?: number;
-  starCount?: number;
   interactive?: boolean;
 }
 
 export function Interactive3DStarBadge({
-  size = 140,
-  starCount = 42,
+  stars = 24,
+  size = 180,
   interactive = true,
 }: Interactive3DStarBadgeProps) {
   const mountRef = useRef<HTMLDivElement>(null);
+  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
+    if (!isWebGLAvailable()) {
+      setWebglSupported(false);
+      return;
+    }
+
     const container = mountRef.current;
     if (!container) return;
 
-    // Scene, Camera, Renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.z = 7;
+    let renderer: THREE.WebGLRenderer | null = null;
+    let animationFrameId: number;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(size, size);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
+    try {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+      camera.position.z = 6;
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
-    scene.add(ambientLight);
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: 'default',
+        failIfMajorPerformanceCaveat: false,
+      });
+      renderer.setSize(size, size);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      container.appendChild(renderer.domElement);
 
-    const dirLight = new THREE.DirectionalLight(0xfff5cc, 2.5);
-    dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
+      // Star Shape
+      const starGeo = new THREE.OctahedronGeometry(1.4, 0);
+      const starMat = new THREE.MeshStandardMaterial({
+        color: 0xf59e0b,
+        metalness: 0.85,
+        roughness: 0.25,
+        emissive: 0xd97706,
+        emissiveIntensity: 0.35,
+      });
+      const starMesh = new THREE.Mesh(starGeo, starMat);
+      scene.add(starMesh);
 
-    const pointLight = new THREE.PointLight(0x4fa3cd, 3, 10);
-    pointLight.position.set(-3, -2, 3);
-    scene.add(pointLight);
+      // Halo Ring
+      const haloGeo = new THREE.TorusGeometry(2.0, 0.03, 16, 64);
+      const haloMat = new THREE.MeshBasicMaterial({
+        color: 0x4fa3cd,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+      haloMesh.rotation.x = Math.PI / 3;
+      scene.add(haloMesh);
 
-    // Create 5-point Star Shape
-    const starShape = new THREE.Shape();
-    const points = 5;
-    const outerRadius = 1.6;
-    const innerRadius = 0.75;
+      // Lights
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+      scene.add(ambientLight);
 
-    for (let i = 0; i < points * 2; i++) {
-      const radius = i % 2 === 0 ? outerRadius : innerRadius;
-      const angle = (i / (points * 2)) * Math.PI * 2 - Math.PI / 2;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
+      const pointLight = new THREE.PointLight(0xffedd5, 2.5, 20);
+      pointLight.position.set(3, 4, 5);
+      scene.add(pointLight);
 
-      if (i === 0) starShape.moveTo(x, y);
-      else starShape.lineTo(x, y);
-    }
-    starShape.closePath();
+      // Interaction
+      let isDragging = false;
+      let prevMouseX = 0;
+      let prevMouseY = 0;
+      let targetRotX = 0;
+      let targetRotY = 0;
 
-    // Extrude 3D Star
-    const extrudeSettings = {
-      depth: 0.5,
-      bevelEnabled: true,
-      bevelSegments: 4,
-      steps: 1,
-      bevelSize: 0.15,
-      bevelThickness: 0.15,
-    };
+      const onMouseDown = (e: MouseEvent) => {
+        if (!interactive) return;
+        isDragging = true;
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
+      };
 
-    const geometry = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
-    geometry.center();
+      const onMouseMove = (e: MouseEvent) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - prevMouseX;
+        const deltaY = e.clientY - prevMouseY;
+        targetRotY += deltaX * 0.01;
+        targetRotX += deltaY * 0.01;
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
+      };
 
-    // Gold Metallic Material
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xf59e0b,
-      roughness: 0.25,
-      metalness: 0.85,
-    });
+      const onMouseUp = () => {
+        isDragging = false;
+      };
 
-    const starMesh = new THREE.Mesh(geometry, material);
-    scene.add(starMesh);
-
-    // Outer Glowing Halo Ring
-    const ringGeo = new THREE.TorusGeometry(2.3, 0.04, 16, 64);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x4fa3cd,
-      transparent: true,
-      opacity: 0.6,
-    });
-    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-    scene.add(ringMesh);
-
-    // Drag-to-rotate interaction
-    let isDragging = false;
-    let prevMouseX = 0;
-    let prevMouseY = 0;
-    let rotSpeedX = 0;
-    let rotSpeedY = 0;
-
-    const onMouseDown = (e: MouseEvent) => {
-      if (!interactive) return;
-      isDragging = true;
-      prevMouseX = e.clientX;
-      prevMouseY = e.clientY;
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging || !interactive) return;
-      const deltaX = e.clientX - prevMouseX;
-      const deltaY = e.clientY - prevMouseY;
-
-      starMesh.rotation.y += deltaX * 0.015;
-      starMesh.rotation.x += deltaY * 0.015;
-
-      prevMouseX = e.clientX;
-      prevMouseY = e.clientY;
-    };
-
-    const onMouseUp = () => {
-      isDragging = false;
-    };
-
-    if (interactive) {
-      container.addEventListener('mousedown', onMouseDown);
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp);
-    }
-
-    // Animation Loop
-    let animId: number;
-    const animate = () => {
-      animId = requestAnimationFrame(animate);
-
-      if (!isDragging) {
-        starMesh.rotation.y += 0.012;
-        starMesh.rotation.x = Math.sin(Date.now() * 0.0015) * 0.15;
-      }
-
-      ringMesh.rotation.z -= 0.008;
-      ringMesh.rotation.x += 0.004;
-
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animId);
       if (interactive) {
-        container.removeEventListener('mousedown', onMouseDown);
-        window.removeEventListener('mousemove', onMouseMove);
-        window.removeEventListener('mouseup', onMouseUp);
+        container.addEventListener('mousedown', onMouseDown);
+        window.addEventListener('mousemove', onMouseMove, { passive: true });
+        window.addEventListener('mouseup', onMouseUp);
       }
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
-      geometry.dispose();
-      material.dispose();
-      ringGeo.dispose();
-      ringMat.dispose();
-      renderer.dispose();
-    };
+
+      // Animate
+      const animate = () => {
+        animationFrameId = requestAnimationFrame(animate);
+
+        if (!isDragging) {
+          targetRotY += 0.01;
+        }
+
+        starMesh.rotation.y += (targetRotY - starMesh.rotation.y) * 0.1;
+        starMesh.rotation.x += (targetRotX - starMesh.rotation.x) * 0.1;
+
+        haloMesh.rotation.z += 0.008;
+
+        renderer?.render(scene, camera);
+      };
+
+      animate();
+
+      return () => {
+        cancelAnimationFrame(animationFrameId);
+        if (interactive) {
+          container.removeEventListener('mousedown', onMouseDown);
+          window.removeEventListener('mousemove', onMouseMove);
+          window.removeEventListener('mouseup', onMouseUp);
+        }
+        if (renderer && container.contains(renderer.domElement)) {
+          container.removeChild(renderer.domElement);
+          renderer.dispose();
+          renderer.forceContextLoss();
+        }
+      };
+    } catch (err) {
+      console.warn('Interactive3DStarBadge WebGL init failed:', err);
+      setWebglSupported(false);
+    }
   }, [size, interactive]);
 
+  if (!webglSupported) {
+    return (
+      <div
+        className="relative flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400/20 via-brand-sky/10 to-brand-navy/10 border border-amber-400/30 p-4 shadow-lg"
+        style={{ width: size, height: size }}
+      >
+        <span className="text-3xl">⭐</span>
+        <span className="font-bold text-amber-500 mt-1">{stars} Stars</span>
+      </div>
+    );
+  }
+
   return (
-    <div
-      ref={mountRef}
-      className={`relative inline-flex items-center justify-center select-none ${
-        interactive ? 'cursor-grab active:cursor-grabbing' : ''
-      }`}
-      style={{ width: size, height: size }}
-      title={interactive ? 'Click & drag to spin your 3D Star trophy!' : undefined}
-    />
+    <div className="relative inline-flex items-center justify-center">
+      <div
+        ref={mountRef}
+        className={`relative ${interactive ? 'cursor-grab active:cursor-grabbing' : ''}`}
+        style={{ width: size, height: size }}
+      />
+      <div className="absolute -bottom-2 px-3 py-1 bg-brand-navy/80 dark:bg-brand-navyDark/90 backdrop-blur-md rounded-full border border-amber-400/40 text-amber-400 font-bold text-xs shadow-md">
+        ★ {stars} Stars
+      </div>
+    </div>
   );
 }
