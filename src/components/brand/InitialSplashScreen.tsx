@@ -5,9 +5,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 /**
  * InitialSplashScreen — Full-screen brand loader on first visit.
  *
- * Light mode #F9F7F8 background (matching homepage).
- * Video black background is converted to transparent white via invert + hue-rotate + multiply blend,
- * rendering the logo in crisp, deep First Savvy brand navy/blue without any black rectangle.
+ * - Light mode #F9F7F8 background (matching homepage).
+ * - Focuses on the animated Lion crest from the video with pure brand navy/blue.
+ * - Displays official "First Savvy" wordmark with proper gap & typography.
  */
 export function InitialSplashScreen() {
   const [visible, setVisible] = useState(true);
@@ -87,13 +87,13 @@ export function InitialSplashScreen() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102,175,211,0.12) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102,175,211,0.14) 0%, transparent 70%)',
         }}
       />
 
-      <div className="relative flex flex-col items-center justify-center">
-        {/* Brand Loader Video — Centered, well-sized, clean white blend */}
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center overflow-hidden">
+      <div className="relative flex flex-col items-center justify-center gap-3">
+        {/* Animated Lion Crest Container */}
+        <div className="relative w-48 h-40 sm:w-56 sm:h-44 flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
@@ -101,7 +101,7 @@ export function InitialSplashScreen() {
             muted
             playsInline
             onEnded={handleVideoEnded}
-            className="w-full h-full object-contain pointer-events-none select-none"
+            className="w-full h-full object-contain pointer-events-none select-none scale-[1.38] -translate-y-3"
             style={{
               filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
               mixBlendMode: 'multiply',
@@ -117,8 +117,21 @@ export function InitialSplashScreen() {
           </video>
         </div>
 
-        {/* Progress bar placed closely right below the video */}
-        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 -mt-2">
+        {/* Crisp Brand Typography with 'First Savvy' (with gap) */}
+        <div className="flex flex-col items-center select-none text-center -mt-2">
+          <span 
+            className="font-serif font-bold text-2xl sm:text-[1.75rem] text-[#1D2D42] dark:text-white tracking-tight"
+            style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
+          >
+            First Savvy
+          </span>
+          <span className="font-sans font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[#66AFD3] mt-1">
+            Stars To Legacy
+          </span>
+        </div>
+
+        {/* Sleek Progress bar placed right below */}
+        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 mt-2">
           <div
             className="h-full rounded-full"
             style={{

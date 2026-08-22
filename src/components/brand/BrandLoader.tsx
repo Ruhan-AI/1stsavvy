@@ -32,7 +32,11 @@ export function BrandLoader({
           muted
           playsInline
           poster="/brand/loader-poster.png"
-          className="w-full h-full object-contain pointer-events-none drop-shadow-sm select-none"
+          className="w-full h-full object-contain pointer-events-none drop-shadow-sm select-none scale-[1.3] -translate-y-2"
+          style={{
+            filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
+            mixBlendMode: 'multiply',
+          }}
         >
           <source src="/brand/loader.webm" type="video/webm" />
           <source src="/brand/loader.mp4" type="video/mp4" />
@@ -45,21 +49,25 @@ export function BrandLoader({
         </video>
       </div>
 
-      {/* Optional Brand Message / Tagline */}
-      {(showTagline || message) && (
-        <div className="text-center space-y-1 select-none animate-fade-in">
-          {message && (
-            <p className="text-xs font-semibold text-brand-navy dark:text-slate-200 tracking-wide">
-              {message}
-            </p>
-          )}
-          {showTagline && (
-            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-brand-sky">
-              Stars to Legacy
-            </p>
-          )}
-        </div>
-      )}
+      {/* Brand Title with Space */}
+      <div className="text-center space-y-1 select-none animate-fade-in">
+        <span 
+          className="font-serif font-bold text-lg text-brand-navy dark:text-white tracking-tight"
+          style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
+        >
+          First Savvy
+        </span>
+        {message && (
+          <p className="text-xs font-semibold text-brand-navy dark:text-slate-200 tracking-wide">
+            {message}
+          </p>
+        )}
+        {showTagline && (
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-brand-sky">
+            Stars to Legacy
+          </p>
+        )}
+      </div>
     </div>
   );
 
