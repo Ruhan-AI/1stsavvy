@@ -7,8 +7,12 @@ import { HeroPreview } from '@/components/marketing/HeroPreview';
 import { HowItWorks } from '@/components/marketing/HowItWorks';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
-import { ProductScreenshot } from '@/components/marketing/ProductScreenshot';
 import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { LiveGlobalSearchPreview } from '@/components/marketing/live-previews/LiveGlobalSearchPreview';
+import { LiveTransactionsTablePreview } from '@/components/marketing/live-previews/LiveTransactionsTablePreview';
+import { LiveTaskCreationPreview } from '@/components/marketing/live-previews/LiveTaskCreationPreview';
+import { LiveGoalCreationPreview } from '@/components/marketing/live-previews/LiveGoalCreationPreview';
+import { LiveAccountTypesPreview } from '@/components/marketing/live-previews/LiveAccountTypesPreview';
 import { 
   FadeIn, 
   AuroraBackground, 
@@ -33,7 +37,6 @@ import {
   DollarSign
 } from 'lucide-react';
 
-// Dynamically import Three.js scene with ssr: false
 const HeroConstellationCanvas = dynamic(
   () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
   { ssr: false }
@@ -102,7 +105,7 @@ export default function HomePage() {
           </FadeIn>
         </div>
 
-        {/* Hero Composed Product UI Preview */}
+        {/* Hero Composed Product UI Preview (Live Interactive Vector) */}
         <ScrollReveal delay={0.2} direction="up" distance={30}>
           <div className="mt-12 sm:mt-16">
             <HeroPreview />
@@ -143,7 +146,7 @@ export default function HomePage() {
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: MONEY IS CONNECTED (With Global Search Screenshot) */}
+      {/* 2. SECTION: MONEY IS CONNECTED (Live Global Search Vector Preview) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
@@ -167,14 +170,7 @@ export default function HomePage() {
             </div>
 
             <div className="lg:col-span-7">
-              <ProductScreenshot
-                src="/images/app/global-search.jpg"
-                alt="First Savvy global search finding accounts, transactions, and family activity"
-                label="Instant Household Search"
-                caption="Search across accounts, transactions, contacts, and household activity."
-                variant="browser"
-                aspectRatio="16/10"
-              />
+              <LiveGlobalSearchPreview />
             </div>
           </div>
         </ScrollReveal>
@@ -230,7 +226,7 @@ export default function HomePage() {
         </StaggerContainer>
       </section>
 
-      {/* 4. SECTION: PERSONAL FINANCE PREVIEW (Wide Transaction Workspace) */}
+      {/* 4. SECTION: PERSONAL FINANCE PREVIEW (Live Transactions Table) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -246,19 +242,12 @@ export default function HomePage() {
           </div>
 
           <div className="max-w-5xl mx-auto">
-            <ProductScreenshot
-              src="/images/app/transactions.jpg"
-              alt="First Savvy transaction search, filters, category tagging, and pending items"
-              label="Transaction & Cash Flow Hub"
-              caption="Review, search, filter, and organize financial activity from one workspace."
-              variant="browser"
-              aspectRatio="16/9"
-            />
+            <LiveTransactionsTablePreview />
           </div>
         </div>
       </section>
 
-      {/* 5. SECTION: FAMILY PREVIEW (Split Tasks & Goals Cards) */}
+      {/* 5. SECTION: FAMILY PREVIEW (Live Task & Goal Creation Modals) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -274,27 +263,13 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <ProductScreenshot
-              src="/images/app/task-creation.jpg"
-              alt="First Savvy task creation modal with star values and assignment"
-              label="Task & Responsibility Setup"
-              caption="Assign chores, set recurring schedules, and allocate star values."
-              variant="browser"
-              aspectRatio="4/3"
-            />
-            <ProductScreenshot
-              src="/images/app/goal-creation.jpg"
-              alt="First Savvy reward goal setup with target milestones"
-              label="Star Reward & Goal Milestone"
-              caption="Set saving goals, reward items, and teach delayed gratification."
-              variant="browser"
-              aspectRatio="4/3"
-            />
+            <LiveTaskCreationPreview />
+            <LiveGoalCreationPreview />
           </div>
         </div>
       </section>
 
-      {/* 6. SECTION: SEE MORE THAN A BALANCE (With Account Types Screenshot) */}
+      {/* 6. SECTION: SEE MORE THAN A BALANCE (Live Account Types Vector Preview) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="lg:col-span-5 space-y-4 text-left">
@@ -317,14 +292,7 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-7">
-            <ProductScreenshot
-              src="/images/app/account-types.jpg"
-              alt="First Savvy asset, liability, banking, property, and vehicle category controls"
-              label="Unified Wealth & Asset Classes"
-              caption="Organize every asset, liability, debt, and vehicle in one unified picture."
-              variant="browser"
-              aspectRatio="16/10"
-            />
+            <LiveAccountTypesPreview />
           </div>
         </div>
       </section>

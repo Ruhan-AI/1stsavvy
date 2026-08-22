@@ -5,8 +5,10 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
-import { ProductScreenshot } from '@/components/marketing/ProductScreenshot';
 import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { LiveTransactionsTablePreview } from '@/components/marketing/live-previews/LiveTransactionsTablePreview';
+import { LiveAccountTypesPreview } from '@/components/marketing/live-previews/LiveAccountTypesPreview';
+import { LiveBudgetSetupPreview } from '@/components/marketing/live-previews/LiveBudgetSetupPreview';
 import { 
   FadeIn, 
   TextReveal, 
@@ -84,34 +86,15 @@ export default function PersonalFinancePage() {
           </FadeIn>
         </div>
 
-        {/* Hero Product Composite: Transactions with Floating Account Types */}
+        {/* Hero Product Composite: Live Interactive Vector Transactions */}
         <ScrollReveal delay={0.3} direction="up">
-          <div className="mt-12 max-w-5xl mx-auto relative">
-            <ProductScreenshot
-              src="/images/app/transactions.jpg"
-              alt="First Savvy unified transaction hub with search, filters, and pending items"
-              label="Transaction & Cash Flow Workspace"
-              variant="browser"
-              aspectRatio="16/9"
-              priority={true}
-            />
-
-            {/* Floating Card: Account Types */}
-            <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-6 w-[55%] sm:w-[42%] max-w-sm hidden xs:block z-20 hover:scale-105 transition-transform duration-300">
-              <ProductScreenshot
-                src="/images/app/account-types.jpg"
-                alt="First Savvy account types covering banking, vehicle, property, and loans"
-                label="Asset & Liability Classes"
-                variant="floating"
-                aspectRatio="4/3"
-                enableLightbox={true}
-              />
-            </div>
+          <div className="mt-12 max-w-5xl mx-auto">
+            <LiveTransactionsTablePreview />
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: EVERYTHING IN VIEW (Account Types Screenshot) */}
+      {/* 2. SECTION: EVERYTHING IN VIEW (Live Account Types Vector) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <ScrollReveal direction="left" className="lg:col-span-5 space-y-6">
@@ -132,19 +115,12 @@ export default function PersonalFinancePage() {
           </ScrollReveal>
 
           <ScrollReveal direction="right" className="lg:col-span-7">
-            <ProductScreenshot
-              src="/images/app/account-types.jpg"
-              alt="First Savvy account types selection dialog with custom asset creation"
-              label="Account & Asset Categorization"
-              caption="Track multiple asset classes from standard checking to real estate and auto loans."
-              variant="browser"
-              aspectRatio="16/10"
-            />
+            <LiveAccountTypesPreview />
           </ScrollReveal>
         </div>
       </section>
 
-      {/* 3. SECTION: TRANSACTIONS & LESS REPETITION (Wide Table Screenshot) */}
+      {/* 3. SECTION: TRANSACTIONS & LESS REPETITION (Live Transactions Table) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -160,30 +136,16 @@ export default function PersonalFinancePage() {
           </div>
 
           <div className="max-w-5xl mx-auto">
-            <ProductScreenshot
-              src="/images/app/transactions.jpg"
-              alt="First Savvy transaction details table with search, categories, and account filters"
-              label="Transaction Management & Filters"
-              caption="Review, search, filter, and organize financial activity from one workspace."
-              variant="browser"
-              aspectRatio="16/9"
-            />
+            <LiveTransactionsTablePreview />
           </div>
         </div>
       </section>
 
-      {/* 4. SECTION: BUDGETING (Budget Setup Screenshot) */}
+      {/* 4. SECTION: BUDGETING (Live Budget Setup Vector) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <ScrollReveal direction="left" className="order-2 lg:order-1 lg:col-span-7">
-            <ProductScreenshot
-              src="/images/app/budget-setup.jpg"
-              alt="First Savvy budget creation modal with categories, spending limits, and intervals"
-              label="Budget Limit & Category Setup"
-              caption="Set monthly category targets and follow planned vs. actual progress."
-              variant="browser"
-              aspectRatio="4/3"
-            />
+            <LiveBudgetSetupPreview />
           </ScrollReveal>
 
           <ScrollReveal direction="right" className="order-1 lg:order-2 lg:col-span-5 space-y-6">

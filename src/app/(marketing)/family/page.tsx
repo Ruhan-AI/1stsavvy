@@ -5,8 +5,10 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
-import { ProductScreenshot } from '@/components/marketing/ProductScreenshot';
 import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { LiveHeroDashboardPreview } from '@/components/marketing/live-previews/LiveHeroDashboardPreview';
+import { LiveTaskCreationPreview } from '@/components/marketing/live-previews/LiveTaskCreationPreview';
+import { LiveGoalCreationPreview } from '@/components/marketing/live-previews/LiveGoalCreationPreview';
 import { 
   FadeIn, 
   TextReveal, 
@@ -79,34 +81,15 @@ export default function FamilyPage() {
           </FadeIn>
         </div>
 
-        {/* Family Hero Product Preview with Floating Goal Card */}
+        {/* Family Hero Product Preview (Live Interactive Vector) */}
         <ScrollReveal delay={0.3} direction="up">
-          <div className="mt-12 max-w-5xl mx-auto relative">
-            <ProductScreenshot
-              src="/images/app/dashboard-family.jpg"
-              alt="First Savvy parent and child family dashboard with chore tracking and allowance ledger"
-              label="Family Activity & Learning Hub"
-              variant="browser"
-              aspectRatio="16/9"
-              priority={true}
-            />
-
-            {/* Floating Goal Card */}
-            <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-6 w-[55%] sm:w-[40%] max-w-xs hidden xs:block z-20 hover:scale-105 transition-transform duration-300">
-              <ProductScreenshot
-                src="/images/app/goal-creation.jpg"
-                alt="First Savvy reward goal setup"
-                label="Goal Milestone"
-                variant="floating"
-                aspectRatio="4/3"
-                enableLightbox={true}
-              />
-            </div>
+          <div className="mt-12 max-w-5xl mx-auto">
+            <LiveHeroDashboardPreview />
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: IT STARTS WITH RESPONSIBILITY (Task Creation with Callouts) */}
+      {/* 2. SECTION: IT STARTS WITH RESPONSIBILITY (Live Task Creation Vector) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <ScrollReveal direction="left" className="lg:col-span-5 space-y-6">
@@ -138,30 +121,16 @@ export default function FamilyPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="right" className="lg:col-span-7">
-            <ProductScreenshot
-              src="/images/app/task-creation.jpg"
-              alt="First Savvy task creation modal showing task title, stars, schedule, and child assignment"
-              label="Task & Chore Assignment"
-              caption="Assign tasks with custom star rewards and recurring schedules."
-              variant="browser"
-              aspectRatio="4/3"
-            />
+            <LiveTaskCreationPreview />
           </ScrollReveal>
         </div>
       </section>
 
-      {/* 3. SECTION: FROM STARS TO REWARDS & GOALS (Goal Creation Visual) */}
+      {/* 3. SECTION: FROM STARS TO REWARDS & GOALS (Live Goal Creation Vector) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <ScrollReveal direction="left" className="order-2 lg:order-1 lg:col-span-7">
-            <ProductScreenshot
-              src="/images/app/goal-creation.jpg"
-              alt="First Savvy goal creation with target star cost and assignment"
-              label="Reward & Saving Goal Builder"
-              caption="Turn stars into tangible rewards and long-term saving goals."
-              variant="browser"
-              aspectRatio="4/3"
-            />
+            <LiveGoalCreationPreview />
           </ScrollReveal>
 
           <ScrollReveal direction="right" className="order-1 lg:order-2 lg:col-span-5 space-y-6">
@@ -205,14 +174,7 @@ export default function FamilyPage() {
           </div>
 
           <div className="lg:col-span-7">
-            <ProductScreenshot
-              src="/images/app/dashboard-family.jpg"
-              alt="First Savvy clean dashboard preview showing supervised family workspace"
-              label="Supervised Family Space"
-              caption="Different access. Same family."
-              variant="browser"
-              aspectRatio="16/10"
-            />
+            <LiveGoalCreationPreview />
           </div>
         </div>
       </section>
