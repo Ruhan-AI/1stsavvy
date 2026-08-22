@@ -203,7 +203,18 @@ export default function PersonalFinancePage() {
       {/* 6. EARLY ACCESS CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy dark:bg-[#15202B] text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#070B10] border border-slate-700/80 text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+            {/* 3D Canvas Background */}
+            <div className="absolute inset-0 opacity-35 pointer-events-none -z-0">
+              <CanvasErrorBoundary>
+                <FinancialWaveCanvas className="w-full h-full" />
+              </CanvasErrorBoundary>
+            </div>
+
+            {/* Ambient Lighting Orbs */}
+            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#10b981]/15 blur-3xl -z-0 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#52A5CE]/10 blur-3xl -z-0 pointer-events-none" />
+
             <div className="relative z-10 space-y-4 max-w-xl mx-auto">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Early Access</span>
               <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">

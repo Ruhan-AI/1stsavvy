@@ -42,6 +42,16 @@ const HeroConstellationCanvas = dynamic(
   { ssr: false }
 );
 
+const FinancialWaveCanvas = dynamic(
+  () => import('@/components/3d/FinancialWaveCanvas').then(mod => mod.FinancialWaveCanvas),
+  { ssr: false }
+);
+
+const FamilyStarFlowCanvas = dynamic(
+  () => import('@/components/3d/FamilyStarFlowCanvas').then(mod => mod.FamilyStarFlowCanvas),
+  { ssr: false }
+);
+
 export default function HomePage() {
   return (
     <div className="space-y-12 sm:space-y-20 pb-20 overflow-hidden relative">
@@ -98,69 +108,78 @@ export default function HomePage() {
             </div>
           </FadeIn>
 
+          {/* Feature Badges */}
           <FadeIn delay={0.6}>
-            <div className="pt-2 text-xs font-semibold uppercase tracking-widest text-brand-sky">
-              Built for the way money actually moves through life.
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <span className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                Bank-Level 256-Bit Security
+              </span>
+              <span className="flex items-center gap-2">
+                <Star className="w-4 h-4 text-brand-amber fill-brand-amber" />
+                COPPA Child-Safe Architecture
+              </span>
+              <span className="flex items-center gap-2">
+                <Layers className="w-4 h-4 text-brand-sky" />
+                12,000+ Connected Institutions
+              </span>
             </div>
           </FadeIn>
-        </div>
 
-        {/* Hero Composed Product UI Preview (Live Interactive Vector) */}
-        <ScrollReveal delay={0.2} direction="up" distance={30}>
-          <div className="mt-12 sm:mt-16">
+          {/* Real Interactive Webapp Hero Experience */}
+          <div className="pt-6 sm:pt-10">
             <HeroPreview />
           </div>
-        </ScrollReveal>
+        </div>
+      </section>
 
-        {/* Dynamic Animated Platform Statistics Strip */}
-        <ScrollReveal delay={0.3} direction="up">
-          <div className="mt-14 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-brand-navy dark:text-white tabular-nums">
-                <CountUp value={14.2} prefix="$" suffix="M+" decimals={1} duration={2.2} />
+      {/* METRICS STRIP */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 p-6 sm:p-8 rounded-3xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 shadow-sm text-center">
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+                <CountUp value={12000} duration={2} suffix="+" />
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">Household Wealth Tracked</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Supported Banks & Cards</div>
             </div>
-
-            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-brand-sky tabular-nums">
-                <CountUp value={28500} suffix="+" decimals={0} duration={2.2} />
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-serif font-bold text-brand-sky">
+                <CountUp value={100} duration={1.5} suffix="%" />
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">Chores & Stars Earned</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">COPPA Child Privacy Safe</div>
             </div>
-
-            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-emerald-600 dark:text-emerald-400 tabular-nums">
-                <CountUp value={99.9} suffix="%" decimals={1} duration={2.2} />
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-serif font-bold text-emerald-600 dark:text-emerald-400">
+                <CountUp value={256} duration={1.8} suffix="-Bit" />
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">Plaid Bank Encryption</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">AES Institutional Encryption</div>
             </div>
-
-            <div className="p-5 rounded-2xl bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700 text-center shadow-xs hover:scale-105 transition-transform duration-300">
-              <div className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-amber-500 tabular-nums">
-                <CountUp value={100} suffix="%" decimals={0} duration={2.2} />
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-serif font-bold text-brand-amber">
+                <CountUp value={10} duration={1.2} suffix="+" />
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mt-1.5">COPPA Child Safe</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Connected Hub Modules</div>
             </div>
           </div>
         </ScrollReveal>
       </section>
 
-      {/* 2. SECTION: MONEY IS CONNECTED (Live Global Search Vector Preview) */}
+      {/* 2. SECTION: MONEY IS CONNECTED (Live Global Search Preview) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+        <ScrollReveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
             <div className="lg:col-span-5 space-y-4 text-left">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is connected</span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
-                <TextReveal text="Your financial tools should be too." />
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Money is Connected</span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white">
+                Your financial tools should be too.
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
                 A task completed by your child, an allowance earned, a bill coming due, a balance growing, and a financial goal getting closer may look like separate moments. First Savvy brings them into a more connected financial experience.
               </p>
               <div className="pt-2">
                 <Link
-                  href="/signup"
+                  href="/family"
                   className="inline-flex items-center gap-2 text-sm font-bold text-brand-sky hover:text-brand-navyDark transition-colors group"
                 >
                   <span>Experience Connected Finance</span>
@@ -247,9 +266,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. SECTION: FAMILY PREVIEW (Live Task & Goal Creation Modals) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8">
+      {/* 5. SECTION: FAMILY PREVIEW (Live Task & Goal Creation Modals + 3D Stars in Background) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="absolute inset-0 max-w-5xl mx-auto h-[380px] pointer-events-none -z-0 opacity-20 dark:opacity-30">
+          <CanvasErrorBoundary>
+            <FamilyStarFlowCanvas />
+          </CanvasErrorBoundary>
+        </div>
+
+        <div className="space-y-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-sky block">
               Family Experience Preview
@@ -314,10 +339,21 @@ export default function HomePage() {
         <HowItWorks />
       </section>
 
-      {/* 8. EARLY ACCESS & FINAL CTA */}
+      {/* 8. EARLY ACCESS & FINAL CTA WITH 3D PARTICLES AND RICH DARK GRADIENT */}
       <section id="early-access" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="p-8 sm:p-14 rounded-3xl bg-brand-navy dark:bg-[#15202B] text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#070B10] border border-slate-700/80 text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+            {/* 3D Wave Particle Canvas Background */}
+            <div className="absolute inset-0 opacity-40 pointer-events-none -z-0">
+              <CanvasErrorBoundary>
+                <FinancialWaveCanvas className="w-full h-full" />
+              </CanvasErrorBoundary>
+            </div>
+
+            {/* Ambient Lighting Orbs */}
+            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#52A5CE]/15 blur-3xl -z-0 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#EFCE7B]/10 blur-3xl -z-0 pointer-events-none" />
+
             <div className="relative z-10 space-y-4 max-w-xl mx-auto">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Early Access</span>
               <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight">
