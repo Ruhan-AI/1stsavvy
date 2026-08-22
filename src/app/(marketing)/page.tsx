@@ -146,7 +146,7 @@ export default function HomePage() {
         </ScrollReveal>
       </section>
 
-      {/* 3. SECTION: THE FIRSTSAVVY WAY */}
+      {/* 3. SECTION: THE FIRST SAVVY WAY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-12">

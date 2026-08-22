@@ -62,12 +62,12 @@ export function Logo({
       {variant !== 'mark' && (
         <div className="flex flex-col select-none justify-center">
           <span 
-            className={`font-serif font-bold leading-none tracking-tight ${dimensions.text} ${
+            className={`font-serif font-bold leading-none tracking-normal ${dimensions.text} ${
               variant === 'dark' ? 'text-white' : 'text-brand-navy dark:text-white'
             }`}
             style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
           >
-            First Savvy
+            First&nbsp;Savvy
           </span>
           {showTagline && (
             <span 

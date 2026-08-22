@@ -125,7 +125,7 @@ export default function ChildProfileDetailPage() {
     }, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', dataStr);
-    downloadAnchor.setAttribute('download', `${child.displayName}_firstsavvy_data.json`);
+    downloadAnchor.setAttribute('download', `${child.displayName}_first_savvy_data.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();

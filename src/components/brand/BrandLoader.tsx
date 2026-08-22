@@ -52,10 +52,10 @@ export function BrandLoader({
       {/* Brand Title with Space */}
       <div className="text-center space-y-0.5 select-none animate-fade-in">
         <span 
-          className="font-serif font-bold text-lg text-brand-navy dark:text-white tracking-tight"
+          className="font-serif font-bold text-lg text-brand-navy dark:text-white tracking-normal"
           style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
         >
-          First Savvy
+          First&nbsp;Savvy
         </span>
         {message && (
           <p className="text-xs font-semibold text-brand-navy dark:text-slate-200 tracking-wide">
