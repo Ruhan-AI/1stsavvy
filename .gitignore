@@ -42,3 +42,5 @@ public/brand/Loader.mov
 
 # Helper Scripts
 *.ps1
+.responsive-audit.mjs
+.responsive-audit-sub.mjs

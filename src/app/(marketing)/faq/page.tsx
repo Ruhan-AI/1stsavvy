@@ -53,40 +53,42 @@ const FAQS = [
 
 export default function FAQPage() {
   return (
-    <div className="py-8 space-y-8 relative">
-      {/* 3D Background Canvas */}
-      <div className="absolute inset-0 max-w-5xl mx-auto h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
+    // §3 — marketing page root rhythm.
+    <div className="relative pt-2 sm:pt-4 pb-16 sm:pb-20 space-y-12 sm:space-y-20 lg:space-y-24">
+      {/* 3D Background Canvas — decorative, pinned to the top band, never widens the page (§12). */}
+      <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[260px] sm:h-[360px] lg:h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
         <CanvasErrorBoundary>
           <HeroConstellationCanvas />
         </CanvasErrorBoundary>
       </div>
 
-      <div className="relative z-10">
+      {/* §2 — FAQ/prose container. */}
+      <section className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <FAQAccordion
           eyebrow="Got Questions?"
           title="Frequently Asked Questions"
           subtitle="Everything you need to know about First Savvy's family experience, security, and personal finance tools."
           items={FAQS}
         />
-      </div>
+      </section>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-10 rounded-3xl bg-brand-navy text-white text-center space-y-4 shadow-xl">
-          <h2 className="text-2xl font-serif font-bold">Have a question not listed here?</h2>
-          <p className="text-slate-300 text-sm max-w-lg mx-auto">
+      <section className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-brand-navy text-white text-center space-y-4 shadow-xl">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold leading-tight">Have a question not listed here?</h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg mx-auto">
             Our support team is always happy to help with questions about household setup, bank linking, or child security.
           </p>
           <div className="pt-2">
             <Link
               href="/contact"
-              className="px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-sm font-semibold inline-flex items-center gap-2"
+              className="w-full sm:w-auto min-h-[44px] px-4 sm:px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-sm font-semibold inline-flex items-center justify-center gap-2"
             >
               <span>Contact Support</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 shrink-0" />
             </Link>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

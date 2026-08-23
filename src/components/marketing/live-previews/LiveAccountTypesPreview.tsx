@@ -77,7 +77,7 @@ export function LiveAccountTypesPreview() {
   const activeCategory = categories.find(c => c.id === selected) || categories[0];
 
   return (
-    <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
+    <div data-mock-preview className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
       {/* Browser Bar */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-slate-950/90 border-b border-slate-800">
         <div className="flex items-center gap-2">
@@ -105,13 +105,15 @@ export function LiveAccountTypesPreview() {
                     : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <div className={`p-1.5 rounded-lg bg-slate-900 border border-slate-800 ${cat.color}`}>
+                <div className="flex min-w-0 items-center gap-2">
+                  <div className={`shrink-0 p-1.5 rounded-lg bg-slate-900 border border-slate-800 ${cat.color}`}>
                     <Icon className="w-3.5 h-3.5" />
                   </div>
-                  <div className="truncate">
-                    <div className="font-bold text-xs text-white truncate">{cat.name}</div>
-                    <div className={`font-mono font-bold text-[11px] ${cat.balance.startsWith('-') ? 'text-[#EF6F3C]' : 'text-slate-200'}`}>
+                  <div className="min-w-0">
+                    {/* §8: the label may wrap to two lines on mobile rather than lose text */}
+                    <div className="font-bold text-xs text-white break-words line-clamp-2">{cat.name}</div>
+                    {/* §8: never truncate a currency amount */}
+                    <div className={`font-mono font-bold text-[11px] whitespace-nowrap ${cat.balance.startsWith('-') ? 'text-[#EF6F3C]' : 'text-slate-200'}`}>
                       {cat.balance}
                     </div>
                   </div>
@@ -135,7 +137,7 @@ export function LiveAccountTypesPreview() {
               <div key={idx} className="flex items-center justify-between p-2 rounded-lg bg-slate-950 text-xs">
                 <div>
                   <div className="font-semibold text-slate-200 text-[11px]">{it.name}</div>
-                  <div className="text-[9px] text-slate-500">{it.status}</div>
+                  <div className="text-[11px] text-slate-500">{it.status}</div>
                 </div>
                 <div className={`font-mono font-bold text-xs ${it.val.startsWith('-') ? 'text-rose-400' : 'text-emerald-400'}`}>
                   {it.val}
@@ -149,11 +151,11 @@ export function LiveAccountTypesPreview() {
         <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
           <div>
             <div className="text-[10px] uppercase font-bold text-slate-400">Total True Net Worth</div>
-            <div className="text-[10px] text-slate-500">Assets: $926,450 • Debts: -$489,042</div>
+            <div className="text-[11px] text-slate-500">Assets: $926,450 • Debts: -$489,042</div>
           </div>
           <div className="text-right">
             <div className="font-mono font-extrabold text-base text-[#AACC96]">$437,407.70</div>
-            <div className="text-[10px] text-[#AACC96] font-semibold">+3.2% This Month</div>
+            <div className="text-[11px] text-[#AACC96] font-semibold">+3.2% This Month</div>
           </div>
         </div>
       </div>

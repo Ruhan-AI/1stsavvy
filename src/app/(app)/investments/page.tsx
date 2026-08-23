@@ -81,25 +81,28 @@ export default function InvestmentsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
           <h2 className="font-serif font-bold text-lg text-brand-navy dark:text-white">Holdings & Positions</h2>
 
-          <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold">
-            {['all', 'etf', 'stock', 'bond', 'crypto'].map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilterAsset(f)}
-                className={`px-3 py-1 rounded-lg uppercase transition-colors ${
-                  filterAsset === f
-                    ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs'
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
+          {/* §9: the five asset chips overflow 320px, so the row scrolls */}
+          <div className="max-w-full overflow-x-auto no-scrollbar">
+            <div className="inline-flex min-w-max gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold">
+              {['all', 'etf', 'stock', 'bond', 'crypto'].map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilterAsset(f)}
+                  className={`shrink-0 min-h-[44px] px-3 py-1 rounded-lg uppercase transition-colors ${
+                    filterAsset === f
+                      ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs'
+                      : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto overscroll-x-contain">
+          <table className="w-full min-w-[640px] text-left text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-700 text-slate-400 font-bold uppercase tracking-wider">
                 <th className="pb-3 px-2">Asset</th>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable } from '@/lib/webgl';
+import { isWebGLAvailable, responsivePixelRatio } from '@/lib/webgl';
 
 interface Interactive3DStarBadgeProps {
   stars?: number;
@@ -42,7 +42,7 @@ export function Interactive3DStarBadge({
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(size, size);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(responsivePixelRatio(size));
       container.appendChild(renderer.domElement);
 
       // Star Shape
@@ -163,7 +163,7 @@ export function Interactive3DStarBadge({
     <div className="relative inline-flex items-center justify-center">
       <div
         ref={mountRef}
-        className={`relative ${interactive ? 'cursor-grab active:cursor-grabbing' : ''}`}
+        className={`relative max-w-full ${interactive ? "cursor-grab active:cursor-grabbing" : ""}`}
         style={{ width: size, height: size }}
       />
       <div className="absolute -bottom-2 px-3 py-1 bg-brand-navy/80 dark:bg-brand-navyDark/90 backdrop-blur-md rounded-full border border-amber-400/40 text-amber-400 font-bold text-xs shadow-md">

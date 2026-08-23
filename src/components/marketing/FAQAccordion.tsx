@@ -60,9 +60,12 @@ export function FAQAccordion({
   };
 
   return (
-    <div className={`max-w-4xl mx-auto py-6 ${className}`}>
+    // §2 — the accordion is container-neutral: the page section owns the
+    // max-width and the `px-4 sm:px-6 lg:px-8` gutter, so it can never
+    // double-pad or push past the viewport.
+    <div className={`w-full min-w-0 ${className}`}>
       {/* Accordion Items */}
-      <div className="space-y-3">
+      <div className="space-y-3 sm:space-y-4">
         {items.map((item, idx) => {
           const isOpen = openIndex === idx;
 
@@ -75,23 +78,24 @@ export function FAQAccordion({
                   : 'bg-white/70 dark:bg-[#1E293B]/70 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
+              {/* §5 — full-width 44px+ target, chevron pinned right, question wraps. */}
               <button
                 type="button"
                 onClick={() => toggleItem(idx)}
-                className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
+                className="w-full min-h-[44px] p-4 sm:p-6 text-left flex items-start justify-between gap-3 sm:gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky focus-visible:ring-inset rounded-2xl"
                 aria-expanded={isOpen}
               >
-                <div className="flex items-center gap-3">
+                <span className="flex items-start gap-2.5 sm:gap-3 min-w-0">
                   <span className="w-6 h-6 rounded-full bg-brand-sky/10 text-brand-sky text-xs font-bold flex items-center justify-center shrink-0">
                     Q
                   </span>
-                  <span className="font-bold text-sm sm:text-base text-brand-navy dark:text-white">
+                  <span className="min-w-0 break-words font-bold text-sm sm:text-base text-brand-navy dark:text-white leading-snug">
                     {item.question}
                   </span>
-                </div>
+                </span>
 
                 <ChevronDown
-                  className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
+                  className={`w-5 h-5 mt-0.5 text-slate-400 shrink-0 transition-transform duration-200 ${
                     isOpen ? 'rotate-180 text-brand-sky' : ''
                   }`}
                 />
@@ -105,7 +109,7 @@ export function FAQAccordion({
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.25, ease: 'easeInOut' }}
                   >
-                    <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-1 text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800/80">
+                    <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed break-words border-t border-slate-100 dark:border-slate-800/80">
                       {item.answer}
                     </div>
                   </motion.div>

@@ -72,13 +72,13 @@ export default function NetWorthPage() {
           <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold">
             <button
               onClick={() => setViewScope('household')}
-              className={`px-3 py-1.5 rounded-lg transition-colors ${viewScope === 'household' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
+              className={`min-h-[44px] px-3 py-1.5 rounded-lg transition-colors ${viewScope === 'household' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
             >
               Household Total
             </button>
             <button
               onClick={() => setViewScope('individual')}
-              className={`px-3 py-1.5 rounded-lg transition-colors ${viewScope === 'individual' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
+              className={`min-h-[44px] px-3 py-1.5 rounded-lg transition-colors ${viewScope === 'individual' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
             >
               My Accounts Only
             </button>

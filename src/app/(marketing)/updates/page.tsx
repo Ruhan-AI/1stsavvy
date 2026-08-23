@@ -46,32 +46,33 @@ export default function UpdatesPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-16 space-y-16 relative">
-      {/* 3D Background Canvas */}
-      <div className="absolute inset-0 max-w-5xl mx-auto h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
+    // §2 narrow marketing container + §3 marketing page rhythm.
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-16 sm:pb-20 space-y-12 sm:space-y-20 lg:space-y-24 relative">
+      {/* 3D Background Canvas — decorative, pinned to the top band, never widens the page (§12). */}
+      <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[260px] sm:h-[360px] lg:h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
         <CanvasErrorBoundary>
           <HeroConstellationCanvas />
         </CanvasErrorBoundary>
       </div>
 
       {/* Header */}
-      <div className="text-center space-y-4 relative z-10">
-        <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Roadmap & Changelog</span>
-        <h1 className="text-4xl sm:text-5xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+      <div className="text-center space-y-3 sm:space-y-4 relative z-10">
+        <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Roadmap & Changelog</span>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
           What we're building next at First Savvy
         </h1>
-        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Follow our latest feature releases and join early access lists for upcoming family, personal finance, and estate capabilities.
         </p>
       </div>
 
       {/* Waitlist Box */}
-      <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl space-y-4 text-center max-w-2xl mx-auto relative z-10">
-        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-brand-sky mx-auto">
-          <Sparkles className="w-5 h-5" />
+      <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyDark text-white shadow-xl space-y-4 text-center max-w-2xl mx-auto relative z-10">
+        <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-brand-sky mx-auto">
+          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
-        <h2 className="text-2xl font-serif font-bold">Be the first to test new features</h2>
-        <p className="text-slate-300 text-xs sm:text-sm">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold leading-tight">Be the first to test new features</h2>
+        <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
           Get notified when new parent tools, allowance integrations, and business modules enter beta testing.
         </p>
         <div className="pt-2">
@@ -80,22 +81,22 @@ export default function UpdatesPage() {
       </div>
 
       {/* Timeline Grid */}
-      <div className="space-y-6 relative z-10">
-        <h2 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">Active Roadmap</h2>
-        <div className="grid grid-cols-1 gap-4">
+      <div className="space-y-6 sm:space-y-8 relative z-10">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">Active Roadmap</h2>
+        <div className="grid grid-cols-1 gap-4 sm:gap-6">
           {roadmapItems.map((item, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-brand-sky/40 transition-colors"
+              className="min-w-0 p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 hover:border-brand-sky/40 transition-colors"
             >
-              <div className="space-y-1">
-                <div className="flex items-center gap-3">
-                  <h3 className="font-bold text-base text-brand-navy dark:text-white">{item.title}</h3>
-                  <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold ${item.statusColor}`}>
+              <div className="min-w-0 space-y-2">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <h3 className="min-w-0 break-words text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white leading-snug">{item.title}</h3>
+                  <span className={`shrink-0 whitespace-nowrap text-[11px] sm:text-xs px-2.5 py-1 rounded-full font-bold ${item.statusColor}`}>
                     {item.status}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed break-words">
                   {item.description}
                 </p>
               </div>

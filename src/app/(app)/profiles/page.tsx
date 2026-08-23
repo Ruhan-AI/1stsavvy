@@ -120,13 +120,13 @@ export default function ProfilesPage() {
           <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold">
             <button
               onClick={() => setViewMode('grid')}
-              className={`px-3 py-1.5 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
+              className={`min-h-[44px] px-3 py-1.5 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
             >
               Grid View
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`px-3 py-1.5 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
+              className={`min-h-[44px] px-3 py-1.5 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs' : 'text-slate-500'}`}
             >
               List View
             </button>
@@ -134,7 +134,7 @@ export default function ProfilesPage() {
 
           <button
             onClick={() => setAddModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 text-brand-sky" />
             <span>Add Family Member</span>
@@ -199,7 +199,7 @@ export default function ProfilesPage() {
                 <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                   <button
                     onClick={() => setActiveProfile(p.id)}
-                    className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="inline-flex items-center justify-center min-h-[44px] px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     Switch to Profile
                   </button>
@@ -207,7 +207,7 @@ export default function ProfilesPage() {
                   {p.isChild && (
                     <Link
                       href={`/profiles/${p.id}`}
-                      className="px-3 py-1.5 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold inline-flex items-center gap-1 shadow-xs"
+                      className="min-h-[44px] px-3 py-1.5 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold inline-flex items-center gap-1 shadow-xs"
                     >
                       <span>Manage Child</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -239,7 +239,7 @@ export default function ProfilesPage() {
                 {p.isChild ? (
                   <Link
                     href={`/profiles/${p.id}`}
-                    className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-sky hover:text-white text-xs font-bold text-brand-navy"
+                    className="inline-flex items-center min-h-[44px] px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-brand-sky hover:text-white text-xs font-bold text-brand-navy"
                   >
                     Open Tasks & Ledger →
                   </Link>
@@ -261,7 +261,7 @@ export default function ProfilesPage() {
                 <h3 className="font-serif font-bold text-xl text-brand-navy dark:text-white">Add Family Member</h3>
                 <p className="text-xs text-slate-500">Configure access level for your household.</p>
               </div>
-              <button onClick={() => setAddModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setAddModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -278,7 +278,7 @@ export default function ProfilesPage() {
               <button
                 type="button"
                 onClick={() => setProfileType('child')}
-                className={`p-3 rounded-xl border text-left space-y-1 transition-all ${
+                className={`min-h-[44px] p-3 rounded-xl border text-left space-y-1 transition-all ${
                   profileType === 'child'
                     ? 'bg-sky-50 dark:bg-sky-950/60 border-brand-sky ring-2 ring-brand-sky/20'
                     : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50'
@@ -294,7 +294,7 @@ export default function ProfilesPage() {
               <button
                 type="button"
                 onClick={() => setProfileType('adult_family')}
-                className={`p-3 rounded-xl border text-left space-y-1 transition-all ${
+                className={`min-h-[44px] p-3 rounded-xl border text-left space-y-1 transition-all ${
                   profileType === 'adult_family'
                     ? 'bg-sky-50 dark:bg-sky-950/60 border-brand-sky ring-2 ring-brand-sky/20'
                     : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50'
@@ -317,7 +317,7 @@ export default function ProfilesPage() {
                   onChange={(e) => setDisplayName(e.target.value)}
                   required
                   placeholder={profileType === 'child' ? 'e.g. Leo or Maya' : 'e.g. David'}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -332,7 +332,7 @@ export default function ProfilesPage() {
                         onChange={(e) => setUsername(e.target.value.toLowerCase())}
                         required
                         placeholder="e.g. leo"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                        className="min-h-[44px] text-base sm:text-sm w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                       />
                     </div>
 
@@ -345,7 +345,7 @@ export default function ProfilesPage() {
                         onChange={(e) => setPin(e.target.value)}
                         required
                         placeholder="••••"
-                        className="w-full font-mono text-center tracking-[0.4em] px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                        className="min-h-[44px] text-base sm:text-sm w-full font-mono text-center tracking-[0.4em] px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                       />
                     </div>
                   </div>
@@ -358,13 +358,13 @@ export default function ProfilesPage() {
                         id="coppa"
                         checked={coppaConsent}
                         onChange={(e) => setCoppaConsent(e.target.checked)}
-                        className="mt-0.5 w-4 h-4 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+                        className="mt-0.5 w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
                       />
                       <label htmlFor="coppa" className="text-xs text-slate-800 dark:text-slate-200 leading-snug select-none">
                         <strong>Parental Consent (COPPA):</strong> As the parent or legal guardian, I give explicit permission to create this supervised child profile for financial learning, tasks, and savings goals. I have reviewed the <Link href="/children-privacy" target="_blank" className="text-brand-sky font-bold underline">Children's Privacy Notice</Link>.
                       </label>
                     </div>
-                    <p className="text-[10px] text-slate-500 pl-6">
+                    <p className="text-[11px] text-slate-500 pl-6">
                       An immutable timestamp and parental consent record will be logged with policy v1.0.
                     </p>
                   </div>
@@ -375,7 +375,7 @@ export default function ProfilesPage() {
                   <select
                     value={relationship}
                     onChange={(e) => setRelationship(e.target.value as any)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   >
                     <option value="spouse">Spouse / Partner</option>
                     <option value="parent">Parent</option>
@@ -391,13 +391,13 @@ export default function ProfilesPage() {
                 <button
                   type="button"
                   onClick={() => setAddModalOpen(false)}
-                  className="w-1/3 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/3 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-2/3 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow"
+                  className="min-h-[44px] w-2/3 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow"
                 >
                   <span>Create Profile</span>
                   <ArrowRight className="w-4 h-4 text-brand-sky" />

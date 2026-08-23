@@ -151,7 +151,7 @@ export default function SignupPage() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                    className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -161,7 +161,7 @@ export default function SignupPage() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                    className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                   />
                 </div>
               </div>
@@ -173,7 +173,7 @@ export default function SignupPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
               </div>
 
@@ -185,7 +185,7 @@ export default function SignupPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="At least 8 characters"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
                 {/* Strength Meter */}
                 <div className="grid grid-cols-4 gap-1 pt-1">
@@ -203,13 +203,13 @@ export default function SignupPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"
+                className="min-h-[44px] w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"
               >
                 <span>Continue to Verification</span>
                 <ArrowRight className="w-4 h-4 text-brand-sky" />
@@ -238,7 +238,7 @@ export default function SignupPage() {
                   onChange={(e) => setVerificationCode(e.target.value)}
                   required
                   placeholder="849201"
-                  className="w-48 mx-auto text-center tracking-[0.5em] text-xl font-mono py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-48 mx-auto text-center tracking-[0.5em] text-xl font-mono py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
               </div>
 
@@ -250,13 +250,13 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="w-1/3 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/3 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
-                  className="w-2/3 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-semibold inline-flex items-center justify-center gap-2 shadow"
+                  className="min-h-[44px] w-2/3 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-semibold inline-flex items-center justify-center gap-2 shadow"
                 >
                   <span>Verify Email</span>
                   <ArrowRight className="w-4 h-4 text-brand-sky" />
@@ -276,7 +276,7 @@ export default function SignupPage() {
                   onChange={(e) => setHouseholdName(e.target.value)}
                   required
                   placeholder="The Miller Family"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
                 <p className="text-[11px] text-slate-500">You can invite your partner or add children once created.</p>
               </div>
@@ -287,7 +287,7 @@ export default function SignupPage() {
                   <select
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                    className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                   >
                     <option value="USD">USD ($)</option>
                     <option value="CAD">CAD ($)</option>
@@ -302,7 +302,7 @@ export default function SignupPage() {
                   <select
                     value={timezone}
                     onChange={(e) => setTimezone(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                    className="min-h-[44px] w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                   >
                     <option value="America/New_York">Eastern (EST)</option>
                     <option value="America/Chicago">Central (CST)</option>
@@ -317,13 +317,13 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="w-1/3 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/3 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
-                  className="w-2/3 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-semibold inline-flex items-center justify-center gap-2 shadow"
+                  className="min-h-[44px] w-2/3 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-semibold inline-flex items-center justify-center gap-2 shadow"
                 >
                   <span>Continue to Legal</span>
                   <ArrowRight className="w-4 h-4 text-brand-sky" />
@@ -346,7 +346,7 @@ export default function SignupPage() {
                     id="terms"
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+                    className="mt-0.5 w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
                   />
                   <label htmlFor="terms" className="text-xs text-slate-700 dark:text-slate-300 leading-tight select-none">
                     I agree to the <Link href="/terms" target="_blank" className="text-brand-sky underline font-semibold">Terms of Use</Link> and understand First Savvy is not a bank.
@@ -359,7 +359,7 @@ export default function SignupPage() {
                     id="privacy"
                     checked={agreePrivacy}
                     onChange={(e) => setAgreePrivacy(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+                    className="mt-0.5 w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
                   />
                   <label htmlFor="privacy" className="text-xs text-slate-700 dark:text-slate-300 leading-tight select-none">
                     I have reviewed the <Link href="/privacy" target="_blank" className="text-brand-sky underline font-semibold">Privacy Policy</Link> and <Link href="/children-privacy" target="_blank" className="text-brand-sky underline font-semibold">Children's Privacy Notice</Link>.
@@ -372,7 +372,7 @@ export default function SignupPage() {
                     id="beta"
                     checked={agreeBeta}
                     onChange={(e) => setAgreeBeta(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+                    className="mt-0.5 w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
                   />
                   <label htmlFor="beta" className="text-xs text-slate-700 dark:text-slate-300 leading-tight select-none">
                     I accept the <Link href="/beta-terms" target="_blank" className="text-brand-sky underline font-semibold">Beta Terms</Link> for early access testing.
@@ -385,7 +385,7 @@ export default function SignupPage() {
                     id="marketing"
                     checked={agreeMarketing}
                     onChange={(e) => setAgreeMarketing(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+                    className="mt-0.5 w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
                   />
                   <label htmlFor="marketing" className="text-xs text-slate-500 leading-tight select-none">
                     (Optional) Send me product updates, financial education articles, and tips.
@@ -397,14 +397,14 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="w-1/3 py-3 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/3 py-3 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-2/3 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow transition-all duration-200"
+                  className="min-h-[44px] w-2/3 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow transition-all duration-200"
                 >
                   {loading ? (
                     <>
@@ -426,7 +426,7 @@ export default function SignupPage() {
           {step === 1 && (
             <div className="pt-2 text-center text-xs text-slate-500">
               Already have an account?{' '}
-              <Link href="/login" className="font-bold text-brand-sky hover:underline">
+              <Link href="/login" className="inline-flex items-center min-h-[44px] font-bold text-brand-sky hover:underline">
                 Sign in here
               </Link>
             </div>

@@ -70,7 +70,7 @@ export function LiveTransactionsTablePreview() {
   };
 
   return (
-    <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
+    <div data-mock-preview className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
       {/* Top Bar */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-slate-950/90 border-b border-slate-800">
         <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export function LiveTransactionsTablePreview() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search transactions..."
-                className="w-full pl-8 pr-3 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#52A5CE]"
+                className="w-full pl-8 pr-3 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-base sm:text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#52A5CE]"
               />
             </div>
             <button
@@ -130,8 +130,8 @@ export function LiveTransactionsTablePreview() {
         </div>
 
         {/* Transaction Table */}
-        <div className="overflow-x-auto rounded-xl border border-slate-800">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto overscroll-x-contain rounded-xl border border-slate-800">
+          <table className="w-full min-w-[560px] text-left text-xs">
             <thead className="bg-slate-900 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
               <tr>
                 <th className="py-3 px-3.5">Date</th>
@@ -151,7 +151,7 @@ export function LiveTransactionsTablePreview() {
                   <td className="py-3.5 px-3.5 font-mono text-slate-400 whitespace-nowrap text-[11px]">{item.date}</td>
                   <td className="py-3.5 px-3.5">
                     <div className="font-semibold text-slate-200">{item.name}</div>
-                    <div className="text-[10px] text-slate-500 flex items-center gap-1 sm:hidden">
+                    <div className="text-[11px] text-slate-500 flex items-center gap-1 sm:hidden">
                       <span>{item.cat}</span> • <span>{item.account}</span>
                     </div>
                   </td>
@@ -160,7 +160,7 @@ export function LiveTransactionsTablePreview() {
                       {item.cat}
                     </span>
                   </td>
-                  <td className="py-3.5 px-3.5 hidden sm:table-cell text-slate-400 text-[11px] truncate max-w-[160px]">
+                  <td className="py-3.5 px-3.5 hidden sm:table-cell text-slate-400 text-[11px] truncate max-w-[200px]">
                     {item.account}
                   </td>
                   <td className={`py-3.5 px-3.5 text-right font-mono font-bold text-sm whitespace-nowrap ${
@@ -183,7 +183,7 @@ export function LiveTransactionsTablePreview() {
               </div>
               <div>
                 <div className="font-bold text-white">{selectedTxn.name}</div>
-                <div className="text-[10px] text-slate-400">Account: {selectedTxn.account} • Status: {selectedTxn.status.toUpperCase()}</div>
+                <div className="text-[11px] text-slate-400">Account: {selectedTxn.account} • Status: {selectedTxn.status.toUpperCase()}</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -218,7 +218,7 @@ export function LiveTransactionsTablePreview() {
                   type="text"
                   value={newMerchant}
                   onChange={(e) => setNewMerchant(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white"
+                  className="text-base sm:text-sm w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white"
                   required
                 />
               </div>
@@ -230,7 +230,7 @@ export function LiveTransactionsTablePreview() {
                   step="0.01"
                   value={newAmount}
                   onChange={(e) => setNewAmount(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white font-mono"
+                  className="text-base sm:text-sm w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white font-mono"
                   required
                 />
               </div>
@@ -240,7 +240,7 @@ export function LiveTransactionsTablePreview() {
                 <select
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white"
+                  className="text-base sm:text-sm w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white"
                 >
                   <option value="Groceries">Groceries</option>
                   <option value="Housing">Housing</option>

@@ -84,7 +84,7 @@ export function LiveHeroDashboardPreview() {
   ];
 
   return (
-    <div className="relative mx-auto max-w-5xl lg:max-w-6xl w-full select-none text-left font-sans">
+    <div data-mock-preview className="relative mx-auto max-w-5xl lg:max-w-6xl w-full select-none text-left font-sans">
       {/* Ambient Lighting */}
       <div className="absolute -inset-3 bg-gradient-to-r from-[#52A5CE]/20 via-[#25533F]/15 to-[#EFCE7B]/15 rounded-3xl blur-2xl opacity-60 -z-10" />
 
@@ -181,7 +181,7 @@ export function LiveHeroDashboardPreview() {
                           <span>{item.label}</span>
                         </div>
                         {item.badge && (
-                          <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded ${
+                          <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded ${
                             isActive ? 'bg-white text-slate-950' : 'bg-[#EFCE7B]/20 text-[#EFCE7B]'
                           }`}>
                             {item.badge}
@@ -210,7 +210,7 @@ export function LiveHeroDashboardPreview() {
                           <span>{item.label}</span>
                         </div>
                         {item.badge && (
-                          <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded ${
+                          <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded ${
                             isActive ? 'bg-slate-950 text-[#EFCE7B]' : 'bg-[#EFCE7B]/20 text-[#EFCE7B]'
                           }`}>
                             {item.badge}
@@ -242,7 +242,7 @@ export function LiveHeroDashboardPreview() {
             >
               <div className="text-[10px] uppercase font-bold text-slate-400 flex items-center justify-between">
                 <span>{userRole === 'parent' ? 'Parent Account' : 'Kid Space'}</span>
-                <span className="text-[#52A5CE] text-[10px] font-bold">Switch ⇄</span>
+                <span className="text-[#52A5CE] text-[11px] font-bold">Switch ⇄</span>
               </div>
               <div className="flex items-center gap-2 mt-1">
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
@@ -254,7 +254,7 @@ export function LiveHeroDashboardPreview() {
                   <div className="font-bold text-xs text-white">
                     {userRole === 'parent' ? 'Sarah (Admin)' : 'Emma Miller'}
                   </div>
-                  <div className="text-[10px] text-amber-400 font-semibold">
+                  <div className="text-[11px] text-amber-400 font-semibold">
                     {userRole === 'parent' ? 'All Accounts Active' : '★ 45 Stars (Age 9)'}
                   </div>
                 </div>
@@ -353,7 +353,7 @@ export function LiveHeroDashboardPreview() {
                                 <div className={`font-bold text-xs ${isDone ? 'line-through text-slate-400' : 'text-white'}`}>
                                   {task.title}
                                 </div>
-                                <div className="text-[10px] text-slate-400">{task.time}</div>
+                                <div className="text-[11px] text-slate-400">{task.time}</div>
                               </div>
                             </div>
 
@@ -388,7 +388,7 @@ export function LiveHeroDashboardPreview() {
                             <span className="text-2xl">🎮</span>
                             <div>
                               <div className="font-bold text-xs text-white">Nintendo Switch OLED</div>
-                              <div className="text-[10px] text-slate-400">Electronics • Target: 60 Stars</div>
+                              <div className="text-[11px] text-slate-400">Electronics • Target: 60 Stars</div>
                             </div>
                           </div>
                           <span className="text-xs font-bold text-[#EFCE7B]">45 / 60 ⭐</span>
@@ -398,7 +398,7 @@ export function LiveHeroDashboardPreview() {
                           <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
                             <div className="h-full rounded-full bg-gradient-to-r from-[#EFCE7B] to-[#52A5CE] w-[75%]" />
                           </div>
-                          <div className="flex items-center justify-between text-[10px] text-slate-400">
+                          <div className="flex items-center justify-between text-[11px] text-slate-400">
                             <span>15 Stars to go!</span>
                             <span className="text-[#52A5CE] font-bold">75% Complete</span>
                           </div>
@@ -412,7 +412,7 @@ export function LiveHeroDashboardPreview() {
                             <span className="text-2xl">🎁</span>
                             <div>
                               <div className="font-bold text-xs text-white">Roblox Robux Gift Pack</div>
-                              <div className="text-[10px] text-slate-400">Gaming Pass • Target: 20 Stars</div>
+                              <div className="text-[11px] text-slate-400">Gaming Pass • Target: 20 Stars</div>
                             </div>
                           </div>
                           <span className="text-xs font-bold text-[#AACC96]">20 / 20 ⭐</span>
@@ -422,7 +422,7 @@ export function LiveHeroDashboardPreview() {
                           <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
                             <div className="h-full rounded-full bg-[#AACC96] w-[100%]" />
                           </div>
-                          <div className="flex items-center justify-between text-[10px]">
+                          <div className="flex items-center justify-between text-[11px]">
                             <span className="text-[#AACC96] font-bold">100% Unlocked!</span>
                             <button
                               type="button"
@@ -430,7 +430,7 @@ export function LiveHeroDashboardPreview() {
                                 setShowStarCelebration(true);
                                 setTimeout(() => setShowStarCelebration(false), 3500);
                               }}
-                              className="px-2.5 py-1 rounded-lg bg-[#AACC96] text-slate-950 font-bold text-[10px] cursor-pointer hover:scale-105 transition-transform"
+                              className="px-2.5 py-1 rounded-lg bg-[#AACC96] text-slate-950 font-bold text-[11px] cursor-pointer hover:scale-105 transition-transform"
                             >
                               Claim Reward 🎉
                             </button>
@@ -456,7 +456,7 @@ export function LiveHeroDashboardPreview() {
                       <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
                         <div className="h-full rounded-full bg-gradient-to-r from-[#52A5CE] to-[#AACC96] w-[90%]" />
                       </div>
-                      <div className="text-[10px] text-slate-400 flex items-center justify-between">
+                      <div className="text-[11px] text-slate-400 flex items-center justify-between">
                         <span>5 more Stars to reach Level 3 Star Captain!</span>
                         <span className="text-[#EFCE7B] font-semibold">8 Days Streak Active 🔥</span>
                       </div>
@@ -483,7 +483,7 @@ export function LiveHeroDashboardPreview() {
                           <div className="text-xl">{badge.icon}</div>
                           <div>
                             <div className="font-bold text-[11px]">{badge.title}</div>
-                            <div className="text-[9px] text-slate-400">{badge.desc}</div>
+                            <div className="text-[11px] text-slate-400">{badge.desc}</div>
                           </div>
                         </div>
                       ))}
@@ -626,7 +626,7 @@ export function LiveHeroDashboardPreview() {
                             <div key={item.id} className="flex items-center justify-between p-2.5 rounded-lg bg-slate-950/70 border border-slate-800/60 text-xs">
                               <div>
                                 <div className="font-semibold text-slate-200">{item.name}</div>
-                                <div className="text-[10px] text-slate-500">{item.cat} • {item.date}</div>
+                                <div className="text-[11px] text-slate-500">{item.cat} • {item.date}</div>
                               </div>
                               <div className={`font-mono font-bold text-xs ${item.amount.startsWith('+') ? 'text-[#AACC96]' : 'text-slate-200'}`}>
                                 {item.amount}
@@ -675,7 +675,7 @@ export function LiveHeroDashboardPreview() {
                                     <div className={`text-xs font-semibold ${isDone ? 'line-through text-slate-500' : ''}`}>
                                       {task.title}
                                     </div>
-                                    <div className="text-[10px] text-slate-500">{task.schedule}</div>
+                                    <div className="text-[11px] text-slate-500">{task.schedule}</div>
                                   </div>
                                 </div>
 
@@ -698,7 +698,7 @@ export function LiveHeroDashboardPreview() {
                       <div className="p-4 rounded-xl bg-slate-900 border border-[#52A5CE]/40">
                         <div className="text-xs text-slate-400 flex items-center justify-between">
                           <span>Chase Total Checking (...4921)</span>
-                          <span className="text-[#AACC96] font-semibold text-[10px]">Plaid Active</span>
+                          <span className="text-[#AACC96] font-semibold text-[11px]">Plaid Active</span>
                         </div>
                         <div className="text-2xl font-bold text-white mt-1.5 font-mono">$18,450.20</div>
                         <div className="text-[11px] text-slate-500 mt-1">Primary household spend account</div>
@@ -707,7 +707,7 @@ export function LiveHeroDashboardPreview() {
                       <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                         <div className="text-xs text-slate-400 flex items-center justify-between">
                           <span>Chase High Yield Savings (...9021)</span>
-                          <span className="text-[#AACC96] font-semibold text-[10px]">4.85% APY</span>
+                          <span className="text-[#AACC96] font-semibold text-[11px]">4.85% APY</span>
                         </div>
                         <div className="text-2xl font-bold text-white mt-1.5 font-mono">$14,000.00</div>
                         <div className="text-[11px] text-slate-500 mt-1">Emergency 6-month buffer</div>
@@ -716,7 +716,7 @@ export function LiveHeroDashboardPreview() {
                       <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                         <div className="text-xs text-slate-400 flex items-center justify-between">
                           <span>Chase Sapphire Preferred (...8812)</span>
-                          <span className="text-[#EF6F3C] font-semibold text-[10px]">Due Sept 15</span>
+                          <span className="text-[#EF6F3C] font-semibold text-[11px]">Due Sept 15</span>
                         </div>
                         <div className="text-2xl font-bold text-rose-400 mt-1.5 font-mono">-$1,240.50</div>
                         <div className="text-[11px] text-slate-500 mt-1">Auto-pay enabled</div>
@@ -769,7 +769,7 @@ export function LiveHeroDashboardPreview() {
                           <div className="flex items-center justify-between text-xs">
                             <div className="flex items-center gap-2">
                               <span className="font-bold text-white">{b.name}</span>
-                              <span className="text-[10px] px-2 py-0.2 rounded bg-slate-800 text-slate-400">{b.tag}</span>
+                              <span className="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-400">{b.tag}</span>
                             </div>
                             <span className="text-slate-300 font-mono text-[11px]">{b.spent} / {b.limit}</span>
                           </div>
@@ -810,7 +810,7 @@ export function LiveHeroDashboardPreview() {
                         </div>
                         <div className="flex items-center justify-between text-[11px] text-slate-400">
                           <span>Lucas (Age 12) • 100% Achieved</span>
-                          <span className="px-2 py-0.5 rounded bg-[#25533F] text-[#AACC96] font-bold text-[10px]">
+                          <span className="px-2 py-0.5 rounded bg-[#25533F] text-[#AACC96] font-bold text-[11px]">
                             Ready to Redeem!
                           </span>
                         </div>
@@ -841,7 +841,7 @@ export function LiveHeroDashboardPreview() {
                             </span>
                             <div>
                               <div className="font-semibold text-white">{item.title}</div>
-                              <div className="text-[10px] text-slate-400">{item.cat}</div>
+                              <div className="text-[11px] text-slate-400">{item.cat}</div>
                             </div>
                           </div>
                           <span className={`font-mono font-bold ${item.amount.startsWith('+') ? 'text-[#AACC96]' : 'text-slate-200'}`}>
@@ -877,7 +877,7 @@ export function LiveHeroDashboardPreview() {
                         <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
                           <div>
                             <div className="font-semibold text-white">{a.name}</div>
-                            <div className="text-[10px] text-slate-400">{a.type}</div>
+                            <div className="text-[11px] text-slate-400">{a.type}</div>
                           </div>
                           <div className={`font-mono font-bold ${a.val.startsWith('-') ? 'text-rose-400' : 'text-slate-200'}`}>{a.val}</div>
                         </div>
@@ -892,7 +892,7 @@ export function LiveHeroDashboardPreview() {
                     <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
                       <div>
                         <div className="font-bold text-white">Investment Portfolios & Retirement</div>
-                        <div className="text-slate-400 text-[10px]">Vanguard, Fidelity & Roth IRAs</div>
+                        <div className="text-slate-400 text-[11px]">Vanguard, Fidelity & Roth IRAs</div>
                       </div>
                       <div className="font-mono font-bold text-sm text-[#EFCE7B]">$210,000.00</div>
                     </div>
@@ -908,7 +908,7 @@ export function LiveHeroDashboardPreview() {
                           <div className="font-bold text-xs text-white">{inv.name}</div>
                           <div className="flex items-center justify-between text-xs">
                             <span className="font-mono text-slate-300">{inv.val}</span>
-                            <span className="text-[#AACC96] text-[10px] font-semibold">{inv.change}</span>
+                            <span className="text-[#AACC96] text-[11px] font-semibold">{inv.change}</span>
                           </div>
                         </div>
                       ))}
@@ -928,8 +928,8 @@ export function LiveHeroDashboardPreview() {
                       ].map((c, idx) => (
                         <div key={idx} className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
                           <div className="font-bold text-xs text-white">{c.name}</div>
-                          <div className="text-[10px] text-[#52A5CE] font-semibold">{c.role} • {c.firm}</div>
-                          <div className="text-[10px] text-slate-400">{c.phone}</div>
+                          <div className="text-[11px] text-[#52A5CE] font-semibold">{c.role} • {c.firm}</div>
+                          <div className="text-[11px] text-slate-400">{c.phone}</div>
                         </div>
                       ))}
                     </div>
@@ -1009,7 +1009,7 @@ export function LiveHeroDashboardPreview() {
                       ].map((v, idx) => (
                         <div key={idx} className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
                           <div className="font-bold text-xs text-white">{v.name}</div>
-                          <div className="text-[10px] text-slate-400 flex items-center justify-between">
+                          <div className="text-[11px] text-slate-400 flex items-center justify-between">
                             <span>{v.cat}</span>
                             <span className="text-[#52A5CE]">{v.items}</span>
                           </div>
@@ -1073,7 +1073,7 @@ export function LiveHeroDashboardPreview() {
                   type="text"
                   value={newChoreTitle}
                   onChange={(e) => setNewChoreTitle(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white"
+                  className="text-base sm:text-sm w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-white"
                 />
               </div>
 
@@ -1138,7 +1138,7 @@ export function LiveHeroDashboardPreview() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-[10px] text-slate-400">
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
             <span>15 Stars left</span>
             <span className="text-[#AACC96] font-semibold">Goal Target: Sept 1</span>
           </div>

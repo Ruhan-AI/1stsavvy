@@ -118,11 +118,11 @@ export function HowItWorks() {
   const Icon = currentStep.icon;
 
   return (
-    <div className="py-16 bg-white dark:bg-[#1E293B] rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-sm overflow-hidden">
+    <div className="bg-white dark:bg-[#1E293B] rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 lg:p-12 shadow-sm overflow-hidden">
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-10">
-        <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">How First Savvy Works</span>
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-navy dark:text-white mt-2">
+      <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+        <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">How First Savvy Works</span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight mt-2">
           From first stars to lifelong financial clarity
         </h2>
         <p className="text-slate-600 dark:text-slate-300 mt-3 text-sm sm:text-base">
@@ -131,7 +131,7 @@ export function HowItWorks() {
       </div>
 
       {/* Interactive Step Navigation Tabs with fluid directional fill & drain wipe */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mb-6 sm:mb-8">
         {STEPS.map((s, idx) => {
           const StepIcon = s.icon;
           const isActive = activeStep === idx;
@@ -141,36 +141,36 @@ export function HowItWorks() {
             <button
               key={s.step}
               onClick={() => handleStepChange(idx)}
-              className="relative p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-slate-50 dark:bg-slate-800/80 text-left transition-all duration-200 flex flex-col justify-between overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky group cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 shadow-xs"
+              className="relative min-h-[44px] p-2.5 sm:p-3.5 rounded-2xl border border-slate-200/90 dark:border-slate-700/90 bg-slate-50 dark:bg-slate-800/80 text-left transition-all duration-200 flex flex-col justify-between overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky group cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 shadow-xs"
             >
               {/* 1. Base Inactive Layer (Visible when card is not filled) */}
-              <div className="relative z-0 flex flex-col justify-between h-full w-full">
-                <div className="flex items-center justify-between w-full mb-2.5">
-                  <span 
-                    className={`text-[11px] font-bold px-2 py-0.5 rounded-md transition-colors ${
-                      isPassed 
-                        ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300' 
+              <div className="relative z-0 flex flex-col justify-between h-full w-full min-w-0">
+                <div className="flex items-center justify-between gap-1.5 w-full mb-2.5">
+                  <span
+                    className={`text-[11px] font-bold px-2 py-0.5 rounded-md whitespace-nowrap transition-colors ${
+                      isPassed
+                        ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
                         : 'bg-slate-200/80 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
                     }`}
                   >
                     Step {s.step}
                   </span>
-                  <StepIcon 
-                    className={`w-4 h-4 transition-colors ${
-                      isPassed 
-                        ? 'text-emerald-500' 
+                  <StepIcon
+                    className={`w-4 h-4 shrink-0 transition-colors ${
+                      isPassed
+                        ? 'text-emerald-500'
                         : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300'
-                    }`} 
+                    }`}
                   />
                 </div>
-                <div className="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">
+                <div className="text-xs font-bold text-slate-700 dark:text-slate-200 line-clamp-2 xl:line-clamp-none xl:truncate">
                   {s.title}
                 </div>
               </div>
 
               {/* 2. Animated Color Fill Layer (Smoothly wipes in from start and drains out to next card) */}
               <motion.div
-                className="absolute inset-0 bg-brand-navy dark:bg-slate-900 border border-brand-sky/40 shadow-md p-3.5 flex flex-col justify-between z-10 overflow-hidden pointer-events-none"
+                className="absolute inset-0 bg-brand-navy dark:bg-slate-900 border border-brand-sky/40 shadow-md p-2.5 sm:p-3.5 flex flex-col justify-between z-10 overflow-hidden pointer-events-none"
                 initial={false}
                 animate={{
                   scaleX: isActive ? 1 : 0,
@@ -186,13 +186,13 @@ export function HowItWorks() {
                   ease: [0.25, 1, 0.5, 1],
                 }}
               >
-                <div className="flex items-center justify-between w-full mb-2.5">
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-brand-sky text-white shadow-xs">
+                <div className="flex items-center justify-between gap-1.5 w-full mb-2.5">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-brand-sky text-white shadow-xs whitespace-nowrap">
                     Step {s.step}
                   </span>
-                  <StepIcon className="w-4 h-4 text-brand-sky" />
+                  <StepIcon className="w-4 h-4 shrink-0 text-brand-sky" />
                 </div>
-                <div className="text-xs font-bold text-white truncate">
+                <div className="text-xs font-bold text-white line-clamp-2 xl:line-clamp-none xl:truncate">
                   {s.title}
                 </div>
 
@@ -223,7 +223,7 @@ export function HowItWorks() {
           />
         </div>
 
-        <div className="p-6 sm:p-10 min-h-[220px] flex items-center">
+        <div className="p-4 sm:p-6 min-h-[220px] flex items-center">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={activeStep}
@@ -232,7 +232,7 @@ export function HowItWorks() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="w-full flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8"
+              className="w-full min-w-0 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8"
             >
               {/* Step Icon with animated bounce */}
               <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${currentStep.accent} flex items-center justify-center shrink-0 shadow-xs`}>
@@ -240,16 +240,16 @@ export function HowItWorks() {
               </div>
 
               {/* Step Text Info */}
-              <div className="space-y-3 text-center md:text-left flex-1">
-                <div className="flex items-center justify-center md:justify-start gap-2">
+              <div className="min-w-0 space-y-3 text-center lg:text-left flex-1">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1">
                   <span className="text-xs font-bold uppercase tracking-wider text-brand-sky">
                     Step {currentStep.step} of 5
                   </span>
                   <span className="text-slate-300 dark:text-slate-600">•</span>
-                  <span className="text-xs text-slate-500 font-medium">Ready in minutes</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Ready in minutes</span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-brand-navy dark:text-white">
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
                   {currentStep.title}
                 </h3>
 
@@ -257,21 +257,21 @@ export function HowItWorks() {
                   {currentStep.description}
                 </p>
 
-                <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center md:justify-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>{currentStep.detail}</span>
+                <div className="pt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex items-start justify-center lg:justify-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-500 shrink-0" />
+                  <span className="text-left">{currentStep.detail}</span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="shrink-0 flex items-center gap-3 pt-2 md:pt-0">
+              <div className="w-full lg:w-auto shrink-0 flex flex-wrap items-center justify-center lg:justify-end gap-3 pt-2 lg:pt-0">
                 {activeStep > 0 && (
                   <button
                     onClick={handlePrev}
-                    className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold inline-flex items-center gap-1.5 transition-all cursor-pointer"
+                    className="min-h-[44px] min-w-[44px] px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                     aria-label="Previous step"
                   >
-                    <ArrowLeft className="w-4 h-4" />
+                    <ArrowLeft className="w-4 h-4 shrink-0" />
                     <span className="hidden sm:inline">Back</span>
                   </button>
                 )}
@@ -279,18 +279,18 @@ export function HowItWorks() {
                 {activeStep < STEPS.length - 1 ? (
                   <button
                     onClick={handleNext}
-                    className="px-6 py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all hover:translate-x-0.5 cursor-pointer"
+                    className="min-h-[44px] px-4 sm:px-5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:translate-x-0.5 cursor-pointer"
                   >
-                    <span>Next Step</span>
-                    <ArrowRight className="w-4 h-4 text-brand-sky" />
+                    <span className="whitespace-nowrap">Next Step</span>
+                    <ArrowRight className="w-4 h-4 shrink-0 text-brand-sky" />
                   </button>
                 ) : (
                   <Link
                     href="/signup"
-                    className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-105"
+                    className="min-h-[44px] px-4 sm:px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold inline-flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-105"
                   >
-                    <span>Get Started Now</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span className="whitespace-nowrap">Get Started Now</span>
+                    <ArrowRight className="w-4 h-4 shrink-0" />
                   </Link>
                 )}
               </div>

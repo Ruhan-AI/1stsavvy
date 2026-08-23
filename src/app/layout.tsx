@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import { InitialSplashScreen } from '@/components/brand/InitialSplashScreen';
@@ -17,6 +17,20 @@ const inter = Inter({
   variable: '--font-sans',
   display: 'swap',
 });
+
+/**
+ * Responsive viewport contract — docs/responsive-system.md §13.
+ * Kept in its own `viewport` export (Next 14 warns when these keys live in `metadata`).
+ */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F9F7F8' },
+    { media: '(prefers-color-scheme: dark)', color: '#1A232E' },
+  ],
+};
 
 export const metadata: Metadata = {
   title: {

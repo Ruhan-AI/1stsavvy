@@ -83,7 +83,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="name@example.com"
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-bold text-brand-navy dark:text-slate-200">Password</label>
-                <Link href="/forgot-password" className="text-xs font-semibold text-brand-sky hover:underline">
+                <Link href="/forgot-password" className="inline-flex min-h-[44px] items-center text-xs font-semibold text-brand-sky hover:underline">
                   Forgot password?
                 </Link>
               </div>
@@ -105,12 +105,12 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                  className="absolute inset-y-0 right-0 flex min-w-[44px] items-center justify-center pr-3 text-slate-400 hover:text-slate-600"
                   aria-label="Toggle password visibility"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -128,7 +128,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow transition-all duration-200"
+              className="min-h-[44px] w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow transition-all duration-200"
             >
               {loading ? (
                 <>
@@ -159,7 +159,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={loading}
-            className="w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center justify-center gap-2 transition-colors"
+            className="min-h-[44px] w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center justify-center gap-2 transition-colors"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -174,7 +174,7 @@ export default function LoginPage() {
           <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
             <Link
               href="/kid-login"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline p-1"
+              className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline p-1"
             >
               <span>Are you a kid? Go to Kid Space Login (PIN) →</span>
             </Link>
@@ -183,7 +183,7 @@ export default function LoginPage() {
 
         <div className="mt-6 text-center text-xs text-slate-500">
           Don't have a household yet?{' '}
-          <Link href="/signup" className="font-bold text-brand-sky hover:underline">
+          <Link href="/signup" className="inline-flex items-center min-h-[44px] font-bold text-brand-sky hover:underline">
             Create your account for free
           </Link>
         </div>

@@ -21,7 +21,7 @@ export default function SessionExpiredPage() {
         <div className="pt-4">
           <Link
             href="/login"
-            className="w-full sm:w-auto px-8 py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"
+            className="min-h-[44px] w-full sm:w-auto px-8 py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"
           >
             <span>Sign In Again</span>
             <ArrowRight className="w-4 h-4 text-brand-sky" />

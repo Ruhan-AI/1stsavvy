@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable } from '@/lib/webgl';
+import { isWebGLAvailable, observeContainerSize, responsivePixelRatio } from '@/lib/webgl';
 
 interface HeroConstellationCanvasProps {
   className?: string;
@@ -49,7 +49,7 @@ export function HeroConstellationCanvas({
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(responsivePixelRatio(width));
       container.appendChild(renderer.domElement);
 
       // 1. Constellation Nodes (Connected Stars)
@@ -165,9 +165,10 @@ export function HeroConstellationCanvas({
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
         renderer.setSize(w, h);
+        renderer.setPixelRatio(responsivePixelRatio(w));
       };
 
-      window.addEventListener('resize', handleResize);
+      const stopResize = observeContainerSize(container, handleResize);
 
       // Animation Loop
       let clock = new THREE.Clock();
@@ -242,7 +243,7 @@ export function HeroConstellationCanvas({
       return () => {
         cancelAnimationFrame(animationFrameId);
         window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('resize', handleResize);
+        stopResize();
         if (renderer && container.contains(renderer.domElement)) {
           container.removeChild(renderer.domElement);
           renderer.dispose();

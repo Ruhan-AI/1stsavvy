@@ -24,7 +24,7 @@ export function LiveTaskCreationPreview() {
   };
 
   return (
-    <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
+    <div data-mock-preview className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
       {/* Modal Top Bar */}
       <div className="flex items-center justify-between px-4 py-3 bg-slate-950/90 border-b border-slate-800">
         <div className="flex items-center gap-2">
@@ -47,13 +47,13 @@ export function LiveTaskCreationPreview() {
           <div className="flex items-center justify-between">
             <label className="block text-slate-400 font-semibold text-[11px]">Task Title & Details</label>
             <div className="flex items-center gap-1">
-              <span className="text-[10px] text-slate-500">Presets:</span>
+              <span className="text-[11px] text-slate-500">Presets:</span>
               {presets.slice(0, 2).map((p, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setTaskTitle(p)}
-                  className="text-[10px] text-[#52A5CE] hover:underline"
+                  className="text-[11px] text-[#52A5CE] hover:underline"
                 >
                   {p.split(' ')[0]}
                 </button>
@@ -64,7 +64,7 @@ export function LiveTaskCreationPreview() {
             type="text"
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
+            className="text-base sm:text-sm w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
           />
         </div>
 

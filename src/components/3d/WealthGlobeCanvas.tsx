@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable } from '@/lib/webgl';
+import { isWebGLAvailable, responsivePixelRatio } from '@/lib/webgl';
 
 interface WealthGlobeCanvasProps {
   size?: number;
@@ -37,7 +37,7 @@ export function WealthGlobeCanvas({ size = 320 }: WealthGlobeCanvasProps) {
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(size, size);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(responsivePixelRatio(size));
       container.appendChild(renderer.domElement);
 
       // 1. Central Wireframe Icosahedron (Wealth Core)

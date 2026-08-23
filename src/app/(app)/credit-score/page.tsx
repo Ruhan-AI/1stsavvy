@@ -62,7 +62,7 @@ export default function CreditScorePage() {
           <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
             <div className="h-full bg-gradient-to-r from-amber-400 via-sky-400 to-emerald-500 rounded-full" style={{ width: '85%' }} />
           </div>
-          <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+          <div className="flex justify-between text-[11px] text-slate-400 font-mono">
             <span>300 (Poor)</span>
             <span>670 (Good)</span>
             <span>850 (Exceptional)</span>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable } from '@/lib/webgl';
+import { isWebGLAvailable, observeContainerSize, responsivePixelRatio } from '@/lib/webgl';
 
 interface SecurityShieldCanvasProps {
   className?: string;
@@ -41,7 +41,7 @@ export function SecurityShieldCanvas({ className = '' }: SecurityShieldCanvasPro
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(responsivePixelRatio(container.clientWidth));
       container.appendChild(renderer.domElement);
 
       // Outer Shield Ring
@@ -83,8 +83,9 @@ export function SecurityShieldCanvas({ className = '' }: SecurityShieldCanvasPro
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(responsivePixelRatio(container.clientWidth));
       };
-      window.addEventListener('resize', handleResize);
+      const stopResize = observeContainerSize(container, handleResize);
 
       // Animate
       const animate = () => {
@@ -105,7 +106,7 @@ export function SecurityShieldCanvas({ className = '' }: SecurityShieldCanvasPro
 
       return () => {
         cancelAnimationFrame(animationFrameId);
-        window.removeEventListener('resize', handleResize);
+        stopResize();
         if (renderer && container.contains(renderer.domElement)) {
           container.removeChild(renderer.domElement);
           renderer.dispose();

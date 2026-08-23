@@ -17,7 +17,7 @@ export function LiveGoalCreationPreview() {
   };
 
   return (
-    <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
+    <div data-mock-preview className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
       {/* Modal Top Bar */}
       <div className="flex items-center justify-between px-4 py-3 bg-slate-950/90 border-b border-slate-800">
         <div className="flex items-center gap-2">
@@ -42,7 +42,7 @@ export function LiveGoalCreationPreview() {
             type="text"
             value={goalTitle}
             onChange={(e) => setGoalTitle(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
+            className="text-base sm:text-sm w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
           />
         </div>
 

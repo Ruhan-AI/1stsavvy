@@ -84,7 +84,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/banking"
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm transition-all"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm transition-all"
           >
             <Plus className="w-3.5 h-3.5 text-brand-sky" />
             <span>Connect Account</span>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
           {/* Card 1: Net Worth */}
           <button
             onClick={() => setActiveTab('net_worth')}
-            className={`p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
+            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
               activeTab === 'net_worth'
                 ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
                 : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
@@ -120,7 +120,7 @@ export default function DashboardPage() {
           {/* Card 2: Spending */}
           <button
             onClick={() => setActiveTab('spending')}
-            className={`p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
+            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
               activeTab === 'spending'
                 ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
                 : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
@@ -141,7 +141,7 @@ export default function DashboardPage() {
           {/* Card 3: In and Out */}
           <button
             onClick={() => setActiveTab('in_out')}
-            className={`p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
+            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
               activeTab === 'in_out'
                 ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
                 : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
@@ -162,7 +162,7 @@ export default function DashboardPage() {
           {/* Card 4: Liquid Balance */}
           <button
             onClick={() => setActiveTab('balance')}
-            className={`p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
+            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
               activeTab === 'balance'
                 ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
                 : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
@@ -205,13 +205,15 @@ export default function DashboardPage() {
                 <p className="text-xs text-slate-500">Historical performance across all verified accounts.</p>
               </div>
 
-              {/* Period Filter Buttons */}
-              <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+              {/* Period Filter Buttons — §9: seven chips do not fit at 320px, so the
+                  row scrolls instead of pushing the page wide */}
+              <div className="max-w-full overflow-x-auto no-scrollbar">
+              <div className="inline-flex min-w-max items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
                 {(['MTD', '30D', '3M', '6M', 'YTD', '1Y', 'ALL'] as const).map((period) => (
                   <button
                     key={period}
                     onClick={() => setSelectedPeriod(period)}
-                    className={`px-2.5 py-1 rounded-lg transition-colors ${
+                    className={`shrink-0 min-h-[44px] px-2.5 py-1 rounded-lg transition-colors ${
                       selectedPeriod === period
                         ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs font-bold'
                         : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -220,6 +222,7 @@ export default function DashboardPage() {
                     {period}
                   </button>
                 ))}
+              </div>
               </div>
             </div>
 
@@ -279,7 +282,7 @@ export default function DashboardPage() {
                     Family Responsibilities & Stars
                   </h3>
                 </div>
-                <Link href="/profiles" className="text-xs font-bold text-brand-sky hover:underline">
+                <Link href="/profiles" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
                   Manage Family →
                 </Link>
               </div>
@@ -290,7 +293,7 @@ export default function DashboardPage() {
                   <Link
                     key={child.id}
                     href={`/profiles/${child.id}`}
-                    className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-sky-50/60 dark:hover:bg-sky-950/40 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between transition-all group hover:scale-[1.02] duration-200"
+                    className="min-h-[44px] p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-sky-50/60 dark:hover:bg-sky-950/40 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between transition-all group hover:scale-[1.02] duration-200"
                   >
                     <div className="flex items-center gap-3">
                       <div
@@ -323,7 +326,7 @@ export default function DashboardPage() {
               {/* Quick Link to Kid View Preview */}
               <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-50 to-sky-50 dark:from-amber-950/30 dark:to-sky-950/30 border border-amber-200/60 dark:border-amber-800/40 flex items-center justify-between text-xs">
                 <span className="text-slate-700 dark:text-slate-300 font-medium">Want to see what your kids see?</span>
-                <Link href="/kid-view" className="font-bold text-amber-700 dark:text-amber-300 hover:underline">
+                <Link href="/kid-view" className="inline-flex items-center min-h-[44px] font-bold text-amber-700 dark:text-amber-300 hover:underline">
                   Preview Kid Space →
                 </Link>
               </div>
@@ -340,7 +343,7 @@ export default function DashboardPage() {
                     Upcoming Bills & Paydays
                   </h3>
                 </div>
-                <Link href="/calendar" className="text-xs font-bold text-brand-sky hover:underline">
+                <Link href="/calendar" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
                   Full Calendar →
                 </Link>
               </div>
@@ -373,7 +376,7 @@ export default function DashboardPage() {
                     Recent Household Activity
                   </h3>
                 </div>
-                <Link href="/banking" className="text-xs font-bold text-brand-sky hover:underline">
+                <Link href="/banking" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
                   View All Transactions →
                 </Link>
               </div>
@@ -388,11 +391,13 @@ export default function DashboardPage() {
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${isIncome ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>
                         {isIncome ? <ArrowDownLeft className="w-4 h-4" /> : <ArrowUpRight className="w-4 h-4" />}
                       </div>
-                      <div className="truncate">
-                        <div className="font-bold text-brand-navy dark:text-white truncate">
+                      <div className="min-w-0">
+                        {/* §8: a merchant name may take two lines on a phone rather than
+                            lose its tail; it goes back to one truncated line from sm up */}
+                        <div className="font-bold text-brand-navy dark:text-white line-clamp-2 xl:line-clamp-none xl:truncate">
                           {tx.description}
                         </div>
-                        <div className="text-[11px] text-slate-500 truncate">
+                        <div className="text-[11px] text-slate-500 line-clamp-2 xl:line-clamp-none xl:truncate">
                           {tx.categoryName} • {tx.date}
                         </div>
                       </div>
@@ -413,7 +418,7 @@ export default function DashboardPage() {
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
                 Top Budget Categories
               </h3>
-              <Link href="/budgeting" className="text-xs font-bold text-brand-sky hover:underline">
+              <Link href="/budgeting" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
                 Budget Manager →
               </Link>
             </div>

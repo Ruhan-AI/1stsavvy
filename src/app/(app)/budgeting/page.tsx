@@ -65,7 +65,7 @@ export default function BudgetingPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleCopyPreviousMonth}
-            className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2 hover:bg-slate-50 transition-colors"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2 hover:bg-slate-50 transition-colors"
           >
             <Copy className="w-3.5 h-3.5" />
             <span>Copy July Budget</span>
@@ -73,7 +73,7 @@ export default function BudgetingPage() {
 
           <button
             onClick={() => setCategoryModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 text-brand-sky" />
             <span>Category Manager</span>
@@ -180,7 +180,7 @@ export default function BudgetingPage() {
               <div className="text-lg font-mono font-bold text-emerald-600">
                 {formatMoney(inc.plannedCents)}
               </div>
-              <div className="text-[10px] text-slate-500">Actual received: {formatMoney(inc.actualCents)}</div>
+              <div className="text-[11px] text-slate-500">Actual received: {formatMoney(inc.actualCents)}</div>
             </div>
           ))}
         </div>

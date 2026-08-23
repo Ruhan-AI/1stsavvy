@@ -87,6 +87,24 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Global responsive contract — docs/responsive-system.md §13
+   `overflow-x: clip` (never `hidden`) so `position: sticky` keeps working.
+   --------------------------------------------------------------------------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+/* Opt-out of visible scrollbars for deliberate horizontal control rows (§9). */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
@@ -101,6 +119,17 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(100, 116, 139, 0.4);
+}
+
+/* Coarse pointers (touch) need a grabbable track. */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.32);
+  }
 }
 
 /* Glass & Card Treatments */

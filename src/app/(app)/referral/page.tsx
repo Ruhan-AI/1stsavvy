@@ -41,11 +41,11 @@ export default function ReferralPage() {
             type="text"
             readOnly
             value={referralLink}
-            className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-xs text-white font-mono focus:outline-none"
+            className="min-h-[44px] flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-base sm:text-xs text-white font-mono focus:outline-none"
           />
           <button
             onClick={handleCopy}
-            className="px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold inline-flex items-center justify-center gap-2 transition-colors shrink-0"
+            className="min-h-[44px] px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold inline-flex items-center justify-center gap-2 transition-colors shrink-0"
           >
             {copied ? (
               <>

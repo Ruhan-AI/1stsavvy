@@ -78,7 +78,7 @@ export function InitialSplashScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-all duration-700 ease-out ${
+      className={`fixed inset-0 z-[9999] min-h-[100dvh] overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-out ${
         fadeOut
           ? 'opacity-0 scale-[1.03] pointer-events-none'
           : 'opacity-100 scale-100'
@@ -98,9 +98,9 @@ export function InitialSplashScreen() {
         }}
       />
 
-      <div className="relative flex flex-col items-center justify-center">
+      <div className="relative flex max-w-full flex-col items-center justify-center">
         {/* Full Brand Loader Video */}
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center overflow-hidden">
+        <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 max-w-full flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
@@ -119,13 +119,13 @@ export function InitialSplashScreen() {
             <img
               src="/brand/logo-mark.png"
               alt="First Savvy"
-              className="w-24 h-24 object-contain animate-pulse"
+              className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain animate-pulse"
             />
           </video>
         </div>
 
         {/* Sleek Progress bar placed closely right below the video */}
-        <div className="w-36 sm:w-44 h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 -mt-2">
+        <div className="w-32 sm:w-36 lg:w-44 max-w-full h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 -mt-2">
           <div
             className="h-full rounded-full"
             style={{

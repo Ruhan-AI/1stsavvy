@@ -153,7 +153,7 @@ export default function BankingPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setPlaidModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
           >
             <Building2 className="w-3.5 h-3.5 text-brand-sky" />
             <span>Connect Bank (Plaid)</span>
@@ -161,7 +161,7 @@ export default function BankingPage() {
 
           <button
             onClick={() => setManualModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Manual Asset</span>
@@ -181,7 +181,7 @@ export default function BankingPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors flex items-center gap-2 ${
+            className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors flex items-center gap-2 ${
               activeTab === tab.id
                 ? 'bg-brand-navy text-white shadow-xs dark:bg-brand-sky dark:text-slate-900'
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
@@ -189,7 +189,7 @@ export default function BankingPage() {
           >
             <span>{tab.label}</span>
             {tab.count !== undefined && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-200 dark:bg-slate-700'}`}>
+              <span className={`text-[11px] px-1.5 py-0.5 rounded-full ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-200 dark:bg-slate-700'}`}>
                 {tab.count}
               </span>
             )}
@@ -240,7 +240,7 @@ export default function BankingPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search transactions by merchant or note..."
-                className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-xs text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                className="min-h-[44px] w-full pl-10 pr-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-xs text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
               />
             </div>
 
@@ -248,7 +248,7 @@ export default function BankingPage() {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-xs font-semibold text-brand-navy dark:text-white focus:outline-none"
+                className="min-h-[44px] px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-xs font-semibold text-brand-navy dark:text-white focus:outline-none"
               >
                 <option value="all">All Categories</option>
                 {state.categories.map((c) => (
@@ -259,7 +259,7 @@ export default function BankingPage() {
               <select
                 value={accountFilter}
                 onChange={(e) => setAccountFilter(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-xs font-semibold text-brand-navy dark:text-white focus:outline-none"
+                className="min-h-[44px] px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-xs font-semibold text-brand-navy dark:text-white focus:outline-none"
               >
                 <option value="all">All Accounts</option>
                 {state.accounts.map((a) => (
@@ -279,7 +279,7 @@ export default function BankingPage() {
                 <select
                   value={bulkCategory}
                   onChange={(e) => setBulkCategory(e.target.value)}
-                  className="px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs bg-white text-brand-navy"
+                  className="min-h-[44px] px-2.5 py-1.5 rounded-lg border border-slate-300 text-base sm:text-xs bg-white text-brand-navy"
                 >
                   <option value="">Choose category...</option>
                   {state.categories.map((c) => (
@@ -288,13 +288,13 @@ export default function BankingPage() {
                 </select>
                 <button
                   onClick={handleBulkCategorize}
-                  className="px-3 py-1.5 rounded-lg bg-brand-navy text-white text-xs font-bold"
+                  className="min-h-[36px] px-3 py-1.5 rounded-lg bg-brand-navy text-white text-xs font-bold"
                 >
                   Apply
                 </button>
                 <button
                   onClick={() => setSelectedTxIds([])}
-                  className="p-1 text-slate-400 hover:text-slate-600"
+                  className="min-h-[44px] p-1 text-slate-400 hover:text-slate-600"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -303,8 +303,8 @@ export default function BankingPage() {
           )}
 
           {/* Transactions Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto overscroll-x-contain">
+            <table className="w-full min-w-[640px] text-left text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-700 text-slate-400 font-bold uppercase tracking-wider">
                   <th className="pb-3 px-2 w-8">
@@ -404,7 +404,7 @@ export default function BankingPage() {
             </div>
             <button
               onClick={() => setRuleModalOpen(true)}
-              className="px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold inline-flex items-center gap-1.5 shadow"
+              className="min-h-[44px] px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold inline-flex items-center gap-1.5 shadow"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Create Rule</span>
@@ -471,7 +471,7 @@ export default function BankingPage() {
                 </div>
                 <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Plaid Link (Sandbox)</h3>
               </div>
-              <button onClick={() => setPlaidModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setPlaidModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -486,16 +486,16 @@ export default function BankingPage() {
                   key={inst.id}
                   onClick={() => handlePlaidConnect(inst.id)}
                   disabled={plaidConnecting}
-                  className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-left flex items-center justify-between text-xs font-bold text-brand-navy dark:text-white transition-colors"
+                  className="min-h-[44px] w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-left flex items-center justify-between text-xs font-bold text-brand-navy dark:text-white transition-colors"
                 >
                   <div className="flex items-center gap-2.5">
                     <Building2 className="w-4 h-4 text-brand-sky" />
                     <span>{inst.name}</span>
                   </div>
                   {selectedInst === inst.id && plaidConnecting ? (
-                    <span className="text-[10px] text-brand-sky animate-pulse">Connecting...</span>
+                    <span className="text-[11px] text-brand-sky animate-pulse">Connecting...</span>
                   ) : (
-                    <span className="text-[10px] text-slate-400">Connect →</span>
+                    <span className="text-[11px] text-slate-400">Connect →</span>
                   )}
                 </button>
               ))}
@@ -514,7 +514,7 @@ export default function BankingPage() {
           <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Add Manual Asset or Liability</h3>
-              <button onClick={() => setManualModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setManualModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -528,7 +528,7 @@ export default function BankingPage() {
                   onChange={(e) => setAccountName(e.target.value)}
                   required
                   placeholder="e.g. 2024 Honda Pilot or Vacation Cabin"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -538,7 +538,7 @@ export default function BankingPage() {
                   <select
                     value={accountClass}
                     onChange={(e) => setAccountClass(e.target.value as any)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   >
                     <option value="asset">Asset (Positive value)</option>
                     <option value="liability">Liability (Debt / Loan)</option>
@@ -550,7 +550,7 @@ export default function BankingPage() {
                   <select
                     value={accountType}
                     onChange={(e) => setAccountType(e.target.value as any)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   >
                     <option value="banking">Cash / Checking</option>
                     <option value="savings">Savings Account</option>
@@ -571,7 +571,7 @@ export default function BankingPage() {
                   onChange={(e) => setBalanceInput(e.target.value)}
                   required
                   placeholder="35000.00"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -579,13 +579,13 @@ export default function BankingPage() {
                 <button
                   type="button"
                   onClick={() => setManualModalOpen(false)}
-                  className="w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
                 >
                   Save Account
                 </button>

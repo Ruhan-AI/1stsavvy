@@ -91,7 +91,7 @@ export default function GoalsPage() {
           <select
             value={profileFilter}
             onChange={(e) => setProfileFilter(e.target.value)}
-            className="px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white"
+            className="min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-base sm:text-xs font-bold text-brand-navy dark:text-white"
           >
             <option value="all">All Family Profiles</option>
             {state.profiles.map((p) => (
@@ -101,7 +101,7 @@ export default function GoalsPage() {
 
           <button
             onClick={() => setGoalModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 text-brand-sky" />
             <span>Create New Goal</span>
@@ -176,7 +176,7 @@ export default function GoalsPage() {
                 </span>
                 <button
                   onClick={() => setContribModalGoal(goal)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-sky hover:text-white font-bold text-brand-navy dark:text-slate-200 transition-colors"
+                  className="min-h-[44px] px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-sky hover:text-white font-bold text-brand-navy dark:text-slate-200 transition-colors"
                 >
                   + Add Progress
                 </button>
@@ -192,7 +192,7 @@ export default function GoalsPage() {
           <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Create New Goal</h3>
-              <button onClick={() => setGoalModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setGoalModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -206,7 +206,7 @@ export default function GoalsPage() {
                   onChange={(e) => setTitle(e.target.value)}
                   required
                   placeholder="e.g. New Mountain Bike or Tahoe Cabin Fund"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -216,7 +216,7 @@ export default function GoalsPage() {
                   <select
                     value={goalType}
                     onChange={(e) => setGoalType(e.target.value as any)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   >
                     <option value="reward_stars">Star Reward (Child)</option>
                     <option value="monetary_savings">Monetary Savings ($)</option>
@@ -228,7 +228,7 @@ export default function GoalsPage() {
                   <select
                     value={assignedProfileId}
                     onChange={(e) => setAssignedProfileId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   >
                     {state.profiles.map((p) => (
                       <option key={p.id} value={p.id}>{p.displayName}</option>
@@ -245,7 +245,7 @@ export default function GoalsPage() {
                     value={targetStars}
                     onChange={(e) => setTargetStars(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   />
                 </div>
               ) : (
@@ -256,7 +256,7 @@ export default function GoalsPage() {
                     value={targetAmount}
                     onChange={(e) => setTargetAmount(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   />
                 </div>
               )}
@@ -265,13 +265,13 @@ export default function GoalsPage() {
                 <button
                   type="button"
                   onClick={() => setGoalModalOpen(false)}
-                  className="w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
                 >
                   Save Goal
                 </button>
@@ -300,7 +300,7 @@ export default function GoalsPage() {
                   onChange={(e) => setContribAmount(e.target.value)}
                   required
                   placeholder={contribModalGoal.goalType === 'reward_stars' ? '5' : '150.00'}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                 />
               </div>
 
@@ -308,13 +308,13 @@ export default function GoalsPage() {
                 <button
                   type="button"
                   onClick={() => setContribModalGoal(null)}
-                  className="w-1/2 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/2 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
+                  className="min-h-[44px] w-1/2 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
                 >
                   Record
                 </button>

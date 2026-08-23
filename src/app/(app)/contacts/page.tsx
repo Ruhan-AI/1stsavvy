@@ -45,7 +45,7 @@ export default function ContactsPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setContactModalOpen(true)}
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 text-brand-sky" />
             <span>Add Contact</span>
@@ -61,7 +61,7 @@ export default function ContactsPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search contacts by name or relationship..."
-          className="w-full bg-transparent text-xs text-brand-navy dark:text-white focus:outline-none placeholder-slate-400"
+          className="min-h-[44px] w-full bg-transparent text-base sm:text-xs text-brand-navy dark:text-white focus:outline-none placeholder-slate-400"
         />
       </div>
 
@@ -79,7 +79,7 @@ export default function ContactsPage() {
                 </div>
                 <div>
                   <div className="font-bold text-sm text-brand-navy dark:text-white">{contact.name}</div>
-                  <span className="text-[10px] font-semibold text-brand-sky bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded">
+                  <span className="text-[11px] font-semibold text-brand-sky bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded">
                     {contact.relationship}
                   </span>
                 </div>
@@ -115,7 +115,7 @@ export default function ContactsPage() {
           <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Add Contact</h3>
-              <button onClick={() => setContactModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setContactModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -129,7 +129,7 @@ export default function ContactsPage() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   placeholder="e.g. Grandma Eleanor or Marcus Vance"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export default function ContactsPage() {
                   value={relationship}
                   onChange={(e) => setRelationship(e.target.value)}
                   placeholder="e.g. Financial Advisor or Grandparent"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -152,7 +152,7 @@ export default function ContactsPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                   />
                 </div>
 
@@ -163,7 +163,7 @@ export default function ContactsPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="(555) 000-0000"
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                   />
                 </div>
               </div>
@@ -172,13 +172,13 @@ export default function ContactsPage() {
                 <button
                   type="button"
                   onClick={() => setContactModalOpen(false)}
-                  className="w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
                 >
                   Save Contact
                 </button>

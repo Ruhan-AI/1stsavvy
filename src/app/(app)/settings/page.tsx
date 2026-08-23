@@ -81,7 +81,7 @@ export default function SettingsPage() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
               />
             </div>
             <div className="space-y-1">
@@ -91,7 +91,7 @@ export default function SettingsPage() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
               />
             </div>
             <div className="space-y-1 sm:col-span-2">
@@ -101,7 +101,7 @@ export default function SettingsPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
               />
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function SettingsPage() {
                 value={householdName}
                 onChange={(e) => setHouseholdName(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
               />
             </div>
 
@@ -131,7 +131,7 @@ export default function SettingsPage() {
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value as any)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
               >
                 <option value="USD">USD ($)</option>
                 <option value="CAD">CAD ($)</option>
@@ -146,7 +146,7 @@ export default function SettingsPage() {
               <select
                 value={timezone}
                 onChange={(e) => setTimezone(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
               >
                 <option value="America/New_York">Eastern (EST)</option>
                 <option value="America/Chicago">Central (CST)</option>
@@ -166,33 +166,33 @@ export default function SettingsPage() {
           </div>
 
           <div className="space-y-3 text-xs">
-            <label className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
+            <label className="flex min-h-[44px] items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
               <span>Task completion & child approval requests</span>
               <input
                 type="checkbox"
                 checked={notifTasks}
                 onChange={(e) => setNotifTasks(e.target.checked)}
-                className="w-4 h-4 rounded text-brand-sky"
+                className="w-5 h-5 shrink-0 rounded text-brand-sky"
               />
             </label>
 
-            <label className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
+            <label className="flex min-h-[44px] items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
               <span>Recurring bill due date reminders (3 days before)</span>
               <input
                 type="checkbox"
                 checked={notifBills}
                 onChange={(e) => setNotifBills(e.target.checked)}
-                className="w-4 h-4 rounded text-brand-sky"
+                className="w-5 h-5 shrink-0 rounded text-brand-sky"
               />
             </label>
 
-            <label className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
+            <label className="flex min-h-[44px] items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
               <span>Budget threshold alerts (80%+ utilization)</span>
               <input
                 type="checkbox"
                 checked={notifBudgets}
                 onChange={(e) => setNotifBudgets(e.target.checked)}
-                className="w-4 h-4 rounded text-brand-sky"
+                className="w-5 h-5 shrink-0 rounded text-brand-sky"
               />
             </label>
           </div>
@@ -201,7 +201,7 @@ export default function SettingsPage() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-6 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow"
+            className="min-h-[44px] px-6 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow"
           >
             <Save className="w-4 h-4 text-brand-sky" />
             <span>Save Preferences</span>
@@ -219,7 +219,7 @@ export default function SettingsPage() {
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <button
             onClick={handleExportAll}
-            className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2 hover:bg-slate-50"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2 hover:bg-slate-50"
           >
             <Download className="w-4 h-4 text-brand-sky" />
             <span>Export Complete Household (JSON)</span>
@@ -231,7 +231,7 @@ export default function SettingsPage() {
                 resetToDemoData();
               }
             }}
-            className="px-4 py-2.5 rounded-xl border border-amber-200 bg-amber-50 text-xs font-bold text-amber-800 inline-flex items-center gap-2 hover:bg-amber-100"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-amber-200 bg-amber-50 text-xs font-bold text-amber-800 inline-flex items-center gap-2 hover:bg-amber-100"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Reset Demo Sandbox</span>

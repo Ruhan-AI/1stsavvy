@@ -66,7 +66,7 @@ export default function ChildProfileDetailPage() {
     return (
       <div className="p-12 text-center space-y-4">
         <h2 className="text-xl font-bold text-brand-navy dark:text-white">Profile not found</h2>
-        <Link href="/profiles" className="text-xs font-bold text-brand-sky hover:underline">
+        <Link href="/profiles" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
           ← Return to Profiles
         </Link>
       </div>
@@ -143,7 +143,7 @@ export default function ChildProfileDetailPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/profiles"
-            className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="inline-flex items-center min-h-[44px] p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
@@ -175,7 +175,7 @@ export default function ChildProfileDetailPage() {
               setIsDeduction(false);
               setAwardModalOpen(true);
             }}
-            className="px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm"
           >
             <Star className="w-3.5 h-3.5 fill-brand-sky text-brand-sky" />
             <span>Award Stars</span>
@@ -183,7 +183,7 @@ export default function ChildProfileDetailPage() {
 
           <Link
             href="/kid-view"
-            className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-1.5"
+            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-1.5"
           >
             <span>Preview Kid Space</span>
           </Link>
@@ -201,7 +201,7 @@ export default function ChildProfileDetailPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 ${
+            className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 ${
               activeTab === tab.id
                 ? 'bg-brand-navy text-white shadow-xs dark:bg-brand-sky dark:text-slate-900'
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
@@ -209,7 +209,7 @@ export default function ChildProfileDetailPage() {
           >
             <span>{tab.label}</span>
             {tab.count !== undefined && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-200 dark:bg-slate-700'}`}>
+              <span className={`text-[11px] px-1.5 py-0.5 rounded-full ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-200 dark:bg-slate-700'}`}>
                 {tab.count}
               </span>
             )}
@@ -224,7 +224,7 @@ export default function ChildProfileDetailPage() {
             <h3 className="font-serif font-bold text-lg text-brand-navy dark:text-white">Assigned Responsibilities</h3>
             <button
               onClick={() => setTaskModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-brand-navy text-white text-xs font-bold inline-flex items-center gap-1.5 shadow"
+              className="min-h-[36px] px-3.5 py-1.5 rounded-xl bg-brand-navy text-white text-xs font-bold inline-flex items-center gap-1.5 shadow"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Create Task</span>
@@ -273,7 +273,7 @@ export default function ChildProfileDetailPage() {
                   </div>
                   <button
                     onClick={() => approveRedemption(r.id)}
-                    className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold"
+                    className="min-h-[44px] px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold"
                   >
                     Approve & Deduct Stars
                   </button>
@@ -334,7 +334,7 @@ export default function ChildProfileDetailPage() {
                     <span className={`font-mono font-bold ${isPositive ? 'text-emerald-600' : 'text-rose-600'}`}>
                       {isPositive ? `+${item.amount}` : item.amount} Stars
                     </span>
-                    <div className="text-[10px] text-slate-400">Balance: {item.balanceAfter} ⭐</div>
+                    <div className="text-[11px] text-slate-400">Balance: {item.balanceAfter} ⭐</div>
                   </div>
                 </div>
               );
@@ -376,11 +376,11 @@ export default function ChildProfileDetailPage() {
                 value={newPin}
                 onChange={(e) => setNewPin(e.target.value)}
                 placeholder="New 4-digit PIN"
-                className="w-40 font-mono tracking-[0.4em] text-center px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-brand-navy dark:text-white"
+                className="min-h-[44px] w-40 font-mono tracking-[0.4em] text-center px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-base sm:text-xs text-brand-navy dark:text-white"
               />
               <button
                 type="submit"
-                className="px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
+                className="min-h-[44px] px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
               >
                 Update PIN
               </button>
@@ -397,7 +397,7 @@ export default function ChildProfileDetailPage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handleExportData}
-                className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2 hover:bg-slate-50"
+                className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-white inline-flex items-center gap-2 hover:bg-slate-50"
               >
                 <Download className="w-4 h-4 text-brand-sky" />
                 <span>Export Child Records (JSON)</span>
@@ -405,7 +405,7 @@ export default function ChildProfileDetailPage() {
 
               <button
                 onClick={() => setDeleteModalOpen(true)}
-                className="px-4 py-2.5 rounded-xl border border-rose-200 bg-rose-50 text-xs font-bold text-rose-700 inline-flex items-center gap-2 hover:bg-rose-100"
+                className="min-h-[44px] px-4 py-2.5 rounded-xl border border-rose-200 bg-rose-50 text-xs font-bold text-rose-700 inline-flex items-center gap-2 hover:bg-rose-100"
               >
                 <Trash2 className="w-4 h-4 text-rose-600" />
                 <span>Delete or Anonymize Profile</span>
@@ -431,7 +431,7 @@ export default function ChildProfileDetailPage() {
                   value={starAmount}
                   onChange={(e) => setStarAmount(e.target.value)}
                   required
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                 />
               </div>
 
@@ -443,7 +443,7 @@ export default function ChildProfileDetailPage() {
                   onChange={(e) => setStarReason(e.target.value)}
                   required
                   placeholder="e.g. Great attitude helping clean up"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                 />
               </div>
 
@@ -451,13 +451,13 @@ export default function ChildProfileDetailPage() {
                 <button
                   type="button"
                   onClick={() => setAwardModalOpen(false)}
-                  className="w-1/2 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/2 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className={`w-1/2 py-2 rounded-xl text-white text-xs font-bold shadow ${isDeduction ? 'bg-rose-600' : 'bg-brand-navy'}`}
+                  className={`min-h-[44px] w-1/2 py-2 rounded-xl text-white text-xs font-bold shadow ${isDeduction ? 'bg-rose-600' : 'bg-brand-navy'}`}
                 >
                   Confirm
                 </button>
@@ -482,7 +482,7 @@ export default function ChildProfileDetailPage() {
                   onChange={(e) => setTaskTitle(e.target.value)}
                   required
                   placeholder="e.g. Practice Piano 20 mins"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
+                  className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-sky"
                 />
               </div>
 
@@ -494,7 +494,7 @@ export default function ChildProfileDetailPage() {
                     value={taskStars}
                     onChange={(e) => setTaskStars(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   />
                 </div>
 
@@ -503,7 +503,7 @@ export default function ChildProfileDetailPage() {
                   <select
                     value={taskSchedule}
                     onChange={(e) => setTaskSchedule(e.target.value as any)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
+                    className="min-h-[44px] text-base sm:text-sm w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white"
                   >
                     <option value="daily">Daily</option>
                     <option value="weekdays">Weekdays</option>
@@ -531,13 +531,13 @@ export default function ChildProfileDetailPage() {
                 <button
                   type="button"
                   onClick={() => setTaskModalOpen(false)}
-                  className="w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
+                  className="min-h-[44px] w-1/2 py-2.5 rounded-xl bg-brand-navy text-white text-xs font-bold shadow"
                 >
                   Assign Task
                 </button>
@@ -588,13 +588,13 @@ export default function ChildProfileDetailPage() {
               <button
                 type="button"
                 onClick={() => setDeleteModalOpen(false)}
-                className="w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
+                className="min-h-[44px] w-1/2 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-600"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeleteChild}
-                className="w-1/2 py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow"
+                className="min-h-[44px] w-1/2 py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow"
               >
                 Confirm Deletion
               </button>

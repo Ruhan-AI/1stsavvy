@@ -40,7 +40,7 @@ export default function ForgotPasswordPage() {
               <div className="pt-4">
                 <Link
                   href="/login"
-                  className="w-full py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-semibold inline-flex items-center justify-center gap-2"
+                  className="min-h-[44px] w-full py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-semibold inline-flex items-center justify-center gap-2"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Return to Sign In</span>
@@ -61,21 +61,21 @@ export default function ForgotPasswordPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="name@example.com"
-                    className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                    className="min-h-[44px] w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"
+                className="min-h-[44px] w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow"
               >
                 <span>Send Reset Link</span>
                 <ArrowRight className="w-4 h-4 text-brand-sky" />
               </button>
 
               <div className="text-center pt-2">
-                <Link href="/login" className="text-xs font-semibold text-slate-500 hover:text-brand-sky">
+                <Link href="/login" className="inline-flex min-h-[44px] items-center justify-center text-xs font-semibold text-slate-500 hover:text-brand-sky">
                   Back to Sign In
                 </Link>
               </div>

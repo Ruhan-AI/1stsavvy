@@ -5,7 +5,7 @@ import { LiveHeroDashboardPreview } from './live-previews/LiveHeroDashboardPrevi
 
 export function HeroPreview() {
   return (
-    <div className="relative mx-auto max-w-5xl lg:max-w-6xl w-full">
+    <div className="relative mx-auto w-full min-w-0 max-w-5xl lg:max-w-6xl">
       <LiveHeroDashboardPreview />
     </div>
   );

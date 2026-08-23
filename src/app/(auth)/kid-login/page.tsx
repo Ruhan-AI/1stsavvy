@@ -70,13 +70,13 @@ export default function KidLoginPage() {
               <button
                 type="button"
                 onClick={() => handleQuickChild('leo')}
-                className={`p-2 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
+                className={`min-h-[44px] p-2 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
                   username === 'leo'
                     ? 'bg-sky-50 border-brand-sky text-brand-navy dark:bg-sky-950/60 dark:text-white'
                     : 'bg-slate-50 border-slate-200 text-slate-600 dark:bg-slate-800 dark:border-slate-700'
                 }`}
               >
-                <div className="w-5 h-5 rounded-full bg-brand-sky text-white flex items-center justify-center text-[10px]">
+                <div className="w-5 h-5 rounded-full bg-brand-sky text-white flex items-center justify-center text-[11px]">
                   L
                 </div>
                 <span>Leo (Age 10)</span>
@@ -85,13 +85,13 @@ export default function KidLoginPage() {
               <button
                 type="button"
                 onClick={() => handleQuickChild('maya')}
-                className={`p-2 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
+                className={`min-h-[44px] p-2 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${
                   username === 'maya'
                     ? 'bg-sky-50 border-brand-sky text-brand-navy dark:bg-sky-950/60 dark:text-white'
                     : 'bg-slate-50 border-slate-200 text-slate-600 dark:bg-slate-800 dark:border-slate-700'
                 }`}
               >
-                <div className="w-5 h-5 rounded-full bg-brand-softBlue text-brand-navy flex items-center justify-center text-[10px]">
+                <div className="w-5 h-5 rounded-full bg-brand-softBlue text-brand-navy flex items-center justify-center text-[11px]">
                   M
                 </div>
                 <span>Maya (Age 7)</span>
@@ -108,7 +108,7 @@ export default function KidLoginPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 placeholder="e.g. leo"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                className="min-h-[44px] w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-base sm:text-sm text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
               />
             </div>
 
@@ -122,7 +122,7 @@ export default function KidLoginPage() {
                   onChange={(e) => setPin(e.target.value)}
                   required
                   placeholder="••••"
-                  className="w-full tracking-[0.5em] text-center font-mono text-lg py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
+                  className="min-h-[44px] w-full tracking-[0.5em] text-center font-mono text-lg py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
               </div>
               <p className="text-[11px] text-slate-400 text-center">Default demo PIN is 1234</p>
@@ -138,7 +138,7 @@ export default function KidLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold inline-flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+              className="min-h-[44px] w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold inline-flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
             >
               {loading ? (
                 <>
@@ -171,7 +171,7 @@ export default function KidLoginPage() {
             <button
               type="button"
               onClick={() => setShowPrivacyModal(!showPrivacyModal)}
-              className="text-xs text-slate-500 hover:text-brand-sky flex items-center justify-center gap-1 mx-auto"
+              className="min-h-[44px] text-xs text-slate-500 hover:text-brand-sky flex items-center justify-center gap-1 mx-auto"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>How we keep your info safe (Kid Privacy)</span>
@@ -190,7 +190,7 @@ export default function KidLoginPage() {
 
         <div className="mt-6 text-center text-xs text-slate-500">
           Are you a parent?{' '}
-          <Link href="/login" className="font-bold text-brand-navy dark:text-white hover:underline">
+          <Link href="/login" className="inline-flex items-center min-h-[44px] font-bold text-brand-navy dark:text-white hover:underline">
             Switch to Adult Login
           </Link>
         </div>

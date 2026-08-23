@@ -15,15 +15,16 @@ export function BrandLoader({
   showTagline = false,
   message,
 }: BrandLoaderProps) {
+  // Responsive size ladder — mirrors the Logo crest ladder (docs/responsive-system.md §4).
   const sizeStyles = {
-    sm: 'w-12 h-12',
-    md: 'w-24 h-24 sm:w-28 sm:h-28',
-    lg: 'w-36 h-36 sm:w-44 sm:h-44',
-    fullscreen: 'w-32 h-32 sm:w-40 sm:h-40',
+    sm: 'w-10 h-10 sm:w-12 sm:h-12',
+    md: 'w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28',
+    lg: 'w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44',
+    fullscreen: 'w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40',
   }[size];
 
   const loaderElement = (
-    <div className={`flex flex-col items-center justify-center gap-2 ${className}`}>
+    <div className={`flex max-w-full flex-col items-center justify-center gap-2 ${className}`}>
       {/* Optimized Video Animation Container - focused on crest */}
       <div className={`relative ${sizeStyles} flex items-center justify-center overflow-hidden rounded-2xl`}>
         <video
@@ -50,20 +51,20 @@ export function BrandLoader({
       </div>
 
       {/* Brand Title with Space */}
-      <div className="text-center space-y-0.5 select-none animate-fade-in">
-        <span 
-          className="font-serif font-bold text-lg text-brand-navy dark:text-white tracking-normal"
+      <div className="max-w-full text-center space-y-0.5 select-none animate-in fade-in duration-500">
+        <span
+          className="font-serif font-bold text-base sm:text-lg text-brand-navy dark:text-white tracking-normal"
           style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
         >
           First&nbsp;Savvy
         </span>
         {message && (
-          <p className="text-xs font-semibold text-brand-navy dark:text-slate-200 tracking-wide">
+          <p className="text-xs sm:text-sm font-semibold text-brand-navy dark:text-slate-200 tracking-wide text-balance">
             {message}
           </p>
         )}
         {showTagline && (
-          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-brand-sky">
+          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.24em] sm:tracking-[0.28em] text-brand-sky">
             Stars to Legacy
           </p>
         )}
@@ -73,7 +74,7 @@ export function BrandLoader({
 
   if (size === 'fullscreen') {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#F9F7F8]/80 dark:bg-[#1A232E]/85 backdrop-blur-md transition-all">
+      <div className="fixed inset-0 z-50 min-h-[100dvh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 bg-[#F9F7F8]/80 dark:bg-[#1A232E]/85 backdrop-blur-md transition-all">
         {loaderElement}
       </div>
     );

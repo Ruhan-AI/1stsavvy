@@ -66,7 +66,7 @@ export default function KidViewPage() {
           <select
             value={activeChildId}
             onChange={(e) => setActiveChildId(e.target.value)}
-            className="bg-white/15 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 focus:outline-none"
+            className="min-h-[44px] bg-white/15 text-white text-base sm:text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 focus:outline-none"
           >
             {state.profiles.filter((p) => p.isChild).map((c) => (
               <option key={c.id} value={c.id} className="text-brand-navy">
@@ -77,7 +77,7 @@ export default function KidViewPage() {
 
           <Link
             href="/dashboard"
-            className="px-3.5 py-1.5 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold inline-flex items-center gap-1 transition-colors"
+            className="min-h-[44px] px-3.5 py-1.5 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-xs font-bold inline-flex items-center gap-1 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Exit to Parent View</span>
@@ -118,7 +118,7 @@ export default function KidViewPage() {
           <div className="text-3xl sm:text-4xl font-bold font-serif text-amber-300 flex items-center justify-center gap-2 mt-0.5">
             <span>{currentChild.starBalance} Stars</span>
           </div>
-          <div className="text-[10px] text-white/80 mt-1">Click & drag star to spin! ⭐</div>
+          <div className="text-[11px] text-white/80 mt-1">Click & drag star to spin! ⭐</div>
         </div>
       </div>
 
@@ -163,7 +163,7 @@ export default function KidViewPage() {
                   <button
                     onClick={() => handleMarkDone(task.id, task.title)}
                     disabled={isDone}
-                    className={`w-full py-2.5 rounded-xl font-bold text-xs inline-flex items-center justify-center gap-2 transition-all duration-200 ${
+                    className={`min-h-[44px] w-full py-2.5 rounded-xl font-bold text-xs inline-flex items-center justify-center gap-2 transition-all duration-200 ${
                       isDone
                         ? 'bg-emerald-600 text-white cursor-default'
                         : 'bg-brand-navy hover:bg-brand-navyDark hover:scale-[1.02] active:scale-[0.98] text-white shadow-md'
@@ -241,7 +241,7 @@ export default function KidViewPage() {
                   <button
                     onClick={() => handleRedeem(rew.id, rew.title)}
                     disabled={!canAfford}
-                    className={`px-3 py-1.5 rounded-xl font-bold transition-colors ${
+                    className={`min-h-[44px] px-3 py-1.5 rounded-xl font-bold transition-colors ${
                       canAfford
                         ? 'bg-amber-500 hover:bg-amber-600 text-white shadow-xs'
                         : 'bg-slate-200 text-slate-400 cursor-not-allowed dark:bg-slate-700'

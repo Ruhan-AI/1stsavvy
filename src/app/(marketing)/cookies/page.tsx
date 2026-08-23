@@ -60,12 +60,16 @@ export default function CookiePreferencesPage() {
               Required for secure adult and child login authentication, CSRF security tokens, and preserving active household state.
             </p>
           </div>
-          <input
-            type="checkbox"
-            checked={essential}
-            disabled
-            className="w-5 h-5 rounded text-brand-sky opacity-75 cursor-not-allowed mt-1"
-          />
+          {/* §5: the 20px box sits inside a 44px label so the whole square is tappable */}
+          <label className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center self-center">
+            <span className="sr-only">Strictly necessary cookies (always on)</span>
+            <input
+              type="checkbox"
+              checked={essential}
+              disabled
+              className="w-5 h-5 shrink-0 rounded text-brand-sky opacity-75 cursor-not-allowed"
+            />
+          </label>
         </div>
 
         {/* Functional & Preference Cookies */}
@@ -76,12 +80,15 @@ export default function CookiePreferencesPage() {
               Remembers your selected household profile, dark/light theme, and currency display preferences across visits.
             </p>
           </div>
-          <input
-            type="checkbox"
-            checked={preferences}
-            onChange={(e) => setPreferences(e.target.checked)}
-            className="w-5 h-5 rounded text-brand-sky focus:ring-brand-sky cursor-pointer mt-1"
-          />
+          <label className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center self-center cursor-pointer">
+            <span className="sr-only">Preference storage cookies</span>
+            <input
+              type="checkbox"
+              checked={preferences}
+              onChange={(e) => setPreferences(e.target.checked)}
+              className="w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+            />
+          </label>
         </div>
 
         {/* Analytics Cookies */}
@@ -92,12 +99,15 @@ export default function CookiePreferencesPage() {
               Helps our engineers diagnose performance bottlenecks and catch bugs. Never includes financial account numbers or child PII.
             </p>
           </div>
-          <input
-            type="checkbox"
-            checked={analytics}
-            onChange={(e) => setAnalytics(e.target.checked)}
-            className="w-5 h-5 rounded text-brand-sky focus:ring-brand-sky cursor-pointer mt-1"
-          />
+          <label className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center self-center cursor-pointer">
+            <span className="sr-only">Anonymous analytics cookies</span>
+            <input
+              type="checkbox"
+              checked={analytics}
+              onChange={(e) => setAnalytics(e.target.checked)}
+              className="w-5 h-5 shrink-0 rounded text-brand-sky focus:ring-brand-sky cursor-pointer"
+            />
+          </label>
         </div>
       </div>
 
@@ -107,7 +117,7 @@ export default function CookiePreferencesPage() {
         </div>
         <button
           onClick={handleSave}
-          className="w-full sm:w-auto px-8 py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow transition-colors"
+          className="min-h-[44px] w-full sm:w-auto px-8 py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 shadow transition-colors"
         >
           <Save className="w-4 h-4 text-brand-sky" />
           <span>Save Preferences</span>
