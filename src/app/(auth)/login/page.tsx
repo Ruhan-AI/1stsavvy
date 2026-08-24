@@ -10,7 +10,6 @@ import {
   ArrowRight, 
   Lock, 
   Mail, 
-  Sparkles, 
   ShieldCheck,
   AlertCircle,
   Loader2
@@ -61,15 +60,6 @@ export default function LoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white dark:bg-[#1E293B] py-8 px-6 sm:px-10 shadow-xl rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6">
-          {/* Quick Demo Pre-fill Banner */}
-          <div className="p-3 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-brand-sky/20 text-xs text-brand-navy dark:text-slate-200 flex items-center justify-between">
-            <span className="flex items-center gap-1.5 font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-brand-sky" />
-              <span>Demo Account Loaded</span>
-            </span>
-            <span className="font-mono text-[11px] text-brand-sky">The Miller Family</span>
-          </div>
-
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-brand-navy dark:text-slate-200">Email Address</label>

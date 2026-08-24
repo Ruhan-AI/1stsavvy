@@ -25,28 +25,28 @@ export function Logo({
    */
   const dimensions = {
     sm: {
-      mark: 'w-8 h-8 sm:w-9 sm:h-9',
+      mark: 'w-9 h-9 sm:w-10 sm:h-10',
       lockup: 'w-[96px] sm:w-[108px]',
-      text: 'text-lg sm:text-xl',
-      sub: 'text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.24em]',
+      text: 'text-xl sm:text-2xl',
+      sub: 'text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.2em]',
     },
     md: {
-      mark: 'w-10 h-10 sm:w-[46px] sm:h-[46px]',
+      mark: 'w-11 h-11 sm:w-[52px] sm:h-[52px]',
       lockup: 'w-[120px] sm:w-[138px]',
-      text: 'text-xl sm:text-2xl lg:text-[1.65rem]',
-      sub: 'text-[10px] sm:text-[11px] tracking-[0.24em] sm:tracking-[0.28em]',
+      text: 'text-2xl sm:text-3xl lg:text-[2rem]',
+      sub: 'text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.24em]',
     },
     lg: {
-      mark: 'w-12 h-12 sm:w-[58px] sm:h-[58px]',
+      mark: 'w-14 h-14 sm:w-[66px] sm:h-[66px]',
       lockup: 'w-[144px] sm:w-[174px]',
-      text: 'text-2xl sm:text-3xl',
-      sub: 'text-[11px] sm:text-xs tracking-[0.28em] sm:tracking-[0.32em]',
+      text: 'text-3xl sm:text-4xl',
+      sub: 'text-[11px] sm:text-xs tracking-[0.22em] sm:tracking-[0.26em]',
     },
     xl: {
-      mark: 'w-16 h-16 sm:w-[78px] sm:h-[78px]',
+      mark: 'w-[72px] h-[72px] sm:w-[88px] sm:h-[88px]',
       lockup: 'w-[180px] sm:w-[234px]',
-      text: 'text-3xl sm:text-4xl lg:text-5xl',
-      sub: 'text-xs sm:text-sm tracking-[0.32em] sm:tracking-[0.36em]',
+      text: 'text-4xl sm:text-5xl lg:text-6xl',
+      sub: 'text-xs sm:text-sm tracking-[0.26em] sm:tracking-[0.3em]',
     },
   }[size];
 
@@ -88,7 +88,9 @@ export function Logo({
             }`}
             style={{ fontFamily: 'var(--font-serif, "Playfair Display", "Cinzel", Georgia, serif)' }}
           >
-            First&nbsp;Savvy
+            {/* The wordmark is the one place the name is set solid. Everywhere else in
+                the product it is written "First Savvy", with the space. */}
+            FirstSavvy
           </span>
           {showTagline && (
             <span 

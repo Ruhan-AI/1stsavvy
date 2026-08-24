@@ -63,9 +63,9 @@ export default function KidLoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white dark:bg-[#1E293B] py-8 px-6 sm:px-10 shadow-xl rounded-3xl border-2 border-brand-sky/30 dark:border-brand-sky/20 space-y-6">
-          {/* Quick profile switch for demo */}
+          {/* Quick profile switch */}
           <div className="space-y-1.5">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Select Demo Profile</div>
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Select Profile</div>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
@@ -125,7 +125,6 @@ export default function KidLoginPage() {
                   className="min-h-[44px] w-full tracking-[0.5em] text-center font-mono text-lg py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#222F3E] text-brand-navy dark:text-white focus:ring-2 focus:ring-brand-sky focus:outline-none"
                 />
               </div>
-              <p className="text-[11px] text-slate-400 text-center">Default demo PIN is 1234</p>
             </div>
 
             {error && (

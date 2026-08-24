@@ -11,12 +11,11 @@ import {
   Download, 
   Trash2, 
   Check, 
-  Save,
-  RotateCcw
+  Save
 } from 'lucide-react';
 
 export default function SettingsPage() {
-  const { state, updateProfile, resetToDemoData } = useFirstSavvyStore();
+  const { state, updateProfile } = useFirstSavvyStore();
 
   const [firstName, setFirstName] = useState(state.currentUser.firstName);
   const [lastName, setLastName] = useState(state.currentUser.lastName);
@@ -223,18 +222,6 @@ export default function SettingsPage() {
           >
             <Download className="w-4 h-4 text-brand-sky" />
             <span>Export Complete Household (JSON)</span>
-          </button>
-
-          <button
-            onClick={() => {
-              if (confirm('Reset sandbox to default Miller Family demo data?')) {
-                resetToDemoData();
-              }
-            }}
-            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-amber-200 bg-amber-50 text-xs font-bold text-amber-800 inline-flex items-center gap-2 hover:bg-amber-100"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>Reset Demo Sandbox</span>
           </button>
         </div>
       </div>
