@@ -2,7 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable, observeContainerSize, responsivePixelRatio } from '@/lib/webgl';
+import {
+  createVisibleRenderLoop,
+  isWebGLAvailable,
+  observeContainerSize,
+  responsivePixelRatio,
+} from '@/lib/webgl';
 
 interface HeroConstellationCanvasProps {
   className?: string;
@@ -26,7 +31,6 @@ export function HeroConstellationCanvas({
     if (!container) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
-    let animationFrameId: number;
 
     try {
       const width = container.clientWidth || window.innerWidth;
@@ -49,7 +53,7 @@ export function HeroConstellationCanvas({
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(width, height);
-      renderer.setPixelRatio(responsivePixelRatio(width));
+      renderer.setPixelRatio(responsivePixelRatio(width, 1.5));
       container.appendChild(renderer.domElement);
 
       // 1. Constellation Nodes (Connected Stars)
@@ -165,18 +169,13 @@ export function HeroConstellationCanvas({
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
         renderer.setSize(w, h);
-        renderer.setPixelRatio(responsivePixelRatio(w));
+        renderer.setPixelRatio(responsivePixelRatio(w, 1.5));
       };
 
       const stopResize = observeContainerSize(container, handleResize);
 
-      // Animation Loop
-      let clock = new THREE.Clock();
-
-      const animate = () => {
-        animationFrameId = requestAnimationFrame(animate);
-        const elapsedTime = clock.getElapsedTime();
-
+      // Animation loop — only runs while the canvas is on screen and the tab is visible.
+      const stopLoop = createVisibleRenderLoop(container, (elapsedTime) => {
         targetX += (mouseX - targetX) * 0.05;
         targetY += (mouseY - targetY) * 0.05;
 
@@ -236,12 +235,10 @@ export function HeroConstellationCanvas({
         lineGeometry.attributes.position.needsUpdate = true;
 
         renderer?.render(scene, camera);
-      };
-
-      animate();
+      }, { fps: 30 });
 
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        stopLoop();
         window.removeEventListener('mousemove', handleMouseMove);
         stopResize();
         if (renderer && container.contains(renderer.domElement)) {
@@ -259,7 +256,7 @@ export function HeroConstellationCanvas({
   if (!webglSupported) {
     return (
       <div className={`absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden ${className}`}>
-        <div className="absolute w-[600px] h-[600px] rounded-full bg-radial from-brand-sky/10 via-brand-amber/5 to-transparent blur-3xl" />
+        <div className="absolute w-[600px] h-[600px] rounded-full bg-radial from-brand-sky/10 via-brand-amber/5 to-transparent" />
       </div>
     );
   }

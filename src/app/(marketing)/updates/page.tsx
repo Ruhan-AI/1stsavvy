@@ -1,15 +1,9 @@
 'use client';
 
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
-import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { HeroGlow } from '@/components/marketing/HeroGlow';
 import { Sparkles, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
-
-const HeroConstellationCanvas = dynamic(
-  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
-  { ssr: false }
-);
 
 export default function UpdatesPage() {
   const roadmapItems = [
@@ -49,11 +43,7 @@ export default function UpdatesPage() {
     // §2 narrow marketing container + §3 marketing page rhythm.
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-16 sm:pb-20 space-y-12 sm:space-y-20 lg:space-y-24 relative">
       {/* 3D Background Canvas — decorative, pinned to the top band, never widens the page (§12). */}
-      <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[260px] sm:h-[360px] lg:h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
-        <CanvasErrorBoundary>
-          <HeroConstellationCanvas />
-        </CanvasErrorBoundary>
-      </div>
+      <HeroGlow className="inset-x-0 top-0 mx-auto h-[260px] max-w-5xl sm:h-[360px] lg:h-[450px]" />
 
       {/* Header */}
       <div className="text-center space-y-3 sm:space-y-4 relative z-10">

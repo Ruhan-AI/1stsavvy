@@ -2,16 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { Mail, Send, CheckCircle2, MessageSquare, Shield, HelpCircle, Building, ArrowRight, Sparkles, Clock, FileQuestion } from 'lucide-react';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
 import { ScrollReveal, TextReveal, FadeIn } from '@/components/animations/MotionWrappers';
-import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
-
-const HeroConstellationCanvas = dynamic(
-  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
-  { ssr: false }
-);
+import { HeroGlow } from '@/components/marketing/HeroGlow';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -53,11 +47,7 @@ export default function ContactPage() {
     // §2 narrow marketing container + §3 marketing page rhythm.
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-16 sm:pb-20 space-y-12 sm:space-y-20 lg:space-y-24 relative">
       {/* 3D Background Canvas — decorative, pinned to the top band, never widens the page (§12). */}
-      <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[260px] sm:h-[360px] lg:h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
-        <CanvasErrorBoundary>
-          <HeroConstellationCanvas />
-        </CanvasErrorBoundary>
-      </div>
+      <HeroGlow className="inset-x-0 top-0 mx-auto h-[260px] max-w-5xl sm:h-[360px] lg:h-[450px]" />
 
       {/* 1. Header */}
       <div className="text-center space-y-3 relative z-10">

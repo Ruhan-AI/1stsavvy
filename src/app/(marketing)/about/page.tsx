@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Logo } from '@/components/brand/Logo';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
 import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { HeroGlow } from '@/components/marketing/HeroGlow';
 import {
   FadeIn,
   TextReveal,
@@ -20,23 +21,14 @@ const SecurityShieldCanvas = dynamic(
   { ssr: false }
 );
 
-const HeroConstellationCanvas = dynamic(
-  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
-  { ssr: false }
-);
-
 export default function AboutPage() {
   return (
     // §3 marketing page root rhythm, §1 Rule B: nothing may widen the page.
     <div className="space-y-12 sm:space-y-20 lg:space-y-24 pb-20 overflow-hidden relative">
       {/* 1. HERO — §2 wide marketing container */}
       <section className="relative pt-2 sm:pt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* §12 decorative canvas: responsive box ladder, clipped, never interactive */}
-        <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[280px] sm:h-[380px] lg:h-[480px] overflow-hidden pointer-events-none -z-0 opacity-20 dark:opacity-30">
-          <CanvasErrorBoundary>
-            <HeroConstellationCanvas />
-          </CanvasErrorBoundary>
-        </div>
+        {/* §12 decorative wash: responsive box ladder, clipped, never interactive */}
+        <HeroGlow className="inset-x-0 top-0 mx-auto h-[280px] max-w-5xl sm:h-[380px] lg:h-[480px]" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center space-y-3 sm:space-y-4">
           <FadeIn delay={0.05}>

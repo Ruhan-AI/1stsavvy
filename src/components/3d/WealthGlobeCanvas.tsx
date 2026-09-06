@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable, responsivePixelRatio } from '@/lib/webgl';
+import { createVisibleRenderLoop, isWebGLAvailable, responsivePixelRatio } from '@/lib/webgl';
 
 interface WealthGlobeCanvasProps {
   size?: number;
@@ -22,7 +22,6 @@ export function WealthGlobeCanvas({ size = 320 }: WealthGlobeCanvasProps) {
     if (!container) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
-    let animationFrameId: number;
 
     try {
       // Scene, Camera, Renderer
@@ -103,10 +102,8 @@ export function WealthGlobeCanvas({ size = 320 }: WealthGlobeCanvasProps) {
         satGroup.add(sat);
       }
 
-      // Animation Loop
-      const animate = () => {
-        animationFrameId = requestAnimationFrame(animate);
-
+      // Animation loop — only while the canvas is on screen and the tab is visible.
+      const stopLoop = createVisibleRenderLoop(container, () => {
         coreMesh.rotation.y += 0.005;
         coreMesh.rotation.x += 0.002;
 
@@ -118,12 +115,10 @@ export function WealthGlobeCanvas({ size = 320 }: WealthGlobeCanvasProps) {
         satGroup.rotation.y += 0.01;
 
         renderer?.render(scene, camera);
-      };
-
-      animate();
+      }, { fps: 30 });
 
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        stopLoop();
         if (renderer && container.contains(renderer.domElement)) {
           container.removeChild(renderer.domElement);
           renderer.dispose();

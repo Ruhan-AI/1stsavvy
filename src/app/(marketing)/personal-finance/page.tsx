@@ -6,8 +6,9 @@ import dynamic from 'next/dynamic';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
 import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { LiveAccountsLedgerPreview } from '@/components/marketing/live-previews/LiveAccountsLedgerPreview';
 import { LiveTransactionsTablePreview } from '@/components/marketing/live-previews/LiveTransactionsTablePreview';
-import { LiveAccountTypesPreview } from '@/components/marketing/live-previews/LiveAccountTypesPreview';
+import { LiveIntegrationsPreview } from '@/components/marketing/live-previews/LiveIntegrationsPreview';
 import { LiveBudgetSetupPreview } from '@/components/marketing/live-previews/LiveBudgetSetupPreview';
 import {
   FadeIn,
@@ -98,8 +99,8 @@ export default function PersonalFinancePage() {
 
         {/* Hero Product Composite: Live Interactive Vector Transactions */}
         <ScrollReveal delay={0.3} direction="up">
-          <div className="relative z-10 mt-8 sm:mt-12 max-w-5xl mx-auto min-w-0">
-            <LiveTransactionsTablePreview />
+          <div className="relative z-10 mt-8 sm:mt-12 max-w-6xl mx-auto min-w-0">
+            <LiveAccountsLedgerPreview />
           </div>
         </ScrollReveal>
       </section>
@@ -126,7 +127,7 @@ export default function PersonalFinancePage() {
           </ScrollReveal>
 
           <ScrollReveal direction="right" className="lg:col-span-7 min-w-0">
-            <LiveAccountTypesPreview />
+            <LiveIntegrationsPreview />
           </ScrollReveal>
         </div>
       </section>

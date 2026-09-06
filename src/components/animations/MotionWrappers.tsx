@@ -196,6 +196,12 @@ export function FloatingBadge({
 
 /**
  * 5. Animated Glowing Aurora Background
+ *
+ * The orbs are painted by the `.aurora-orb*` rules in globals.css, not by classes here:
+ * they used to be flat discs under `filter: blur(100px)`, and animating them meant
+ * re-running three large Gaussians every frame, which cost this page most of its frame
+ * rate. Each box is sized to the reach the blur used to have. Keep the paint in CSS and
+ * keep the animation to transform-only properties.
  */
 export function AuroraBackground() {
   return (
@@ -205,14 +211,14 @@ export function AuroraBackground() {
         animate={{
           x: [0, 80, -60, 0],
           y: [0, -60, 40, 0],
-          scale: [1, 1.25, 0.9, 1],
+          scale: [1, 1.13, 0.95, 1],
         }}
         transition={{
           duration: 18,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute -top-32 -left-20 w-96 h-96 rounded-full bg-brand-sky/20 dark:bg-brand-sky/15 blur-[100px]"
+        className="aurora-orb aurora-orb--sky -top-[19rem] -left-64 h-[46rem] w-[46rem]"
       />
 
       {/* Orb 2: Warm Gold */}
@@ -220,14 +226,14 @@ export function AuroraBackground() {
         animate={{
           x: [0, -90, 70, 0],
           y: [0, 70, -50, 0],
-          scale: [1, 1.15, 1.3, 1],
+          scale: [1, 1.08, 1.16, 1],
         }}
         transition={{
           duration: 22,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute top-1/4 -right-20 w-96 h-96 rounded-full bg-amber-400/15 dark:bg-amber-500/10 blur-[110px]"
+        className="aurora-orb aurora-orb--amber top-[calc(25%-176px)] -right-64 h-[46rem] w-[46rem]"
       />
 
       {/* Orb 3: Soft Emerald / Navy */}
@@ -235,14 +241,14 @@ export function AuroraBackground() {
         animate={{
           x: [0, 50, -40, 0],
           y: [0, 50, -30, 0],
-          scale: [1, 1.2, 1, 1],
+          scale: [1, 1.11, 1, 1],
         }}
         transition={{
           duration: 25,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute -bottom-40 left-1/3 w-[30rem] h-[30rem] rounded-full bg-emerald-500/10 dark:bg-brand-softBlue/10 blur-[120px]"
+        className="aurora-orb aurora-orb--emerald -bottom-[23rem] left-[calc(33.333%-208px)] h-[56rem] w-[56rem]"
       />
     </div>
   );
@@ -283,12 +289,10 @@ export function TextReveal({
     hidden: {
       opacity: 0,
       y: 16,
-      filter: 'blur(4px)',
     },
     visible: {
       opacity: 1,
       y: 0,
-      filter: 'blur(0px)',
       transition: {
         duration: 0.5,
         ease: 'easeOut',

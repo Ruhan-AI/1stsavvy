@@ -44,3 +44,7 @@ public/brand/Loader.mov
 *.ps1
 .responsive-audit.mjs
 .responsive-audit-sub.mjs
+
+# Temp scratch files
+scratch/
+.vscode/

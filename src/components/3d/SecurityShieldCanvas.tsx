@@ -2,7 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable, observeContainerSize, responsivePixelRatio } from '@/lib/webgl';
+import {
+  createVisibleRenderLoop,
+  isWebGLAvailable,
+  observeContainerSize,
+  responsivePixelRatio,
+} from '@/lib/webgl';
 
 interface SecurityShieldCanvasProps {
   className?: string;
@@ -22,7 +27,6 @@ export function SecurityShieldCanvas({ className = '' }: SecurityShieldCanvasPro
     if (!container) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
-    let animationFrameId: number;
 
     try {
       const scene = new THREE.Scene();
@@ -87,10 +91,8 @@ export function SecurityShieldCanvas({ className = '' }: SecurityShieldCanvasPro
       };
       const stopResize = observeContainerSize(container, handleResize);
 
-      // Animate
-      const animate = () => {
-        animationFrameId = requestAnimationFrame(animate);
-
+      // Animate — only while the canvas is on screen and the tab is visible.
+      const stopLoop = createVisibleRenderLoop(container, () => {
         ringMesh.rotation.z += 0.005;
         ringMesh.rotation.x += 0.002;
 
@@ -100,12 +102,10 @@ export function SecurityShieldCanvas({ className = '' }: SecurityShieldCanvasPro
         coreMesh.rotation.x += 0.004;
 
         renderer?.render(scene, camera);
-      };
-
-      animate();
+      }, { fps: 30 });
 
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        stopLoop();
         stopResize();
         if (renderer && container.contains(renderer.domElement)) {
           container.removeChild(renderer.domElement);

@@ -3,452 +3,554 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useFirstSavvyStore } from '@/lib/store';
-import { formatMoney, formatCompactMoney, calculateNetWorth } from '@/lib/utils/format';
-import { 
-  FadeIn, 
-  CountUp, 
-  HoverCard3D, 
-  TextReveal, 
-  ScrollReveal 
-} from '@/components/animations/MotionWrappers';
-import { 
-  TrendingUp, 
-  Wallet, 
-  PiggyBank, 
-  Scale, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  Sparkles, 
-  Star, 
-  Calendar as CalendarIcon, 
-  Plus, 
-  ShieldCheck, 
-  ChevronRight, 
-  Landmark, 
-  CheckCircle2, 
-  Clock,
+import { formatMoney, calculateNetWorth } from '@/lib/utils/format';
+import {
+  TrendingUp,
+  CreditCard,
+  Star,
+  Plus,
+  Check,
+  CheckCircle2,
+  Calendar as CalendarIcon,
+  Sparkles,
   ArrowRight,
-  AlertCircle
+  ShieldCheck,
+  Award,
+  Gamepad2,
+  X
 } from 'lucide-react';
-import { 
-  AreaChart, 
-  Area, 
-  XAxis, 
-  YAxis, 
-  Tooltip, 
-  ResponsiveContainer 
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer
 } from 'recharts';
 
 export default function DashboardPage() {
   const { state, activeProfile } = useFirstSavvyStore();
-  const [activeTab, setActiveTab] = useState<'net_worth' | 'spending' | 'in_out' | 'balance'>('net_worth');
-  const [selectedPeriod, setSelectedPeriod] = useState<'MTD' | '30D' | '3M' | '6M' | 'YTD' | '1Y' | 'ALL'>('30D');
 
-  const { totalAssetsCents, totalLiabilitiesCents, netWorthCents } = calculateNetWorth(state.accounts);
+  // State for interactive chores matching the screenshot
+  const [chores, setChores] = useState([
+    {
+      id: 'chore-1',
+      title: 'Tidy Bedroom & Make Bed',
+      cadence: 'Daily',
+      stars: 2,
+      completed: true,
+    },
+    {
+      id: 'chore-2',
+      title: 'Feed & Walk Pet Dog',
+      cadence: 'Morning',
+      stars: 3,
+      completed: false,
+    },
+    {
+      id: 'chore-3',
+      title: 'Daily Math & Reading Time',
+      cadence: 'Weekdays',
+      stars: 4,
+      completed: false,
+    },
+  ]);
 
-  // Month spending calculation
-  const totalSpendingCents = state.transactions
-    .filter((t) => t.amountCents < 0 && t.status !== 'excluded')
-    .reduce((acc, t) => acc + Math.abs(t.amountCents), 0);
+  // Star balance calculation
+  const [starBalance, setStarBalance] = useState(45);
+  const targetStars = 60;
 
-  // Month income calculation
-  const totalIncomeCents = state.transactions
-    .filter((t) => t.amountCents > 0 && t.status !== 'excluded')
-    .reduce((acc, t) => acc + t.amountCents, 0);
+  // Modal for + Assign Chore
+  const [assignChoreModalOpen, setAssignChoreModalOpen] = useState(false);
+  const [newChoreTitle, setNewChoreTitle] = useState('');
+  const [newChoreCadence, setNewChoreCadence] = useState('Daily');
+  const [newChoreStars, setNewChoreStars] = useState(3);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Chart data from history
-  const chartData = state.netWorthHistory.map((item) => ({
-    name: item.date.slice(5), // MM-DD
-    netWorth: item.netWorthCents / 100,
-    assets: item.totalAssetsCents / 100,
-    liabilities: item.totalLiabilitiesCents / 100,
-  }));
+  // Toggle chore completion
+  const toggleChore = (choreId: string) => {
+    setChores((prev) =>
+      prev.map((c) => {
+        if (c.id === choreId) {
+          const nextCompleted = !c.completed;
+          const delta = nextCompleted ? c.stars : -c.stars;
+          setStarBalance((prevStars) => Math.max(0, prevStars + delta));
 
-  const upcomingBills = state.recurring.filter((r) => r.type === 'bill');
-  const childProfiles = state.profiles.filter((p) => p.isChild);
+          // Trigger toast message
+          setToastMessage(
+            nextCompleted
+              ? `⭐ Awesome! Emma earned +${c.stars} Stars for "${c.title}"!`
+              : `Chore "${c.title}" marked pending.`
+          );
+          setTimeout(() => setToastMessage(null), 3500);
+
+          return { ...c, completed: nextCompleted };
+        }
+        return c;
+      })
+    );
+  };
+
+  // Add new chore
+  const handleAddChore = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newChoreTitle.trim()) return;
+
+    const newChore = {
+      id: `chore-${Date.now()}`,
+      title: newChoreTitle.trim(),
+      cadence: newChoreCadence,
+      stars: Number(newChoreStars),
+      completed: false,
+    };
+
+    setChores((prev) => [...prev, newChore]);
+    setNewChoreTitle('');
+    setAssignChoreModalOpen(false);
+
+    setToastMessage(`✨ New chore "${newChore.title}" assigned to Emma with +${newChore.stars}★ reward!`);
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
+  // Static Net Worth data matching the screenshot
+  const netWorthValue = '$437,407.70';
+  const assetsValue = '$926,450';
+  const debtsValue = '-$489,042';
+
+  // Static Budget data matching the screenshot
+  const augustBudgetValue = '$4,124.90';
+  const remainingBudgetValue = '$2,450.00';
+
+  const chartData = [
+    { name: 'Mar', netWorth: 390000 },
+    { name: 'Apr', netWorth: 400000 },
+    { name: 'May', netWorth: 413000 },
+    { name: 'Jun', netWorth: 424000 },
+    { name: 'Jul', netWorth: 433000 },
+    { name: 'Aug', netWorth: 437407 },
+  ];
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* 1. Header Greeting & Quick Actions */}
+    <div className="space-y-6 pb-12 select-none">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-20 right-6 z-50 bg-[#0C1929] border border-cyan-500/50 text-white px-4 py-3 rounded-2xl shadow-2xl shadow-cyan-500/20 flex items-center gap-3 animate-in fade-in slide-in-from-top-4 duration-200">
+          <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
+          <span className="text-sm font-semibold">{toastMessage}</span>
+        </div>
+      )}
+
+      {/* 1. Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 text-xs font-bold text-brand-sky uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{state.currentHousehold.name}</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-brand-navy dark:text-white mt-1">
-            <TextReveal text="Financial & Household Overview" />
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Household Financial Hub (Parent Admin)
           </h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Full visibility into household balance sheet, Plaid accounts, and children&apos;s chores.
+          </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <Link
-            href="/banking"
-            className="min-h-[44px] px-4 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm transition-all"
+        <div>
+          <button
+            onClick={() => setAssignChoreModalOpen(true)}
+            className="inline-flex items-center justify-center min-h-[44px] gap-2 px-5 rounded-xl bg-[#00B4D8] hover:bg-[#0096C7] text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
-            <Plus className="w-3.5 h-3.5 text-brand-sky" />
-            <span>Connect Account</span>
-          </Link>
+            <Plus className="w-4 h-4 text-slate-950 stroke-[3]" />
+            <span>Assign Chore</span>
+          </button>
         </div>
       </div>
 
-      {/* 2. Top Summary Metric Cards & Period Selector */}
-      <div className="space-y-4">
-        {/* Metric Tabs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Card 1: Net Worth */}
-          <button
-            onClick={() => setActiveTab('net_worth')}
-            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
-              activeTab === 'net_worth'
-                ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
-                : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
-            }`}
-          >
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Total Net Worth</span>
-              <TrendingUp className="w-4 h-4 text-emerald-600" />
-            </div>
-            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-brand-navy dark:text-white mt-2">
-              $<CountUp value={netWorthCents / 100} decimals={2} />
-            </div>
-            <div className="text-[11px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
-              <span>+3.2% vs last month</span>
-            </div>
-          </button>
-
-          {/* Card 2: Spending */}
-          <button
-            onClick={() => setActiveTab('spending')}
-            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
-              activeTab === 'spending'
-                ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
-                : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
-            }`}
-          >
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>August Spending</span>
-              <Wallet className="w-4 h-4 text-brand-sky" />
-            </div>
-            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-brand-navy dark:text-white mt-2">
-              $<CountUp value={totalSpendingCents / 100} decimals={2} />
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              <span className="font-semibold text-brand-sky">$2,450.00</span> budget left
-            </div>
-          </button>
-
-          {/* Card 3: In and Out */}
-          <button
-            onClick={() => setActiveTab('in_out')}
-            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
-              activeTab === 'in_out'
-                ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
-                : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
-            }`}
-          >
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Cash In / Out</span>
-              <Scale className="w-4 h-4 text-amber-500" />
-            </div>
-            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-emerald-600 dark:text-emerald-400 mt-2">
-              +$<CountUp value={(totalIncomeCents - totalSpendingCents) / 100} decimals={2} />
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              +{formatMoney(totalIncomeCents)} in / -{formatMoney(totalSpendingCents)} out
-            </div>
-          </button>
-
-          {/* Card 4: Liquid Balance */}
-          <button
-            onClick={() => setActiveTab('balance')}
-            className={`min-h-[44px] p-5 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-0.5 ${
-              activeTab === 'balance'
-                ? 'bg-white dark:bg-[#1E293B] border-brand-sky shadow-md ring-2 ring-brand-sky/20'
-                : 'bg-white/60 dark:bg-[#1E293B]/60 border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-[#1E293B]'
-            }`}
-          >
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Cash & Liquid Assets</span>
-              <PiggyBank className="w-4 h-4 text-brand-softBlue" />
-            </div>
-            <div className="text-xl sm:text-2xl font-extrabold font-sans tabular-nums text-brand-navy dark:text-white mt-2">
-              $<CountUp
-                value={
-                  state.accounts
-                    .filter((a) => a.accountType === 'banking' || a.accountType === 'savings')
-                    .reduce((acc, a) => acc + a.balanceCents, 0) / 100
-                }
-                decimals={2}
-              />
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              Checking + High-Yield Savings
-            </div>
-          </button>
+      {/* 2. Top 3 Metric Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* Card 1: True Net Worth */}
+        <div className="bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md hover:border-[#1E3A5F] transition-all">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 tracking-wide">True Net Worth</span>
+            <span className="text-xs font-bold text-[#38BDF8] flex items-center gap-1">
+              <span>↗ +3.2%</span>
+            </span>
+          </div>
+          <div className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight mt-2">
+            {netWorthValue}
+          </div>
+          <div className="text-xs font-medium text-slate-400 mt-2">
+            Assets: <span className="text-slate-200 font-semibold">{assetsValue}</span> • Debts:{' '}
+            <span className="text-rose-400 font-semibold">{debtsValue}</span>
+          </div>
         </div>
 
-        {/* Interactive Chart Container */}
-        <FadeIn delay={0.2}>
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <h3 className="font-serif font-bold text-lg text-brand-navy dark:text-white">
-                  {activeTab === 'net_worth'
-                    ? 'Net Worth Trend'
-                    : activeTab === 'spending'
-                    ? 'Monthly Spending History'
-                    : activeTab === 'in_out'
-                    ? 'Cash In vs Out Trend'
-                    : 'Liquid Asset Balance'}
-                </h3>
-                <p className="text-xs text-slate-500">Historical performance across all verified accounts.</p>
-              </div>
+        {/* Card 2: August Budgets */}
+        <div className="bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md hover:border-[#1E3A5F] transition-all">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 tracking-wide">August Budgets</span>
+            <span className="text-xs font-bold text-[#38BDF8]">
+              50/30/20 Rule
+            </span>
+          </div>
+          <div className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight mt-2">
+            {augustBudgetValue}
+          </div>
+          <div className="text-xs font-medium text-slate-400 mt-2">
+            <span className="text-[#22C55E] font-semibold">{remainingBudgetValue}</span> remaining limit
+          </div>
+        </div>
 
-              {/* Period Filter Buttons — §9: seven chips do not fit at 320px, so the
-                  row scrolls instead of pushing the page wide */}
-              <div className="max-w-full overflow-x-auto no-scrollbar">
-              <div className="inline-flex min-w-max items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
-                {(['MTD', '30D', '3M', '6M', 'YTD', '1Y', 'ALL'] as const).map((period) => (
-                  <button
-                    key={period}
-                    onClick={() => setSelectedPeriod(period)}
-                    className={`shrink-0 min-h-[44px] px-2.5 py-1 rounded-lg transition-colors ${
-                      selectedPeriod === period
-                        ? 'bg-white dark:bg-slate-700 text-brand-navy dark:text-white shadow-xs font-bold'
-                        : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+        {/* Card 3: Emma's Stars Balance */}
+        <div className="bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md hover:border-[#1E3A5F] transition-all">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 tracking-wide">Emma&apos;s Stars Balance</span>
+            <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
+              <span>★ Supervised</span>
+            </span>
+          </div>
+          <div className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight mt-2">
+            <span className="text-amber-400 font-black">{starBalance}</span>
+            <span className="text-slate-300 font-normal text-2xl sm:text-3xl"> / {targetStars} Stars Target</span>
+          </div>
+          <div className="text-xs font-medium text-[#38BDF8] mt-2 flex items-center gap-1">
+            <span>{Math.round((starBalance / targetStars) * 100)}% toward Nintendo Switch Goal</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Bottom Split Section: Recent Transactions (Left) + Emma's Active Chores (Right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left: Recent Transactions (7 cols) */}
+        <div className="lg:col-span-7 bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <CreditCard className="w-4 h-4 text-cyan-400" />
+              <h3 className="font-bold text-base text-white">
+                Recent Transactions
+              </h3>
+            </div>
+            <Link
+              href="/banking"
+              className="inline-flex min-h-[44px] items-center text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              View Banking (5) →
+            </Link>
+          </div>
+
+          {/* Transactions List matching screenshot */}
+          <div className="space-y-2.5">
+            {/* Row 1: Acme Corp Bi-Weekly Salary */}
+            <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
+              <div>
+                <div className="font-bold text-sm text-white">
+                  Acme Corp Bi-Weekly Salary
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  Income • Aug 22, 2026
+                </div>
+              </div>
+              <div className="font-mono font-bold text-sm text-[#22C55E]">
+                +$4,750.00
+              </div>
+            </div>
+
+            {/* Row 2: Whole Foods Market */}
+            <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
+              <div>
+                <div className="font-bold text-sm text-white">
+                  Whole Foods Market — Columbus
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  Groceries • Aug 21, 2026
+                </div>
+              </div>
+              <div className="font-mono font-bold text-sm text-slate-200">
+                -$164.50
+              </div>
+            </div>
+
+            {/* Row 3: Rocket Mortgage Escrow */}
+            <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
+              <div>
+                <div className="font-bold text-sm text-white">
+                  Rocket Mortgage Escrow
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  Housing • Aug 18, 2026
+                </div>
+              </div>
+              <div className="font-mono font-bold text-sm text-slate-200">
+                -$2,450.00
+              </div>
+            </div>
+
+            {/* Row 4: Shell Oil Gas */}
+            <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
+              <div>
+                <div className="font-bold text-sm text-white">
+                  Shell Oil — Fuel Station
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  Vehicle & Gas • Aug 17, 2026
+                </div>
+              </div>
+              <div className="font-mono font-bold text-sm text-slate-200">
+                -$58.40
+              </div>
+            </div>
+
+            {/* Row 5: Trattoria Bella */}
+            <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
+              <div>
+                <div className="font-bold text-sm text-white">
+                  Trattoria Bella — Family Dinner
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  Dining • Aug 16, 2026
+                </div>
+              </div>
+              <div className="font-mono font-bold text-sm text-slate-200">
+                -$86.20
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Emma's Active Chores (5 cols) */}
+        <div className="lg:col-span-5 bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              <h3 className="font-bold text-base text-white">
+                Emma&apos;s Active Chores
+              </h3>
+            </div>
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-400/10 text-amber-300 border border-amber-400/25">
+              PARENT SUPERVISED
+            </span>
+          </div>
+
+          {/* Interactive Chores List */}
+          <div className="space-y-3">
+            {chores.map((chore) => (
+              <div
+                key={chore.id}
+                onClick={() => toggleChore(chore.id)}
+                className={`p-3.5 rounded-xl border flex items-center justify-between gap-3 cursor-pointer transition-all ${
+                  chore.completed
+                    ? 'bg-[#081F1E]/60 border-emerald-500/40 text-emerald-300 hover:border-emerald-400'
+                    : 'bg-[#08121E] border-[#122238] text-slate-200 hover:border-cyan-500/40'
+                }`}
+              >
+                <div className="flex items-center gap-3.5 min-w-0">
+                  {/* Custom Checkbox */}
+                  <div
+                    className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 border transition-all ${
+                      chore.completed
+                        ? 'bg-emerald-500 border-emerald-400 text-slate-950 shadow-sm shadow-emerald-500/40'
+                        : 'border-slate-600 bg-[#0C1826] hover:border-cyan-400'
                     }`}
                   >
-                    {period}
-                  </button>
-                ))}
-              </div>
-              </div>
-            </div>
+                    {chore.completed && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                  </div>
 
-            {/* Recharts Area Chart */}
-            <div className="h-64 w-full pt-4">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="netWorthGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#4FA3CD" stopOpacity={0.4} />
-                      <stop offset="95%" stopColor="#4FA3CD" stopOpacity={0.0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="name" stroke="#94A3B8" fontSize={11} tickLine={false} />
-                  <YAxis
-                    stroke="#94A3B8"
-                    fontSize={11}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(val) => `$${(val / 1000).toFixed(0)}k`}
-                  />
-                  <Tooltip
-                    formatter={(val: any) => [`$${Number(val).toLocaleString()}`, 'Net Worth']}
-                    contentStyle={{
-                      backgroundColor: '#1E293B',
-                      borderColor: '#334155',
-                      borderRadius: '0.75rem',
-                      color: '#FFFFFF',
-                      fontSize: '12px',
-                    }}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="netWorth"
-                    stroke="#4FA3CD"
-                    strokeWidth={3}
-                    fillOpacity={1}
-                    fill="url(#netWorthGrad)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
+                  <div className="min-w-0">
+                    <div
+                      className={`font-bold text-sm line-clamp-2 xl:line-clamp-none xl:truncate ${
+                        chore.completed ? 'text-emerald-300 line-through opacity-90' : 'text-white'
+                      }`}
+                    >
+                      {chore.title}
+                    </div>
+                    <div className="text-xs text-slate-400 mt-0.5">
+                      {chore.cadence}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Star Reward Badge */}
+                <div className="px-2.5 py-1 rounded-md bg-amber-400/15 text-amber-400 border border-amber-400/30 text-xs font-bold shrink-0">
+                  +{chore.stars}★
+                </div>
+              </div>
+            ))}
           </div>
-        </FadeIn>
+
+          {/* Bottom quick view for Emma's reward goal */}
+          <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/30 to-cyan-950/30 border border-amber-500/30 flex items-center justify-between text-xs mt-2">
+            <div className="flex items-center gap-2">
+              <Gamepad2 className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="text-slate-300 font-medium">Goal: Nintendo Switch ({starBalance}/{targetStars}★)</span>
+            </div>
+            <Link
+              href="/kid-view"
+              className="font-bold text-cyan-400 hover:underline inline-flex min-h-[44px] items-center gap-1"
+            >
+              <span>Kid View</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
       </div>
 
-      {/* 3. Middle Section: Family Hub + Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Family Profiles & Stars Widget (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          <FadeIn delay={0.3}>
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-brand-sky" />
-                  <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
-                    Family Responsibilities & Stars
-                  </h3>
-                </div>
-                <Link href="/profiles" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
-                  Manage Family →
-                </Link>
-              </div>
-
-              {/* Child Profiles Carousel / Cards */}
-              <div className="space-y-3">
-                {childProfiles.map((child) => (
-                  <Link
-                    key={child.id}
-                    href={`/profiles/${child.id}`}
-                    className="min-h-[44px] p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-sky-50/60 dark:hover:bg-sky-950/40 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between transition-all group hover:scale-[1.02] duration-200"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-full text-white text-sm font-bold flex items-center justify-center shrink-0 shadow-xs"
-                        style={{ backgroundColor: child.avatarColor }}
-                      >
-                        {child.displayName.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="font-bold text-sm text-brand-navy dark:text-white group-hover:text-brand-sky transition-colors">
-                          {child.displayName}
-                        </div>
-                        <div className="text-xs text-slate-500">
-                          {state.tasks.filter((t) => t.assignedProfileIds.includes(child.id)).length} active tasks
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <div className="px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-xs font-bold flex items-center gap-1 shadow-2xs">
-                        <Star className="w-3 h-3 fill-amber-400 text-amber-500" />
-                        <span>{child.starBalance} Stars</span>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              {/* Quick Link to Kid View Preview */}
-              <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-50 to-sky-50 dark:from-amber-950/30 dark:to-sky-950/30 border border-amber-200/60 dark:border-amber-800/40 flex items-center justify-between text-xs">
-                <span className="text-slate-700 dark:text-slate-300 font-medium">Want to see what your kids see?</span>
-                <Link href="/kid-view" className="inline-flex items-center min-h-[44px] font-bold text-amber-700 dark:text-amber-300 hover:underline">
-                  Preview Kid Space →
-                </Link>
-              </div>
-            </div>
-          </FadeIn>
-
-          {/* Upcoming Bills & Payday Snapshot */}
-          <FadeIn delay={0.4}>
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <CalendarIcon className="w-4 h-4 text-brand-sky" />
-                  <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
-                    Upcoming Bills & Paydays
-                  </h3>
-                </div>
-                <Link href="/calendar" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
-                  Full Calendar →
-                </Link>
-              </div>
-
-              <div className="space-y-2.5">
-                {upcomingBills.slice(0, 3).map((bill) => (
-                  <div key={bill.id} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 flex items-center justify-between text-xs hover:bg-slate-100 dark:hover:bg-slate-750 transition-colors">
-                    <div>
-                      <div className="font-bold text-brand-navy dark:text-white">{bill.name}</div>
-                      <div className="text-[11px] text-slate-500">Due {bill.nextDate} • {bill.cadence}</div>
-                    </div>
-                    <span className="font-mono font-bold text-slate-700 dark:text-slate-300">
-                      -{formatMoney(bill.expectedAmountCents)}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
+      {/* 4. Optional Net Worth Growth Trend Chart */}
+      <div className="bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-bold text-base text-white">
+              Household Net Worth Trend
+            </h3>
+            <p className="text-xs text-slate-400">
+              Aggregated from Chase, Vanguard, and Rocket Mortgage.
+            </p>
+          </div>
+          <Link
+            href="/net-worth"
+            className="inline-flex min-h-[44px] items-center text-xs font-bold text-cyan-400 hover:text-cyan-300"
+          >
+            Full Analytics →
+          </Link>
         </div>
 
-        {/* Right: Recent Transactions (7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
-          <FadeIn delay={0.35}>
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Wallet className="w-4 h-4 text-brand-sky" />
-                  <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
-                    Recent Household Activity
-                  </h3>
-                </div>
-                <Link href="/banking" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
-                  View All Transactions →
-                </Link>
+        <div className="h-56 w-full pt-2">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+              <defs>
+                <linearGradient id="netWorthGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#00B4D8" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#00B4D8" stopOpacity={0.0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="name" stroke="#64748B" fontSize={11} tickLine={false} />
+              <YAxis
+                stroke="#64748B"
+                fontSize={11}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(val) => `$${(val / 1000).toFixed(0)}k`}
+              />
+              <Tooltip
+                formatter={(val: any) => [`$${Number(val).toLocaleString()}`, 'Net Worth']}
+                contentStyle={{
+                  backgroundColor: '#0A1524',
+                  borderColor: '#1C324E',
+                  borderRadius: '0.75rem',
+                  color: '#FFFFFF',
+                  fontSize: '12px',
+                }}
+              />
+              <Area
+                type="monotone"
+                dataKey="netWorth"
+                stroke="#00B4D8"
+                strokeWidth={3}
+                fillOpacity={1}
+                fill="url(#netWorthGradient)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* 5. Assign Chore Modal Dialog */}
+      {assignChoreModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
+          <div className="bg-[#0C1929] border border-[#1E3452] rounded-2xl w-full max-w-md p-6 shadow-2xl relative space-y-4 animate-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between pb-2 border-b border-[#16273E]">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-cyan-400" />
+                <h3 className="font-bold text-lg text-white">Assign New Chore</h3>
+              </div>
+              <button
+                onClick={() => setAssignChoreModalOpen(false)}
+                className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddChore} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                  Chore Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g., Clean Study Desk, Water Plants"
+                  value={newChoreTitle}
+                  onChange={(e) => setNewChoreTitle(e.target.value)}
+                  required
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                />
               </div>
 
-            {/* Transactions Feed */}
-            <div className="divide-y divide-slate-100 dark:divide-slate-800">
-              {state.transactions.slice(0, 7).map((tx) => {
-                const isIncome = tx.amountCents > 0;
-                return (
-                  <div key={tx.id} className="py-3 flex items-center justify-between gap-3 text-xs">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${isIncome ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>
-                        {isIncome ? <ArrowDownLeft className="w-4 h-4" /> : <ArrowUpRight className="w-4 h-4" />}
-                      </div>
-                      <div className="min-w-0">
-                        {/* §8: a merchant name may take two lines on a phone rather than
-                            lose its tail; it goes back to one truncated line from sm up */}
-                        <div className="font-bold text-brand-navy dark:text-white line-clamp-2 xl:line-clamp-none xl:truncate">
-                          {tx.description}
-                        </div>
-                        <div className="text-[11px] text-slate-500 line-clamp-2 xl:line-clamp-none xl:truncate">
-                          {tx.categoryName} • {tx.date}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={`font-mono font-bold shrink-0 ${isIncome ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-800 dark:text-slate-200'}`}>
-                      {formatMoney(tx.amountCents, 'USD', true)}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Budget Utilization Snapshot */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
-                Top Budget Categories
-              </h3>
-              <Link href="/budgeting" className="inline-flex items-center min-h-[44px] text-xs font-bold text-brand-sky hover:underline">
-                Budget Manager →
-              </Link>
-            </div>
-
-            <div className="space-y-3">
-              {[
-                { name: 'Mortgage & Rent', spent: 245000, budget: 285000, pct: 86, color: '#324154' },
-                { name: 'Groceries & Household', spent: 58850, budget: 95000, pct: 62, color: '#0F766E' },
-                { name: 'Dining & Takeout', spent: 34500, budget: 45000, pct: 77, color: '#4FA3CD' },
-              ].map((b, idx) => (
-                <div key={idx} className="space-y-1 text-xs">
-                  <div className="flex justify-between font-medium">
-                    <span className="text-slate-700 dark:text-slate-300 font-bold">{b.name}</span>
-                    <span className="text-slate-500">
-                      {formatMoney(b.spent)} of {formatMoney(b.budget)} ({b.pct}%)
-                    </span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                    <div
-                      className="h-full rounded-full"
-                      style={{ width: `${b.pct}%`, backgroundColor: b.color }}
-                    />
-                  </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                    Frequency
+                  </label>
+                  <select
+                    value={newChoreCadence}
+                    onChange={(e) => setNewChoreCadence(e.target.value)}
+                    className="w-full px-3 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                  >
+                    <option value="Daily">Daily</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Evening">Evening</option>
+                    <option value="Weekdays">Weekdays</option>
+                    <option value="Weekends">Weekends</option>
+                  </select>
                 </div>
-              ))}
-            </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                    Star Reward
+                  </label>
+                  <select
+                    value={newChoreStars}
+                    onChange={(e) => setNewChoreStars(Number(e.target.value))}
+                    className="w-full px-3 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-amber-400 font-bold text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                  >
+                    <option value={1}>⭐ +1 Star</option>
+                    <option value={2}>⭐⭐ +2 Stars</option>
+                    <option value={3}>⭐⭐⭐ +3 Stars</option>
+                    <option value={4}>⭐⭐⭐⭐ +4 Stars</option>
+                    <option value={5}>⭐⭐⭐⭐⭐ +5 Stars</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                  Assignee
+                </label>
+                <div className="p-3 rounded-xl bg-[#08121E] border border-[#172C46] flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center">
+                      E
+                    </div>
+                    <span className="text-sm font-semibold text-white">Emma (Child)</span>
+                  </div>
+                  <span className="text-xs font-bold text-amber-400">Current Balance: {starBalance}★</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#16273E]">
+                <button
+                  type="button"
+                  onClick={() => setAssignChoreModalOpen(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center min-h-[44px] px-5 rounded-xl bg-[#00B4D8] hover:bg-[#0096C7] text-slate-950 font-bold text-sm shadow-md shadow-cyan-500/25 transition-all"
+                >
+                  Assign Chore
+                </button>
+              </div>
+            </form>
           </div>
-        </FadeIn>
-      </div>
-    </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -8,11 +8,12 @@ import { HowItWorks } from '@/components/marketing/HowItWorks';
 import { WaitlistForm } from '@/components/marketing/WaitlistForm';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
 import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { HeroGlow } from '@/components/marketing/HeroGlow';
 import { LiveGlobalSearchPreview } from '@/components/marketing/live-previews/LiveGlobalSearchPreview';
-import { LiveTransactionsTablePreview } from '@/components/marketing/live-previews/LiveTransactionsTablePreview';
+import { LiveAccountsLedgerPreview } from '@/components/marketing/live-previews/LiveAccountsLedgerPreview';
 import { LiveTaskCreationPreview } from '@/components/marketing/live-previews/LiveTaskCreationPreview';
 import { LiveGoalCreationPreview } from '@/components/marketing/live-previews/LiveGoalCreationPreview';
-import { LiveAccountTypesPreview } from '@/components/marketing/live-previews/LiveAccountTypesPreview';
+import { LiveIntegrationsPreview } from '@/components/marketing/live-previews/LiveIntegrationsPreview';
 import { 
   FadeIn, 
   AuroraBackground, 
@@ -37,11 +38,6 @@ import {
   DollarSign
 } from 'lucide-react';
 
-const HeroConstellationCanvas = dynamic(
-  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
-  { ssr: false }
-);
-
 const FinancialWaveCanvas = dynamic(
   () => import('@/components/3d/FinancialWaveCanvas').then(mod => mod.FinancialWaveCanvas),
   { ssr: false }
@@ -59,9 +55,7 @@ export default function HomePage() {
 
       {/* 1. HERO SECTION */}
       <section className="relative pt-2 sm:pt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <CanvasErrorBoundary>
-          <HeroConstellationCanvas />
-        </CanvasErrorBoundary>
+        <HeroGlow />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-3 sm:space-y-4">
           {/* Headline */}
@@ -178,7 +172,7 @@ export default function HomePage() {
 
       {/* 2. SECTION: MONEY IS CONNECTED (Live Global Search Preview) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
+        <ScrollReveal distance={12} duration={0.45}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-10 lg:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
             <div className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-left">
               <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Money is Connected</span>
@@ -271,8 +265,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto min-w-0">
-            <LiveTransactionsTablePreview />
+          <div className="max-w-6xl mx-auto min-w-0">
+            <LiveAccountsLedgerPreview />
           </div>
         </div>
       </section>
@@ -332,7 +326,7 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-7 min-w-0">
-            <LiveAccountTypesPreview />
+            <LiveIntegrationsPreview />
           </div>
         </div>
       </section>

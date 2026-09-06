@@ -2,15 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { FAQAccordion } from '@/components/marketing/FAQAccordion';
-import { CanvasErrorBoundary } from '@/components/3d/CanvasErrorBoundary';
+import { HeroGlow } from '@/components/marketing/HeroGlow';
 import { ArrowRight } from 'lucide-react';
-
-const HeroConstellationCanvas = dynamic(
-  () => import('@/components/3d/HeroConstellationCanvas').then(mod => mod.HeroConstellationCanvas),
-  { ssr: false }
-);
 
 const FAQS = [
   {
@@ -56,11 +50,7 @@ export default function FAQPage() {
     // §3 — marketing page root rhythm.
     <div className="relative pt-2 sm:pt-4 pb-16 sm:pb-20 space-y-12 sm:space-y-20 lg:space-y-24">
       {/* 3D Background Canvas — decorative, pinned to the top band, never widens the page (§12). */}
-      <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[260px] sm:h-[360px] lg:h-[450px] pointer-events-none -z-0 opacity-20 dark:opacity-30 overflow-hidden">
-        <CanvasErrorBoundary>
-          <HeroConstellationCanvas />
-        </CanvasErrorBoundary>
-      </div>
+      <HeroGlow className="inset-x-0 top-0 mx-auto h-[260px] max-w-5xl sm:h-[360px] lg:h-[450px]" />
 
       {/* §2 — FAQ/prose container. */}
       <section className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,140 +1,122 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Target, Star, Gift, Sparkles, X, Check } from 'lucide-react';
+import { Gift, ImagePlus } from 'lucide-react';
+import {
+  AssignTo,
+  CHILDREN,
+  DialogFooter,
+  DialogFrame,
+  Field,
+  IconAndColor,
+  INPUT,
+  Note,
+  StarStepper,
+} from './childDialogParts';
+
+/**
+ * Marketing stand-in for the app's New Goal dialog
+ * (`src/components/children/GoalDialog.jsx`): Title, Description, Icon & Color, Star
+ * Cost, Assign to, an optional image, then Cancel / Create Goal.
+ *
+ * It differs from New Task in exactly the ways the real dialog does — star cost instead
+ * of stars, an image slot instead of a schedule, and a rule under the title.
+ */
+
+const LOOKS = [
+  { name: 'Gift', color: '#EFCE7B' },
+  { name: 'Bike', color: '#52A5CE' },
+  { name: 'Gamepad', color: '#7B2CBF' },
+  { name: 'Ticket', color: '#0F766E' },
+];
 
 export function LiveGoalCreationPreview() {
-  const [goalTitle, setGoalTitle] = useState('Nintendo Switch OLED — Mario Edition');
-  const [targetStars, setTargetStars] = useState(60);
-  const [category, setCategory] = useState('Electronics');
-  const [isCreated, setIsCreated] = useState(false);
-  const currentStars = 45;
-  const progress = Math.round((currentStars / targetStars) * 100);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [look, setLook] = useState(0);
+  const [cost, setCost] = useState(10);
+  const [selected, setSelected] = useState<string[]>([CHILDREN[0].id]);
+  const [note, setNote] = useState<string | null>(null);
 
-  const handleCreate = () => {
-    setIsCreated(true);
-    setTimeout(() => setIsCreated(false), 4000);
+  const say = (message: string) => {
+    setNote(message);
+    window.setTimeout(() => setNote((current) => (current === message ? null : current)), 2800);
+  };
+
+  const create = () => {
+    const who = selected.length
+      ? CHILDREN.filter((c) => selected.includes(c.id)).map((c) => c.name).join(' and ')
+      : 'nobody yet';
+    say(`"${title.trim() || 'Extra screen time'}" — ${cost} stars for ${who}`);
   };
 
   return (
-    <div data-mock-preview className="relative rounded-2xl bg-slate-900 border border-slate-700/80 shadow-2xl overflow-hidden select-none text-left font-sans">
-      {/* Modal Top Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-slate-950/90 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#EF6F3C]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#EFCE7B]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#AACC96]" />
+    <DialogFrame title="New Goal" rule onClose={() => say('Closed without creating a goal')}>
+      <Field label="Title">
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          maxLength={100}
+          placeholder="e.g., Extra screen time"
+          aria-label="Goal title"
+          className={INPUT}
+        />
+      </Field>
+
+      <Field label="Description" optional optionalLowercase>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows={3}
+          placeholder="Add details about this goal.."
+          aria-label="Goal description"
+          className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3 py-2 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none sm:text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+        />
+      </Field>
+
+      <Field label="Icon & Color">
+        <IconAndColor
+          name={LOOKS[look].name}
+          color={LOOKS[look].color}
+          icon={Gift}
+          onClick={() => setLook((i) => (i + 1) % LOOKS.length)}
+        />
+      </Field>
+
+      <Field label="Star Cost">
+        <StarStepper value={cost} onChange={setCost} />
+      </Field>
+
+      <Field label="Assign to">
+        <AssignTo
+          selected={selected}
+          onToggle={(id) =>
+            setSelected((current) => (current.includes(id) ? current.filter((x) => x !== id) : [...current, id]))
+          }
+          onToggleAll={(all) => setSelected(all ? CHILDREN.map((c) => c.id) : [])}
+        />
+      </Field>
+
+      <div className="space-y-1.5">
+        <p className="text-sm font-semibold text-slate-800 dark:text-white">
+          Image <span className="font-normal text-slate-400">(optional)</span>
+        </p>
+        <p className="text-xs text-slate-400">Upload an image to replace the icon. Max 5MB.</p>
+        <div className="flex items-center gap-3 pt-1">
+          <button
+            type="button"
+            onClick={() => say('The file picker opens here in the app')}
+            className="flex h-14 w-14 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 text-slate-400 transition-colors hover:border-slate-400 hover:text-slate-500 dark:border-slate-700 dark:bg-slate-800/50"
+          >
+            <ImagePlus className="h-4 w-4" />
+            <span className="text-[11px] font-medium">Upload</span>
+          </button>
         </div>
-        <div className="text-xs font-bold uppercase tracking-wider text-[#EFCE7B] flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5" /> Reward & Goal Builder
-        </div>
-        <button type="button" className="text-slate-500 hover:text-white">
-          <X className="w-4 h-4" />
-        </button>
       </div>
 
-      {/* Interactive Form Content */}
-      <div className="p-5 bg-slate-950/95 space-y-4 text-xs">
-        {/* Goal Title */}
-        <div className="space-y-1.5">
-          <label className="block text-slate-400 font-semibold text-[11px]">Goal / Reward Title</label>
-          <input
-            type="text"
-            value={goalTitle}
-            onChange={(e) => setGoalTitle(e.target.value)}
-            className="text-base sm:text-sm w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-medium focus:outline-none focus:border-[#52A5CE]"
-          />
-        </div>
+      <DialogFooter submitLabel="Create Goal" onCancel={() => say('Cancelled')} onSubmit={create} />
 
-        {/* Target Stars Selector */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-slate-400 font-semibold text-[11px]">Target Star Points</label>
-            <span className="font-bold text-[#EFCE7B] font-mono text-sm">{targetStars} Stars</span>
-          </div>
-          <div className="grid grid-cols-4 gap-2">
-            {[30, 45, 60, 100].map((val) => (
-              <button
-                key={val}
-                type="button"
-                onClick={() => setTargetStars(val)}
-                className={`py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  targetStars === val
-                    ? 'bg-[#EFCE7B] text-slate-950 shadow-sm ring-1 ring-[#EFCE7B]'
-                    : 'bg-slate-900 text-[#EFCE7B]/80 border border-slate-800 hover:border-slate-700'
-                }`}
-              >
-                {val} Stars
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Live Milestone Progress Visualizer */}
-        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold text-slate-300">Emma's Goal Progress</span>
-            <span className="font-bold text-[#EFCE7B]">{currentStars} / {targetStars} Stars ({progress}%)</span>
-          </div>
-          <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-[#EFCE7B] via-[#52A5CE] to-[#AACC96] transition-all duration-300"
-              style={{ width: `${Math.min(progress, 100)}%` }}
-            />
-          </div>
-          <div className="text-[11px] text-slate-400 flex items-center justify-between">
-            <span>{Math.max(targetStars - currentStars, 0)} Stars remaining to unlock</span>
-            <span className="text-[#AACC96] font-semibold flex items-center gap-1">
-              <Check className="w-3 h-3" /> Auto-Redeem Ready
-            </span>
-          </div>
-        </div>
-
-        {/* Reward Category Badges */}
-        <div className="space-y-1.5">
-          <label className="block text-slate-400 font-semibold text-[11px]">Reward Category</label>
-          <div className="grid grid-cols-2 gap-2">
-            {[
-              { label: '🎮 Electronics', id: 'Electronics' },
-              { label: '🎟️ Family Outing', id: 'Family Outing' },
-              { label: '📚 Book Set', id: 'Books' },
-              { label: '💵 Allowance Payout', id: 'Allowance' }
-            ].map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setCategory(cat.id)}
-                className={`py-1.5 px-2.5 rounded-lg text-[11px] font-medium border text-left transition-all cursor-pointer ${
-                  category === cat.id
-                    ? 'bg-[#52A5CE]/15 border-[#52A5CE] text-white font-bold'
-                    : 'bg-slate-900 border-slate-800 text-slate-400'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Submit Button */}
-        <div className="pt-1">
-          {isCreated ? (
-            <div className="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center font-bold flex items-center justify-center gap-2 animate-in fade-in">
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span>Goal &ldquo;{goalTitle}&rdquo; Created with {targetStars} Stars Target!</span>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={handleCreate}
-              className="w-full bg-[#52A5CE] hover:bg-[#4392be] text-white text-xs font-semibold px-4 sm:px-6 py-2.5 h-10 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
-            >
-              <Target className="w-3.5 h-3.5" />
-              <span>Create Goal ({targetStars} Stars Target)</span>
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
+      <Note text={note} />
+    </DialogFrame>
   );
 }

@@ -2,7 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable, observeContainerSize, responsivePixelRatio } from '@/lib/webgl';
+import {
+  createVisibleRenderLoop,
+  isWebGLAvailable,
+  observeContainerSize,
+  responsivePixelRatio,
+} from '@/lib/webgl';
 
 interface FamilyStarFlowCanvasProps {
   className?: string;
@@ -22,7 +27,6 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
     if (!container) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
-    let animationFrameId: number;
 
     try {
       // Scene
@@ -42,7 +46,7 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(responsivePixelRatio(container.clientWidth));
+      renderer.setPixelRatio(responsivePixelRatio(container.clientWidth, 1.5));
       container.appendChild(renderer.domElement);
 
       // Lighting
@@ -149,17 +153,13 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(responsivePixelRatio(container.clientWidth));
+        renderer.setPixelRatio(responsivePixelRatio(container.clientWidth, 1.5));
       };
 
       const stopResize = observeContainerSize(container, handleResize);
 
-      // Animate
-      let clock = new THREE.Clock();
-      const animate = () => {
-        animationFrameId = requestAnimationFrame(animate);
-        const delta = clock.getDelta();
-        const time = clock.getElapsedTime();
+      // Animate — only while the canvas is on screen and the tab is visible.
+      const stopLoop = createVisibleRenderLoop(container, (time, delta) => {
 
         // Rotate and float stars along harmonic curves
         stars.forEach((s, idx) => {
@@ -180,12 +180,10 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
         group.rotation.y = time * 0.05 + mouseX * 0.1;
 
         renderer?.render(scene, camera);
-      };
-
-      animate();
+      }, { fps: 30 });
 
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        stopLoop();
         window.removeEventListener('mousemove', handleMouseMove);
         stopResize();
         if (renderer && container.contains(renderer.domElement)) {
@@ -203,7 +201,7 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
   if (!webglSupported) {
     return (
       <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
-        <div className="absolute inset-0 bg-radial from-amber-400/5 via-brand-sky/5 to-transparent blur-2xl" />
+        <div className="absolute inset-0 bg-radial from-amber-400/5 via-brand-sky/5 to-transparent" />
       </div>
     );
   }

@@ -147,12 +147,14 @@ html {
 .brand-gradient-text {
   background: linear-gradient(135deg, #324154 0%, #4FA3CD 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .dark .brand-gradient-text {
   background: linear-gradient(135deg, #FFFFFF 0%, #A4CDE1 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -163,4 +165,83 @@ html {
   92% { width: 95%; }
   100% { width: 100%; }
 }
+/**
+ * Aurora orbs.
+ *
+ * These used to be flat discs under `filter: blur(100px)` with a looping x/y/scale
+ * drift. Scaling a filtered layer forces the blur to be recomputed every frame, and
+ * three ~500px Gaussians per frame was costing the marketing page two thirds of its
+ * frame rate. The same soft cloud drawn as a radial gradient costs nothing to paint
+ * and lets the drift run entirely on the compositor.
+ *
+ * Stops approximate a Gaussian falloff; the peak alpha is below the old flat fill
+ * because blurring spread that ink over a much larger area.
+ */
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
 
+.aurora-orb--sky {
+  background: radial-gradient(
+    closest-side,
+    rgba(79, 163, 205, 0.14) 0%,
+    rgba(79, 163, 205, 0.11) 28%,
+    rgba(79, 163, 205, 0.06) 50%,
+    rgba(79, 163, 205, 0.02) 70%,
+    rgba(79, 163, 205, 0) 85%
+  );
+}
+.dark .aurora-orb--sky {
+  background: radial-gradient(
+    closest-side,
+    rgba(79, 163, 205, 0.105) 0%,
+    rgba(79, 163, 205, 0.082) 28%,
+    rgba(79, 163, 205, 0.045) 50%,
+    rgba(79, 163, 205, 0.015) 70%,
+    rgba(79, 163, 205, 0) 85%
+  );
+}
+
+.aurora-orb--amber {
+  background: radial-gradient(
+    closest-side,
+    rgba(251, 191, 36, 0.105) 0%,
+    rgba(251, 191, 36, 0.082) 28%,
+    rgba(251, 191, 36, 0.045) 50%,
+    rgba(251, 191, 36, 0.015) 70%,
+    rgba(251, 191, 36, 0) 85%
+  );
+}
+.dark .aurora-orb--amber {
+  background: radial-gradient(
+    closest-side,
+    rgba(245, 158, 11, 0.07) 0%,
+    rgba(245, 158, 11, 0.055) 28%,
+    rgba(245, 158, 11, 0.03) 50%,
+    rgba(245, 158, 11, 0.01) 70%,
+    rgba(245, 158, 11, 0) 85%
+  );
+}
+
+.aurora-orb--emerald {
+  background: radial-gradient(
+    closest-side,
+    rgba(16, 185, 129, 0.07) 0%,
+    rgba(16, 185, 129, 0.055) 28%,
+    rgba(16, 185, 129, 0.03) 50%,
+    rgba(16, 185, 129, 0.01) 70%,
+    rgba(16, 185, 129, 0) 85%
+  );
+}
+.dark .aurora-orb--emerald {
+  background: radial-gradient(
+    closest-side,
+    rgba(164, 205, 225, 0.07) 0%,
+    rgba(164, 205, 225, 0.055) 28%,
+    rgba(164, 205, 225, 0.03) 50%,
+    rgba(164, 205, 225, 0.01) 70%,
+    rgba(164, 205, 225, 0) 85%
+  );
+}

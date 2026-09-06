@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable, responsivePixelRatio } from '@/lib/webgl';
+import { createVisibleRenderLoop, isWebGLAvailable, responsivePixelRatio } from '@/lib/webgl';
 
 interface Interactive3DStarBadgeProps {
   stars?: number;
@@ -28,7 +28,6 @@ export function Interactive3DStarBadge({
     if (!container) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
-    let animationFrameId: number;
 
     try {
       const scene = new THREE.Scene();
@@ -110,10 +109,8 @@ export function Interactive3DStarBadge({
         window.addEventListener('mouseup', onMouseUp);
       }
 
-      // Animate
-      const animate = () => {
-        animationFrameId = requestAnimationFrame(animate);
-
+      // Animate — only while the canvas is on screen and the tab is visible.
+      const stopLoop = createVisibleRenderLoop(container, () => {
         if (!isDragging) {
           targetRotY += 0.01;
         }
@@ -124,12 +121,10 @@ export function Interactive3DStarBadge({
         haloMesh.rotation.z += 0.008;
 
         renderer?.render(scene, camera);
-      };
-
-      animate();
+      });
 
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        stopLoop();
         if (interactive) {
           container.removeEventListener('mousedown', onMouseDown);
           window.removeEventListener('mousemove', onMouseMove);

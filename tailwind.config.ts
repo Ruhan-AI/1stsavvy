@@ -88,6 +88,11 @@ const config: Config = {
       backdropBlur: {
         xs: "2px",
       },
+      // `blur-xs` is a Tailwind v4 utility used in components/marketing; without this
+      // backfill it is a no-op in this v3 build.
+      blur: {
+        xs: "2px",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

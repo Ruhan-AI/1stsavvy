@@ -68,12 +68,10 @@ const slideVariants: Variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 36 : -36,
     opacity: 0,
-    filter: 'blur(3px)',
   }),
   center: {
     x: 0,
     opacity: 1,
-    filter: 'blur(0px)',
     transition: {
       duration: 0.35,
       ease: 'easeOut',
@@ -82,7 +80,6 @@ const slideVariants: Variants = {
   exit: (direction: number) => ({
     x: direction < 0 ? 36 : -36,
     opacity: 0,
-    filter: 'blur(3px)',
     transition: {
       duration: 0.25,
       ease: 'easeOut',

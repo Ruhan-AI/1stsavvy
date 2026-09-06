@@ -2,7 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { isWebGLAvailable, observeContainerSize, responsivePixelRatio } from '@/lib/webgl';
+import {
+  createVisibleRenderLoop,
+  isWebGLAvailable,
+  observeContainerSize,
+  responsivePixelRatio,
+} from '@/lib/webgl';
 
 interface FinancialWaveCanvasProps {
   className?: string;
@@ -22,7 +27,6 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
     if (!container) return;
 
     let renderer: THREE.WebGLRenderer | null = null;
-    let animationFrameId: number;
 
     try {
       // Scene setup
@@ -43,7 +47,7 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
         failIfMajorPerformanceCaveat: false,
       });
       renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(responsivePixelRatio(container.clientWidth));
+      renderer.setPixelRatio(responsivePixelRatio(container.clientWidth, 1.5));
       container.appendChild(renderer.domElement);
 
       // Create 3D Particle Grid Wave
@@ -117,15 +121,13 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(responsivePixelRatio(container.clientWidth));
+        renderer.setPixelRatio(responsivePixelRatio(container.clientWidth, 1.5));
       };
       const stopResize = observeContainerSize(container, handleResize);
 
       // Animate Waves
       let countStep = 0;
-      const animate = () => {
-        animationFrameId = requestAnimationFrame(animate);
-
+      const stopLoop = createVisibleRenderLoop(container, () => {
         countStep += 0.035;
         mouseX += (targetMouseX - mouseX) * 0.05;
 
@@ -151,12 +153,10 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
         particles.rotation.z = Math.sin(countStep * 0.2) * 0.03;
 
         renderer?.render(scene, camera);
-      };
-
-      animate();
+      }, { fps: 30 });
 
       return () => {
-        cancelAnimationFrame(animationFrameId);
+        stopLoop();
         window.removeEventListener('mousemove', onMouseMove);
         stopResize();
         if (renderer && container.contains(renderer.domElement)) {
@@ -174,7 +174,7 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
   if (!webglSupported) {
     return (
       <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
-        <div className="absolute inset-0 bg-radial from-emerald-500/5 via-brand-sky/5 to-transparent blur-2xl" />
+        <div className="absolute inset-0 bg-radial from-emerald-500/5 via-brand-sky/5 to-transparent" />
       </div>
     );
   }
