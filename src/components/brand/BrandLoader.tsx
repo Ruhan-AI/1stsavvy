@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { BrandLoaderMedia } from './BrandLoaderMedia';
 
 interface BrandLoaderProps {
   size?: 'sm' | 'md' | 'lg' | 'fullscreen';
@@ -27,27 +28,7 @@ export function BrandLoader({
     <div className={`flex max-w-full flex-col items-center justify-center gap-2 ${className}`}>
       {/* Optimized Video Animation Container - focused on crest */}
       <div className={`relative ${sizeStyles} flex items-center justify-center overflow-hidden rounded-2xl`}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/brand/loader-poster.png"
-          className="w-full h-full object-contain pointer-events-none drop-shadow-sm select-none scale-[1.9] -translate-y-4"
-          style={{
-            filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
-            mixBlendMode: 'multiply',
-          }}
-        >
-          <source src="/brand/loader.webm" type="video/webm" />
-          <source src="/brand/loader.mp4" type="video/mp4" />
-          {/* Fallback image if video is not supported */}
-          <img
-            src="/brand/logo-mark.png"
-            alt="First Savvy Loading..."
-            className="w-full h-full object-contain animate-pulse"
-          />
-        </video>
+        <BrandLoaderMedia className="sm:scale-[1.9] sm:-translate-y-4" />
       </div>
 
       {/* Brand Title with Space */}

@@ -6,6 +6,7 @@ import {
   createVisibleRenderLoop,
   isWebGLAvailable,
   observeContainerSize,
+  responsiveCount,
   responsivePixelRatio,
 } from '@/lib/webgl';
 
@@ -57,7 +58,7 @@ export function HeroConstellationCanvas({
       container.appendChild(renderer.domElement);
 
       // 1. Constellation Nodes (Connected Stars)
-      const nodeCount = 55;
+      const nodeCount = responsiveCount(55, width);
       const nodeGeometry = new THREE.BufferGeometry();
       const nodePositions = new Float32Array(nodeCount * 3);
       const nodeColors = new Float32Array(nodeCount * 3);

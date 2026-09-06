@@ -286,6 +286,16 @@ export const viewport: Viewport = {
 | Transactions / holdings tables | `overflow-x-auto` scroller | Full-width table |
 | Marketing 12-col splits | Stacked, copy first | Side by side |
 | Live preview mocks | Single column, real wrapping labels | Multi-pane app mock |
+| Interactive hero demo | Full-width content with its own native scroller and a menu drawer; controls at least 44px | Persistent collapsible sidebar |
+
+The interactive demo uses a bounded window (`min(540px, 75svh)`, minimum 300px) below
+`lg`, including landscape phones. Its dialogs stay inside that window and scroll when
+needed. Only the content scrolls while the demo header remains reachable. Static device
+mockups remain separate from this interactive surface.
+
+The first-visit loader shows the complete crest on phones. It must dismiss even when
+video playback fails, respect reduced motion, and restore page scrolling on exit. The
+desktop loader video plays once rather than looping while waiting for an `ended` event.
 
 ---
 

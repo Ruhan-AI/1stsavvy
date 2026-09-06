@@ -6,6 +6,7 @@ import {
   createVisibleRenderLoop,
   isWebGLAvailable,
   observeContainerSize,
+  responsiveCount,
   responsivePixelRatio,
 } from '@/lib/webgl';
 
@@ -51,7 +52,7 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
       container.appendChild(renderer.domElement);
 
       // Create 3D Particle Grid Wave
-      const cols = 40;
+      const cols = responsiveCount(40, container.clientWidth);
       const rows = 28;
       const count = cols * rows;
       const positions = new Float32Array(count * 3);
@@ -66,7 +67,7 @@ export function FinancialWaveCanvas({ className = '' }: FinancialWaveCanvasProps
       let colIdx = 0;
       for (let ix = 0; ix < cols; ix++) {
         for (let iy = 0; iy < rows; iy++) {
-          const x = (ix - cols / 2) * 0.75;
+          const x = (ix - cols / 2) * 0.75 * (40 / cols);
           const z = (iy - rows / 2) * 0.75;
           const y = 0;
 

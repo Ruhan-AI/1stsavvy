@@ -245,3 +245,19 @@ html {
     rgba(164, 205, 225, 0) 85%
   );
 }
+
+/* The live demo is interactive: its phone controls need real touch hit areas. */
+@media (max-width: 1023px) {
+  [data-demo-shell] button {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+
+  [data-demo-shell] input:not([type='checkbox']):not([type='radio']),
+  [data-demo-shell] select,
+  [data-demo-shell] textarea {
+    min-height: 44px;
+    font-size: 16px;
+  }
+}

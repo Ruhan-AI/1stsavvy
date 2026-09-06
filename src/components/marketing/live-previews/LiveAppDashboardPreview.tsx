@@ -34,6 +34,7 @@ import {
   Star,
   Award,
   Bell,
+  Menu,
   CheckSquare
 } from 'lucide-react';
 
@@ -160,6 +161,19 @@ const BUDGET_ROWS = [
 export function LiveAppDashboardPreview() {
   const [activeNav, setActiveNav] = useState('Dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null);
+  React.useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const reset = () => { if (desktop.matches) setMobileNavOpen(false); };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setMobileNavOpen(false); menuButtonRef.current?.focus(); }
+    };
+    desktop.addEventListener('change', reset);
+    document.addEventListener('keydown', escape);
+    return () => { desktop.removeEventListener('change', reset); document.removeEventListener('keydown', escape); };
+  }, []);
   const [activeProfileTab, setActiveProfileTab] = useState('Simon John');
 
   // Modals & Toasts
@@ -414,11 +428,11 @@ export function LiveAppDashboardPreview() {
   return (
     <div
       data-demo-shell
-      className="relative w-full bg-[#f8fafc] text-slate-800 font-sans select-none flex flex-col md:flex-row min-h-[720px] overflow-hidden text-left border-t border-slate-200"
+      className="relative flex h-full min-h-0 w-full overflow-hidden border-t border-slate-200 bg-[#f8fafc] text-left font-sans text-slate-800 lg:h-auto lg:min-h-[720px]"
     >
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="absolute top-14 right-6 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 border border-slate-700 animate-in fade-in duration-150">
+        <div role="status" className="pointer-events-none absolute top-14 left-3 right-3 lg:left-auto lg:right-6 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 border border-slate-700 animate-in fade-in duration-150">
           <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{toastMessage}</span>
         </div>
@@ -426,8 +440,8 @@ export function LiveAppDashboardPreview() {
 
       {/* Referral Dialog Modal */}
       {referralModalOpen && (
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-sm w-full p-5 space-y-4">
+        <div role="dialog" aria-modal="true" aria-label="Invite Family & Friends" className="absolute inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150">
+          <div className="max-h-full overflow-y-auto overscroll-contain bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-sm w-full p-4 sm:p-5 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold">
@@ -438,7 +452,8 @@ export function LiveAppDashboardPreview() {
               <button
                 type="button"
                 onClick={() => setReferralModalOpen(false)}
-                className="text-slate-400 hover:text-slate-700 cursor-pointer"
+                aria-label="Close referral dialog"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-400 hover:text-slate-700 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -451,7 +466,8 @@ export function LiveAppDashboardPreview() {
                 type="text"
                 readOnly
                 value="https://app.firstsavvy.com/r/simon-lab-928"
-                className="text-xs font-mono bg-transparent flex-1 text-slate-700 outline-none"
+                aria-label="Referral link"
+                className="min-h-11 min-w-0 text-base sm:text-xs font-mono bg-transparent flex-1 text-slate-700 outline-none"
               />
               <button
                 type="button"
@@ -478,8 +494,8 @@ export function LiveAppDashboardPreview() {
 
       {/* Set Up Budget Modal */}
       {budgetModalOpen && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="w-full max-w-sm space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-2xl">
+        <div role="dialog" aria-modal="true" aria-label="Set Up Monthly Budget" className="absolute inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3 sm:p-4 animate-in fade-in duration-150">
+          <div className="max-h-full overflow-y-auto overscroll-contain w-full max-w-sm space-y-4 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-2xl">
             <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
               <div className="flex min-w-0 items-center gap-2">
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-[#52A5CE]">
@@ -535,9 +551,12 @@ export function LiveAppDashboardPreview() {
       )}
 
       {/* 1. LEFT SIDEBAR (Exact deep navy #2c4a6b from First Savvy Web App Layout.jsx) */}
+      {mobileNavOpen && <button type="button" aria-label="Close demo navigation" onClick={() => setMobileNavOpen(false)} className="absolute inset-0 z-30 bg-slate-900/50 lg:hidden" />}
       <aside
-        className={`shrink-0 transition-all duration-300 flex flex-col border-r border-slate-700/40 text-white select-none ${
-          sidebarCollapsed ? 'w-16' : 'w-48'
+        id="demo-navigation"
+        aria-label="Demo navigation"
+        className={`${mobileNavOpen ? 'absolute inset-y-0 left-0 z-40 flex' : 'hidden'} max-w-[88%] w-64 lg:relative lg:z-auto lg:flex shrink-0 transition-[width] duration-300 flex-col border-r border-slate-700/40 text-white select-none ${
+          sidebarCollapsed ? 'lg:w-16' : 'lg:w-48'
         }`}
         style={{ backgroundColor: '#2c4a6b' }}
       >
@@ -546,7 +565,11 @@ export function LiveAppDashboardPreview() {
             Collapsed, the emblem IS the expand control: the previous version kept the
             wordmark mounted at 56px wide, which pushed the toggle outside the sidebar
             where the content area covered it, so the panel could not be reopened. */}
-        <div className="flex h-16 shrink-0 items-center justify-between gap-1 border-b border-slate-700/50 px-2">
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-700/50 px-3 lg:hidden">
+          <FirstSavvyLogoSidebar className="h-12 w-auto" />
+          <button type="button" aria-label="Close demo menu" onClick={() => { setMobileNavOpen(false); menuButtonRef.current?.focus(); }} className="flex h-11 w-11 items-center justify-center rounded-lg hover:bg-slate-700/50"><X className="h-5 w-5" /></button>
+        </div>
+        <div className="hidden lg:flex h-16 shrink-0 items-center justify-between gap-1 border-b border-slate-700/50 px-2">
           {sidebarCollapsed ? (
             <button
               type="button"
@@ -578,7 +601,7 @@ export function LiveAppDashboardPreview() {
         </div>
 
         {/* Nav Items */}
-        <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+        <nav className="flex-1 min-h-0 py-3 px-2 space-y-0.5 overflow-y-auto overscroll-contain" data-lenis-prevent>
           {navLinks.map((item) => {
             const Icon = item.icon;
             const isActive = activeNav === item.name;
@@ -588,17 +611,20 @@ export function LiveAppDashboardPreview() {
                 type="button"
                 onClick={() => {
                   setActiveNav(item.name);
+                  setMobileNavOpen(false);
+                  contentRef.current?.scrollTo({ top: 0 });
                   showToast(`Selected ${item.name}`);
                 }}
-                className={`flex items-center w-full px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                aria-current={isActive ? 'page' : undefined}
+                className={`flex min-h-11 lg:min-h-0 items-center w-full px-2.5 py-1.5 rounded-lg text-sm lg:text-xs font-medium transition-all cursor-pointer ${
                   isActive
                     ? 'bg-[#1e3550] text-white shadow-xs font-semibold'
                     : 'text-slate-300 hover:bg-slate-700/50 hover:text-white'
-                } ${sidebarCollapsed ? 'justify-center px-1.5' : 'justify-start'}`}
+                } ${sidebarCollapsed ? 'lg:justify-center lg:px-1.5' : 'justify-start'}`}
                 title={item.name}
               >
-                <Icon className={`w-3.5 h-3.5 shrink-0 ${sidebarCollapsed ? 'mr-0' : 'mr-2.5'}`} />
-                <span className={`truncate text-left text-[11px] ${sidebarCollapsed ? 'hidden' : 'block'}`}>
+                <Icon className={`w-4 h-4 lg:w-3.5 lg:h-3.5 shrink-0 mr-2.5 ${sidebarCollapsed ? 'lg:mr-0' : ''}`} />
+                <span className={`truncate text-left text-sm lg:text-[11px] ${sidebarCollapsed ? 'lg:hidden' : 'block'}`}>
                   {item.name}
                 </span>
               </button>
@@ -608,30 +634,32 @@ export function LiveAppDashboardPreview() {
       </aside>
 
       {/* 2. MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto bg-[#f8fafc]">
+      <div ref={(element) => { element?.toggleAttribute('inert', mobileNavOpen); }} className="flex-1 flex flex-col min-h-0 min-w-0 bg-[#f8fafc]">
         {/* Top Header Bar */}
-        <header className="bg-white px-5 py-2.5 border-b border-slate-200 flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs text-slate-500 font-normal">Welcome,</span>
+        <header className="bg-white px-2 sm:px-5 py-2 lg:py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-1 shrink-0">
+          <div className="flex min-w-0 items-center gap-1.5">
+            <button ref={menuButtonRef} type="button" aria-label="Open demo menu" aria-expanded={mobileNavOpen} aria-controls="demo-navigation" onClick={() => setMobileNavOpen(true)} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 lg:hidden"><Menu className="h-5 w-5" /></button>
+            <span className="hidden sm:inline text-xs text-slate-500 font-normal">Welcome,</span>
             <span className="text-xs font-semibold text-slate-900">Simon Lab</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-0 lg:gap-3">
             {/* Referral Button */}
             <button
               type="button"
               onClick={() => setReferralModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-[#0F766E] hover:bg-[#115E59] text-white shadow-xs transition-colors cursor-pointer"
+              aria-label="Referral"
+              className="inline-flex min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 items-center justify-center gap-1.5 px-2 lg:px-3 py-1 rounded-xl text-xs font-semibold bg-[#0F766E] hover:bg-[#115E59] text-white shadow-xs transition-colors cursor-pointer"
             >
               <Share2 className="w-3.5 h-3.5 text-white" />
-              <span>Referral</span>
+              <span className="hidden sm:inline">Referral</span>
             </button>
 
             {/* Search */}
             <button
               type="button"
               onClick={() => showToast('Search transactions, accounts, and tasks')}
-              className="p-1 rounded text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+              className="inline-flex min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 items-center justify-center p-1 rounded text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
               title="Search"
             >
               <Search className="w-4 h-4" />
@@ -641,7 +669,7 @@ export function LiveAppDashboardPreview() {
             <button
               type="button"
               onClick={() => showToast('3 unread notifications')}
-              className="relative p-1 rounded text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+              className="relative inline-flex min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 items-center justify-center p-1 rounded text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
               title="Notifications"
               aria-label="Notifications"
             >
@@ -650,12 +678,12 @@ export function LiveAppDashboardPreview() {
             </button>
 
             {/* SL Avatar */}
-            <div
+            <button type="button" aria-label="Profile: Simon Lab"
               onClick={() => showToast('Profile • Simon Lab')}
-              className="w-7 h-7 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-[11px] font-bold text-slate-700 cursor-pointer hover:ring-2 hover:ring-[#52A5CE]/50 transition-all"
+              className="hidden sm:flex w-11 h-11 lg:w-7 lg:h-7 rounded-full bg-slate-100 border border-slate-300 items-center justify-center text-[11px] font-bold text-slate-700 cursor-pointer hover:ring-2 hover:ring-[#52A5CE]/50 transition-all"
             >
               SL
-            </div>
+            </button>
           </div>
         </header>
 
@@ -707,13 +735,13 @@ export function LiveAppDashboardPreview() {
 
         {/* Content area. Every sidebar item renders its own page — before this the nav
             only moved the highlight and left the Dashboard on screen. */}
-        <div className="p-4 sm:p-5 flex-1">
+        <div ref={contentRef} data-demo-content data-lenis-prevent className={`p-4 sm:p-5 flex-1 min-h-0 min-w-0 overscroll-contain lg:overflow-visible ${referralModalOpen || budgetModalOpen ? 'overflow-hidden' : 'overflow-y-auto'}`}>
           {activeNav !== 'Dashboard' ? (
             <DemoAppPage nav={activeNav} onAction={showToast} />
           ) : (
           /* Dashboard body, laid out as the app's own dashboard: a wide left column
              carrying the net-worth chart over Recent Transactions / Top Utilized Budgets
-             and then Goals / Task Manager, with Credit Score, Household and Calendar
+             with Credit Score, Household and Calendar
              stacked in a fixed rail on the right. */
           <div className="flex flex-col lg:flex-row gap-4 items-start">
             {/* ============ LEFT COLUMN ============ */}

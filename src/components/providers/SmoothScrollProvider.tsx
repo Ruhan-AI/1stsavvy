@@ -8,7 +8,8 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     if (typeof window === 'undefined') return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    // Touch scrolling and nested demo panels should use the browser's native momentum.
+    if (prefersReducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
 
     const lenis = new Lenis({
       duration: 1.1,

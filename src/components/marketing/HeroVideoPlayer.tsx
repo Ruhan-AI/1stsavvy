@@ -1,8 +1,14 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { Volume2, VolumeX, Sparkles, Play, Settings, Check, Wifi, Info } from 'lucide-react';
-import { LiveAppDashboardPreview } from './live-previews/LiveAppDashboardPreview';
+import dynamic from 'next/dynamic';
+import { Volume2, VolumeX, Sparkles, Play, Pause, Settings, Check, Info } from 'lucide-react';
+import { BrandLoader } from '@/components/brand/BrandLoader';
+
+const LiveAppDashboardPreview = dynamic(
+  () => import('./live-previews/LiveAppDashboardPreview').then((module) => module.LiveAppDashboardPreview),
+  { loading: () => <div role="status" className="flex h-full items-center justify-center p-4"><BrandLoader message="Opening your dashboard…" /></div> }
+);
 
 type VideoQuality = 'auto' | '1080p' | '720p' | '480p' | '360p';
 
@@ -32,7 +38,7 @@ export function HeroVideoPlayer() {
 
   // Quality settings (YouTube style adaptive)
   const [userQuality, setUserQuality] = useState<VideoQuality>('auto');
-  const [resolvedQuality, setResolvedQuality] = useState<'1080p' | '720p' | '480p' | '360p'>('1080p');
+  const [resolvedQuality, setResolvedQuality] = useState<'1080p' | '720p' | '480p' | '360p' | null>(null);
   const [qualityMenuOpen, setQualityMenuOpen] = useState(false);
   const [statusToast, setStatusToast] = useState<string | null>(null);
 
@@ -162,9 +168,6 @@ export function HeroVideoPlayer() {
         { threshold: 0.2 }
       );
       observer.observe(video);
-      if (viewMode === 'video') {
-        video.play().catch(() => {});
-      }
     }
 
     mql.addEventListener('change', checkIsMobile);
@@ -179,7 +182,7 @@ export function HeroVideoPlayer() {
 
   // Active video source based on user selection or auto-resolved quality
   const activeQuality = userQuality === 'auto' ? resolvedQuality : userQuality;
-  const currentVideoSrc = QUALITY_SOURCES[activeQuality] || QUALITY_SOURCES['1080p'];
+  const currentVideoSrc = activeQuality ? QUALITY_SOURCES[activeQuality] : undefined;
 
   /**
    * Change resolution seamlessly while keeping current time & play state
@@ -205,7 +208,7 @@ export function HeroVideoPlayer() {
 
     if (video) {
       const nextSrc = QUALITY_SOURCES[targetRes];
-      if (video.src !== nextSrc) {
+      if (video.src !== new URL(nextSrc, window.location.href).href) {
         const handleLoadedData = () => {
           video.currentTime = currentTime;
           if (wasPlaying) {
@@ -238,7 +241,7 @@ export function HeroVideoPlayer() {
   };
 
   const handleContainerClick = () => {
-    if (!isMobile || viewMode === 'demo') return;
+    if (viewMode === 'demo') return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -278,6 +281,8 @@ export function HeroVideoPlayer() {
   useEffect(() => () => { if (switchTimer.current) clearTimeout(switchTimer.current); }, []);
 
   useEffect(() => {
+    videoPaneRef.current?.toggleAttribute('inert', viewMode !== 'video');
+    demoPaneRef.current?.toggleAttribute('inert', viewMode !== 'demo');
     const el = viewMode === 'video' ? videoPaneRef.current : demoPaneRef.current;
     if (!el) return;
     const measure = () => setContentHeight(el.offsetHeight);
@@ -345,24 +350,23 @@ export function HeroVideoPlayer() {
         className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#101926] border border-slate-700/80 dark:border-slate-700/70 shadow-2xl transition-all duration-700 ease-out cursor-default"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={handleContainerClick}
       >
         {/* Floating Notification Toast */}
         {statusToast && (
-          <div className="absolute top-16 right-4 sm:right-6 z-40 bg-slate-900/95 text-white text-xs font-semibold px-3.5 py-2 rounded-xl shadow-2xl flex items-center gap-2 border border-slate-700 backdrop-blur-md animate-in fade-in duration-150">
+          <div role="status" className="pointer-events-none absolute top-16 left-3 right-3 sm:left-auto sm:right-6 z-40 bg-slate-900/95 text-white text-xs font-semibold px-3.5 py-2 rounded-xl shadow-2xl flex items-center gap-2 border border-slate-700 animate-in fade-in duration-150">
             <Info className="w-3.5 h-3.5 text-[#52A5CE] shrink-0" />
             <span>{statusToast}</span>
           </div>
         )}
 
         {/* macOS Style Window Chrome Header */}
-        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-slate-900/95 border-b border-slate-800/90 z-20">
+        <div className="relative z-20 flex flex-wrap lg:flex-nowrap items-center justify-center sm:justify-between gap-2.5 px-3 sm:px-5 py-2.5 sm:py-3 bg-slate-900/95 border-b border-slate-800/90">
           {/* Left: Traffic Light Buttons */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 shrink-0">
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500/90 shadow-xs ring-1 ring-rose-600/30 inline-block" />
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400/90 shadow-xs ring-1 ring-amber-500/30 inline-block" />
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-400/90 shadow-xs ring-1 ring-emerald-500/30 inline-block" />
-            <span className="hidden lg:inline-block ml-3 text-[11px] font-medium text-slate-400 tracking-wide">
+            <span className="hidden xl:inline-block ml-3 text-[11px] font-medium text-slate-400 tracking-wide">
               {viewMode === 'demo' ? 'First Savvy • Real-Time Web App Sandbox' : 'First Savvy • Official Product Walkthrough'}
             </span>
           </div>
@@ -372,7 +376,8 @@ export function HeroVideoPlayer() {
             <button
               type="button"
               onClick={switchToVideo}
-              className={`inline-flex items-center justify-center gap-1.5 min-h-[36px] px-3 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              aria-pressed={viewMode === 'video'}
+              className={`inline-flex items-center justify-center gap-1.5 min-h-11 lg:min-h-[36px] px-3 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 viewMode === 'video'
                   ? 'bg-[#52A5CE] text-white shadow-xs'
                   : 'text-slate-400 hover:text-white'
@@ -384,7 +389,8 @@ export function HeroVideoPlayer() {
             <button
               type="button"
               onClick={switchToDemo}
-              className={`inline-flex items-center justify-center gap-1.5 min-h-[36px] px-3 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              aria-pressed={viewMode === 'demo'}
+              className={`inline-flex items-center justify-center gap-1.5 min-h-11 lg:min-h-[36px] px-3 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 viewMode === 'demo'
                   ? 'bg-[#52A5CE] text-white shadow-xs ring-1 ring-white/30'
                   : 'text-slate-300 hover:text-white'
@@ -397,14 +403,14 @@ export function HeroVideoPlayer() {
           </div>
 
           {/* Right Header Controls (Audio + YouTube-style Quality Selector) */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className={`${viewMode === 'demo' ? 'hidden lg:flex' : 'flex flex-wrap sm:flex-nowrap w-full sm:w-auto justify-center'} items-center gap-2 sm:gap-2.5 shrink-0`}>
             {viewMode === 'video' ? (
               <>
                 {/* Audio Toggle Pill */}
                 <button
                   onClick={toggleMute}
                   type="button"
-                  className="inline-flex items-center justify-center gap-1.5 min-h-[36px] px-2.5 sm:px-3 rounded-full text-[11px] sm:text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 transition-all cursor-pointer shadow-xs active:scale-95"
+                  className="inline-flex items-center justify-center gap-1.5 min-h-11 lg:min-h-[36px] px-2.5 sm:px-3 rounded-full text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 transition-all cursor-pointer shadow-xs active:scale-95"
                   title={isMuted ? 'Unmute video audio' : 'Mute video audio'}
                 >
                   {isMuted ? (
@@ -423,19 +429,20 @@ export function HeroVideoPlayer() {
                 </button>
 
                 {/* YouTube-Style Quality Dropdown */}
-                <div className="relative" ref={qualityMenuRef}>
+                <div className={`relative ${qualityMenuOpen ? 'max-sm:w-full' : ''}`} ref={qualityMenuRef}>
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       setQualityMenuOpen(!qualityMenuOpen);
                     }}
-                    className="inline-flex items-center justify-center gap-1.5 min-h-[36px] px-2.5 sm:px-3 rounded-full text-[11px] sm:text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 transition-all cursor-pointer shadow-xs active:scale-95"
+                    aria-expanded={qualityMenuOpen}
+                    className="inline-flex items-center justify-center gap-1.5 min-h-11 lg:min-h-[36px] px-2.5 sm:px-3 rounded-full text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 transition-all cursor-pointer shadow-xs active:scale-95"
                     title="Change video quality (YouTube style)"
                   >
                     <Settings className={`w-3.5 h-3.5 text-slate-400 transition-transform ${qualityMenuOpen ? 'rotate-45 text-[#52A5CE]' : ''}`} />
                     <span className="font-bold text-[#52A5CE]">
-                      {userQuality === 'auto' ? `Auto (${resolvedQuality})` : userQuality}
+                      {userQuality === 'auto' ? (resolvedQuality ? `Auto (${resolvedQuality})` : 'Auto') : userQuality}
                     </span>
                   </button>
 
@@ -443,7 +450,7 @@ export function HeroVideoPlayer() {
                   {qualityMenuOpen && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute right-0 top-full mt-2 w-52 rounded-2xl bg-slate-900/98 border border-slate-700 shadow-2xl p-1.5 z-50 backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150"
+                      className="relative mt-2 w-full sm:absolute sm:right-0 sm:top-full sm:w-52 max-h-[60dvh] overflow-y-auto rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-1.5 z-50 animate-in fade-in duration-150"
                     >
                       <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between">
                         <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Quality</span>
@@ -458,7 +465,7 @@ export function HeroVideoPlayer() {
                               key={q}
                               type="button"
                               onClick={() => handleQualityChange(q)}
-                              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                              className={`w-full min-h-11 lg:min-h-0 flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                                 isSelected
                                   ? 'bg-[#52A5CE]/20 text-[#52A5CE]'
                                   : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
@@ -475,11 +482,11 @@ export function HeroVideoPlayer() {
                                   {resolvedQuality}
                                 </span>
                               ) : q === '1080p' ? (
-                                <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold uppercase">
+                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold uppercase">
                                   HD
                                 </span>
                               ) : q === '360p' ? (
-                                <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+                                <span className="text-[11px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
                                   Saver
                                 </span>
                               ) : null}
@@ -517,10 +524,9 @@ export function HeroVideoPlayer() {
                 : 'pointer-events-none absolute inset-x-0 top-0 opacity-0'
             }`}
           >
-            <div className="relative flex w-full aspect-[1920/912] items-center justify-center overflow-hidden bg-[#101926]">
+            <div onClick={handleContainerClick} className="relative flex w-full aspect-[1920/912] items-center justify-center overflow-hidden bg-[#101926]">
               <video
                 ref={videoRef}
-                key={currentVideoSrc}
                 src={currentVideoSrc}
                 poster="/videos/first-savvy-explanation-poster.jpg"
                 muted={isMuted}
@@ -529,6 +535,9 @@ export function HeroVideoPlayer() {
                 preload="metadata"
                 className="block h-full w-full object-cover object-center"
               />
+              <button type="button" aria-label={isPlaying ? 'Pause video' : 'Play video'} onClick={(event) => { event.stopPropagation(); handleContainerClick(); }} className="absolute bottom-2 left-2 flex h-11 w-11 items-center justify-center rounded-full bg-slate-900/80 text-white lg:hidden">
+                {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+              </button>
             </div>
           </div>
 
@@ -542,7 +551,7 @@ export function HeroVideoPlayer() {
                   : 'pointer-events-none absolute inset-x-0 top-0 opacity-0'
               }`}
             >
-              <div className="relative h-[440px] w-full overflow-y-auto overscroll-contain bg-[#f8fafc] sm:h-[540px] lg:h-[660px]">
+              <div data-demo-viewport data-lenis-prevent className="relative h-[min(540px,75svh)] min-h-[300px] w-full overflow-hidden overscroll-contain bg-[#f8fafc] lg:h-[660px] lg:overflow-y-auto">
                 <LiveAppDashboardPreview />
               </div>
             </div>

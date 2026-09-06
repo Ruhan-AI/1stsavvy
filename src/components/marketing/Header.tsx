@@ -23,6 +23,13 @@ export function MarketingHeader() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = () => { if (desktop.matches) setMobileMenuOpen(false); };
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
+  }, []);
+
   // Lock body scroll + close on Escape while the drawer is open
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -101,7 +108,7 @@ export function MarketingHeader() {
       {mobileMenuOpen && (
         <div
           id="marketing-mobile-menu"
-          className="lg:hidden bg-white dark:bg-[#1A232E] border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 shadow-xl max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain animate-in slide-in-from-top-4 duration-200"
+          className="absolute inset-x-0 top-full lg:hidden bg-white dark:bg-[#1A232E] border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 shadow-xl max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain animate-in slide-in-from-top-4 duration-200"
         >
           <div className="space-y-1">
             {navLinks.map((link) => (
@@ -109,7 +116,7 @@ export function MarketingHeader() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2.5 px-3 text-sm font-semibold text-brand-navy dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                className="flex min-h-11 items-center py-2.5 px-3 text-sm font-semibold text-brand-navy dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
               >
                 {link.name}
               </Link>
@@ -120,14 +127,14 @@ export function MarketingHeader() {
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-semibold text-brand-navy dark:text-white"
+              className="min-h-11 w-full text-center py-2.5 px-4 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-semibold text-brand-navy dark:text-white"
             >
               Log In
             </Link>
             <Link
               href="/signup"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 rounded-lg bg-brand-navy text-white text-sm font-semibold shadow"
+              className="min-h-11 w-full text-center py-2.5 px-4 rounded-lg bg-brand-navy text-white text-sm font-semibold shadow"
             >
               Get Started for Free
             </Link>

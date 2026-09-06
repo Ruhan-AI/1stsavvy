@@ -1,138 +1,70 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { BrandLoaderMedia } from './BrandLoaderMedia';
 
-/**
- * InitialSplashScreen — Full-screen brand loader on first visit.
- *
- * - Light mode #F9F7F8 background (matching homepage).
- * - Full original video animation (animated crest + brand).
- * - Sleek progress bar right beneath.
- */
 export function InitialSplashScreen() {
-  const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(true);
+  // Server-rendered content stays usable while the phone downloads JavaScript.
+  const [visible, setVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const hasTriggeredExit = useRef(false);
-  const mountTime = useRef(0);
+  const exitStarted = useRef(false);
+  const fadeTimer = useRef<ReturnType<typeof setTimeout>>();
+  const fallbackTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const triggerExit = useCallback(() => {
-    if (hasTriggeredExit.current) return;
-    hasTriggeredExit.current = true;
-
+    if (exitStarted.current) return;
+    exitStarted.current = true;
+    try { sessionStorage.setItem('fs-splash-shown', '1'); } catch { /* Private browsing. */ }
     setFadeOut(true);
-
-    setTimeout(() => {
-      setVisible(false);
-      try {
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('fs-splash-shown', '1');
-        }
-      } catch {
-        // sessionStorage not available
-      }
-    }, 700);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    fadeTimer.current = setTimeout(() => setVisible(false), reduceMotion ? 0 : 300);
   }, []);
 
-  useEffect(() => {
-    setMounted(true);
-    mountTime.current = Date.now();
+  const handleUnavailable = useCallback(() => {
+    clearTimeout(fallbackTimer.current);
+    fallbackTimer.current = setTimeout(triggerExit, 700);
+  }, [triggerExit]);
 
+  useEffect(() => {
+    exitStarted.current = false;
     try {
-      if (typeof window !== 'undefined' && sessionStorage.getItem('fs-splash-shown') === '1') {
+      if (sessionStorage.getItem('fs-splash-shown') === '1') {
         setVisible(false);
         return;
       }
-    } catch {
-      // proceed to show
-    }
+    } catch { /* The time limit also works without storage. */ }
 
-    // Minimum display time (4.5s)
-    const minTimer = setTimeout(() => {
-      if (videoRef.current?.ended) {
-        triggerExit();
-      }
-    }, 4500);
+    setVisible(true);
 
-    // Maximum display time fallback
-    const maxTimer = setTimeout(() => {
-      triggerExit();
-    }, 6000);
-
+    // Media events are not guaranteed on mobile, so loading always has a time limit.
+    const mobile = window.matchMedia('(max-width: 1023px), (pointer: coarse)').matches;
+    const timeout = setTimeout(triggerExit, mobile ? 2000 : 6000);
     return () => {
-      clearTimeout(minTimer);
-      clearTimeout(maxTimer);
+      clearTimeout(timeout);
+      clearTimeout(fadeTimer.current);
+      clearTimeout(fallbackTimer.current);
     };
   }, [triggerExit]);
 
-  const handleVideoEnded = useCallback(() => {
-    const elapsed = Date.now() - mountTime.current;
-    if (elapsed >= 4200) {
-      triggerExit();
-    }
-  }, [triggerExit]);
+  useEffect(() => {
+    if (!visible || fadeOut) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previous; };
+  }, [visible, fadeOut]);
 
-  // Prevent SSR / hydration mismatch
-  if (!mounted || !visible) return null;
+  if (!visible) return null;
 
   return (
-    <div
-      className={`fixed inset-0 z-[9999] min-h-[100dvh] overflow-hidden flex items-center justify-center px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-out ${
-        fadeOut
-          ? 'opacity-0 scale-[1.03] pointer-events-none'
-          : 'opacity-100 scale-100'
-      }`}
-      style={{
-        backgroundColor: '#F9F7F8',
-      }}
-      aria-label="Loading First Savvy"
-      role="progressbar"
-    >
-      {/* Soft radial glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102,175,211,0.14) 0%, transparent 70%)',
-        }}
-      />
-
+    <div data-brand-splash role="progressbar" aria-label="Loading First Savvy"
+      className={`fixed inset-0 z-[9999] flex h-[100dvh] w-full touch-none items-center justify-center overflow-hidden bg-[#F9F7F8] px-4 transition-opacity duration-300 motion-reduce:transition-none sm:px-6 lg:px-8 ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(102,175,211,0.14) 0%, transparent 70%)' }} />
       <div className="relative flex max-w-full flex-col items-center justify-center">
-        {/* Full Brand Loader Video */}
-        <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 max-w-full flex items-center justify-center overflow-hidden">
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            onEnded={handleVideoEnded}
-            className="w-full h-full object-contain pointer-events-none select-none"
-            style={{
-              filter: 'invert(1) hue-rotate(180deg) brightness(0.92) contrast(1.25)',
-              mixBlendMode: 'multiply',
-            }}
-          >
-            <source src="/brand/loader.webm" type="video/webm" />
-            <source src="/brand/loader.mp4" type="video/mp4" />
-            <img
-              src="/brand/logo-mark.png"
-              alt="First Savvy"
-              className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain animate-pulse"
-            />
-          </video>
+        <div className="h-48 w-48 max-h-[55dvh] max-w-full sm:h-64 sm:w-64 lg:h-80 lg:w-80">
+          <BrandLoaderMedia loop={false} onEnded={triggerExit} onUnavailable={handleUnavailable} />
         </div>
-
-        {/* Sleek Progress bar placed closely right below the video */}
-        <div className="w-32 sm:w-36 lg:w-44 max-w-full h-[2.5px] rounded-full overflow-hidden bg-slate-200/80 -mt-2">
-          <div
-            className="h-full rounded-full"
-            style={{
-              background: 'linear-gradient(90deg, #66AFD3, #1D2D42)',
-              animation: 'splash-progress 5.0s ease-out forwards',
-            }}
-          />
+        <div className="-mt-2 h-[3px] w-32 max-w-full overflow-hidden rounded-full bg-slate-200/80 sm:w-36 lg:w-44">
+          <div className="h-full rounded-full bg-gradient-to-r from-brand-sky to-brand-navy animate-[splash-progress_2s_ease-out_forwards] lg:animate-[splash-progress_5s_ease-out_forwards] motion-reduce:animate-none motion-reduce:w-full" />
         </div>
       </div>
     </div>

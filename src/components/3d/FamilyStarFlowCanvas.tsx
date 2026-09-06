@@ -6,6 +6,7 @@ import {
   createVisibleRenderLoop,
   isWebGLAvailable,
   observeContainerSize,
+  responsiveCount,
   responsivePixelRatio,
 } from '@/lib/webgl';
 
@@ -115,7 +116,7 @@ export function FamilyStarFlowCanvas({ className = '' }: FamilyStarFlowCanvasPro
 
       // Sparkles / Dust particles
       const dustGeom = new THREE.BufferGeometry();
-      const dustCount = 80;
+      const dustCount = responsiveCount(80, container.clientWidth);
       const dustPos = new Float32Array(dustCount * 3);
 
       for (let i = 0; i < dustCount * 3; i += 3) {
