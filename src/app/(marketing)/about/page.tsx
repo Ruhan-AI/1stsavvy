@@ -14,7 +14,7 @@ import {
   StaggerContainer,
   StaggerItem
 } from '@/components/animations/MotionWrappers';
-import { ShieldCheck, Heart, Sparkles, Target, Users, ArrowRight } from 'lucide-react';
+import { Compass, Shield, Network, Landmark, Users, ArrowRight } from 'lucide-react';
 
 const SecurityShieldCanvas = dynamic(
   () => import('@/components/3d/SecurityShieldCanvas').then(mod => mod.SecurityShieldCanvas),
@@ -62,9 +62,9 @@ export default function AboutPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-brand-sky/40 hover:shadow-md transition-all text-center">
-              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-sky-50 dark:bg-sky-950/50 text-brand-sky flex items-center justify-center">
-                <Sparkles className="w-6 h-6" />
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-brand-sky/40 hover:shadow-md transition-all text-center group">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-2xl bg-gradient-to-br from-sky-50 to-sky-100/70 dark:from-sky-950/80 dark:to-sky-900/50 border border-sky-200/80 dark:border-sky-800/80 text-[#52A5CE] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                <Compass className="w-6 h-6 stroke-[1.9]" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Learn by Doing</h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -74,9 +74,9 @@ export default function AboutPage() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-emerald-500/40 hover:shadow-md transition-all text-center">
-              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 flex items-center justify-center">
-                <ShieldCheck className="w-6 h-6" />
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-emerald-500/40 hover:shadow-md transition-all text-center group">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 dark:from-emerald-950/80 dark:to-emerald-900/50 border border-emerald-200/80 dark:border-emerald-800/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                <Shield className="w-6 h-6 stroke-[1.9]" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Trust and Privacy First</h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -86,9 +86,9 @@ export default function AboutPage() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-amber-400/40 hover:shadow-md transition-all text-center">
-              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 flex items-center justify-center">
-                <Target className="w-6 h-6" />
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-amber-400/40 hover:shadow-md transition-all text-center group">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100/70 dark:from-amber-950/80 dark:to-amber-900/50 border border-amber-200/80 dark:border-amber-800/80 text-amber-600 dark:text-amber-400 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                <Network className="w-6 h-6 stroke-[1.9]" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">One Connected Ecosystem</h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -98,9 +98,9 @@ export default function AboutPage() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-indigo-400/40 hover:shadow-md transition-all text-center">
-              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 flex items-center justify-center">
-                <Heart className="w-6 h-6" />
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-indigo-400/40 hover:shadow-md transition-all text-center group">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100/70 dark:from-indigo-950/80 dark:to-indigo-900/50 border border-indigo-200/80 dark:border-indigo-800/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                <Landmark className="w-6 h-6 stroke-[1.9]" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Built for Legacy</h2>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
