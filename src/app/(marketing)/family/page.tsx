@@ -107,12 +107,17 @@ export default function FamilyPage() {
                 { label: 'Schedule', desc: 'Daily or weekly rhythm' },
                 { label: 'Assign to Child', desc: 'Personalized space' },
               ].map((callout, idx) => (
-                <div key={idx} className="min-w-0 p-3 sm:p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs">
-                  <div className="font-bold text-xs sm:text-sm text-brand-navy dark:text-white flex items-center gap-1.5">
+                <div
+                  key={idx}
+                  className="min-w-0 p-3 sm:p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col items-center justify-center text-center"
+                >
+                  <div className="font-bold text-xs sm:text-sm text-brand-navy dark:text-white flex items-center justify-center gap-1.5">
                     <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-brand-sky" />
                     <span className="min-w-0">{callout.label}</span>
                   </div>
-                  <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5">{callout.desc}</div>
+                  <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 text-center">
+                    {callout.desc}
+                  </div>
                 </div>
               ))}
             </div>
@@ -136,9 +141,12 @@ export default function FamilyPage() {
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               When tasks are completed, kids earn stars. Stars can be redeemed for small rewards or saved toward larger goals. As children grow, the same framework supports allowances, giving them a structured way to practice making choices with money they earned.
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
               {['Stars', 'Rewards', 'Allowances', 'Goals'].map((label) => (
-                <span key={label} className="inline-flex items-center min-h-[36px] px-3 sm:px-3.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-slate-200 whitespace-nowrap">
+                <span
+                  key={label}
+                  className="inline-flex items-center min-h-[36px] px-3 sm:px-3.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-slate-200 whitespace-nowrap"
+                >
                   {label}
                 </span>
               ))}
@@ -164,7 +172,7 @@ export default function FamilyPage() {
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Kids see what they need to see: their tasks, their stars, their rewards, and their goals. Parents manage the system, approve tasks, set allowances, and keep full visibility into the family environment without giving children access to adult finances.
             </p>
-            <div className="p-3 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-start sm:items-center gap-3">
+            <div className="p-3 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-3 text-center">
               <ShieldCheck className="w-5 h-5 shrink-0 text-emerald-600" />
               <div className="min-w-0 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
                 PIN-protected or password-protected child spaces with isolated parent controls.
