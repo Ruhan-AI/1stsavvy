@@ -28,7 +28,11 @@ import {
   CreditCard,
   Briefcase,
   PieChart,
-  Repeat
+  Repeat,
+  Scale,
+  ArrowLeftRight,
+  BookUser,
+  LockKeyhole
 } from 'lucide-react';
 
 
@@ -207,9 +211,9 @@ export default function PersonalFinancePage() {
             {/* Right Column: Architectural Pillar Cards */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Card 1: Balance Sheet */}
-              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
-                <div className="w-10 h-10 mx-auto rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#52A5CE] flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5" />
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5 hover:border-sky-300 dark:hover:border-sky-700/80 transition-all duration-200 group">
+                <div className="w-11 h-11 mx-auto rounded-xl bg-gradient-to-br from-sky-50 to-sky-100/70 dark:from-sky-950/80 dark:to-sky-900/50 border border-sky-200/80 dark:border-sky-800/80 text-[#52A5CE] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                  <Scale className="w-5 h-5 stroke-[1.9]" />
                 </div>
                 <h3 className="text-base font-bold text-brand-navy dark:text-white">Unified Balance Sheet</h3>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -218,9 +222,9 @@ export default function PersonalFinancePage() {
               </div>
 
               {/* Card 2: Cash Flow */}
-              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
-                <div className="w-10 h-10 mx-auto rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                  <Repeat className="w-5 h-5" />
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5 hover:border-emerald-300 dark:hover:border-emerald-700/80 transition-all duration-200 group">
+                <div className="w-11 h-11 mx-auto rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 dark:from-emerald-950/80 dark:to-emerald-900/50 border border-emerald-200/80 dark:border-emerald-800/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                  <ArrowLeftRight className="w-5 h-5 stroke-[1.9]" />
                 </div>
                 <h3 className="text-base font-bold text-brand-navy dark:text-white">Live Transaction Flow</h3>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -229,9 +233,9 @@ export default function PersonalFinancePage() {
               </div>
 
               {/* Card 3: Estate & Contacts */}
-              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
-                <div className="w-10 h-10 mx-auto rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                  <Briefcase className="w-5 h-5" />
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5 hover:border-amber-300 dark:hover:border-amber-700/80 transition-all duration-200 group">
+                <div className="w-11 h-11 mx-auto rounded-xl bg-gradient-to-br from-amber-50 to-amber-100/70 dark:from-amber-950/80 dark:to-amber-900/50 border border-amber-200/80 dark:border-amber-800/80 text-amber-600 dark:text-amber-400 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                  <BookUser className="w-5 h-5 stroke-[1.9]" />
                 </div>
                 <h3 className="text-base font-bold text-brand-navy dark:text-white">Estate & Key Contacts</h3>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -240,9 +244,9 @@ export default function PersonalFinancePage() {
               </div>
 
               {/* Card 4: Vault & Privacy */}
-              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
-                <div className="w-10 h-10 mx-auto rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                  <ShieldCheck className="w-5 h-5" />
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5 hover:border-indigo-300 dark:hover:border-indigo-700/80 transition-all duration-200 group">
+                <div className="w-11 h-11 mx-auto rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100/70 dark:from-indigo-950/80 dark:to-indigo-900/50 border border-indigo-200/80 dark:border-indigo-800/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                  <LockKeyhole className="w-5 h-5 stroke-[1.9]" />
                 </div>
                 <h3 className="text-base font-bold text-brand-navy dark:text-white">Encrypted Family Vault</h3>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
