@@ -108,9 +108,12 @@ export default function PersonalFinancePage() {
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Stop checking five different apps to understand your balance sheet. First Savvy organizes every asset and liability category so you can see your liquid cash, investments, real estate, vehicles, and debts side by side.
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-nowrap items-center justify-center gap-1.5 sm:gap-2 pt-2 overflow-x-auto no-scrollbar">
               {['Banking', 'Vehicles', 'Property', 'Investments', 'Loans & Debt'].map((label) => (
-                <span key={label} className="inline-flex items-center min-h-[36px] px-3 sm:px-3.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-brand-navy dark:text-slate-200 whitespace-nowrap">
+                <span
+                  key={label}
+                  className="inline-flex items-center justify-center min-h-[34px] px-2.5 sm:px-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] sm:text-xs font-bold text-brand-navy dark:text-slate-200 whitespace-nowrap shrink-0"
+                >
                   {label}
                 </span>
               ))}
