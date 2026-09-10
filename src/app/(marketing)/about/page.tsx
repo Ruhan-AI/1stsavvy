@@ -62,8 +62,8 @@ export default function AboutPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-brand-sky/40 hover:shadow-md transition-all">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-brand-sky flex items-center justify-center">
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-brand-sky/40 hover:shadow-md transition-all text-center">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-sky-50 dark:bg-sky-950/50 text-brand-sky flex items-center justify-center">
                 <Sparkles className="w-6 h-6" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Learn by Doing</h2>
@@ -74,8 +74,8 @@ export default function AboutPage() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-emerald-500/40 hover:shadow-md transition-all">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 flex items-center justify-center">
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-emerald-500/40 hover:shadow-md transition-all text-center">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 flex items-center justify-center">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Trust and Privacy First</h2>
@@ -86,8 +86,8 @@ export default function AboutPage() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-amber-400/40 hover:shadow-md transition-all">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 flex items-center justify-center">
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-amber-400/40 hover:shadow-md transition-all text-center">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 flex items-center justify-center">
                 <Target className="w-6 h-6" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">One Connected Ecosystem</h2>
@@ -98,8 +98,8 @@ export default function AboutPage() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-indigo-400/40 hover:shadow-md transition-all">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 flex items-center justify-center">
+            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-indigo-400/40 hover:shadow-md transition-all text-center">
+              <div className="w-12 h-12 shrink-0 mx-auto rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 flex items-center justify-center">
                 <Heart className="w-6 h-6" />
               </div>
               <h2 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Built for Legacy</h2>
@@ -114,7 +114,7 @@ export default function AboutPage() {
       {/* 3. NARRATIVE — §3 hero panel padding */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-slate-900 text-white space-y-4 sm:space-y-6">
+          <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-slate-900 text-white space-y-4 sm:space-y-6 text-center">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">The Vision</span>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold leading-tight">
               Financial clarity that begins with a single star and grows with your family for decades.

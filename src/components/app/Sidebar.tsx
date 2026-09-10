@@ -34,6 +34,14 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
   const { state, activeProfile, setActiveProfile } = useFirstSavvyStore();
   const [profileModalOpen, setProfileModalOpen] = useState(false);
 
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = () => { if (desktop.matches) onCloseMobile?.(); };
+    closeOnDesktop();
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
+  }, [onCloseMobile]);
+
   // Lock body scroll + close on Escape while mobile drawer is open
   useEffect(() => {
     if (!mobileOpen) return;
@@ -69,6 +77,7 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
   const handleProfileSelect = (profileId: string) => {
     setActiveProfile(profileId);
     setProfileModalOpen(false);
+    onCloseMobile?.();
     const profile = state.profiles.find((p) => p.id === profileId);
     if (profile?.isChild) {
       router.push(`/kid-view`);
@@ -87,7 +96,7 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
         {mobileOpen && (
           <button
             onClick={onCloseMobile}
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="lg:hidden inline-flex min-h-11 min-w-11 items-center justify-center p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
             aria-label="Close sidebar"
           >
             <X className="w-5 h-5" />
@@ -106,7 +115,7 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
               key={item.name}
               href={item.href}
               onClick={onCloseMobile}
-              className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
+              className={`flex min-h-11 lg:min-h-0 items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
                 isActive
                   ? 'bg-[#00B4D8] text-[#060D17] font-bold shadow-md shadow-cyan-500/25'
                   : 'text-slate-300 hover:bg-[#112238] hover:text-white'
@@ -140,7 +149,7 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
             <span>PARENT ACCOUNT</span>
             <button
               onClick={() => setProfileModalOpen(!profileModalOpen)}
-              className="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1 font-bold text-[11px]"
+              className="min-h-11 lg:min-h-0 text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1 font-bold text-[11px]"
             >
               <span>SWITCH</span>
               <span>⇄</span>
@@ -163,7 +172,7 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
 
           {/* Profile Switcher Popover */}
           {profileModalOpen && (
-            <div className="absolute bottom-full left-0 right-0 mb-2 bg-[#0C1929] border border-[#1E3452] rounded-xl p-2 shadow-2xl z-50 animate-in fade-in slide-in-from-bottom-2 space-y-1">
+            <div className="absolute bottom-full left-0 right-0 mb-2 max-h-[50dvh] overflow-y-auto overscroll-contain bg-[#0C1929] border border-[#1E3452] rounded-xl p-2 shadow-2xl z-50 animate-in fade-in slide-in-from-bottom-2 space-y-1">
               <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-2 py-1">
                 Switch Household Profile
               </div>
@@ -171,7 +180,7 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
                 <button
                   key={p.id}
                   onClick={() => handleProfileSelect(p.id)}
-                  className={`w-full p-2 rounded-lg flex items-center justify-between text-left text-xs font-semibold transition-colors ${
+                  className={`w-full min-h-11 p-2 rounded-lg flex items-center justify-between text-left text-xs font-semibold transition-colors ${
                     p.id === activeProfile.id
                       ? 'bg-cyan-500/20 text-cyan-300'
                       : 'hover:bg-[#15273F] text-slate-300 hover:text-white'
@@ -196,8 +205,8 @@ export function AppSidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) 
               <div className="pt-1.5 border-t border-[#1A2E47]">
                 <Link
                   href="/profiles"
-                  onClick={() => setProfileModalOpen(false)}
-                  className="w-full p-2 rounded-lg flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:bg-cyan-950/40"
+                  onClick={() => { setProfileModalOpen(false); onCloseMobile?.(); }}
+                  className="w-full min-h-11 p-2 rounded-lg flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:bg-cyan-950/40"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Manage Profiles</span>

@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/family',
     '/personal-finance',
     '/about',
-    '/contact',
     '/faq',
     '/updates',
     '/privacy',

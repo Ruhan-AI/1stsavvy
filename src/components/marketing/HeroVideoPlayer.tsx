@@ -498,14 +498,7 @@ export function HeroVideoPlayer() {
                   )}
                 </div>
               </>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Real App UX
-                </span>
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -551,7 +544,7 @@ export function HeroVideoPlayer() {
                   : 'pointer-events-none absolute inset-x-0 top-0 opacity-0'
               }`}
             >
-              <div data-demo-viewport data-lenis-prevent className="relative h-[min(540px,75svh)] min-h-[300px] w-full overflow-hidden overscroll-contain bg-[#f8fafc] lg:h-[660px] lg:overflow-y-auto">
+              <div data-demo-viewport data-lenis-prevent className="relative h-[min(540px,75svh)] min-h-[300px] w-full overflow-hidden bg-[#f8fafc] lg:h-[660px]">
                 <LiveAppDashboardPreview />
               </div>
             </div>

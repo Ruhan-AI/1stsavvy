@@ -69,13 +69,13 @@ export default function FAQPage() {
             Our support team is always happy to help with questions about household setup, bank linking, or child security.
           </p>
           <div className="pt-2">
-            <Link
-              href="/contact"
+            <a
+              href="mailto:support@firstsavvy.com"
               className="w-full sm:w-auto min-h-[44px] px-4 sm:px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-sm font-semibold inline-flex items-center justify-center gap-2"
             >
               <span>Contact Support</span>
               <ArrowRight className="w-4 h-4 shrink-0" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { PieChart, DollarSign, Calendar, TrendingDown, CheckCircle2, X, Check } from 'lucide-react';
 
 export function LiveBudgetSetupPreview() {
@@ -123,14 +124,14 @@ export function LiveBudgetSetupPreview() {
         </div>
 
         {/* Save Target Action */}
-        <button
-          type="button"
-          onClick={handleSave}
+        <Link
+          href="/signup"
           className="w-full py-2.5 rounded-xl bg-[#52A5CE] hover:bg-[#438fb6] text-white font-semibold shadow-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+          title="Sign up to save budget targets"
         >
           <CheckCircle2 className="w-4 h-4" />
           <span>Save Budget Target (${budgetLimit.toFixed(2)})</span>
-        </button>
+        </Link>
 
         {isSaved && (
           <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold text-center flex items-center justify-center gap-1.5 animate-in fade-in">

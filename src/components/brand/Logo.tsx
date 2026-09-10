@@ -23,21 +23,25 @@ export function Logo({
       // §4: 9px is below the legibility floor. 10px is allowed here only because the
       // tagline is uppercase; tighter tracking keeps it on one line at this size.
       sub: 'text-[10px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.2em]',
+      taglineMargin: 'mt-1.5 sm:mt-1.5',
     },
     md: {
       mark: 'w-11 h-11 sm:w-12 sm:h-12',
       text: 'text-2xl sm:text-3xl',
       sub: 'text-[10px] sm:text-[11px] tracking-[0.25em]',
+      taglineMargin: 'mt-1.5 sm:mt-2',
     },
     lg: {
       mark: 'w-14 h-14 sm:w-16 sm:h-16',
       text: 'text-3xl sm:text-4xl',
       sub: 'text-[11px] sm:text-xs tracking-[0.26em]',
+      taglineMargin: 'mt-2 sm:mt-2.5',
     },
     xl: {
       mark: 'w-16 h-16 sm:w-20 sm:h-20',
       text: 'text-4xl sm:text-5xl',
       sub: 'text-xs sm:text-sm tracking-[0.28em]',
+      taglineMargin: 'mt-2.5 sm:mt-3',
     },
   }[size];
 
@@ -68,7 +72,7 @@ export function Logo({
           </span>
           {showTagline && (
             <span
-              className={`font-sans font-bold uppercase whitespace-nowrap mt-1 sm:mt-1.5 ${dimensions.sub} text-[#2FA4E7] dark:text-[#38BDF8]`}
+              className={`font-sans font-bold uppercase whitespace-nowrap leading-none ${dimensions.taglineMargin} ${dimensions.sub} text-[#2FA4E7] dark:text-[#38BDF8]`}
             >
               STARS TO LEGACY
             </span>

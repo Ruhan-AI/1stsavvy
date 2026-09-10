@@ -1,5 +1,7 @@
 'use client';
 
+import { AppDialog } from '@/components/app/AppDialog';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -254,14 +256,13 @@ export default function ProfilesPage() {
 
       {/* ADD PROFILE MODAL WITH COPPA CONSENT */}
       {addModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-lg bg-white dark:bg-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-5 max-h-[90vh] overflow-y-auto">
+        <AppDialog title="Add Family Member" onClose={() => setAddModalOpen(false)} className="w-full max-w-lg bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-5 overflow-y-auto">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <h3 className="font-serif font-bold text-xl text-brand-navy dark:text-white">Add Family Member</h3>
                 <p className="text-xs text-slate-500">Configure access level for your household.</p>
               </div>
-              <button onClick={() => setAddModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
+              <button onClick={() => setAddModalOpen(false)} aria-label="Close dialog" className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -404,8 +405,7 @@ export default function ProfilesPage() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </AppDialog>
       )}
     </div>
   );

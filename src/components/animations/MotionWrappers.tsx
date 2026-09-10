@@ -1,7 +1,20 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useAnimation, useInView, type Variants } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
+
+// Keep the server and first client render identical before applying preferences.
+function useReducedMotionPreference() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(preference.matches);
+    update();
+    preference.addEventListener('change', update);
+    return () => preference.removeEventListener('change', update);
+  }, []);
+  return reduced;
+}
 
 /**
  * 1. FadeIn & Stagger Entrance
@@ -23,6 +36,9 @@ export function FadeIn({
   duration = 0.5,
   className = '',
 }: FadeInProps) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <div className={className}>{children}</div>;
+
   const getInitialPosition = () => {
     switch (direction) {
       case 'up': return { y: distance, opacity: 0 };
@@ -177,6 +193,9 @@ export function FloatingBadge({
   className?: string;
   duration?: number;
 }) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
       animate={{
@@ -272,6 +291,9 @@ export function TextReveal({
   stagger = 0.035,
   as: Component = 'span',
 }: TextRevealProps) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <span className={className}>{text}</span>;
+
   const words = text.split(' ');
 
   const containerVariants: Variants = {
@@ -333,6 +355,9 @@ export function LetterPullUp({
   className?: string;
   delay?: number;
 }) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <span className={className}>{text}</span>;
+
   const letters = text.split('');
 
   const container: Variants = {
@@ -401,6 +426,9 @@ export function ScrollReveal({
   duration = 0.65,
   once = true,
 }: ScrollRevealProps) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <div className={className}>{children}</div>;
+
   const getVariants = () => {
     switch (direction) {
       case 'up':
@@ -465,6 +493,9 @@ export function StaggerContainer({
   stagger?: number;
   delay?: number;
 }) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
       initial="hidden"
@@ -494,6 +525,9 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
 }) {
+  const reducedMotion = useReducedMotionPreference();
+  if (reducedMotion) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
       variants={{

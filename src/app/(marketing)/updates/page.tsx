@@ -72,12 +72,12 @@ export default function UpdatesPage() {
 
       {/* Timeline Grid */}
       <div className="space-y-6 sm:space-y-8 relative z-10">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">Active Roadmap</h2>
+        <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">Active Roadmap</h2>
         <div className="grid grid-cols-1 gap-4 sm:gap-6">
           {roadmapItems.map((item, i) => (
             <div
               key={i}
-              className="min-w-0 p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 hover:border-brand-sky/40 transition-colors"
+              className="text-center min-w-0 p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 hover:border-brand-sky/40 transition-colors"
             >
               <div className="min-w-0 space-y-2">
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">

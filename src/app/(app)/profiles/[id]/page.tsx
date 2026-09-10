@@ -1,5 +1,7 @@
 'use client';
 
+import { AppDialog } from '@/components/app/AppDialog';
+
 import React, { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -143,18 +145,18 @@ export default function ChildProfileDetailPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/profiles"
-            className="inline-flex items-center min-h-[44px] p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            aria-label="Back to profiles" className="inline-flex shrink-0 items-center justify-center min-h-[44px] min-w-[44px] p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div
-            className="w-12 h-12 rounded-2xl text-white text-lg font-bold flex items-center justify-center shadow-xs"
+            className="w-12 h-12 shrink-0 rounded-2xl text-white text-lg font-bold flex items-center justify-center shadow-xs"
             style={{ backgroundColor: child.avatarColor }}
           >
             {child.displayName.charAt(0)}
           </div>
-          <div>
-            <div className="flex items-center gap-2">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-serif font-bold text-brand-navy dark:text-white">
                 {child.displayName}
               </h1>
@@ -191,7 +193,7 @@ export default function ChildProfileDetailPage() {
       </div>
 
       {/* 2. Subtabs Navigation */}
-      <div className="flex gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+      <div className="flex gap-2 overflow-x-auto overscroll-x-contain no-scrollbar border-b border-slate-200 dark:border-slate-800 pb-2">
         {[
           { id: 'tasks', label: 'Tasks & Chores', count: childTasks.length },
           { id: 'goals', label: 'Goals & Rewards', count: childGoals.length },
@@ -201,7 +203,7 @@ export default function ChildProfileDetailPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 ${
+            className={`shrink-0 whitespace-nowrap min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 ${
               activeTab === tab.id
                 ? 'bg-brand-navy text-white shadow-xs dark:bg-brand-sky dark:text-slate-900'
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
@@ -219,7 +221,7 @@ export default function ChildProfileDetailPage() {
 
       {/* 3. SUBTAB: TASKS & CHORES */}
       {activeTab === 'tasks' && (
-        <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="p-4 sm:p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="font-serif font-bold text-lg text-brand-navy dark:text-white">Assigned Responsibilities</h3>
             <button
@@ -261,7 +263,7 @@ export default function ChildProfileDetailPage() {
         <div className="space-y-6">
           {/* Pending Redemptions */}
           {childRedemptions.filter((r) => r.status === 'pending').length > 0 && (
-            <div className="p-6 rounded-3xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 space-y-3">
+            <div className="p-4 sm:p-6 rounded-3xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 space-y-3">
               <h3 className="font-serif font-bold text-base text-amber-900 dark:text-amber-200">
                 Pending Reward Redemptions
               </h3>
@@ -304,7 +306,7 @@ export default function ChildProfileDetailPage() {
 
       {/* 5. SUBTAB: STAR LEDGER AUDIT */}
       {activeTab === 'ledger' && (
-        <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="p-4 sm:p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
             <div>
               <h3 className="font-serif font-bold text-lg text-brand-navy dark:text-white">Immutable Star Ledger</h3>
@@ -347,7 +349,7 @@ export default function ChildProfileDetailPage() {
       {activeTab === 'settings' && (
         <div className="space-y-6">
           {/* COPPA Consent Record Box */}
-          <div className="p-6 rounded-3xl bg-sky-50/80 dark:bg-sky-950/40 border border-brand-sky/30 space-y-3">
+          <div className="p-4 sm:p-6 rounded-3xl bg-sky-50/80 dark:bg-sky-950/40 border border-brand-sky/30 space-y-3">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-brand-sky" />
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
@@ -363,20 +365,20 @@ export default function ChildProfileDetailPage() {
           </div>
 
           {/* Reset PIN Form */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div className="p-4 sm:p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
             <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Reset Child PIN</h3>
             <p className="text-xs text-slate-500">
               PINs are stored as cryptographically hashed values. As a parent, you can overwrite and set a new 4-digit PIN for your child.
             </p>
 
-            <form onSubmit={handleResetPin} className="flex gap-2 max-w-sm">
+            <form onSubmit={handleResetPin} className="flex flex-col sm:flex-row gap-2 max-w-sm">
               <input
                 type="password"
                 maxLength={4}
                 value={newPin}
                 onChange={(e) => setNewPin(e.target.value)}
-                placeholder="New 4-digit PIN"
-                className="min-h-[44px] w-40 font-mono tracking-[0.4em] text-center px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-base sm:text-xs text-brand-navy dark:text-white"
+                placeholder="New 4-digit PIN" aria-label="New 4-digit PIN" inputMode="numeric"
+                className="min-h-[44px] w-full sm:w-40 min-w-0 font-mono text-center px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-base sm:text-xs text-brand-navy dark:text-white"
               />
               <button
                 type="submit"
@@ -392,7 +394,7 @@ export default function ChildProfileDetailPage() {
           </div>
 
           {/* Data Export & Deletion */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div className="p-4 sm:p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
             <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Parent Rights & Data Actions</h3>
             <div className="flex flex-col sm:flex-row gap-3">
               <button
@@ -417,8 +419,7 @@ export default function ChildProfileDetailPage() {
 
       {/* AWARD / DEDUCT STARS MODAL */}
       {awardModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-sm bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+        <AppDialog title="Adjust stars" onClose={() => setAwardModalOpen(false)} className="w-full max-w-sm bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">
               {isDeduction ? 'Deduct Stars' : 'Award Stars to'} {child.displayName}
             </h3>
@@ -463,14 +464,12 @@ export default function ChildProfileDetailPage() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </AppDialog>
       )}
 
       {/* CREATE TASK MODAL */}
       {taskModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+        <AppDialog title={`Create Task for ${child.displayName}`} onClose={() => setTaskModalOpen(false)} className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Create Task for {child.displayName}</h3>
 
             <form onSubmit={handleCreateTask} className="space-y-3 text-xs">
@@ -520,9 +519,9 @@ export default function ChildProfileDetailPage() {
                   id="approval"
                   checked={requiresApproval}
                   onChange={(e) => setRequiresApproval(e.target.checked)}
-                  className="rounded text-brand-sky"
+                  className="w-5 h-5 shrink-0 rounded text-brand-sky"
                 />
-                <label htmlFor="approval" className="text-slate-700 dark:text-slate-300">
+                <label htmlFor="approval" className="flex min-h-11 items-center text-slate-700 dark:text-slate-300">
                   Require parent approval before awarding stars
                 </label>
               </div>
@@ -543,14 +542,12 @@ export default function ChildProfileDetailPage() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </AppDialog>
       )}
 
       {/* DELETE / ANONYMIZE MODAL */}
       {deleteModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+        <AppDialog title="Delete Child Profile" onClose={() => setDeleteModalOpen(false)} className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <h3 className="font-serif font-bold text-base text-rose-600">Delete Child Profile</h3>
             <p className="text-xs text-slate-600 dark:text-slate-300">
               Please choose how you would like to handle {child.displayName}'s records:
@@ -599,8 +596,7 @@ export default function ChildProfileDetailPage() {
                 Confirm Deletion
               </button>
             </div>
-          </div>
-        </div>
+          </AppDialog>
       )}
     </div>
   );

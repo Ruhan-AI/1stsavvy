@@ -1,5 +1,7 @@
 'use client';
 
+import { AppDialog } from '@/components/app/AppDialog';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useFirstSavvyStore } from '@/lib/store';
@@ -57,7 +59,7 @@ export default function DashboardPage() {
   ]);
 
   // Star balance calculation
-  const [starBalance, setStarBalance] = useState(45);
+  const [starBalance, setStarBalance] = useState(42);
   const targetStars = 60;
 
   // Modal for + Assign Chore
@@ -79,7 +81,7 @@ export default function DashboardPage() {
           // Trigger toast message
           setToastMessage(
             nextCompleted
-              ? `⭐ Awesome! Emma earned +${c.stars} Stars for "${c.title}"!`
+              ? `⭐ Awesome! Leo earned +${c.stars} Stars for "${c.title}"!`
               : `Chore "${c.title}" marked pending.`
           );
           setTimeout(() => setToastMessage(null), 3500);
@@ -108,7 +110,7 @@ export default function DashboardPage() {
     setNewChoreTitle('');
     setAssignChoreModalOpen(false);
 
-    setToastMessage(`✨ New chore "${newChore.title}" assigned to Emma with +${newChore.stars}★ reward!`);
+    setToastMessage(`✨ New chore "${newChore.title}" assigned to Leo with +${newChore.stars}★ reward!`);
     setTimeout(() => setToastMessage(null), 4000);
   };
 
@@ -197,10 +199,10 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Card 3: Emma's Stars Balance */}
+        {/* Card 3: Leo's Stars Balance */}
         <div className="bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md hover:border-[#1E3A5F] transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 tracking-wide">Emma&apos;s Stars Balance</span>
+            <span className="text-xs font-semibold text-slate-400 tracking-wide">Leo&apos;s Stars Balance</span>
             <span className="text-xs font-bold text-amber-400 flex items-center gap-1">
               <span>★ Supervised</span>
             </span>
@@ -210,12 +212,12 @@ export default function DashboardPage() {
             <span className="text-slate-300 font-normal text-2xl sm:text-3xl"> / {targetStars} Stars Target</span>
           </div>
           <div className="text-xs font-medium text-[#38BDF8] mt-2 flex items-center gap-1">
-            <span>{Math.round((starBalance / targetStars) * 100)}% toward Nintendo Switch Goal</span>
+            <span>{Math.round((starBalance / targetStars) * 100)}% toward Gaming Console Goal</span>
           </div>
         </div>
       </div>
 
-      {/* 3. Bottom Split Section: Recent Transactions (Left) + Emma's Active Chores (Right) */}
+      {/* 3. Bottom Split Section: Recent Transactions (Left) + Leo's Active Chores (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Recent Transactions (7 cols) */}
         <div className="lg:col-span-7 bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md space-y-4">
@@ -251,11 +253,11 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Row 2: Whole Foods Market */}
+            {/* Row 2: Fresh Market */}
             <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
               <div>
                 <div className="font-bold text-sm text-white">
-                  Whole Foods Market — Columbus
+                  Fresh Market — Midtown
                 </div>
                 <div className="text-xs text-slate-400 mt-0.5">
                   Groceries • Aug 21, 2026
@@ -266,26 +268,26 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Row 3: Rocket Mortgage Escrow */}
+            {/* Row 3: Home Mortgage Escrow */}
             <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
               <div>
                 <div className="font-bold text-sm text-white">
-                  Rocket Mortgage Escrow
+                  Home Mortgage Escrow
                 </div>
                 <div className="text-xs text-slate-400 mt-0.5">
                   Housing • Aug 18, 2026
                 </div>
               </div>
               <div className="font-mono font-bold text-sm text-slate-200">
-                -$2,450.00
+                -$1,850.00
               </div>
             </div>
 
-            {/* Row 4: Shell Oil Gas */}
+            {/* Row 4: City Fuel */}
             <div className="p-3.5 rounded-xl bg-[#08121E] border border-[#122238] flex items-center justify-between gap-3 hover:border-cyan-500/30 transition-colors">
               <div>
                 <div className="font-bold text-sm text-white">
-                  Shell Oil — Fuel Station
+                  City Fuel — Station
                 </div>
                 <div className="text-xs text-slate-400 mt-0.5">
                   Vehicle & Gas • Aug 17, 2026
@@ -313,13 +315,13 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Right: Emma's Active Chores (5 cols) */}
+        {/* Right: Leo's Active Chores (5 cols) */}
         <div className="lg:col-span-5 bg-[#0C1826] border border-[#16273E] rounded-2xl p-5 sm:p-6 shadow-md space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
               <h3 className="font-bold text-base text-white">
-                Emma&apos;s Active Chores
+                Leo&apos;s Active Chores
               </h3>
             </div>
             <span className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-400/10 text-amber-300 border border-amber-400/25">
@@ -373,11 +375,11 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          {/* Bottom quick view for Emma's reward goal */}
+          {/* Bottom quick view for Leo's reward goal */}
           <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/30 to-cyan-950/30 border border-amber-500/30 flex items-center justify-between text-xs mt-2">
             <div className="flex items-center gap-2">
               <Gamepad2 className="w-4 h-4 text-amber-400 shrink-0" />
-              <span className="text-slate-300 font-medium">Goal: Nintendo Switch ({starBalance}/{targetStars}★)</span>
+              <span className="text-slate-300 font-medium">Goal: Gaming Console ({starBalance}/{targetStars}★)</span>
             </div>
             <Link
               href="/kid-view"
@@ -398,7 +400,7 @@ export default function DashboardPage() {
               Household Net Worth Trend
             </h3>
             <p className="text-xs text-slate-400">
-              Aggregated from Chase, Vanguard, and Rocket Mortgage.
+              Aggregated from Verified Financial Institutions.
             </p>
           </div>
           <Link
@@ -451,8 +453,7 @@ export default function DashboardPage() {
 
       {/* 5. Assign Chore Modal Dialog */}
       {assignChoreModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="bg-[#0C1929] border border-[#1E3452] rounded-2xl w-full max-w-md p-6 shadow-2xl relative space-y-4 animate-in zoom-in-95 duration-150">
+        <AppDialog title="Assign New Chore" onClose={() => setAssignChoreModalOpen(false)} className="bg-[#0C1929] border border-[#1E3452] rounded-2xl w-full max-w-md p-4 sm:p-6 shadow-2xl relative space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-[#16273E]">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-cyan-400" />
@@ -460,7 +461,7 @@ export default function DashboardPage() {
               </div>
               <button
                 onClick={() => setAssignChoreModalOpen(false)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
+                aria-label="Close dialog" className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -477,7 +478,7 @@ export default function DashboardPage() {
                   value={newChoreTitle}
                   onChange={(e) => setNewChoreTitle(e.target.value)}
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                  className="min-h-[44px] w-full min-w-0 px-3.5 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-white text-base lg:text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                 />
               </div>
 
@@ -489,7 +490,7 @@ export default function DashboardPage() {
                   <select
                     value={newChoreCadence}
                     onChange={(e) => setNewChoreCadence(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                    className="min-h-[44px] w-full min-w-0 px-3 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-white text-base lg:text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                   >
                     <option value="Daily">Daily</option>
                     <option value="Morning">Morning</option>
@@ -506,7 +507,7 @@ export default function DashboardPage() {
                   <select
                     value={newChoreStars}
                     onChange={(e) => setNewChoreStars(Number(e.target.value))}
-                    className="w-full px-3 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-amber-400 font-bold text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                    className="min-h-[44px] w-full min-w-0 px-3 py-2.5 rounded-xl bg-[#08121E] border border-[#172C46] text-amber-400 font-bold text-base lg:text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                   >
                     <option value={1}>⭐ +1 Star</option>
                     <option value={2}>⭐⭐ +2 Stars</option>
@@ -521,12 +522,12 @@ export default function DashboardPage() {
                 <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                   Assignee
                 </label>
-                <div className="p-3 rounded-xl bg-[#08121E] border border-[#172C46] flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-[#08121E] border border-[#172C46] flex flex-wrap gap-2 items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center">
                       E
                     </div>
-                    <span className="text-sm font-semibold text-white">Emma (Child)</span>
+                    <span className="text-sm font-semibold text-white">Leo (Child)</span>
                   </div>
                   <span className="text-xs font-bold text-amber-400">Current Balance: {starBalance}★</span>
                 </div>
@@ -536,7 +537,7 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setAssignChoreModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white"
+                  className="min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white"
                 >
                   Cancel
                 </button>
@@ -548,8 +549,7 @@ export default function DashboardPage() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </AppDialog>
       )}
     </div>
   );

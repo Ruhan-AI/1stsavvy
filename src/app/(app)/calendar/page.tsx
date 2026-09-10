@@ -1,5 +1,7 @@
 'use client';
 
+import { AppDialog } from '@/components/app/AppDialog';
+
 import React, { useState } from 'react';
 import { useFirstSavvyStore } from '@/lib/store';
 import { formatMoney } from '@/lib/utils/format';
@@ -20,6 +22,7 @@ import {
 export default function CalendarPage() {
   const { state } = useFirstSavvyStore();
   const [viewMode, setViewMode] = useState<'month' | 'day'>('month');
+  const [selectedDate, setSelectedDate] = useState('2026-08-21');
   const [currentDate, setCurrentDate] = useState(new Date(2026, 7, 21)); // August 2026
   const [filterType, setFilterType] = useState<string>('all');
   const [eventModalOpen, setEventModalOpen] = useState(false);
@@ -143,8 +146,11 @@ export default function CalendarPage() {
               const isToday = dayNum === 21;
 
               return (
-                <div
+                <button
                   key={dayNum}
+                  type="button"
+                  aria-label={`View events for ${dateStr}`}
+                  onClick={() => { setSelectedDate(dateStr); setViewMode('day'); }}
                   className={`min-h-16 sm:min-h-24 p-1 sm:p-2 rounded-lg sm:rounded-xl border transition-all flex flex-col justify-between ${
                     isToday
                       ? 'bg-sky-50/60 dark:bg-sky-950/40 border-brand-sky'
@@ -201,7 +207,7 @@ export default function CalendarPage() {
                       </div>
                     ))}
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -211,13 +217,13 @@ export default function CalendarPage() {
         <div className="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="border-b border-slate-100 dark:border-slate-800 pb-3">
             <h2 className="font-serif font-bold text-xl text-brand-navy dark:text-white">
-              Friday, August 21, 2026 (Today)
+              {new Date(`${selectedDate}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
             </h2>
           </div>
 
           <div className="space-y-3">
             {filteredEvents
-              .filter((e) => e.date === '2026-08-21')
+              .filter((e) => e.date === selectedDate)
               .map((ev, idx) => (
                 <div
                   key={idx}
@@ -249,11 +255,10 @@ export default function CalendarPage() {
 
       {/* ADD EVENT MODAL */}
       {eventModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+        <AppDialog title="Add Calendar Event / Bill" onClose={() => setEventModalOpen(false)} className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Add Calendar Event / Bill</h3>
-              <button onClick={() => setEventModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
+              <button onClick={() => setEventModalOpen(false)} aria-label="Close dialog" className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -313,8 +318,7 @@ export default function CalendarPage() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </AppDialog>
       )}
     </div>
   );

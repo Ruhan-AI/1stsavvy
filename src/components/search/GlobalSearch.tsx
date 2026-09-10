@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { AppDialog } from '@/components/app/AppDialog';
 import { useRouter } from 'next/navigation';
 import { useFirstSavvyStore } from '@/lib/store';
 import { formatMoney } from '@/lib/utils/format';
@@ -25,31 +26,6 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   const router = useRouter();
   const { state } = useFirstSavvyStore();
   const [query, setQuery] = useState('');
-
-  // Handle Escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        // toggle handled by caller
-      }
-    };
-    if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
-
-  // Lock body scroll while the command sheet is open (spec §10)
-  useEffect(() => {
-    if (!isOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -98,13 +74,7 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-start justify-center p-0 sm:px-4 sm:pt-20 animate-in fade-in duration-150">
-      <div
-        className="w-full sm:max-w-2xl max-h-[85dvh] bg-white dark:bg-[#1E293B] rounded-t-2xl sm:rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Search household"
-      >
+    <AppDialog title="Search household" onClose={onClose} className="max-w-2xl p-0 bg-white dark:bg-[#1E293B] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col">
         {/* Search Input Bar */}
         <div className="shrink-0 p-3 sm:p-4 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2 sm:gap-3">
           <Search className="w-5 h-5 text-brand-sky shrink-0" />
@@ -128,6 +98,10 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           <kbd className="hidden sm:inline-block shrink-0 px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono text-slate-500 border border-slate-200 dark:border-slate-700">
             ESC
           </kbd>
+          <button type="button" onClick={onClose} aria-label="Close search"
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Results Area */}
@@ -249,7 +223,6 @@ export function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
             </div>
           )}
         </div>
-      </div>
-    </div>
+    </AppDialog>
   );
 }

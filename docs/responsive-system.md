@@ -126,6 +126,8 @@ Chip / filter pill min-h-[36px] px-3
 
 **Inputs must be `text-base` (16 px) at base width** to stop iOS Safari from zooming on
 focus; step down with `sm:text-sm` if the design calls for smaller text on desktop.
+On coarse pointers, `globals.css` keeps these `text-base` fields at 16 px even after
+rotation crosses `sm`. Larger PIN text remains unchanged.
 
 Links inside a running paragraph are exempt — the rule applies to standalone controls
 and list-item links.
@@ -221,6 +223,12 @@ Mobile drawer   w-[86vw] max-w-xs h-[100dvh] overflow-y-auto
 Sheets open from the bottom on phones (`items-end`) and centre from `sm` up. Always use
 `dvh`, never `vh`, for anything that must fit the mobile viewport. Lock body scroll
 while an overlay is open.
+
+App forms and household search use `components/app/AppDialog.tsx`. It portals the
+panel outside the page container, handles focus/Escape/scroll locking, and follows
+`visualViewport` so the panel stays within the visible area when a phone keyboard or
+zoom changes it. Phone sheets include the bottom safe area and scroll internally;
+the caller supplies the title, close handler, panel colours and desktop maximum width.
 
 ---
 

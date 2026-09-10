@@ -26,12 +26,12 @@ export default function AuthErrorPage() {
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Sign In</span>
           </Link>
-          <Link
-            href="/contact"
+          <a
+            href="mailto:support@firstsavvy.com"
             className="inline-flex items-center min-h-[44px] px-6 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300"
           >
             Contact Support
-          </Link>
+          </a>
         </div>
       </div>
     </div>

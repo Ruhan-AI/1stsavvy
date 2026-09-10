@@ -64,10 +64,16 @@ const field =
 const ghostBtn =
   'inline-flex min-h-[36px] shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer';
 const smallBtn =
-  'shrink-0 rounded border border-slate-300 px-2 py-0.5 text-[10px] font-bold text-slate-600 hover:bg-slate-100 cursor-pointer';
+  'shrink-0 rounded border border-slate-300 px-2 py-0.5 text-[11px] font-bold text-slate-600 hover:bg-slate-100 cursor-pointer';
 
 const money2 = (n: number) =>
   (n < 0 ? '-' : '') + '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const redirectToSignup = () => {
+  if (typeof window !== 'undefined') {
+    window.location.href = '/signup';
+  }
+};
 
 function PageHeader({
   icon: Icon,
@@ -99,7 +105,7 @@ function PageHeader({
       </div>
       <div className="flex shrink-0 flex-wrap items-center gap-2">
         {secondary && (
-          <button type="button" onClick={onSecondary} className={ghostBtn}>
+          <button type="button" onClick={redirectToSignup} className={ghostBtn}>
             <Pencil className="h-3.5 w-3.5 text-slate-700" />
             <span className="whitespace-nowrap">{secondary}</span>
           </button>
@@ -107,7 +113,7 @@ function PageHeader({
         {action && (
           <button
             type="button"
-            onClick={onAction}
+            onClick={redirectToSignup}
             className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center gap-1.5 rounded-lg bg-[#52A5CE] px-3 text-xs font-bold text-white shadow-2xs transition-colors hover:bg-[#438fb6]"
           >
             <Plus className="h-3.5 w-3.5" />
@@ -187,11 +193,11 @@ function Panel({
   return (
     <div className={`${card} space-y-2 p-4`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{title}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{title}</p>
         {action && (
           <button
             type="button"
-            onClick={onAction}
+            onClick={redirectToSignup}
             className="cursor-pointer text-[11px] font-semibold text-[#52A5CE] hover:underline"
           >
             {action}
@@ -208,11 +214,11 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-700">{children}</h4>;
 }
 
-function Row({ title, meta, value, onClick }: { title: string; meta: string; value: string; onClick?: () => void }) {
+function Row({ title, meta, value }: { title: string; meta: string; value: string; onClick?: () => void }) {
   return (
     <button
       type="button"
-      onClick={onClick}
+      onClick={redirectToSignup}
       className="group flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg bg-slate-50 px-2.5 py-2 text-left transition-colors hover:bg-slate-100"
     >
       {/* §8: at 320px these cards are too narrow to truncate without losing the label,
@@ -221,7 +227,7 @@ function Row({ title, meta, value, onClick }: { title: string; meta: string; val
         <span className="block break-words text-[11px] font-semibold text-slate-800 line-clamp-2 group-hover:text-[#52A5CE] sm:truncate sm:line-clamp-none">
           {title}
         </span>
-        <span className="block break-words text-[10px] text-slate-400 line-clamp-2 sm:truncate sm:line-clamp-none">
+        <span className="block break-words text-[11px] text-slate-400 line-clamp-2 sm:truncate sm:line-clamp-none">
           {meta}
         </span>
       </span>
@@ -248,7 +254,7 @@ function StaticRow({
     <div className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-2.5 py-2">
       <span className="min-w-0 flex-1">
         <span className="block break-words text-[11px] font-semibold text-slate-800 line-clamp-2">{title}</span>
-        {meta && <span className="block break-words text-[10px] text-slate-400 line-clamp-2">{meta}</span>}
+        {meta && <span className="block break-words text-[11px] text-slate-400 line-clamp-2">{meta}</span>}
       </span>
       {value && (
         <span className={`shrink-0 whitespace-nowrap text-[11px] font-bold tabular-nums ${amountClass(value)}`}>
@@ -274,10 +280,14 @@ function NotifyPlaceholder({ icon: Icon, tint, body }: { icon: React.ElementType
       </div>
       <h2 className="mb-2 text-xl font-bold text-slate-900">Coming Soon</h2>
       <p className="mx-auto mb-6 max-w-md text-sm text-slate-500">{body}</p>
-      <span className="inline-flex min-h-[36px] cursor-not-allowed items-center gap-2 rounded-lg border border-slate-300 px-3 text-xs font-semibold text-slate-400">
+      <button
+        type="button"
+        onClick={redirectToSignup}
+        className="inline-flex min-h-[36px] cursor-pointer items-center gap-2 rounded-lg bg-[#52A5CE] px-4 text-xs font-bold text-white shadow-2xs hover:bg-[#438fb6]"
+      >
         <Bell className="h-3.5 w-3.5" />
-        Notify Me When Ready
-      </span>
+        Sign Up to Get Notified
+      </button>
     </div>
   );
 }
@@ -294,6 +304,13 @@ function GoalsPage() {
         </div>
         <h1 className="mb-3 text-2xl font-semibold text-slate-800 sm:text-3xl">Goals &amp; Savings</h1>
         <p className="text-lg text-slate-500 sm:text-xl">Coming Soon</p>
+        <button
+          type="button"
+          onClick={redirectToSignup}
+          className="mt-4 inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-xl bg-[#52A5CE] px-5 text-sm font-bold text-white shadow-xs hover:bg-[#438fb6]"
+        >
+          Sign Up to Unlock
+        </button>
       </div>
     </div>
   );
@@ -303,7 +320,8 @@ function GoalsPage() {
  * Router
  * ------------------------------------------------------------------ */
 
-export function DemoAppPage({ nav, onAction }: Props) {
+export function DemoAppPage({ nav }: Props) {
+  const onAction = redirectToSignup;
   switch (nav) {
     case 'Banking':
       return <BankingPage onAction={onAction} />;
@@ -318,7 +336,7 @@ export function DemoAppPage({ nav, onAction }: Props) {
         <NotifyPlaceholder
           icon={CreditCard}
           tint="bg-[#52A5CE]/20 text-[#52A5CE]"
-          body="Credit Score tracking is currently under development. We're working hard to bring you comprehensive credit monitoring features."
+          body="Credit Score tracking is currently under development. Sign up to get early access as soon as it launches."
         />
       );
     case 'Net Worth':
@@ -384,14 +402,14 @@ const CAT_COLOR: Record<string, string> = {
 
 const AUDIT_TRAIL = [
   { ref: 'AU-0003', what: 'Bank balance refreshed from Plaid', when: 'Sep 4, 2026', who: 'System' },
-  { ref: 'AU-0002', what: 'Account nickname changed to "Chase Checking"', when: 'Aug 31, 2026', who: 'Simon Lab' },
-  { ref: 'AU-0001', what: 'Account linked through Plaid', when: 'Aug 31, 2026', who: 'Simon Lab' },
+  { ref: 'AU-0002', what: 'Account nickname changed to "Demo Checking"', when: 'Aug 31, 2026', who: 'Demo Admin' },
+  { ref: 'AU-0001', what: 'Account linked through Plaid', when: 'Aug 31, 2026', who: 'Demo Admin' },
 ];
 
 const SEED_ACCOUNTS: Account[] = [
-  { id: 'a1', code: '1100', name: 'Chase Checking', cls: 'Asset', type: 'Bank Account', detail: 'Checking', owner: 'Both', savvy: 5184, bank: 12787.24, institution: 'Chase', last4: '1234', pending: 14 },
-  { id: 'a2', code: '1200', name: 'Chase Savings', cls: 'Asset', type: 'Bank Account', detail: 'Checking', owner: 'Both', savvy: 11800, bank: 12841, institution: 'Chase', last4: '9021', pending: 0 },
-  { id: 'a3', code: '2100', name: 'Citi Credit Card', cls: 'Liability', type: 'Credit Card', detail: 'Credit Card', owner: 'Both', savvy: -2740.21, bank: -2607.35, institution: 'Citi', last4: '8812', pending: 3 },
+  { id: 'a1', code: '1100', name: 'Demo Checking', cls: 'Asset', type: 'Bank Account', detail: 'Checking', owner: 'Both', savvy: 5000, bank: 5000, institution: 'Premier National Bank', last4: '1001', pending: 0 },
+  { id: 'a2', code: '1200', name: 'Demo High-Yield Savings', cls: 'Asset', type: 'Bank Account', detail: 'Savings', owner: 'Both', savvy: 15000, bank: 15000, institution: 'Premier National Bank', last4: '2002', pending: 0 },
+  { id: 'a3', code: '2100', name: 'Demo Rewards Credit Card', cls: 'Liability', type: 'Credit Card', detail: 'Credit Card', owner: 'Both', savvy: -1250, bank: -1250, institution: 'Premier National Bank', last4: '3003', pending: 0 },
   { id: 'a4', code: '3000', name: 'Opening Balance', cls: 'Equity', type: 'Equity', detail: 'Opening Balance', owner: 'Both', savvy: null, bank: 0, institution: '—', last4: '——', pending: 0 },
   { id: 'a5', code: '6100', name: 'Allowances', cls: 'Expense', type: 'Personal Expense', detail: 'Family & Lifestyle', owner: 'Both', savvy: null, bank: 0, institution: '—', last4: '——', pending: 0 },
 ];
@@ -401,23 +419,23 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
   const [monthIdx, setMonthIdx] = React.useState(MONTHS.length - 1);
   const [accounts, setAccounts] = React.useState<Account[]>(SEED_ACCOUNTS);
   const [txns, setTxns] = React.useState<Txn[]>([
-    { id: 't1', name: 'Whole Foods Market', cat: 'Groceries', when: 'Yesterday', amount: -164.5, accountId: 'a1', posted: false },
-    { id: 't2', name: 'Acme Corp Payroll', cat: 'Income', when: 'Aug 22', amount: 4750, accountId: 'a1', posted: true },
-    { id: 't3', name: 'Rocket Mortgage Escrow', cat: 'Housing', when: 'Aug 18', amount: -2450, accountId: 'a1', posted: false },
-    { id: 't4', name: 'Interest Payment', cat: 'Income', when: 'Aug 31', amount: 14.76, accountId: 'a2', posted: true },
-    { id: 't5', name: 'Tesla Supercharger', cat: 'Transportation', when: 'Aug 19', amount: -18.2, accountId: 'a3', posted: false },
-    { id: 't6', name: 'Netflix Subscription', cat: 'Entertainment', when: 'Aug 15', amount: -15.49, accountId: 'a1', posted: true },
-    { id: 't7', name: 'Kroger', cat: 'Groceries', when: 'Aug 12', amount: -96.3, accountId: 'a1', posted: true },
+    { id: 't1', name: 'Supermarket Groceries', cat: 'Groceries', when: 'Yesterday', amount: -125.5, accountId: 'a1', posted: false },
+    { id: 't2', name: 'Monthly Salary Deposit', cat: 'Income', when: 'Aug 22', amount: 4500, accountId: 'a1', posted: true },
+    { id: 't3', name: 'Home Mortgage Escrow', cat: 'Housing', when: 'Aug 18', amount: -1850, accountId: 'a1', posted: false },
+    { id: 't4', name: 'Savings Interest Payment', cat: 'Income', when: 'Aug 31', amount: 15.00, accountId: 'a2', posted: true },
+    { id: 't5', name: 'EV Charging Station', cat: 'Transportation', when: 'Aug 19', amount: -22.0, accountId: 'a3', posted: false },
+    { id: 't6', name: 'Streaming Subscription', cat: 'Entertainment', when: 'Aug 15', amount: -14.99, accountId: 'a1', posted: true },
+    { id: 't7', name: 'Local Farmers Market', cat: 'Groceries', when: 'Aug 12', amount: -65.0, accountId: 'a1', posted: true },
   ]);
   const [rules, setRules] = React.useState<Rule[]>([
-    { id: 'r1', match: 'Description contains "Whole Foods"', category: 'Groceries', on: true },
-    { id: 'r2', match: 'Description contains "Shell"', category: 'Gas & Fuel', on: true },
-    { id: 'r3', match: 'Amount > $2,000 and recurring', category: 'Housing', on: false },
+    { id: 'r1', match: 'Description contains "Supermarket"', category: 'Groceries', on: true },
+    { id: 'r2', match: 'Description contains "Charging"', category: 'Transportation', on: true },
+    { id: 'r3', match: 'Amount > $1,500 and recurring', category: 'Housing', on: false },
   ]);
   const [recurring, setRecurring] = React.useState<Recurring[]>([
-    { id: 'p1', name: 'Rocket Mortgage', next: 'Sep 18', amount: -2450, paused: false },
-    { id: 'p2', name: 'Netflix Subscription', next: 'Sep 22', amount: -15.49, paused: false },
-    { id: 'p3', name: 'Acme Corp Payroll', next: 'Sep 30', amount: 4750, paused: false },
+    { id: 'p1', name: 'Home Mortgage Escrow', next: 'Sep 18', amount: -1850, paused: false },
+    { id: 'p2', name: 'Streaming Subscription', next: 'Sep 22', amount: -14.99, paused: false },
+    { id: 'p3', name: 'Monthly Salary Deposit', next: 'Sep 30', amount: 4500, paused: false },
   ]);
 
   const [filterAccount, setFilterAccount] = React.useState<string | null>(null);
@@ -515,7 +533,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
         title="Banking"
         subtitle="Spending, transactions, rules, recurring payments and accounts."
         action={addOpen ? 'Close' : tab === 'Accounts' ? 'Link Account' : 'Add Account'}
-        onAction={() => setAddOpen((v) => !v)}
+        onAction={redirectToSignup}
       />
 
       <div className="flex flex-wrap items-center gap-2">
@@ -530,9 +548,9 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
       </div>
 
       {addOpen && (
-        <form onSubmit={addAccount} className={`${card} grid grid-cols-1 gap-3 p-4 sm:grid-cols-4`}>
+        <form onSubmit={(e) => { e.preventDefault(); redirectToSignup(); }} className={`${card} grid grid-cols-1 gap-3 p-4 sm:grid-cols-4`}>
           <label className="block sm:col-span-2">
-            <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">Account name</span>
+            <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">Account name</span>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -541,7 +559,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">Type</span>
+            <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">Type</span>
             <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className={field}>
               {['Checking', 'Savings', 'Credit Card', 'Brokerage'].map((t) => (
                 <option key={t}>{t}</option>
@@ -549,7 +567,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
             </select>
           </label>
           <label className="block">
-            <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">Balance</span>
+            <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">Balance</span>
             <div className="flex gap-2">
               <input
                 value={form.balance}
@@ -574,7 +592,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
           <div className={`${card} p-4 sm:p-5`}>
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                   Spending · {MONTHS[monthIdx]}
                 </p>
                 <p className="mt-1 whitespace-nowrap text-2xl font-bold tabular-nums text-slate-900">
@@ -621,7 +639,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
                       style={{ width: `${(r.v / spending.sum) * 100}%`, backgroundColor: CAT_COLOR[r.cat] ?? '#94a3b8' }}
                     />
                   </div>
-                  <span className="shrink-0 whitespace-nowrap text-[10px] font-bold tabular-nums text-slate-500">
+                  <span className="shrink-0 whitespace-nowrap text-[11px] font-bold tabular-nums text-slate-500">
                     {Math.round((r.v / spending.sum) * 100)}%
                   </span>
                 </div>
@@ -649,16 +667,13 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
           {shown.map((t) => (
             <StaticRow key={t.id} title={t.name} meta={`${t.cat} • ${t.when}`} value={signed(t.amount)}>
               {t.posted ? (
-                <span className="shrink-0 whitespace-nowrap rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                <span className="shrink-0 whitespace-nowrap rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
                   Posted
                 </span>
               ) : (
                 <button
                   type="button"
-                  onClick={() => {
-                    setTxns((p) => p.map((x) => (x.id === t.id ? { ...x, posted: true } : x)));
-                    onAction(`Posted "${t.name}"`);
-                  }}
+                  onClick={redirectToSignup}
                   className={smallBtn}
                 >
                   Post
@@ -678,11 +693,8 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
             <StaticRow key={r.id} title={r.match} meta={`Assigns to ${r.category}`}>
               <button
                 type="button"
-                onClick={() => {
-                  setRules((p) => p.map((x) => (x.id === r.id ? { ...x, on: !x.on } : x)));
-                  onAction(`${r.on ? 'Disabled' : 'Enabled'} rule for ${r.category}`);
-                }}
-                className={`inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded-full border px-3 text-[10px] font-bold ${
+                onClick={redirectToSignup}
+                className={`inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded-full border px-3 text-[11px] font-bold ${
                   r.on ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-slate-200 bg-slate-100 text-slate-500'
                 }`}
               >
@@ -699,10 +711,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
             <StaticRow key={p.id} title={p.name} meta={`Next ${p.next}`} value={signed(p.amount)}>
               <button
                 type="button"
-                onClick={() => {
-                  setRecurring((prev) => prev.map((x) => (x.id === p.id ? { ...x, paused: !x.paused } : x)));
-                  onAction(`${p.paused ? 'Resumed' : 'Paused'} ${p.name}`);
-                }}
+                onClick={redirectToSignup}
                 className={smallBtn}
               >
                 {p.paused ? 'Resume' : 'Pause'}
@@ -724,11 +733,11 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
                     <span className="shrink-0 whitespace-nowrap text-xs font-medium text-slate-400">#{register.code}</span>
                     {register.pending > 0 && (
                       <>
-                        <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+                        <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[11px] font-bold text-amber-700">
                           <Info className="h-3 w-3" />
                           Needs review
                         </span>
-                        <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                        <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
                           <Clock className="h-3 w-3" />
                           {register.pending} pending
                         </span>
@@ -759,20 +768,20 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
 
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <div className="min-w-0">
-                  <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Savvy Balance</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Savvy Balance</p>
                   <p className="mt-0.5 whitespace-nowrap text-2xl font-bold tabular-nums text-emerald-600">
                     {money2(register.savvy ?? 0)}
                   </p>
                 </div>
                 <div className="flex shrink-0 flex-wrap items-end gap-6">
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Bank Balance</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Bank Balance</p>
                     <p className="mt-0.5 whitespace-nowrap text-sm font-bold tabular-nums text-slate-900">
                       {money2(register.bank)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Difference</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Difference</p>
                     <p className="mt-0.5 flex items-center gap-1 whitespace-nowrap text-sm font-bold tabular-nums text-emerald-600">
                       <TrendingUp className="h-3.5 w-3.5" />
                       {money2(Math.abs(register.bank - (register.savvy ?? 0)))}
@@ -817,7 +826,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
                   <div className="-mx-4 overflow-x-auto px-4 no-scrollbar">
                     <table className="w-full min-w-[700px] text-left">
                       <thead>
-                        <tr className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                        <tr className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                           {['Date', 'Reference', 'Description', 'Category', 'Contact'].map((h) => (
                             <th key={h} className="py-2 pr-3">
                               {h}
@@ -880,7 +889,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
           </div>
         ) : (
           <div className={`${card} space-y-3 p-4`}>
-            <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Accounts</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Accounts</p>
 
             <TabBar tabs={ACCOUNT_SCOPES} value={scope} onChange={setScope} />
 
@@ -888,7 +897,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
             <div className="-mx-4 overflow-x-auto px-4 no-scrollbar">
               <table className="w-full min-w-[880px] text-left">
                 <thead>
-                  <tr className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                  <tr className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                     <th className="py-2 pr-2">Icon</th>
                     <th className="py-2 pr-3">Account Name</th>
                     <th className="py-2 pr-3">Class</th>
@@ -906,7 +915,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
                     <tr key={a.id} className="text-[11px] text-slate-700">
                       <td className="py-2 pr-2">
                         <span
-                          className="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                          className="flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white"
                           style={{ backgroundColor: CLASS_TINT[a.cls] ?? '#94a3b8' }}
                         >
                           {a.name.charAt(0)}
@@ -932,7 +941,7 @@ function BankingPage({ onAction }: { onAction: (m: string) => void }) {
                         {money2(a.bank)}
                       </td>
                       <td className="py-2 pr-3">
-                        <span className="inline-flex whitespace-nowrap rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                        <span className="inline-flex whitespace-nowrap rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
                           Active
                         </span>
                       </td>
@@ -1014,10 +1023,7 @@ function BudgetingPage({ onAction }: { onAction: (m: string) => void }) {
             </p>
             <button
               type="button"
-              onClick={() => {
-                setCreated(true);
-                onAction('Budget created from your spending history');
-              }}
+              onClick={redirectToSignup}
               className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg bg-[#52A5CE] px-5 text-sm font-bold text-white shadow-2xs hover:bg-[#438fb6]"
             >
               <Plus className="h-4 w-4" />
@@ -1052,7 +1058,7 @@ function BudgetingPage({ onAction }: { onAction: (m: string) => void }) {
           {/* BudgetLinearBar — one bar for the whole month, above the per-category tracker */}
           <div className={`${card} p-4 sm:p-5`}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                 {MONTHS[monthIdx]} · Expenses
               </p>
               <p className="whitespace-nowrap text-xs font-bold tabular-nums text-slate-900">
@@ -1091,7 +1097,7 @@ function BudgetingPage({ onAction }: { onAction: (m: string) => void }) {
                       />
                     </div>
                     <span
-                      className={`shrink-0 whitespace-nowrap text-[10px] font-bold tabular-nums ${over ? 'text-red-600' : 'text-slate-500'}`}
+                      className={`shrink-0 whitespace-nowrap text-[11px] font-bold tabular-nums ${over ? 'text-red-600' : 'text-slate-500'}`}
                     >
                       {pct}%
                     </span>
@@ -1116,10 +1122,7 @@ function BudgetingPage({ onAction }: { onAction: (m: string) => void }) {
                 <button
                   type="button"
                   aria-label={`Lower ${c.name} budget by $100`}
-                  onClick={() => {
-                    setCats((p) => p.map((x) => (x.id === c.id ? { ...x, budget: Math.max(0, x.budget - 100) } : x)));
-                    onAction(`Lowered ${c.name} budget by $100`);
-                  }}
+                  onClick={redirectToSignup}
                   className={smallBtn}
                 >
                   −$100
@@ -1127,10 +1130,7 @@ function BudgetingPage({ onAction }: { onAction: (m: string) => void }) {
                 <button
                   type="button"
                   aria-label={`Raise ${c.name} budget by $100`}
-                  onClick={() => {
-                    setCats((p) => p.map((x) => (x.id === c.id ? { ...x, budget: x.budget + 100 } : x)));
-                    onAction(`Raised ${c.name} budget by $100`);
-                  }}
+                  onClick={redirectToSignup}
                   className={smallBtn}
                 >
                   +$100
@@ -1165,8 +1165,8 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
     '5:Dinner': 'Chicken Stir Fry',
   });
   const [tasks, setTasks] = React.useState([
-    { id: 'ct1', title: 'Tidy Bedroom & Make Bed', who: 'Part', stars: 2, done: false },
-    { id: 'ct2', title: 'Feed & Walk Pet Dog', who: 'Simon Jr', stars: 3, done: false },
+    { id: 'ct1', title: 'Tidy Bedroom & Make Bed', who: 'Leo', stars: 2, done: false },
+    { id: 'ct2', title: 'Feed & Walk Pet Dog', who: 'Maya', stars: 3, done: false },
   ]);
   const [draft, setDraft] = React.useState('');
 
@@ -1242,7 +1242,7 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
 
       {/* Meals → Events → Tasks, the same three sections the real Calendar page shows */}
       <div className={`${card} space-y-4 p-4`}>
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">September {selected}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">September {selected}</p>
 
         <div className="space-y-2">
           <div className="flex select-none items-center justify-between rounded-xl bg-slate-100/80 px-3 py-1.5 text-[11px] font-semibold text-slate-700">
@@ -1250,7 +1250,7 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
               <Utensils className="h-3.5 w-3.5 text-[#f59e0b]" />
               <span>Meals</span>
             </span>
-            <span className="text-[10px] font-medium text-[#52A5CE]">Plan</span>
+            <span className="text-[11px] font-medium text-[#52A5CE]">Plan</span>
           </div>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
             {MEAL_SLOTS.map((slot) => {
@@ -1262,20 +1262,20 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
                 >
                   <button
                     type="button"
-                    onClick={() => planMeal(slot)}
+                    onClick={redirectToSignup}
                     className="min-h-[36px] min-w-0 flex-1 cursor-pointer pr-1 text-left"
                   >
                     <span className="block text-xs font-semibold leading-tight text-slate-700">{slot}</span>
-                    <span className="mt-0.5 block truncate text-[10px] font-normal italic text-slate-400">
+                    <span className="mt-0.5 block truncate text-[11px] font-normal italic text-slate-400">
                       {planned || 'Not planned'}
                     </span>
                   </button>
                   {planned && (
                     <button
                       type="button"
-                      onClick={() => clearMeal(slot)}
+                      onClick={redirectToSignup}
                       aria-label={`Remove ${slot}`}
-                      className="flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-[10px] font-bold text-slate-400 shadow-xs hover:bg-red-500 hover:text-white"
+                      className="flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-[11px] font-bold text-slate-400 shadow-xs hover:bg-red-500 hover:text-white"
                     >
                       ✕
                     </button>
@@ -1293,7 +1293,7 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
               <span>Events</span>
             </span>
             {dayEvents.length > 0 && (
-              <span className="rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600">
+              <span className="rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
                 {dayEvents.length}
               </span>
             )}
@@ -1305,10 +1305,7 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
               <StaticRow key={ev + i} title={ev}>
                 <button
                   type="button"
-                  onClick={() => {
-                    setEvents((p) => ({ ...p, [selected]: p[selected].filter((_, k) => k !== i) }));
-                    onAction(`Removed "${ev}"`);
-                  }}
+                  onClick={redirectToSignup}
                   className={smallBtn}
                 >
                   Remove
@@ -1316,7 +1313,7 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
               </StaticRow>
             ))
           )}
-          <form onSubmit={addEvent} className="flex gap-2 pt-1">
+          <form onSubmit={(e) => { e.preventDefault(); redirectToSignup(); }} className="flex gap-2 pt-1">
             <input
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
@@ -1339,23 +1336,20 @@ function CalendarPage({ onAction }: { onAction: (m: string) => void }) {
               <CheckSquare className="h-3.5 w-3.5 text-[#0D9488]" />
               <span>Tasks</span>
             </span>
-            <span className="whitespace-nowrap rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600">
+            <span className="whitespace-nowrap rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
               {tasks.filter((t) => !t.done).length} due
             </span>
           </div>
           {tasks.map((t) => (
             <StaticRow key={t.id} title={t.title} meta={`${t.who} · +${t.stars} ${t.stars === 1 ? 'star' : 'stars'}`}>
               {t.done ? (
-                <span className="shrink-0 whitespace-nowrap rounded-lg border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                <span className="shrink-0 whitespace-nowrap rounded-lg border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
                   Approved
                 </span>
               ) : (
                 <button
                   type="button"
-                  onClick={() => {
-                    setTasks((p) => p.map((x) => (x.id === t.id ? { ...x, done: true } : x)));
-                    onAction(`⭐ ${t.stars} stars awarded to ${t.who} for "${t.title}"`);
-                  }}
+                  onClick={redirectToSignup}
                   className={smallBtn}
                 >
                   Award
@@ -1378,44 +1372,44 @@ function NetWorthPage({ onAction }: { onAction: (m: string) => void }) {
     {
       id: 'prop',
       name: 'Real Estate & Property',
-      total: 620000,
-      items: [{ n: 'Single Family Residence (Columbus, OH)', v: 620000 }],
+      total: 550000,
+      items: [{ n: 'Primary Residence (Demo Property)', v: 550000 }],
     },
     {
       id: 'inv',
-      name: 'Investments & 401(k)',
-      total: 210000,
+      name: 'Investments & Retirement',
+      total: 185000,
       items: [
-        { n: 'Vanguard 500 Index Fund (VFIAX)', v: 124500 },
-        { n: 'Fidelity Traditional 401(k)', v: 62400 },
-        { n: 'Backdoor Roth IRA', v: 23100 },
+        { n: 'Total Market Index Fund (VTSAX)', v: 110000 },
+        { n: 'Employer 401(k) Plan', v: 55000 },
+        { n: 'Roth IRA Account', v: 20000 },
       ],
     },
     {
       id: 'veh',
       name: 'Vehicles',
-      total: 64000,
+      total: 45000,
       items: [
-        { n: '2023 Tesla Model Y Long Range', v: 42000 },
-        { n: '2021 Honda CR-V Touring', v: 22000 },
+        { n: '2023 Electric Crossover SUV', v: 30000 },
+        { n: '2021 Family Sedan', v: 15000 },
       ],
     },
     {
       id: 'cash',
       name: 'Liquid Banking',
-      total: 32450.2,
+      total: 20000,
       items: [
-        { n: 'Chase Total Checking (…4921)', v: 18450.2 },
-        { n: 'Chase High Yield Savings (…9021)', v: 14000 },
+        { n: 'Demo Checking (…1001)', v: 5000 },
+        { n: 'Demo High-Yield Savings (…2002)', v: 15000 },
       ],
     },
     {
       id: 'debt',
       name: 'Loans & Liabilities',
-      total: -489042.3,
+      total: -321250,
       items: [
-        { n: 'Rocket Mortgage (30-Yr Fixed)', v: -465042.3 },
-        { n: 'Chase Sapphire Credit Card', v: -1240.5 },
+        { n: 'Home Mortgage (30-Yr Fixed)', v: -320000 },
+        { n: 'Rewards Credit Card', v: -1250 },
       ],
     },
   ];
@@ -1430,9 +1424,9 @@ function NetWorthPage({ onAction }: { onAction: (m: string) => void }) {
 
   const stat = (label: string, value: React.ReactNode, note: string) => (
     <div className={`${card} p-3`}>
-      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{label}</p>
+      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{label}</p>
       <div className="mt-1">{value}</div>
-      <p className="mt-0.5 text-[10px] font-medium text-slate-400">{note}</p>
+      <p className="mt-0.5 text-[11px] font-medium text-slate-400">{note}</p>
     </div>
   );
 
@@ -1441,7 +1435,7 @@ function NetWorthPage({ onAction }: { onAction: (m: string) => void }) {
       <PageHeader icon={Banknote} title="Net Worth" subtitle="Every asset and liability, in one balance sheet." />
 
       <div className={`${card} p-4 sm:p-5`}>
-        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Net Worth</p>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Net Worth</p>
         <p className="mt-1 whitespace-nowrap text-2xl font-bold tabular-nums text-slate-900">{money2(net)}</p>
       </div>
 
@@ -1465,15 +1459,15 @@ function NetWorthPage({ onAction }: { onAction: (m: string) => void }) {
 
       <div className={`${card} grid grid-cols-1 divide-y divide-slate-100 p-4 sm:grid-cols-3 sm:divide-x sm:divide-y-0`}>
         <div className="py-2 sm:px-3 sm:py-0">
-          <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Assets</p>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-slate-400">Assets</p>
           <p className="mt-0.5 whitespace-nowrap text-sm font-bold tabular-nums text-slate-900">{money2(assets)}</p>
         </div>
         <div className="py-2 sm:px-3 sm:py-0">
-          <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Liabilities</p>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-slate-400">Liabilities</p>
           <p className="mt-0.5 whitespace-nowrap text-sm font-bold tabular-nums text-red-600">-{money2(liabilities)}</p>
         </div>
         <div className="py-2 sm:px-3 sm:py-0">
-          <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Net Worth</p>
+          <p className="text-[11px] font-medium uppercase tracking-wider text-slate-400">Net Worth</p>
           <p className="mt-0.5 whitespace-nowrap text-sm font-bold tabular-nums text-slate-900">{money2(net)}</p>
         </div>
       </div>
@@ -1504,9 +1498,9 @@ function NetWorthPage({ onAction }: { onAction: (m: string) => void }) {
               <div className="space-y-1 border-t border-slate-200 px-2.5 py-2">
                 {g.items.map((it) => (
                   <div key={it.n} className="flex items-center justify-between gap-2">
-                    <span className="min-w-0 flex-1 break-words text-[10px] text-slate-500 line-clamp-2">{it.n}</span>
+                    <span className="min-w-0 flex-1 break-words text-[11px] text-slate-500 line-clamp-2">{it.n}</span>
                     <span
-                      className={`shrink-0 whitespace-nowrap text-[10px] font-bold tabular-nums ${amountClass(money2(it.v))}`}
+                      className={`shrink-0 whitespace-nowrap text-[11px] font-bold tabular-nums ${amountClass(money2(it.v))}`}
                     >
                       {money2(it.v)}
                     </span>
@@ -1546,12 +1540,12 @@ type Wallet = { id: string; name: string; chain: string; v: number };
 function InvestmentsPage({ onAction }: { onAction: (m: string) => void }) {
   const [tab, setTab] = React.useState<(typeof INV_TABS)[number]>('Stocks');
   const [holdings, setHoldings] = React.useState<Holding[]>([
-    { id: 'h1', name: 'Vanguard 500 Index Fund', institution: 'Vanguard', detail: 'VFIAX · +8.4% YTD', kind: 'brokerage', v: 124500 },
-    { id: 'h2', name: 'Fidelity Traditional 401(k)', institution: 'Fidelity', detail: '401(k) · Employer match', kind: 'retirement', v: 62400 },
-    { id: 'h3', name: 'Backdoor Roth IRA', institution: 'Fidelity', detail: 'Roth IRA · Tax-free', kind: 'retirement', v: 23100 },
+    { id: 'h1', name: 'Total Market Index Fund', institution: 'Horizon Investments', detail: 'VFIAX · +8.4% YTD', kind: 'brokerage', v: 124500 },
+    { id: 'h2', name: 'Employer 401(k) Plan', institution: 'Retirement Trust', detail: '401(k) · Employer match', kind: 'retirement', v: 62400 },
+    { id: 'h3', name: 'Roth IRA Account', institution: 'Retirement Trust', detail: 'Roth IRA · Tax-free', kind: 'retirement', v: 23100 },
   ]);
   const [wallets, setWallets] = React.useState<Wallet[]>([
-    { id: 'w1', name: 'Coinbase — BTC', chain: 'Bitcoin · 0.42 BTC', v: 26400 },
+    { id: 'w1', name: 'Digital Asset Custody — BTC', chain: 'Bitcoin · 0.42 BTC', v: 26400 },
   ]);
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = React.useState({ name: '', v: '' });
@@ -1583,10 +1577,7 @@ function InvestmentsPage({ onAction }: { onAction: (m: string) => void }) {
     <StaticRow key={h.id} title={h.name} meta={[h.detail, h.institution].filter(Boolean).join(' · ')} value={money2(h.v)}>
       <button
         type="button"
-        onClick={() => {
-          setHoldings((p) => p.filter((x) => x.id !== h.id));
-          onAction(`Removed ${h.name}`);
-        }}
+        onClick={redirectToSignup}
         className={smallBtn}
       >
         Remove
@@ -1614,7 +1605,7 @@ function InvestmentsPage({ onAction }: { onAction: (m: string) => void }) {
       />
 
       {open && (
-        <form onSubmit={add} className={`${card} flex flex-col gap-3 p-4 sm:flex-row`}>
+        <form onSubmit={(e) => { e.preventDefault(); redirectToSignup(); }} className={`${card} flex flex-col gap-3 p-4 sm:flex-row`}>
           <input
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -1648,7 +1639,7 @@ function InvestmentsPage({ onAction }: { onAction: (m: string) => void }) {
         ) : (
           <div className="space-y-4">
             <div className={`${card} p-4`}>
-              <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                 Stocks &amp; Retirement Accounts
               </p>
               <p className="mt-1 whitespace-nowrap text-xl font-bold tabular-nums text-slate-900">
@@ -1684,10 +1675,7 @@ function InvestmentsPage({ onAction }: { onAction: (m: string) => void }) {
             <StaticRow key={w.id} title={w.name} meta={w.chain} value={money2(w.v)}>
               <button
                 type="button"
-                onClick={() => {
-                  setWallets((p) => p.filter((x) => x.id !== w.id));
-                  onAction(`Removed ${w.name}`);
-                }}
+                onClick={redirectToSignup}
                 className={smallBtn}
               >
                 Remove
@@ -1712,11 +1700,11 @@ function ContactsPage({ onAction }: { onAction: (m: string) => void }) {
   const [q, setQ] = React.useState('');
   const [filter, setFilter] = React.useState<(typeof CONTACT_FILTERS)[number]>('All contacts');
   const people = [
-    { id: 'p1', name: 'Simon Miller', email: 'simon@simson.family', phone: '(614) 555-0142', status: 'Parent · Admin', group: 'Household' },
-    { id: 'p2', name: 'Part Simson', email: 'part@simson.family', phone: '—', status: 'Child · Age 9', group: 'Household' },
-    { id: 'p3', name: 'Simon Jr Simson', email: 'jr@simson.family', phone: '—', status: 'Child · Age 6', group: 'Household' },
-    { id: 'p4', name: 'Rocket Mortgage', email: 'service@rocketmortgage.com', phone: '(800) 555-0199', status: 'Mortgage servicer', group: 'General Contacts' },
-    { id: 'p5', name: 'Chase Bank', email: 'support@chase.com', phone: '(800) 555-0110', status: 'Banking provider', group: 'General Contacts' },
+    { id: 'p1', name: 'Sarah Miller', email: 'sarah.miller@example.com', phone: '(555) 234-7788', status: 'Parent · Admin', group: 'Household' },
+    { id: 'p2', name: 'Leo Miller', email: 'leo@example.com', phone: '—', status: 'Child · Age 10', group: 'Household' },
+    { id: 'p3', name: 'Maya Miller', email: 'maya@example.com', phone: '—', status: 'Child · Age 6', group: 'Household' },
+    { id: 'p4', name: 'Home Loan Servicing Hub', email: 'service@example.com', phone: '(800) 555-0199', status: 'Mortgage servicer', group: 'General Contacts' },
+    { id: 'p5', name: 'Premier National Bank', email: 'support@example.com', phone: '(800) 555-0110', status: 'Banking provider', group: 'General Contacts' },
   ];
 
   const matches = people.filter(
@@ -1729,7 +1717,7 @@ function ContactsPage({ onAction }: { onAction: (m: string) => void }) {
     <div className={`${card} space-y-2 p-4`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-sm font-semibold text-slate-950">{title}</span>
-        <span className="shrink-0 whitespace-nowrap rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600">
+        <span className="shrink-0 whitespace-nowrap rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-bold text-slate-600">
           {list.length}
         </span>
       </div>
@@ -1812,20 +1800,25 @@ type Bank = { id: string; name: string; initial: string; tint: string; accounts:
 
 function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
   const [banks, setBanks] = React.useState<Bank[]>([
-    { id: 'b1', name: 'Mercury', initial: 'M', tint: '#52A5CE', accounts: 1, synced: '7 days ago', active: true },
+    { id: 'b1', name: 'Premier National Bank', initial: 'P', tint: '#3B82F6', accounts: 2, synced: '2 hours ago', active: true },
   ]);
   const [plaidOpen, setPlaidOpen] = React.useState(false);
   const [phone, setPhone] = React.useState('');
   const [expanded, setExpanded] = React.useState<string | null>(null);
 
   const NEXT_BANKS = [
-    { name: 'Chase', initial: 'C', tint: '#117ACA' },
-    { name: 'Ally Bank', initial: 'A', tint: '#7B2CBF' },
-    { name: 'Fidelity', initial: 'F', tint: '#0F766E' },
+    { name: 'City Union Bank', initial: 'C', tint: '#0284C7' },
+    { name: 'Metro Trust Bank', initial: 'M', tint: '#0D9488' },
+    { name: 'Digital Direct Bank', initial: 'D', tint: '#7B2CBF' },
+    { name: 'Pacific Horizon Bank', initial: 'P', tint: '#D97706' },
   ];
 
   const linkBank = () => {
-    const next = NEXT_BANKS[(banks.length - 1) % NEXT_BANKS.length];
+    /* Disconnecting the seeded bank leaves banks.length at 0, and JS % keeps the
+       sign of the dividend, so (0 - 1) % 3 is -1 — the extra + length % length
+       folds that back into a valid 0..length-1 index. */
+    const idx = ((banks.length - 1) % NEXT_BANKS.length + NEXT_BANKS.length) % NEXT_BANKS.length;
+    const next = NEXT_BANKS[idx];
     setBanks((p) => [
       ...p,
       { id: 'b' + Date.now(), ...next, accounts: 2, synced: 'just now', active: true },
@@ -1846,7 +1839,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
         </div>
         <button
           type="button"
-          onClick={() => setPlaidOpen((v) => !v)}
+          onClick={redirectToSignup}
           className="inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-1.5 rounded-xl bg-[#52A5CE] px-4 text-sm font-bold text-white shadow-2xs transition-colors hover:bg-[#438fb6]"
         >
           <Plus className="h-4 w-4" />
@@ -1857,7 +1850,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
       {/* Plaid Link — the same handoff the real Add Bank button opens */}
       {plaidOpen && (
         <div className={`${card} mx-auto max-w-md space-y-4 p-5 text-center`}>
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Plaid</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">Plaid</p>
           <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
             FirstSavvy uses Plaid to connect your account
           </h2>
@@ -1877,12 +1870,12 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
           </p>
           <button
             type="button"
-            onClick={linkBank}
+            onClick={redirectToSignup}
             className="min-h-[44px] w-full cursor-pointer rounded-xl bg-[#52A5CE] px-4 text-sm font-bold text-white hover:bg-[#438fb6]"
           >
             Continue
           </button>
-          <p className="text-[10px] leading-relaxed text-slate-400">
+          <p className="text-[11px] leading-relaxed text-slate-400">
             Terms apply. By continuing, you agree to Plaid&apos;s Privacy Policy.
           </p>
         </div>
@@ -1913,7 +1906,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
                 <span className="flex flex-wrap items-center gap-2">
                   <span className="text-base font-bold text-slate-900">{b.name}</span>
                   <span
-                    className={`shrink-0 whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold ${
+                    className={`shrink-0 whitespace-nowrap rounded-full border px-2 py-0.5 text-[11px] font-bold ${
                       b.active
                         ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                         : 'border-slate-200 bg-slate-100 text-slate-500'
@@ -1933,7 +1926,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
 
             {expanded === b.id && (
               <div className="mt-3 space-y-1 border-t border-slate-100 pt-3">
-                {['Checking ••••1234', 'Savings ••••9021'].slice(0, b.accounts).map((a) => (
+                {['Premier Checking ••••4812', 'High-Yield Savings ••••9104'].slice(0, b.accounts).map((a) => (
                   <p key={a} className="text-xs text-slate-500">
                     {a}
                   </p>
@@ -1945,10 +1938,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
               <span className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    setBanks((p) => p.map((x) => (x.id === b.id ? { ...x, synced: 'just now', active: true } : x)));
-                    onAction(`Synced ${b.name}`);
-                  }}
+                  onClick={redirectToSignup}
                   className={ghostBtn}
                 >
                   <RotateCw className="h-3.5 w-3.5" />
@@ -1956,10 +1946,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setBanks((p) => p.map((x) => (x.id === b.id ? { ...x, active: true, synced: 'just now' } : x)));
-                    onAction(`Reconnected ${b.name}`);
-                  }}
+                  onClick={redirectToSignup}
                   className={ghostBtn}
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
@@ -1968,10 +1955,7 @@ function IntegrationsPage({ onAction }: { onAction: (m: string) => void }) {
               </span>
               <button
                 type="button"
-                onClick={() => {
-                  setBanks((p) => p.filter((x) => x.id !== b.id));
-                  onAction(`Disconnected ${b.name}`);
-                }}
+                onClick={redirectToSignup}
                 className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 text-xs font-semibold text-slate-700 hover:border-red-200 hover:bg-red-50 hover:text-red-600"
               >
                 <Trash2 className="h-3.5 w-3.5" />
@@ -1997,11 +1981,11 @@ function VaultPage({ onAction }: { onAction: (m: string) => void }) {
   const [q, setQ] = React.useState('');
   const [shownId, setShownId] = React.useState<string | null>(null);
   const items = [
-    { id: 'v1', name: 'Chase Online Banking', meta: 'Updated Aug 28', type: 'Logins', secret: 'Ch4se!2026' },
-    { id: 'v2', name: 'Fidelity NetBenefits', meta: 'Updated Aug 12', type: 'Logins', secret: 'F1delity#26' },
-    { id: 'v3', name: 'Chase Sapphire Preferred', meta: 'Expires 09/29', type: 'Cards', secret: '4242 4242 4242 8812' },
-    { id: 'v4', name: 'Home safe code', meta: 'Updated Jul 03', type: 'Notes', secret: '19-42-07' },
-    { id: 'v5', name: 'Simon Passport', meta: 'Expires 2031', type: 'Identity', secret: 'P1234567' },
+    { id: 'v1', name: 'Online Banking Portal', meta: 'Updated Aug 28', type: 'Logins', secret: 'DemoPass-01' },
+    { id: 'v2', name: 'Retirement Benefits Portal', meta: 'Updated Aug 12', type: 'Logins', secret: 'DemoPass-02' },
+    { id: 'v3', name: 'Platinum Rewards Card', meta: 'Expires 09/29', type: 'Cards', secret: '•••• •••• •••• 4242' },
+    { id: 'v4', name: 'Home safe code', meta: 'Updated Jul 03', type: 'Notes', secret: '11-22-33' },
+    { id: 'v5', name: 'Passport', meta: 'Expires 2031', type: 'Identity', secret: 'X0000000' },
   ];
 
   const shown = items.filter(
@@ -2039,12 +2023,8 @@ function VaultPage({ onAction }: { onAction: (m: string) => void }) {
               </span>
               <button
                 type="button"
-                onClick={() => {
-                  const n = shownId === i.id ? null : i.id;
-                  setShownId(n);
-                  onAction(n ? `Revealed ${i.name}` : `Hid ${i.name}`);
-                }}
-                className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded-lg border border-slate-300 px-2.5 text-[10px] font-bold text-slate-600 hover:bg-slate-100"
+                onClick={redirectToSignup}
+                className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded-lg border border-slate-300 px-2.5 text-[11px] font-bold text-slate-600 hover:bg-slate-100"
               >
                 {shownId === i.id ? 'Hide' : 'Reveal'}
               </button>
@@ -2071,7 +2051,7 @@ const SETTINGS_TABS = ['Periods', 'Household', 'Protected'] as const;
 
 function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
   const [tab, setTab] = React.useState<(typeof SETTINGS_TABS)[number]>('Periods');
-  const [household, setHousehold] = React.useState('The Simson Household');
+  const [household, setHousehold] = React.useState('The Miller Household');
   const [saved, setSaved] = React.useState(false);
   const [periods, setPeriods] = React.useState([
     { id: 'q3', name: 'Q3 2026', start: 'Jul 1, 2026', end: 'Sep 30, 2026', open: true },
@@ -2107,7 +2087,7 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
           <div className={`${card} space-y-3 p-4`}>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-sm font-bold text-slate-900 sm:text-base">Accounting Periods</h2>
-              <button type="button" onClick={addPeriod} className={ghostBtn}>
+              <button type="button" onClick={redirectToSignup} className={ghostBtn}>
                 <Plus className="h-3.5 w-3.5" />
                 <span className="whitespace-nowrap">New Period</span>
               </button>
@@ -2120,7 +2100,7 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
               <div className="-mx-4 overflow-x-auto px-4 no-scrollbar">
                 <table className="w-full min-w-[520px] text-left">
                   <thead>
-                    <tr className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    <tr className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                       <th className="py-2 pr-3">Period Name</th>
                       <th className="py-2 pr-3">Start Date</th>
                       <th className="py-2 pr-3">End Date</th>
@@ -2136,7 +2116,7 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
                         <td className="whitespace-nowrap py-2 pr-3 text-slate-500">{p.end}</td>
                         <td className="py-2 pr-3">
                           <span
-                            className={`inline-flex whitespace-nowrap rounded-full border px-2 py-0.5 text-[10px] font-bold ${
+                            className={`inline-flex whitespace-nowrap rounded-full border px-2 py-0.5 text-[11px] font-bold ${
                               p.open
                                 ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                                 : 'border-slate-200 bg-slate-100 text-slate-500'
@@ -2148,10 +2128,7 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
                         <td className="py-2 text-right">
                           <button
                             type="button"
-                            onClick={() => {
-                              setPeriods((prev) => prev.map((x) => (x.id === p.id ? { ...x, open: !x.open } : x)));
-                              onAction(`${p.name} ${p.open ? 'closed' : 'reopened'}`);
-                            }}
+                            onClick={redirectToSignup}
                             className={smallBtn}
                           >
                             {p.open ? 'Close' : 'Reopen'}
@@ -2188,12 +2165,12 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
           <div className={`${card} space-y-3 p-4`}>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-sm font-bold text-slate-900 sm:text-base">Household Activity</h2>
-              <button type="button" onClick={() => onAction('Opening household management')} className={ghostBtn}>
+              <button type="button" onClick={redirectToSignup} className={ghostBtn}>
                 <Users className="h-3.5 w-3.5" />
                 <span className="whitespace-nowrap">Manage Household</span>
               </button>
             </div>
-            <form onSubmit={save} className="flex flex-col gap-2 sm:flex-row sm:items-end">
+            <form onSubmit={(e) => { e.preventDefault(); redirectToSignup(); }} className="flex flex-col gap-2 sm:flex-row sm:items-end">
               <label className="block min-w-0 flex-1">
                 <span className="mb-1 block text-xs font-semibold text-slate-700">Household Name</span>
                 <input value={household} onChange={(e) => setHousehold(e.target.value)} className={field} />
@@ -2210,22 +2187,22 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
           <div className={`${card} space-y-2 p-4`}>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="text-sm font-semibold text-slate-900">Members</span>
-              <button type="button" onClick={() => onAction('Opening the add co-owner form')} className={ghostBtn}>
+              <button type="button" onClick={redirectToSignup} className={ghostBtn}>
                 <Plus className="h-3.5 w-3.5" />
                 <span className="whitespace-nowrap">Add Co-Owner</span>
               </button>
             </div>
             <p className="text-[11px] font-semibold tracking-wider text-slate-400">CHILDREN</p>
             {[
-              { n: 'Part Simson', s: '45 stars' },
-              { n: 'Simon Jr Simson', s: '20 stars' },
+              { n: 'Leo Miller', s: '42 stars' },
+              { n: 'Maya Miller', s: '28 stars' },
             ].map((c) => (
               <Row
                 key={c.n}
                 title={c.n}
                 meta="Click to open parental view"
                 value={c.s}
-                onClick={() => onAction(`Opening ${c.n}'s parental view`)}
+                onClick={redirectToSignup}
               />
             ))}
           </div>
@@ -2241,7 +2218,7 @@ function SettingsPage({ onAction }: { onAction: (m: string) => void }) {
           </p>
           <button
             type="button"
-            onClick={() => onAction('Protected configuration is read-only in the demo')}
+            onClick={redirectToSignup}
             className={ghostBtn}
           >
             Review settings

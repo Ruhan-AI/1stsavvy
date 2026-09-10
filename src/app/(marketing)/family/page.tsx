@@ -41,13 +41,6 @@ export default function FamilyPage() {
     <div className="space-y-12 sm:space-y-20 lg:space-y-24 pb-20 overflow-hidden relative">
       {/* 1. HERO SECTION — §2 wide marketing container */}
       <section className="relative pt-2 sm:pt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* §12 decorative canvas: responsive box ladder, clipped, never interactive */}
-        <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[280px] sm:h-[380px] lg:h-[480px] overflow-hidden pointer-events-none -z-0 opacity-30 dark:opacity-40">
-          <CanvasErrorBoundary>
-            <FamilyStarFlowCanvas />
-          </CanvasErrorBoundary>
-        </div>
-
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-3 sm:space-y-4">
           <FadeIn delay={0.05}>
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">
@@ -97,7 +90,7 @@ export default function FamilyPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* §6 asymmetric split — stacked below lg, copy first in DOM */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <ScrollReveal direction="left" className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4">
+          <ScrollReveal direction="left" className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-center">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">It Starts With Responsibility</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               <TextReveal text="Before kids manage money, they can learn what it means to earn it." />
@@ -135,7 +128,7 @@ export default function FamilyPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* §6 copy first in DOM, preview moves left only from lg up */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <ScrollReveal direction="right" className="lg:order-2 lg:col-span-5 min-w-0 space-y-3 sm:space-y-4">
+          <ScrollReveal direction="right" className="lg:order-2 lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-center">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">From Stars to Rewards and Goals</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               Earn stars. Choose rewards. Save toward goals.
@@ -161,10 +154,10 @@ export default function FamilyPage() {
       {/* 4. SECTION: THEIR EXPERIENCE AND YOUR VISIBILITY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-sky/10 border border-brand-sky/20 text-brand-sky text-xs font-bold uppercase tracking-wider">
-              Different access. Same family.
-            </div>
+          <ScrollReveal direction="left" className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-center">
+            <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">
+              Different Access. Same Family.
+            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               Their experience. Your visibility.
             </h2>
@@ -177,11 +170,11 @@ export default function FamilyPage() {
                 PIN-protected or password-protected child spaces with isolated parent controls.
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-7 min-w-0">
+          <ScrollReveal direction="right" className="lg:col-span-7 min-w-0">
             <LiveGoalCreationPreview />
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 

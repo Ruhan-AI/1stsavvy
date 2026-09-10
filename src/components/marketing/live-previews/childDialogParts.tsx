@@ -1,34 +1,21 @@
 'use client';
 
-import React from 'react';
-import { ChevronDown, Minus, Plus, Star } from 'lucide-react';
-
-/**
- * The pieces shared by the New Task and New Goal dialogs.
- *
- * Both come from `src/components/children/{TaskDialog,GoalDialog}.jsx` in the web app and
- * are nearly the same form, so the field chrome lives here — that also keeps them
- * identical on the marketing page, where they sit side by side.
- *
- * Sizes follow docs/responsive-system.md §5 rather than the app's: controls are 44px on a
- * phone and drop to the app's 40px/36px from sm, and no label goes under 11px.
- */
+import React, { useEffect, useState } from 'react';
+import { ChevronDown, Minus, MousePointer2, Plus, Star } from 'lucide-react';
 
 export const CHILDREN = [
-  { id: 'c1', name: 'SimonJr', initials: 'S', color: '#52A5CE' },
-  { id: 'c2', name: 'Symonds Lab', initials: 'SL', color: '#52A5CE' },
+  { id: 'c1', name: 'Maya Miller', initials: 'MM', color: '#52A5CE' },
+  { id: 'c2', name: 'Leo Miller', initials: 'LM', color: '#52A5CE' },
 ];
 
 export const LABEL = 'text-xs font-semibold uppercase tracking-wider text-slate-500';
 export const BOX = 'w-full rounded-xl border border-slate-200 bg-white';
-/** §5 + iOS: 44px and 16px text on a phone, the app's 40px/14px from sm. */
 export const INPUT =
-  'h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none sm:h-10 sm:text-sm';
+  'h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-white';
 
 export function Field({
   label,
   optional = false,
-  /** New Goal prints "(optional)" in lower case where New Task inherits the uppercase. */
   optionalLowercase = false,
   children,
 }: {
@@ -42,7 +29,7 @@ export function Field({
       <p className={LABEL}>
         {label}
         {optional && (
-          <span className={`ml-0.5 font-normal text-slate-400 ${optionalLowercase ? 'normal-case' : ''}`}>
+          <span className="ml-1 font-normal normal-case text-slate-400">
             (optional)
           </span>
         )}
@@ -52,38 +39,41 @@ export function Field({
   );
 }
 
-/** The dialog shell — rendered as a standing card, not an overlay, so it can sit in a grid. */
+/** Dialog shell with guaranteed matching heights and aligned headers */
 export function DialogFrame({
   title,
-  rule = false,
   onClose,
+  footer,
   children,
 }: {
   title: string;
-  /** GoalDialog draws a rule under its title; TaskDialog does not. */
-  rule?: boolean;
   onClose: () => void;
+  footer?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <div
       data-mock-preview
-      className="relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 text-left font-sans shadow-xl select-none sm:p-6 dark:border-slate-800 dark:bg-slate-900"
+      className="relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 text-left font-sans shadow-xl sm:p-6 dark:border-slate-800 dark:bg-slate-900"
     >
-      <div className={`flex items-start justify-between gap-3 pb-2 ${rule ? 'mb-3 border-b border-slate-100 dark:border-slate-800' : ''}`}>
-        <h3 className="text-base font-bold text-slate-800 dark:text-white">{title}</h3>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label={`Close ${title}`}
-          className="-mr-1 -mt-1 flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800"
-        >
-          <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden="true">
-            <path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          </svg>
-        </button>
+      <div>
+        <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3 dark:border-slate-800">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">{title}</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={`Close ${title}`}
+            className="-mr-1 -mt-1 flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800"
+          >
+            <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden="true">
+              <path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div className="space-y-3.5">{children}</div>
       </div>
-      <div className="space-y-4">{children}</div>
+
+      {footer && <div className="mt-5">{footer}</div>}
     </div>
   );
 }
@@ -103,22 +93,22 @@ export function IconAndColor({
     <button
       type="button"
       onClick={onClick}
-      className={`${BOX} flex cursor-pointer items-center justify-between p-3 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800`}
+      className={`${BOX} flex cursor-pointer items-center justify-between p-2.5 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800`}
     >
       <span className="flex items-center gap-3">
         <span
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white shadow-2xs"
           style={{ backgroundColor: color }}
         >
-          <Icon className="h-5 w-5" />
+          <Icon className="h-4 w-4" />
         </span>
         <span className="flex flex-col justify-center text-left">
-          <span className="text-sm font-semibold text-slate-800 dark:text-white">{name}</span>
+          <span className="text-xs font-semibold text-slate-800 dark:text-white">{name}</span>
           <span className="text-[11px] font-medium text-slate-400">Click to change</span>
         </span>
       </span>
       <span
-        className="h-4 w-4 shrink-0 rounded-full border border-slate-100 shadow-inner"
+        className="h-3.5 w-3.5 shrink-0 rounded-full border border-slate-100 shadow-inner"
         style={{ backgroundColor: color }}
       />
     </button>
@@ -127,13 +117,13 @@ export function IconAndColor({
 
 export function StarStepper({ value, onChange }: { value: number; onChange: (n: number) => void }) {
   const btn =
-    'flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 sm:h-10 sm:w-10 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800';
+    'flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800';
   return (
     <div className="flex items-center gap-2">
       <button type="button" onClick={() => onChange(Math.max(1, value - 1))} disabled={value <= 1} aria-label="Decrease" className={btn}>
         <Minus className="h-4 w-4 text-slate-500" />
       </button>
-      <div className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 sm:h-10 dark:border-slate-700 dark:bg-slate-900">
+      <div className="flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 dark:border-slate-700 dark:bg-slate-900">
         <Star className="h-4 w-4 shrink-0 fill-amber-500 text-amber-500" />
         <span className="text-center text-sm font-semibold tabular-nums text-slate-800 dark:text-white">{value}</span>
       </div>
@@ -144,19 +134,33 @@ export function StarStepper({ value, onChange }: { value: number; onChange: (n: 
   );
 }
 
-export function ScheduleSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+export function ScheduleSelect({
+  value,
+  onChange,
+  options = [
+    { value: 'daily', label: 'Daily' },
+    { value: 'weekly', label: 'Weekly' },
+    { value: 'one_time', label: 'One time' },
+    { value: 'always_available', label: 'Always available' },
+  ],
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options?: { value: string; label: string }[];
+}) {
   return (
     <div className="relative">
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label="Schedule"
-        className="h-11 w-full cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white pl-3 pr-10 text-base font-semibold text-slate-700 focus:outline-none sm:h-10 sm:text-xs dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+        className="h-10 w-full cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white pl-3 pr-10 text-xs font-semibold text-slate-700 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
       >
-        <option value="one_time">One time</option>
-        <option value="daily">Daily</option>
-        <option value="weekly">Weekly</option>
-        <option value="always_available">Always available</option>
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
       </select>
       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
         <ChevronDown className="h-4 w-4" />
@@ -179,8 +183,8 @@ export function AssignTo({
     'h-4 w-4 shrink-0 cursor-pointer rounded border-slate-300 accent-[#52A5CE]';
 
   return (
-    <div className="space-y-2.5 rounded-xl border border-slate-200/80 bg-white p-3 dark:border-slate-700 dark:bg-slate-900">
-      <label className="flex min-h-[44px] cursor-pointer select-none items-center gap-3 sm:min-h-0">
+    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-white p-2.5 dark:border-slate-700 dark:bg-slate-900">
+      <label className="flex cursor-pointer select-none items-center gap-2.5">
         <input type="checkbox" checked={allChecked} onChange={(e) => onToggleAll(e.target.checked)} className={box} />
         <span className="text-xs font-bold text-slate-800 dark:text-white">All Children</span>
       </label>
@@ -190,11 +194,11 @@ export function AssignTo({
       {CHILDREN.map((c) => (
         <label
           key={c.id}
-          className="flex min-h-[44px] cursor-pointer select-none items-center gap-3 rounded-lg p-1 transition-colors hover:bg-slate-50/50 sm:min-h-0 dark:hover:bg-slate-800/50"
+          className="flex cursor-pointer select-none items-center gap-2.5 rounded-lg p-0.5 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50"
         >
           <input type="checkbox" checked={selected.includes(c.id)} onChange={() => onToggle(c.id)} className={box} />
           <span
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-extrabold uppercase text-white"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-extrabold uppercase text-white shadow-xs"
             style={{ backgroundColor: c.color }}
           >
             {c.initials}
@@ -206,44 +210,125 @@ export function AssignTo({
   );
 }
 
-export function DialogFooter({
-  submitLabel,
-  onCancel,
-  onSubmit,
+/** Crisp SaaS cursor arrow (MousePointer2) pointing directly on the button surface and tapping once */
+function OneShotClickIndicator({
+  onSimulatedClick,
+  onComplete,
 }: {
-  submitLabel: string;
-  onCancel: () => void;
-  onSubmit: () => void;
+  onSimulatedClick?: (clicking: boolean) => void;
+  onComplete?: () => void;
 }) {
+  const [phase, setPhase] = useState<'enter' | 'click' | 'fade' | 'gone'>('enter');
+
+  useEffect(() => {
+    // 1. Enter: cursor glides smoothly directly onto the button face (0 -> 750ms)
+    const t1 = setTimeout(() => {
+      setPhase('click');
+      onSimulatedClick?.(true); // Button visibly presses down
+    }, 750);
+
+    // Release button press
+    const tRelease = setTimeout(() => {
+      onSimulatedClick?.(false);
+    }, 1050);
+
+    // 2. Fade out after click (750ms -> 2000ms)
+    const t2 = setTimeout(() => {
+      setPhase('fade');
+    }, 2000);
+
+    // 3. Complete and unmount (2600ms)
+    const t3 = setTimeout(() => {
+      setPhase('gone');
+      onComplete?.();
+    }, 2600);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(tRelease);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [onSimulatedClick, onComplete]);
+
+  if (phase === 'gone') return null;
+
+  const isClick = phase === 'click';
+  const isFade = phase === 'fade';
+
   return (
-    <div className="flex w-full flex-row items-center justify-end gap-2.5 border-t border-slate-100 pt-3 dark:border-slate-800">
-      <button
-        type="button"
-        onClick={onCancel}
-        className="inline-flex min-h-[44px] flex-1 cursor-pointer items-center justify-center rounded-lg border border-slate-200 px-4 text-xs font-semibold text-slate-600 shadow-sm transition-colors hover:bg-slate-50 sm:h-9 sm:min-h-0 sm:flex-initial sm:px-6 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+    <div
+      className={`pointer-events-none absolute right-4 top-1.5 z-30 transition-all duration-500 ease-out ${
+        isFade
+          ? 'opacity-0 translate-y-2'
+          : phase === 'enter'
+          ? 'opacity-80 translate-x-3 translate-y-3'
+          : 'opacity-100 translate-x-0 translate-y-0'
+      }`}
+    >
+      {/* Expanding soft blue ripple centered precisely at the tip of the arrow (NO static dot) */}
+      {isClick && (
+        <span className="absolute left-[4px] top-[4.6px] h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-300/60 animate-ping" />
+      )}
+
+      {/* Modern crisp SaaS cursor arrow with click tap animation */}
+      <div
+        className={`transition-transform duration-150 ease-in-out ${
+          isClick ? 'scale-90 translate-y-0.5' : 'scale-100'
+        }`}
       >
-        Cancel
-      </button>
-      <button
-        type="button"
-        onClick={onSubmit}
-        className="inline-flex min-h-[44px] flex-1 cursor-pointer items-center justify-center rounded-lg bg-[#52A5CE] px-4 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#438fb6] sm:h-9 sm:min-h-0 sm:flex-initial sm:px-6"
-      >
-        {submitLabel}
-      </button>
+        <MousePointer2
+          className="h-6 w-6 fill-white text-slate-900 drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] select-none"
+          strokeWidth={1.75}
+        />
+      </div>
     </div>
   );
 }
 
-/** One-line confirmation strip, so a click in the preview visibly does something. */
-export function Note({ text }: { text: string | null }) {
-  if (!text) return null;
+export function DialogFooter({
+  submitLabel,
+  onCancel,
+  onSubmit,
+  showClickGuide = false,
+  onGuideComplete,
+}: {
+  submitLabel: string;
+  onCancel: () => void;
+  onSubmit: () => void;
+  showClickGuide?: boolean;
+  onGuideComplete?: () => void;
+}) {
+  const [isSimulatedClicking, setIsSimulatedClicking] = useState(false);
+
   return (
-    <div
-      role="status"
-      className="-mx-5 -mb-5 mt-4 border-t border-slate-100 bg-slate-50 px-5 py-2 text-xs text-slate-600 sm:-mx-6 sm:-mb-6 sm:px-6 dark:border-slate-800 dark:bg-slate-800/60 dark:text-slate-300"
-    >
-      {text}
+    <div className="flex w-full flex-row items-center justify-end gap-2.5 border-t border-slate-100 pt-3.5 dark:border-slate-800">
+      <button
+        type="button"
+        onClick={onCancel}
+        className="inline-flex h-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 px-5 text-xs font-semibold text-slate-600 shadow-xs transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+      >
+        Cancel
+      </button>
+
+      <div className="relative inline-flex">
+        <button
+          type="button"
+          onClick={onSubmit}
+          className={`relative inline-flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-[#52A5CE] px-6 text-xs font-semibold text-white shadow-xs transition-all duration-200 hover:bg-[#4194bd] active:scale-95 ${
+            isSimulatedClicking ? 'scale-95 bg-[#3a86ad] shadow-inner' : 'hover:scale-105'
+          }`}
+        >
+          <span>{submitLabel}</span>
+        </button>
+
+        {showClickGuide && (
+          <OneShotClickIndicator
+            onSimulatedClick={setIsSimulatedClicking}
+            onComplete={onGuideComplete}
+          />
+        )}
+      </div>
     </div>
   );
 }

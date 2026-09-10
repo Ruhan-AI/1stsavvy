@@ -16,11 +16,11 @@ import {
 
 export default function TasksPage() {
   const [chores, setChores] = useState([
-    { id: '1', title: 'Tidy Bedroom & Make Bed', cadence: 'Daily', stars: 2, completed: true, child: 'Emma' },
-    { id: '2', title: 'Feed & Walk Pet Dog', cadence: 'Morning', stars: 3, completed: false, child: 'Emma' },
-    { id: '3', title: 'Daily Math & Reading Time', cadence: 'Weekdays', stars: 4, completed: false, child: 'Emma' },
-    { id: '4', title: 'Put Away Toys & Craft Supplies', cadence: 'Daily', stars: 2, completed: true, child: 'Emma' },
-    { id: '5', title: 'Empty Dishwasher & Sort Cutlery', cadence: 'Evening', stars: 3, completed: false, child: 'Emma' },
+    { id: '1', title: 'Tidy Bedroom & Make Bed', cadence: 'Daily', stars: 2, completed: true, child: 'Leo' },
+    { id: '2', title: 'Feed & Walk Pet Dog', cadence: 'Morning', stars: 3, completed: false, child: 'Leo' },
+    { id: '3', title: 'Daily Math & Reading Time', cadence: 'Weekdays', stars: 4, completed: false, child: 'Leo' },
+    { id: '4', title: 'Put Away Toys & Craft Supplies', cadence: 'Daily', stars: 2, completed: true, child: 'Leo' },
+    { id: '5', title: 'Empty Dishwasher & Sort Cutlery', cadence: 'Evening', stars: 3, completed: false, child: 'Leo' },
   ]);
 
   const [filter, setFilter] = useState<'all' | 'pending' | 'completed'>('all');
@@ -46,7 +46,7 @@ export default function TasksPage() {
         cadence: newCadence,
         stars: Number(newStars),
         completed: false,
-        child: 'Emma',
+        child: 'Leo',
       },
     ]);
     setNewTitle('');
@@ -102,11 +102,11 @@ export default function TasksPage() {
         </div>
 
         <div className="bg-[#0C1826] border border-[#16273E] rounded-2xl p-5">
-          <span className="text-xs font-semibold text-slate-400">Emma&apos;s Star Target</span>
+          <span className="text-xs font-semibold text-slate-400">Leo&apos;s Star Target</span>
           <div className="text-2xl sm:text-3xl font-black text-amber-400 mt-1.5">
-            45 / 60 ★
+            42 / 60 ★
           </div>
-          <div className="text-xs text-cyan-400 mt-1">75% toward Nintendo Switch</div>
+          <div className="text-xs text-cyan-400 mt-1">70% toward Gaming Console</div>
         </div>
       </div>
 

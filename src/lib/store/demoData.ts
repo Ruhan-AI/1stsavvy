@@ -169,7 +169,7 @@ export const INITIAL_ACCOUNTS: Account[] = [
     name: 'Premier Checking',
     accountClass: 'asset',
     accountType: 'banking',
-    institutionName: 'Chase Bank',
+    institutionName: 'Premier National Bank',
     accountNumberMasked: '•••• 4812',
     balanceCents: 845020, // $8,450.20
     currency: 'USD',
@@ -187,7 +187,7 @@ export const INITIAL_ACCOUNTS: Account[] = [
     name: 'High-Yield Family Savings',
     accountClass: 'asset',
     accountType: 'savings',
-    institutionName: 'Marcus by Goldman Sachs',
+    institutionName: 'Apex High-Yield Savings',
     accountNumberMasked: '•••• 9104',
     balanceCents: 3420000, // $34,200.00
     currency: 'USD',
@@ -202,10 +202,10 @@ export const INITIAL_ACCOUNTS: Account[] = [
     id: 'acc-inv-01',
     householdId: 'hh-miller-01',
     ownerProfileId: 'prof-david',
-    name: 'Vanguard Total Market Index (IRA)',
+    name: 'Total Market Index Fund (IRA)',
     accountClass: 'asset',
     accountType: 'investments',
-    institutionName: 'Vanguard',
+    institutionName: 'Horizon Investments',
     accountNumberMasked: '•••• 6632',
     balanceCents: 12850000, // $128,500.00
     currency: 'USD',
@@ -220,7 +220,7 @@ export const INITIAL_ACCOUNTS: Account[] = [
     id: 'acc-prop-01',
     householdId: 'hh-miller-01',
     ownerProfileId: 'prof-sarah',
-    name: 'Primary Residence (Cedar Ridge)',
+    name: 'Primary Residence (Demo Property)',
     accountClass: 'asset',
     accountType: 'property',
     institutionName: 'Real Estate Valuation',
@@ -237,7 +237,7 @@ export const INITIAL_ACCOUNTS: Account[] = [
     id: 'acc-veh-01',
     householdId: 'hh-miller-01',
     ownerProfileId: 'prof-david',
-    name: 'Family SUV (2024 Highlander)',
+    name: 'Family SUV (Demo Vehicle)',
     accountClass: 'asset',
     accountType: 'vehicle',
     institutionName: 'Vehicle Valuation',
@@ -257,7 +257,7 @@ export const INITIAL_ACCOUNTS: Account[] = [
     name: '30-Year Fixed Home Mortgage',
     accountClass: 'liability',
     accountType: 'loans_debts',
-    institutionName: 'Rocket Mortgage',
+    institutionName: 'Evergreen Home Loans',
     accountNumberMasked: '•••• 3041',
     balanceCents: -31040000, // -$310,400.00
     currency: 'USD',
@@ -272,10 +272,10 @@ export const INITIAL_ACCOUNTS: Account[] = [
     id: 'acc-card-01',
     householdId: 'hh-miller-01',
     ownerProfileId: 'prof-sarah',
-    name: 'Sapphire Preferred Rewards Card',
+    name: 'Preferred Platinum Rewards Card',
     accountClass: 'liability',
     accountType: 'credit_card',
-    institutionName: 'Chase',
+    institutionName: 'Premier National Bank',
     accountNumberMasked: '•••• 7719',
     balanceCents: -184025, // -$1,840.25
     currency: 'USD',
@@ -289,29 +289,29 @@ export const INITIAL_ACCOUNTS: Account[] = [
 ];
 
 export const INITIAL_TRANSACTIONS: Transaction[] = [
-  { id: 'tx-001', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-20', description: 'Acme Corp Bi-Weekly Direct Deposit', merchantName: 'Acme Corp', amountCents: 475000, categoryId: 'cat-salary', categoryName: 'Salary & Wages', status: 'posted', paymentMethod: 'ach', isRecurring: true, createdAt: '2026-08-20T08:00:00Z' },
-  { id: 'tx-002', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-19', description: 'Whole Foods Market - Organic Groceries', merchantName: 'Whole Foods', amountCents: -16450, categoryId: 'cat-groceries', categoryName: 'Groceries & Household', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-19T14:30:00Z' },
-  { id: 'tx-003', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-18', description: 'Rocket Mortgage Monthly Escrow', merchantName: 'Rocket Mortgage', amountCents: -245000, categoryId: 'cat-housing', categoryName: 'Mortgage & Rent', status: 'posted', paymentMethod: 'ach', isRecurring: true, createdAt: '2026-08-18T10:00:00Z' },
-  { id: 'tx-004', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-17', description: 'Shell Oil - Gas Station', merchantName: 'Shell', amountCents: -5840, categoryId: 'cat-auto', categoryName: 'Vehicle & Gas', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-17T11:20:00Z' },
-  { id: 'tx-005', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-16', description: 'Trattoria Bella - Family Dinner', merchantName: 'Trattoria Bella', amountCents: -8620, categoryId: 'cat-dining', categoryName: 'Dining & Takeout', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-16T19:45:00Z' },
+  { id: 'tx-001', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-20', description: 'Monthly Salary Direct Deposit', merchantName: 'Corporate Payroll', amountCents: 475000, categoryId: 'cat-salary', categoryName: 'Salary & Wages', status: 'posted', paymentMethod: 'ach', isRecurring: true, createdAt: '2026-08-20T08:00:00Z' },
+  { id: 'tx-002', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-19', description: 'Fresh Market - Organic Groceries', merchantName: 'Fresh Market', amountCents: -16450, categoryId: 'cat-groceries', categoryName: 'Groceries & Household', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-19T14:30:00Z' },
+  { id: 'tx-003', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-18', description: 'Home Mortgage Monthly Escrow', merchantName: 'Evergreen Home Loans', amountCents: -185000, categoryId: 'cat-housing', categoryName: 'Mortgage & Rent', status: 'posted', paymentMethod: 'ach', isRecurring: true, createdAt: '2026-08-18T10:00:00Z' },
+  { id: 'tx-004', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-17', description: 'City Fuel - Gas Station', merchantName: 'City Fuel', amountCents: -5840, categoryId: 'cat-auto', categoryName: 'Vehicle & Gas', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-17T11:20:00Z' },
+  { id: 'tx-005', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-16', description: 'Family Dining & Takeout', merchantName: 'Local Restaurant', amountCents: -8620, categoryId: 'cat-dining', categoryName: 'Dining & Takeout', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-16T19:45:00Z' },
   { id: 'tx-006', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-15', description: 'Power & Light Electric Utility', merchantName: 'Electric Co', amountCents: -14280, categoryId: 'cat-utilities', categoryName: 'Utilities & Internet', status: 'posted', paymentMethod: 'ach', isRecurring: true, createdAt: '2026-08-15T09:00:00Z' },
-  { id: 'tx-007', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-14', description: 'Target - School Supplies & Backpacks', merchantName: 'Target', amountCents: -11250, categoryId: 'cat-kids', categoryName: 'Children & Education', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-14T15:10:00Z' },
-  { id: 'tx-008', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-12', description: 'Transfer to High-Yield Savings', merchantName: 'Marcus Savings', amountCents: -100000, categoryId: 'cat-savings', categoryName: 'Emergency & Goal Savings', status: 'posted', paymentMethod: 'transfer', isRecurring: true, createdAt: '2026-08-12T08:00:00Z' },
-  { id: 'tx-009', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-10', description: 'Netflix & Spotify Family Streaming', merchantName: 'Netflix', amountCents: -3498, categoryId: 'cat-subs', categoryName: 'Subscriptions & Software', status: 'posted', paymentMethod: 'card', isRecurring: true, createdAt: '2026-08-10T02:00:00Z' },
-  { id: 'tx-010', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-05', description: 'Client Consulting Retainer', merchantName: 'Nexus Labs', amountCents: 120000, categoryId: 'cat-side-income', categoryName: 'Side Consulting', status: 'posted', paymentMethod: 'ach', isRecurring: false, createdAt: '2026-08-05T12:00:00Z' },
+  { id: 'tx-007', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-14', description: 'Department Store - School Supplies', merchantName: 'Retail Store', amountCents: -11250, categoryId: 'cat-kids', categoryName: 'Children & Education', status: 'posted', paymentMethod: 'card', isRecurring: false, createdAt: '2026-08-14T15:10:00Z' },
+  { id: 'tx-008', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-12', description: 'Transfer to High-Yield Savings', merchantName: 'High-Yield Savings', amountCents: -100000, categoryId: 'cat-savings', categoryName: 'Emergency & Goal Savings', status: 'posted', paymentMethod: 'transfer', isRecurring: true, createdAt: '2026-08-12T08:00:00Z' },
+  { id: 'tx-009', householdId: 'hh-miller-01', accountId: 'acc-card-01', date: '2026-08-10', description: 'Digital Media & Streaming Bundle', merchantName: 'Streaming Service', amountCents: -3498, categoryId: 'cat-subs', categoryName: 'Subscriptions & Software', status: 'posted', paymentMethod: 'card', isRecurring: true, createdAt: '2026-08-10T02:00:00Z' },
+  { id: 'tx-010', householdId: 'hh-miller-01', accountId: 'acc-chk-01', date: '2026-08-05', description: 'Client Consulting Retainer', merchantName: 'Consulting Client', amountCents: 120000, categoryId: 'cat-side-income', categoryName: 'Side Consulting', status: 'posted', paymentMethod: 'ach', isRecurring: false, createdAt: '2026-08-05T12:00:00Z' },
 ];
 
 export const INITIAL_RECURRING: RecurringItem[] = [
-  { id: 'rec-01', householdId: 'hh-miller-01', accountId: 'acc-chk-01', name: 'Rocket Mortgage Escrow', type: 'bill', cadence: 'monthly', nextDate: '2026-09-01', expectedAmountCents: 245000, categoryId: 'cat-housing', reminderDaysBefore: 5, isAutoDetected: false, isActive: true },
+  { id: 'rec-01', householdId: 'hh-miller-01', accountId: 'acc-chk-01', name: 'Home Mortgage Escrow', type: 'bill', cadence: 'monthly', nextDate: '2026-09-01', expectedAmountCents: 185000, categoryId: 'cat-housing', reminderDaysBefore: 5, isAutoDetected: false, isActive: true },
   { id: 'rec-02', householdId: 'hh-miller-01', accountId: 'acc-chk-01', name: 'Acme Corp Salary Deposit', type: 'income', cadence: 'biweekly', nextDate: '2026-09-03', expectedAmountCents: 475000, categoryId: 'cat-salary', reminderDaysBefore: 1, isAutoDetected: true, isActive: true },
   { id: 'rec-03', householdId: 'hh-miller-01', accountId: 'acc-chk-01', name: 'Electric & Utility Bill', type: 'bill', cadence: 'monthly', nextDate: '2026-09-15', expectedAmountCents: 14500, categoryId: 'cat-utilities', reminderDaysBefore: 3, isAutoDetected: true, isActive: true },
   { id: 'rec-04', householdId: 'hh-miller-01', accountId: 'acc-card-01', name: 'Streaming Subscriptions Bundle', type: 'bill', cadence: 'monthly', nextDate: '2026-09-10', expectedAmountCents: 3500, categoryId: 'cat-subs', reminderDaysBefore: 2, isAutoDetected: true, isActive: true },
 ];
 
 export const INITIAL_RULES: TransactionRule[] = [
-  { id: 'rule-01', householdId: 'hh-miller-01', name: 'Auto-categorize Whole Foods to Groceries', descriptionCondition: 'Whole Foods', targetCategoryId: 'cat-groceries', excludeFromReports: false, priority: 1, isActive: true, createdAt: '2026-01-20T00:00:00Z' },
-  { id: 'rule-02', householdId: 'hh-miller-01', name: 'Auto-categorize Shell & Exxon to Gas', descriptionCondition: 'Shell', targetCategoryId: 'cat-auto', excludeFromReports: false, priority: 2, isActive: true, createdAt: '2026-01-20T00:00:00Z' },
-  { id: 'rule-03', householdId: 'hh-miller-01', name: 'Salary Direct Deposit', descriptionCondition: 'Acme Corp', targetCategoryId: 'cat-salary', excludeFromReports: false, priority: 3, isActive: true, createdAt: '2026-01-20T00:00:00Z' },
+  { id: 'rule-01', householdId: 'hh-miller-01', name: 'Auto-categorize Groceries', descriptionCondition: 'Fresh Market', targetCategoryId: 'cat-groceries', excludeFromReports: false, priority: 1, isActive: true, createdAt: '2026-01-20T00:00:00Z' },
+  { id: 'rule-02', householdId: 'hh-miller-01', name: 'Auto-categorize Fuel to Gas', descriptionCondition: 'City Fuel', targetCategoryId: 'cat-auto', excludeFromReports: false, priority: 2, isActive: true, createdAt: '2026-01-20T00:00:00Z' },
+  { id: 'rule-03', householdId: 'hh-miller-01', name: 'Salary Direct Deposit', descriptionCondition: 'Payroll', targetCategoryId: 'cat-salary', excludeFromReports: false, priority: 3, isActive: true, createdAt: '2026-01-20T00:00:00Z' },
 ];
 
 export const INITIAL_TASKS: Task[] = [
@@ -348,17 +348,17 @@ export const INITIAL_GOALS: Goal[] = [
 ];
 
 export const INITIAL_CALENDAR_EVENTS: CalendarEvent[] = [
-  { id: 'ev-01', householdId: 'hh-miller-01', title: 'Mortgage Payment Due ($2,450)', eventType: 'bill', date: '2026-09-01', amountCents: 245000, color: '#324154', assignedProfileIds: ['prof-sarah', 'prof-david'] },
-  { id: 'ev-02', householdId: 'hh-miller-01', title: 'Acme Corp Payday (+$4,750)', eventType: 'income', date: '2026-09-03', amountCents: 475000, color: '#0F766E', assignedProfileIds: ['prof-sarah'] },
+  { id: 'ev-01', householdId: 'hh-miller-01', title: 'Mortgage Payment Due ($1,850)', eventType: 'bill', date: '2026-09-01', amountCents: 185000, color: '#324154', assignedProfileIds: ['prof-sarah', 'prof-david'] },
+  { id: 'ev-02', householdId: 'hh-miller-01', title: 'Monthly Payday (+$4,750)', eventType: 'income', date: '2026-09-03', amountCents: 475000, color: '#0F766E', assignedProfileIds: ['prof-sarah'] },
   { id: 'ev-03', householdId: 'hh-miller-01', title: 'Leo Soccer Practice & Snack Duty', eventType: 'household_event', date: '2026-08-22', startTime: '10:00', endTime: '11:30', color: '#4FA3CD', assignedProfileIds: ['prof-leo', 'prof-david'] },
   { id: 'ev-04', householdId: 'hh-miller-01', title: 'Dinner: Homemade Turkey Tacos & Guacamole', eventType: 'meal', date: '2026-08-21', mealType: 'dinner', color: '#B45309', assignedProfileIds: ['prof-sarah', 'prof-david', 'prof-leo', 'prof-maya'] },
   { id: 'ev-05', householdId: 'hh-miller-01', title: 'Maya Ballet Recital', eventType: 'household_event', date: '2026-08-23', startTime: '14:00', endTime: '15:30', color: '#66AFD3', assignedProfileIds: ['prof-maya', 'prof-sarah'] },
 ];
 
 export const INITIAL_HOLDINGS: Holding[] = [
-  { id: 'hld-01', accountId: 'acc-inv-01', symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', assetClass: 'etf', quantity: 280, costBasisCents: 5800000, currentPriceCents: 27500, currentValueCents: 7700000, gainLossCents: 1900000, lastUpdated: '2026-08-20T16:00:00Z' },
-  { id: 'hld-02', accountId: 'acc-inv-01', symbol: 'VXUS', name: 'Vanguard Total International Stock ETF', assetClass: 'etf', quantity: 340, costBasisCents: 1800000, currentPriceCents: 6200, currentValueCents: 2108000, gainLossCents: 308000, lastUpdated: '2026-08-20T16:00:00Z' },
-  { id: 'hld-03', accountId: 'acc-inv-01', symbol: 'BND', name: 'Vanguard Total Bond Market ETF', assetClass: 'bond', quantity: 420, costBasisCents: 3200000, currentPriceCents: 7240, currentValueCents: 3040800, gainLossCents: -159200, lastUpdated: '2026-08-20T16:00:00Z' },
+  { id: 'hld-01', accountId: 'acc-inv-01', symbol: 'US-IDX', name: 'Total Stock Market Index ETF', assetClass: 'etf', quantity: 280, costBasisCents: 5800000, currentPriceCents: 27500, currentValueCents: 7700000, gainLossCents: 1900000, lastUpdated: '2026-08-20T16:00:00Z' },
+  { id: 'hld-02', accountId: 'acc-inv-01', symbol: 'INTL-IDX', name: 'Total International Stock Index ETF', assetClass: 'etf', quantity: 340, costBasisCents: 1800000, currentPriceCents: 6200, currentValueCents: 2108000, gainLossCents: 308000, lastUpdated: '2026-08-20T16:00:00Z' },
+  { id: 'hld-03', accountId: 'acc-inv-01', symbol: 'BOND-IDX', name: 'Total Bond Market Index ETF', assetClass: 'bond', quantity: 420, costBasisCents: 3200000, currentPriceCents: 7240, currentValueCents: 3040800, gainLossCents: -159200, lastUpdated: '2026-08-20T16:00:00Z' },
 ];
 
 export const INITIAL_CONTACTS: Contact[] = [
@@ -369,7 +369,7 @@ export const INITIAL_CONTACTS: Contact[] = [
 
 export const INITIAL_NOTIFICATIONS: AppNotification[] = [
   { id: 'notif-01', householdId: 'hh-miller-01', title: 'Task Completed: Homework', message: 'Leo submitted "Complete Math & Reading Homework" for parent approval.', category: 'task', isRead: false, actionUrl: '/profiles/prof-leo', createdAt: '2026-08-20T17:00:00Z' },
-  { id: 'notif-02', householdId: 'hh-miller-01', title: 'Upcoming Bill Reminder', message: 'Rocket Mortgage ($2,450.00) is due in 12 days.', category: 'bill', isRead: false, actionUrl: '/banking', createdAt: '2026-08-20T08:00:00Z' },
+  { id: 'notif-02', householdId: 'hh-miller-01', title: 'Upcoming Bill Reminder', message: 'Home Mortgage ($1,850.00) is due in 12 days.', category: 'bill', isRead: false, actionUrl: '/banking', createdAt: '2026-08-20T08:00:00Z' },
   { id: 'notif-03', householdId: 'hh-miller-01', title: 'Budget On Track', message: 'Your August groceries budget is at 62% utilization.', category: 'budget', isRead: true, actionUrl: '/budgeting', createdAt: '2026-08-19T09:00:00Z' },
 ];
 

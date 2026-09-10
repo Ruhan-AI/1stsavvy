@@ -38,7 +38,7 @@ export default function CookiePreferencesPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-16 space-y-12">
-      <div className="space-y-3 text-center sm:text-left">
+      <div className="space-y-3 text-center">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Privacy Controls</span>
         <h1 className="text-4xl font-serif font-bold text-brand-navy dark:text-white">Cookie Preferences</h1>
         <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">

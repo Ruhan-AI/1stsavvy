@@ -8,9 +8,6 @@ import { ShieldCheck } from 'lucide-react';
 const footerLink =
   'inline-flex items-center min-h-[44px] lg:min-h-0 lg:py-1 hover:text-[#52A5CE] transition-colors';
 
-// §5 — same ladder for the legal strip in the bottom bar (different hover colour only).
-const legalLink =
-  'inline-flex items-center min-h-[44px] lg:min-h-0 lg:py-1 hover:text-slate-300 transition-colors';
 
 export function MarketingFooter() {
   return (
@@ -71,18 +68,23 @@ export function MarketingFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className={footerLink}>
-                  Contact Support
-                </Link>
+                <a href="mailto:support@firstsavvy.com" className={footerLink}>
+                  Email
+                </a>
+              </li>
+              <li>
+                <a href="tel:+18005550199" className={footerLink}>
+                  Phone
+                </a>
               </li>
               <li>
                 <Link href="/login" className={footerLink}>
-                  Adult Sign In
+                  Login
                 </Link>
               </li>
               <li>
                 <Link href="/kid-login" className={footerLink}>
-                  Kid Space Login
+                  Login as a kid
                 </Link>
               </li>
             </ul>
@@ -121,17 +123,11 @@ export function MarketingFooter() {
           </div>
         </div>
 
-        {/* Bottom bar — stacks at 320 px, single row from `sm` up (§6/§5). */}
-        <div className="pt-6 sm:pt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-slate-500">
-          <p className="min-w-0 text-center text-balance sm:text-left">
+        {/* Bottom bar */}
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-slate-500">
+          <p className="min-w-0 text-center sm:text-left text-balance">
             © {new Date().getFullYear()} First Savvy, Inc. All rights reserved. First Savvy is a financial management platform, not a bank.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:shrink-0">
-            <Link href="/privacy" className={legalLink}>Privacy</Link>
-            <Link href="/terms" className={legalLink}>Terms</Link>
-            <Link href="/children-privacy" className={legalLink}>COPPA</Link>
-            <Link href="/contact" className={legalLink}>Support</Link>
-          </div>
         </div>
       </div>
     </footer>

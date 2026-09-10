@@ -31,10 +31,7 @@ import {
   Repeat
 } from 'lucide-react';
 
-const WealthGlobeCanvas = dynamic(
-  () => import('@/components/3d/WealthGlobeCanvas').then(mod => mod.WealthGlobeCanvas),
-  { ssr: false }
-);
+
 
 const FinancialWaveCanvas = dynamic(
   () => import('@/components/3d/FinancialWaveCanvas').then(mod => mod.FinancialWaveCanvas),
@@ -47,12 +44,6 @@ export default function PersonalFinancePage() {
     <div className="space-y-12 sm:space-y-20 lg:space-y-24 pb-20 overflow-hidden relative">
       {/* 1. HERO SECTION — §2 wide marketing container */}
       <section className="relative pt-2 sm:pt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* §12 decorative canvas: responsive box ladder, clipped, never interactive */}
-        <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[280px] sm:h-[380px] lg:h-[480px] overflow-hidden pointer-events-none -z-0 opacity-25 dark:opacity-35">
-          <CanvasErrorBoundary>
-            <FinancialWaveCanvas className="w-full h-full" />
-          </CanvasErrorBoundary>
-        </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-3 sm:space-y-4 flex flex-col items-center">
           <FadeIn delay={0.05}>
@@ -109,7 +100,7 @@ export default function PersonalFinancePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* §6 asymmetric split — stacked below lg, copy first in DOM */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <ScrollReveal direction="left" className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4">
+          <ScrollReveal direction="left" className="text-center lg:col-span-5 min-w-0 space-y-3 sm:space-y-4">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Everything in View</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               <TextReveal text="Banking, assets, vehicles, properties, and loans. In one place." />
@@ -157,7 +148,7 @@ export default function PersonalFinancePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* §6 copy first in DOM, preview moves left only from lg up */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <ScrollReveal direction="right" className="lg:order-2 lg:col-span-5 min-w-0 space-y-3 sm:space-y-4">
+          <ScrollReveal direction="right" className="text-center lg:order-2 lg:col-span-5 min-w-0 space-y-3 sm:space-y-4">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Budgeting</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               Planned. Actual. Remaining.
@@ -183,31 +174,78 @@ export default function PersonalFinancePage() {
         </div>
       </section>
 
-      {/* 5. 3D FINANCIAL WAVE SECTION */}
+      {/* 5. CONNECTED WEALTH ARCHITECTURE */}
       <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-slate-900 text-white p-6 sm:p-10 lg:p-12 overflow-hidden border border-slate-800 shadow-2xl">
-          <div className="absolute inset-0 opacity-40 pointer-events-none -z-0">
-            <CanvasErrorBoundary>
-              <FinancialWaveCanvas />
-            </CanvasErrorBoundary>
-          </div>
+        <div className="rounded-3xl bg-gradient-to-br from-slate-50 via-white to-sky-50/50 dark:from-[#1E293B] dark:via-[#1A232E] dark:to-[#16202C] border border-slate-200/90 dark:border-slate-800 p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Heading & Story */}
+            <div className="text-center lg:col-span-5 space-y-4">
+              <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">
+                Connected Wealth Architecture
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
+                Built for where your wealth is heading.
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                From day-to-day transaction flow to generational estate contacts and password records, First Savvy provides the infrastructure you need to protect and grow your legacy.
+              </p>
+              
+              <div className="pt-2">
+                <Link
+                  href="/signup"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[44px] px-6 py-3 rounded-xl bg-brand-navy hover:bg-brand-navyDark dark:bg-brand-sky dark:hover:bg-brand-blue text-white text-sm font-semibold shadow-md transition-colors"
+                >
+                  <span>Get Started</span>
+                  <ArrowRight className="w-4 h-4 shrink-0 text-brand-sky dark:text-white" />
+                </Link>
+              </div>
+            </div>
 
-          <div className="relative z-10 max-w-2xl space-y-3 sm:space-y-4">
-            <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Connected Wealth Architecture</span>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold leading-tight">
-              Built for where your wealth is heading.
-            </h3>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              From day-to-day transaction flow to generational estate contacts and password records, First Savvy provides the infrastructure you need to protect and grow your legacy.
-            </p>
-            <div className="pt-4">
-              <Link
-                href="/signup"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[44px] px-5 sm:px-6 py-3 rounded-xl bg-brand-sky hover:bg-brand-blue text-white text-sm font-bold shadow-md transition-colors"
-              >
-                <span>Get Started</span>
-                <ArrowRight className="w-4 h-4 shrink-0" />
-              </Link>
+            {/* Right Column: Architectural Pillar Cards */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Card 1: Balance Sheet */}
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
+                <div className="w-10 h-10 mx-auto rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#52A5CE] flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy dark:text-white">Unified Balance Sheet</h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Track real estate equity, vehicle values, investment accounts, and liquid cash in a single real-time calculation.
+                </p>
+              </div>
+
+              {/* Card 2: Cash Flow */}
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
+                <div className="w-10 h-10 mx-auto rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <Repeat className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy dark:text-white">Live Transaction Flow</h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Automated category organization, split transactions, and recurring commitments with zero manual entry drag.
+                </p>
+              </div>
+
+              {/* Card 3: Estate & Contacts */}
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
+                <div className="w-10 h-10 mx-auto rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                  <Briefcase className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy dark:text-white">Estate & Key Contacts</h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Store mortgage providers, legal executors, and trusted family advisors linked directly to your household ledger.
+                </p>
+              </div>
+
+              {/* Card 4: Vault & Privacy */}
+              <div className="text-center p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2.5">
+                <div className="w-10 h-10 mx-auto rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy dark:text-white">Encrypted Family Vault</h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  256-bit AES encryption protecting critical account credentials, policy numbers, and emergency access plans.
+                </p>
+              </div>
             </div>
           </div>
         </div>

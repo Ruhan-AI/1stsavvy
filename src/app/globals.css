@@ -247,6 +247,15 @@ html {
 }
 
 /* The live demo is interactive: its phone controls need real touch hit areas. */
+/* Keep readable fields when a touch device rotates past the sm breakpoint. */
+@media (pointer: coarse) {
+  input.text-base:not([type='checkbox']):not([type='radio']),
+  select.text-base,
+  textarea.text-base {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 1023px) {
   [data-demo-shell] button {
     min-height: 44px;

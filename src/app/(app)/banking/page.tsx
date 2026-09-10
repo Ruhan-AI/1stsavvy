@@ -1,5 +1,7 @@
 'use client';
 
+import { AppDialog } from '@/components/app/AppDialog';
+
 import React, { useState } from 'react';
 import { useFirstSavvyStore } from '@/lib/store';
 import { formatMoney, formatDate } from '@/lib/utils/format';
@@ -462,8 +464,7 @@ export default function BankingPage() {
 
       {/* PLAID LINK SANDBOX MODAL */}
       {plaidModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+        <AppDialog title="Plaid Link (Sandbox)" onClose={() => setPlaidModalOpen(false)} className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">
@@ -471,7 +472,7 @@ export default function BankingPage() {
                 </div>
                 <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Plaid Link (Sandbox)</h3>
               </div>
-              <button onClick={() => setPlaidModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
+              <button onClick={() => setPlaidModalOpen(false)} aria-label="Close dialog" className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -504,17 +505,15 @@ export default function BankingPage() {
             <div className="pt-2 text-center text-[11px] text-slate-400">
               Default Sandbox Credentials: <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded">user_good</code> / <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded">pass_good</code>
             </div>
-          </div>
-        </div>
+          </AppDialog>
       )}
 
       {/* MANUAL ACCOUNT MODAL */}
       {manualModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+        <AppDialog title="Add Manual Asset or Liability" onClose={() => setManualModalOpen(false)} className="w-full max-w-md bg-white dark:bg-[#1E293B] rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <h3 className="font-serif font-bold text-base text-brand-navy dark:text-white">Add Manual Asset or Liability</h3>
-              <button onClick={() => setManualModalOpen(false)} className="min-h-[44px] text-slate-400 hover:text-slate-600">
+              <button onClick={() => setManualModalOpen(false)} aria-label="Close dialog" className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -591,8 +590,7 @@ export default function BankingPage() {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </AppDialog>
       )}
     </div>
   );

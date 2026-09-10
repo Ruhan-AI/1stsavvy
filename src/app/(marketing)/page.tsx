@@ -25,7 +25,7 @@ import {
 } from '@/components/animations/MotionWrappers';
 import { 
   ArrowRight, 
-  Sparkles, 
+  GraduationCap, 
   Wallet, 
   ShieldCheck, 
   TrendingUp, 
@@ -43,10 +43,6 @@ const FinancialWaveCanvas = dynamic(
   { ssr: false }
 );
 
-const FamilyStarFlowCanvas = dynamic(
-  () => import('@/components/3d/FamilyStarFlowCanvas').then(mod => mod.FamilyStarFlowCanvas),
-  { ssr: false }
-);
 
 export default function HomePage() {
   return (
@@ -174,7 +170,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal distance={12} duration={0.45}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-10 lg:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
-            <div className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-left">
+            <div className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-center">
               <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Money is Connected</span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
                 Your financial tools should be too.
@@ -211,40 +207,85 @@ export default function HomePage() {
           </div>
         </ScrollReveal>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-brand-sky/40 transition-colors">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-sky-50 dark:bg-sky-950/60 flex items-center justify-center text-brand-sky">
-                <Sparkles className="w-6 h-6" />
+            <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-sky-400/50 transition-all flex flex-col justify-between text-center">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/60 border border-sky-100 dark:border-sky-900/50 flex items-center justify-center text-sky-600 dark:text-sky-400 mb-4 mx-auto">
+                  <GraduationCap className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-sans text-slate-900 dark:text-white tracking-tight mb-2.5">
+                  Learn It
+                </h3>
+                <p className="text-slate-700 dark:text-slate-200 text-sm sm:text-[15px] leading-relaxed font-normal">
+                  Build real money skills through hands-on earning, saving habits, financial responsibility, and working toward tangible goals.
+                </p>
               </div>
-              <h3 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Learn It</h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Learn real money skills through earning, saving, responsibility, and working toward goals.
-              </p>
+
+              <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-sky-500 shrink-0" />
+                  Chores & Rewards
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-sky-500 shrink-0" />
+                  Savings Goals
+                </span>
+              </div>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-emerald-500/40 transition-colors">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600">
-                <Wallet className="w-6 h-6" />
+            <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all flex flex-col justify-between text-center">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4 mx-auto">
+                  <Wallet className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-sans text-slate-900 dark:text-white tracking-tight mb-2.5">
+                  Manage It
+                </h3>
+                <p className="text-slate-700 dark:text-slate-200 text-sm sm:text-[15px] leading-relaxed font-normal">
+                  Organize accounts, transactions, customized budgets, and recurring financial activity effortlessly in one unified dashboard.
+                </p>
               </div>
-              <h3 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Manage It</h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Manage accounts, transactions, budgets, and recurring financial activity in one place.
-              </p>
+
+              <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                  Budgets & Cashflow
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                  Recurring Bills
+                </span>
+              </div>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <div className="h-full p-4 sm:p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 sm:space-y-4 hover:border-brand-softBlue/40 transition-colors">
-              <div className="w-12 h-12 shrink-0 rounded-xl bg-navy-50 dark:bg-slate-800 flex items-center justify-center text-brand-navy dark:text-brand-softBlue">
-                <TrendingUp className="w-6 h-6" />
+            <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-indigo-400/50 transition-all flex flex-col justify-between text-center">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4 mx-auto">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold font-sans text-slate-900 dark:text-white tracking-tight mb-2.5">
+                  Grow It
+                </h3>
+                <p className="text-slate-700 dark:text-slate-200 text-sm sm:text-[15px] leading-relaxed font-normal">
+                  Develop deep clarity on your net worth trajectory, asset allocation, and the bigger long-term financial picture as life evolves.
+                </p>
               </div>
-              <h3 className="text-base sm:text-lg font-serif font-bold text-brand-navy dark:text-white">Grow It</h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Grow your understanding of net worth and the bigger financial picture as life changes.
-              </p>
+
+              <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                  Net Worth Tracking
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-50 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                  Long-term Trends
+                </span>
+              </div>
             </div>
           </StaggerItem>
         </StaggerContainer>
@@ -271,13 +312,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. SECTION: FAMILY PREVIEW (Live Task & Goal Creation Modals + 3D Stars in Background) */}
+      {/* 5. SECTION: FAMILY PREVIEW (Live Task & Goal Creation Modals) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="absolute inset-x-0 top-0 max-w-5xl mx-auto h-[380px] overflow-hidden pointer-events-none -z-0 opacity-20 dark:opacity-30">
-          <CanvasErrorBoundary>
-            <FamilyStarFlowCanvas />
-          </CanvasErrorBoundary>
-        </div>
 
         <div className="space-y-6 sm:space-y-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -292,11 +328,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-5xl mx-auto">
-            <div className="min-w-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
+            <div className="min-w-0 h-full">
               <LiveTaskCreationPreview />
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 h-full">
               <LiveGoalCreationPreview />
             </div>
           </div>
@@ -306,7 +342,7 @@ export default function HomePage() {
       {/* 6. SECTION: SEE MORE THAN A BALANCE (Live Account Types Vector Preview) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center p-6 sm:p-10 lg:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-left">
+          <div className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-center">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">See More Than a Balance</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
               Your balance is not your financial position.
@@ -382,10 +418,9 @@ export default function HomePage() {
       {/* 9. FAQ SECTION */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center mb-8 sm:mb-12 space-y-2">
-            <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">Frequently Asked Questions</span>
+          <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-brand-navy dark:text-white leading-tight">
-              Answers for curious minds
+              Frequently Asked Questions
             </h2>
           </div>
         </ScrollReveal>

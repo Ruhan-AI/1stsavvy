@@ -11,60 +11,60 @@ export function LiveAccountTypesPreview() {
       id: 'banking', 
       name: 'Liquid Banking', 
       icon: Landmark, 
-      balance: '$32,450.20', 
+      balance: '$20,000.00', 
       desc: 'Checking & Savings', 
       isDebt: false,
       items: [
-        { name: 'Chase Total Checking (...4921)', val: '$18,450.20', status: 'Plaid Sync' },
-        { name: 'Chase High Yield Savings (...9021)', val: '$14,000.00', status: '4.85% APY' }
+        { name: 'Demo Checking (...1001)', val: '$5,000.00', status: 'Plaid Sync' },
+        { name: 'Demo Savings (...2002)', val: '$15,000.00', status: '4.85% APY' }
       ]
     },
     { 
       id: 'vehicles', 
       name: 'Vehicles', 
       icon: Car, 
-      balance: '$64,000.00', 
-      desc: 'EV & Family SUVs', 
+      balance: '$45,000.00', 
+      desc: 'EV & Family Vehicles', 
       isDebt: false,
       items: [
-        { name: '2023 Tesla Model Y Long Range', val: '$42,000.00', status: 'KBB Valuation' },
-        { name: '2021 Honda CR-V Touring', val: '$22,000.00', status: 'Owned' }
+        { name: '2023 Electric Crossover SUV', val: '$30,000.00', status: 'Estimated Value' },
+        { name: '2021 Family Sedan', val: '$15,000.00', status: 'Owned' }
       ]
     },
     { 
       id: 'property', 
       name: 'Real Estate & Property', 
       icon: Home, 
-      balance: '$620,000.00', 
+      balance: '$550,000.00', 
       desc: 'Primary Residence', 
       isDebt: false,
       items: [
-        { name: 'Single Family Residence (Columbus, OH)', val: '$620,000.00', status: 'Zillow Linked' }
+        { name: 'Primary Residence (Demo Property)', val: '$550,000.00', status: 'Market Valuation' }
       ]
     },
     { 
       id: 'investments', 
-      name: 'Investments & 401(k)', 
+      name: 'Investments & Retirement', 
       icon: TrendingUp, 
-      balance: '$210,000.00', 
-      desc: 'Vanguard & Roth IRAs', 
+      balance: '$185,000.00', 
+      desc: 'Index Funds & IRAs', 
       isDebt: false,
       items: [
-        { name: 'Vanguard 500 Index Fund (VFIAX)', val: '$124,500.00', status: '+8.4% YTD' },
-        { name: 'Fidelity Traditional 401(k)', val: '$62,400.00', status: 'Employer Match' },
-        { name: 'Backdoor Roth IRA', val: '$23,100.00', status: 'Tax-Free' }
+        { name: 'Total Market Index Fund (VTSAX)', val: '$110,000.00', status: '+8.4% YTD' },
+        { name: 'Employer 401(k) Plan', val: '$55,000.00', status: 'Employer Match' },
+        { name: 'Roth IRA Account', val: '$20,000.00', status: 'Tax-Free' }
       ]
     },
     { 
       id: 'debt', 
       name: 'Loans & Liabilities', 
       icon: CreditCard, 
-      balance: '-$489,042.30', 
+      balance: '-$321,250.00', 
       desc: 'Fixed Mortgage & Debt', 
       isDebt: true,
       items: [
-        { name: 'Rocket Mortgage (30-Yr Fixed @ 3.25%)', val: '-$465,042.30', status: 'Monthly Escrow' },
-        { name: 'Chase Sapphire Credit Card', val: '-$1,240.50', status: 'Due Sept 15' }
+        { name: 'Home Mortgage (30-Yr Fixed @ 3.5%)', val: '-$320,000.00', status: 'Monthly Escrow' },
+        { name: 'Rewards Credit Card', val: '-$1,250.00', status: 'Due Sept 15' }
       ]
     },
   ];

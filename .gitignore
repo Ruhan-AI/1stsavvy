@@ -48,3 +48,5 @@ public/brand/Loader.mov
 # Temp scratch files
 scratch/
 .vscode/
+.claude/
+*.zip

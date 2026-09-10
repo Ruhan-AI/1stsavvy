@@ -5,7 +5,7 @@ import { ShieldCheck, Lock, Eye, AlertCircle } from 'lucide-react';
 export default function PrivacyPolicyPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-16 space-y-12">
-      <div className="space-y-3">
+      <div className="space-y-3 text-center">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-sky">Legal & Compliance</span>
         <h1 className="text-4xl font-serif font-bold text-brand-navy dark:text-white">Privacy Policy</h1>
         <div className="text-xs text-slate-500">
@@ -22,14 +22,14 @@ export default function PrivacyPolicyPage() {
 
       <div className="prose prose-slate dark:prose-invert max-w-none text-sm leading-relaxed space-y-8">
         <section className="space-y-3">
-          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">1. Introduction</h2>
+          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white text-center">1. Introduction</h2>
           <p>
             First Savvy, Inc. ("First Savvy", "we", "us", or "our") provides a family financial education and personal finance management platform. This Privacy Policy describes how we collect, use, process, and protect your personal information when you visit our website (<code>1stsavvy.com</code>) or use our application (<code>app.firstsavvy.com</code>).
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">2. Information We Collect</h2>
+          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white text-center">2. Information We Collect</h2>
           <ul className="list-disc pl-5 space-y-2">
             <li><strong>Adult Account Information:</strong> Name, email address, password hash, timezone, currency preference, and household configuration.</li>
             <li><strong>Financial Data:</strong> Bank account balances, transaction history, categories, transaction rules, and manually entered asset/debt valuations. When using Plaid, account credentials remain strictly with Plaid and your financial institution.</li>
@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">3. Third-Party Service Providers</h2>
+          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white text-center">3. Third-Party Service Providers</h2>
           <p>
             We partner with vetted, industry-leading infrastructure and service providers to operate First Savvy securely:
           </p>
@@ -52,14 +52,14 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">4. Children's Online Privacy (COPPA)</h2>
+          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white text-center">4. Children's Online Privacy (COPPA)</h2>
           <p>
             First Savvy complies with the Children’s Online Privacy Protection Act (COPPA). We do not permit children under 13 to create independent accounts. Child profiles are created strictly by an authenticated parent or legal guardian who provides explicit consent. For complete details, see our <Link href="/children-privacy" className="text-brand-sky font-semibold underline">Children's Privacy Notice</Link>.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">5. Your Rights: Access, Export & Deletion</h2>
+          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white text-center">5. Your Rights: Access, Export & Deletion</h2>
           <p>
             You have full control over your data:
           </p>
@@ -71,9 +71,9 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white">6. Contact Our Privacy Officer</h2>
+          <h2 className="text-xl font-serif font-bold text-brand-navy dark:text-white text-center">6. Contact Our Privacy Officer</h2>
           <p>
-            If you have questions about this policy or wish to exercise your privacy rights, contact us at <a href="mailto:privacy@1stsavvy.com" className="text-brand-sky underline font-semibold">privacy@1stsavvy.com</a> or visit our <Link href="/contact" className="text-brand-sky underline">Contact Page</Link>.
+            If you have questions about this policy or wish to exercise your privacy rights, contact us at <a href="mailto:privacy@1stsavvy.com" className="text-brand-sky underline font-semibold">privacy@1stsavvy.com</a> or reach our support team at <a href="mailto:support@firstsavvy.com" className="text-brand-sky underline">support@firstsavvy.com</a>.
           </p>
         </section>
       </div>

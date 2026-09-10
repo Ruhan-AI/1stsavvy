@@ -62,8 +62,8 @@ interface DemoEvent {
 
 /** The household this Dashboard is scoped to — the member row FamilyConnectionsCard draws. */
 const HOUSEHOLD = [
-  { id: 'part', name: 'Part', initials: 'PS', color: '#52A5CE' },
-  { id: 'jr', name: 'Simon Jr', initials: 'SJ', color: '#10b981' },
+  { id: 'leo', name: 'Leo', initials: 'LM', color: '#52A5CE' },
+  { id: 'maya', name: 'Maya', initials: 'MM', color: '#10b981' },
 ];
 
 const MEAL_OPTIONS: Record<MealCourse, string[]> = {
@@ -174,7 +174,7 @@ export function LiveAppDashboardPreview() {
     document.addEventListener('keydown', escape);
     return () => { desktop.removeEventListener('change', reset); document.removeEventListener('keydown', escape); };
   }, []);
-  const [activeProfileTab, setActiveProfileTab] = useState('Simon John');
+  const [activeProfileTab, setActiveProfileTab] = useState('Sarah Miller');
 
   // Modals & Toasts
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -197,7 +197,7 @@ export function LiveAppDashboardPreview() {
       id: 'k1',
       title: 'Tidy Bedroom & Make Bed',
       description: 'Clothes away, bed made and floor clear before school.',
-      childId: 'part',
+      childId: 'leo',
       schedule: 'Daily',
       stars: 2,
       status: 'open',
@@ -206,7 +206,7 @@ export function LiveAppDashboardPreview() {
       id: 'k2',
       title: 'Feed & Walk Pet Dog',
       description: 'Morning feed plus a 15 minute walk around the block.',
-      childId: 'jr',
+      childId: 'maya',
       schedule: 'Daily',
       stars: 3,
       status: 'pending',
@@ -215,7 +215,7 @@ export function LiveAppDashboardPreview() {
       id: 'k3',
       title: 'Math & Reading Practice',
       description: '20 minutes of each, weekdays only.',
-      childId: 'jr',
+      childId: 'maya',
       schedule: 'Weekly',
       stars: 4,
       status: 'approved',
@@ -223,7 +223,7 @@ export function LiveAppDashboardPreview() {
     {
       id: 'k4',
       title: 'Set the Dinner Table',
-      childId: 'part',
+      childId: 'leo',
       schedule: 'Always Available',
       stars: 1,
       status: 'open',
@@ -232,13 +232,13 @@ export function LiveAppDashboardPreview() {
 
   /* Star balances tie the two cards together the way the real app does: approving a task
      pays stars out, redeeming a goal spends them. */
-  const [starBalances, setStarBalances] = useState<Record<string, number>>({ part: 45, jr: 20 });
+  const [starBalances, setStarBalances] = useState<Record<string, number>>({ leo: 42, maya: 28 });
 
   /* ---------- Goals — components/dashboard/DashboardGoalsCard.jsx ---------- */
 
   /* ---------- Calendar card ---------- */
   const [calDayOffset, setCalDayOffset] = useState(0);
-  const [expandedMember, setExpandedMember] = useState<string | null>('part');
+  const [expandedMember, setExpandedMember] = useState<string | null>('leo');
   const [activePlanningMeal, setActivePlanningMeal] = useState<string | null>(null);
   const [mealCourseTab, setMealCourseTab] = useState<MealCourse>('Entree');
   const [meals, setMeals] = useState<Record<string, string>>({
@@ -268,50 +268,33 @@ export function LiveAppDashboardPreview() {
   const activeEvents = events.filter((e) => e.day === calDayOffset);
 
   /* ---------- Handlers ---------- */
+  const redirectToSignup = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = '/signup';
+    }
+  };
+
   const awardStars = (childId: string, delta: number) =>
     setStarBalances((prev) => ({ ...prev, [childId]: Math.max(0, (prev[childId] ?? 0) + delta) }));
 
-  const handleToggleTask = (id: string) => {
-    const task = tasks.find((t) => t.id === id);
-    if (!task || task.status === 'pending') return;
-    const next: TaskStatus = task.status === 'approved' ? 'open' : 'approved';
-    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, status: next } : t)));
-    awardStars(task.childId, next === 'approved' ? task.stars : -task.stars);
-    showToast(
-      next === 'approved'
-        ? `⭐ ${task.stars} stars awarded for "${task.title}"`
-        : `Reopened "${task.title}" · ${task.stars} stars returned`
-    );
+  const handleToggleTask = () => {
+    redirectToSignup();
   };
 
-  const handleApproveTask = (id: string) => {
-    const task = tasks.find((t) => t.id === id);
-    if (!task) return;
-    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, status: 'approved' } : t)));
-    awardStars(task.childId, task.stars);
-    const member = HOUSEHOLD.find((m) => m.id === task.childId);
-    showToast(`⭐ Approved — ${member?.name ?? 'Child'} earned ${task.stars} stars`);
+  const handleApproveTask = () => {
+    redirectToSignup();
   };
 
-  const handlePlanMeal = (slot: string, dish: string) => {
-    setMeals((prev) => ({ ...prev, [`${calDayOffset}:${slot}`]: dish }));
-    setActivePlanningMeal(null);
-    showToast(`✓ ${slot} planned: ${dish}`);
+  const handlePlanMeal = () => {
+    redirectToSignup();
   };
 
-  const handleClearMeal = (slot: string) => {
-    setMeals((prev) => {
-      const next = { ...prev };
-      delete next[`${calDayOffset}:${slot}`];
-      return next;
-    });
-    showToast(`Cleared ${slot}`);
+  const handleClearMeal = () => {
+    redirectToSignup();
   };
 
   const handleAddEvent = () => {
-    const idea = NEW_EVENT_IDEAS[events.length % NEW_EVENT_IDEAS.length];
-    setEvents((prev) => [...prev, { id: `e${Date.now()}`, day: calDayOffset, ...idea }]);
-    showToast(`✓ Added event "${idea.title}"`);
+    redirectToSignup();
   };
 
   /* ---------- Net Worth chart ---------- */
@@ -383,31 +366,27 @@ export function LiveAppDashboardPreview() {
   /* ---------- Recent transactions ---------- */
   const [openCategoryDropdown, setOpenCategoryDropdown] = useState<string | null>(null);
   const [transactions, setTransactions] = useState<TransactionItem[]>([
-    { id: 't1', name: 'Netflix Subscription', date: 'Sep 2', account: 'Chase Checking', amount: '-$15.49', category: 'Category', posted: false },
-    { id: 't2', name: 'Shell Gas Station', date: 'Sep 1', account: 'Chase Checking', amount: '-$52.10', category: 'Category', posted: false },
-    { id: 't3', name: 'Acme Corp Payroll', date: 'Aug 31', account: 'Chase Checking', amount: '+$3,200.00', category: 'Category', posted: false },
-    { id: 't4', name: 'Interest Payment', date: 'Aug 31', account: 'Chase Savings', amount: '+$14.76', category: 'Category', posted: false },
-    { id: 't5', name: 'Whole Foods Market', date: 'Aug 30', account: 'Chase Checking', amount: '-$87.43', category: 'Category', posted: false },
+    { id: 't1', name: 'Digital Media Subscription', date: 'Sep 2', account: 'Primary Checking', amount: '-$14.99', category: 'Category', posted: false },
+    { id: 't2', name: 'City Fuel Station', date: 'Sep 1', account: 'Primary Checking', amount: '-$48.50', category: 'Category', posted: false },
+    { id: 't3', name: 'Monthly Salary Deposit', date: 'Aug 31', account: 'Primary Checking', amount: '+$3,200.00', category: 'Category', posted: false },
+    { id: 't4', name: 'Savings Interest Payment', date: 'Aug 31', account: 'High-Yield Savings', amount: '+$14.76', category: 'Category', posted: false },
+    { id: 't5', name: 'Fresh Market Groceries', date: 'Aug 30', account: 'Primary Checking', amount: '-$82.40', category: 'Category', posted: false },
   ]);
 
-  const handlePostTransaction = (id: string, name: string) => {
-    setTransactions((prev) => prev.map((t) => (t.id === id ? { ...t, posted: true } : t)));
-    showToast(`✓ Posted transaction: ${name}`);
+  const handlePostTransaction = () => {
+    redirectToSignup();
   };
 
-  const handleSelectCategory = (id: string, newCat: string) => {
-    setTransactions((prev) => prev.map((t) => (t.id === id ? { ...t, category: newCat } : t)));
-    setOpenCategoryDropdown(null);
-    showToast(`Category updated to "${newCat}"`);
+  const handleSelectCategory = () => {
+    redirectToSignup();
   };
 
   /* ---------- Top utilized budgets ---------- */
   const [budgetModalOpen, setBudgetModalOpen] = useState(false);
   const [hasCustomBudget, setHasCustomBudget] = useState(false);
 
-  const handleRemoveEvent = (id: string, title: string) => {
-    setEvents((prev) => prev.filter((e) => e.id !== id));
-    showToast(`Removed event "${title}"`);
+  const handleRemoveEvent = () => {
+    redirectToSignup();
   };
 
   const navLinks = [
@@ -428,7 +407,7 @@ export function LiveAppDashboardPreview() {
   return (
     <div
       data-demo-shell
-      className="relative flex h-full min-h-0 w-full overflow-hidden border-t border-slate-200 bg-[#f8fafc] text-left font-sans text-slate-800 lg:h-auto lg:min-h-[720px]"
+      className="relative flex h-full min-h-0 w-full overflow-hidden border-t border-slate-200 bg-[#f8fafc] text-left font-sans text-slate-800"
     >
       {/* Toast Notification */}
       {toastMessage && (
@@ -465,7 +444,7 @@ export function LiveAppDashboardPreview() {
               <input
                 type="text"
                 readOnly
-                value="https://app.firstsavvy.com/r/simon-lab-928"
+                value="https://app.firstsavvy.com/r/miller-family-204"
                 aria-label="Referral link"
                 className="min-h-11 min-w-0 text-base sm:text-xs font-mono bg-transparent flex-1 text-slate-700 outline-none"
               />
@@ -555,7 +534,7 @@ export function LiveAppDashboardPreview() {
       <aside
         id="demo-navigation"
         aria-label="Demo navigation"
-        className={`${mobileNavOpen ? 'absolute inset-y-0 left-0 z-40 flex' : 'hidden'} max-w-[88%] w-64 lg:relative lg:z-auto lg:flex shrink-0 transition-[width] duration-300 flex-col border-r border-slate-700/40 text-white select-none ${
+        className={`${mobileNavOpen ? 'absolute inset-y-0 left-0 z-40 flex' : 'hidden'} max-w-[88%] w-64 lg:relative lg:z-auto lg:flex shrink-0 h-full transition-[width] duration-300 flex-col border-r border-slate-700/40 text-white select-none ${
           sidebarCollapsed ? 'lg:w-16' : 'lg:w-48'
         }`}
         style={{ backgroundColor: '#2c4a6b' }}
@@ -601,7 +580,7 @@ export function LiveAppDashboardPreview() {
         </div>
 
         {/* Nav Items */}
-        <nav className="flex-1 min-h-0 py-3 px-2 space-y-0.5 overflow-y-auto overscroll-contain" data-lenis-prevent>
+        <nav className="flex-1 min-h-0 py-3 px-2 space-y-0.5 overflow-y-auto overscroll-auto" data-lenis-prevent>
           {navLinks.map((item) => {
             const Icon = item.icon;
             const isActive = activeNav === item.name;
@@ -634,20 +613,20 @@ export function LiveAppDashboardPreview() {
       </aside>
 
       {/* 2. MAIN CONTENT AREA */}
-      <div ref={(element) => { element?.toggleAttribute('inert', mobileNavOpen); }} className="flex-1 flex flex-col min-h-0 min-w-0 bg-[#f8fafc]">
+      <div ref={(element) => { element?.toggleAttribute('inert', mobileNavOpen); }} className="flex-1 flex flex-col h-full min-h-0 min-w-0 bg-[#f8fafc] overflow-hidden">
         {/* Top Header Bar */}
         <header className="bg-white px-2 sm:px-5 py-2 lg:py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-1 shrink-0">
           <div className="flex min-w-0 items-center gap-1.5">
             <button ref={menuButtonRef} type="button" aria-label="Open demo menu" aria-expanded={mobileNavOpen} aria-controls="demo-navigation" onClick={() => setMobileNavOpen(true)} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 lg:hidden"><Menu className="h-5 w-5" /></button>
             <span className="hidden sm:inline text-xs text-slate-500 font-normal">Welcome,</span>
-            <span className="text-xs font-semibold text-slate-900">Simon Lab</span>
+            <span className="text-xs font-semibold text-slate-900">Sarah Miller</span>
           </div>
 
           <div className="flex items-center gap-0 lg:gap-3">
             {/* Referral Button */}
             <button
               type="button"
-              onClick={() => setReferralModalOpen(true)}
+              onClick={redirectToSignup}
               aria-label="Referral"
               className="inline-flex min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 items-center justify-center gap-1.5 px-2 lg:px-3 py-1 rounded-xl text-xs font-semibold bg-[#0F766E] hover:bg-[#115E59] text-white shadow-xs transition-colors cursor-pointer"
             >
@@ -658,7 +637,7 @@ export function LiveAppDashboardPreview() {
             {/* Search */}
             <button
               type="button"
-              onClick={() => showToast('Search transactions, accounts, and tasks')}
+              onClick={redirectToSignup}
               className="inline-flex min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 items-center justify-center p-1 rounded text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
               title="Search"
             >
@@ -668,7 +647,7 @@ export function LiveAppDashboardPreview() {
             {/* Notifications */}
             <button
               type="button"
-              onClick={() => showToast('3 unread notifications')}
+              onClick={redirectToSignup}
               className="relative inline-flex min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 items-center justify-center p-1 rounded text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
               title="Notifications"
               aria-label="Notifications"
@@ -677,34 +656,31 @@ export function LiveAppDashboardPreview() {
               <span className="absolute right-0.5 top-0.5 h-1.5 w-1.5 rounded-full bg-rose-500" />
             </button>
 
-            {/* SL Avatar */}
-            <button type="button" aria-label="Profile: Simon Lab"
-              onClick={() => showToast('Profile • Simon Lab')}
+            {/* SM Avatar */}
+            <button type="button" aria-label="Profile: Sarah Miller"
+              onClick={redirectToSignup}
               className="hidden sm:flex w-11 h-11 lg:w-7 lg:h-7 rounded-full bg-slate-100 border border-slate-300 items-center justify-center text-[11px] font-bold text-slate-700 cursor-pointer hover:ring-2 hover:ring-[#52A5CE]/50 transition-all"
             >
-              SL
+              SM
             </button>
           </div>
         </header>
 
-        {/* Profile Tabs Bar (e.g. Simon John ✕ +) with prominent horizontal border line */}
+        {/* Profile Tabs Bar (e.g. Sarah Miller ✕ +) with prominent horizontal border line */}
         <div className="bg-white px-5 pt-2 border-b-2 border-slate-200 flex items-center gap-1 shrink-0 relative">
           <div className="flex items-center gap-2 px-4 py-1 bg-slate-100 border-t-2 border-l-2 border-r-2 border-slate-300 rounded-t-xl text-xs font-semibold text-slate-900 shadow-2xs -mb-[2px] pb-[calc(0.25rem+2px)]">
             <span>{activeProfileTab}</span>
             <button
               type="button"
-              onClick={() => showToast('Closed tab')}
-              className="text-slate-400 hover:text-slate-700 text-[10px] cursor-pointer"
+              onClick={redirectToSignup}
+              className="text-slate-400 hover:text-slate-700 text-[11px] cursor-pointer"
             >
               ✕
             </button>
           </div>
           <button
             type="button"
-            onClick={() => {
-              setActiveProfileTab(activeProfileTab === 'Simon John' ? 'Emma (Child)' : 'Simon John');
-              showToast(`Switched profile tab to ${activeProfileTab === 'Simon John' ? 'Emma' : 'Simon John'}`);
-            }}
+            onClick={redirectToSignup}
             className="p-1 text-slate-500 hover:text-slate-700 cursor-pointer"
             title="Add tab"
           >
@@ -716,14 +692,14 @@ export function LiveAppDashboardPreview() {
             profile tabs. */}
         <div className="flex shrink-0 items-center gap-1 border-b border-slate-200 bg-white px-3 py-1">
           {([
-            { icon: ArrowLeft, label: 'Back', msg: 'Went back' },
-            { icon: ArrowRight, label: 'Forward', msg: 'Went forward' },
-            { icon: RotateCw, label: 'Refresh', msg: 'Refreshed this view' },
-          ] as const).map(({ icon: Icon, label, msg }) => (
+            { icon: ArrowLeft, label: 'Back' },
+            { icon: ArrowRight, label: 'Forward' },
+            { icon: RotateCw, label: 'Refresh' },
+          ] as const).map(({ icon: Icon, label }) => (
             <button
               key={label}
               type="button"
-              onClick={() => showToast(msg)}
+              onClick={redirectToSignup}
               title={label}
               aria-label={label}
               className="inline-flex min-h-[36px] min-w-[36px] cursor-pointer items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
@@ -735,9 +711,9 @@ export function LiveAppDashboardPreview() {
 
         {/* Content area. Every sidebar item renders its own page — before this the nav
             only moved the highlight and left the Dashboard on screen. */}
-        <div ref={contentRef} data-demo-content data-lenis-prevent className={`p-4 sm:p-5 flex-1 min-h-0 min-w-0 overscroll-contain lg:overflow-visible ${referralModalOpen || budgetModalOpen ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+        <div ref={contentRef} data-demo-content data-lenis-prevent className={`p-4 sm:p-5 flex-1 min-h-0 min-w-0 overscroll-contain ${referralModalOpen || budgetModalOpen ? 'overflow-hidden' : 'overflow-y-auto'}`}>
           {activeNav !== 'Dashboard' ? (
-            <DemoAppPage nav={activeNav} onAction={showToast} />
+            <DemoAppPage nav={activeNav} onAction={redirectToSignup} />
           ) : (
           /* Dashboard body, laid out as the app's own dashboard: a wide left column
              carrying the net-worth chart over Recent Transactions / Top Utilized Budgets
@@ -800,7 +776,7 @@ export function LiveAppDashboardPreview() {
                     {chart.ticks.map((t) => (
                       <span
                         key={t.v}
-                        className="absolute right-0 -translate-y-1/2 whitespace-nowrap text-[10px] font-medium tabular-nums text-slate-400"
+                        className="absolute right-0 -translate-y-1/2 whitespace-nowrap text-[11px] font-medium tabular-nums text-slate-400"
                         style={{ top: `${(t.y / chart.H) * 100}%` }}
                       >
                         {compact(t.v, chart.range)}
@@ -851,7 +827,7 @@ export function LiveAppDashboardPreview() {
                     {/* X labels share the data window, so they cannot drift out of step */}
                     <div className="mt-1 flex justify-between">
                       {chart.labels.map((l) => (
-                        <span key={l} className="text-[10px] font-medium text-slate-400">
+                        <span key={l} className="text-[11px] font-medium text-slate-400">
                           {l}
                         </span>
                       ))}
@@ -883,12 +859,12 @@ export function LiveAppDashboardPreview() {
               <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
                 <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-4">
                   <div className="mb-3 flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                       Recent Transactions
                     </span>
                     <button
                       type="button"
-                      onClick={() => setActiveNav('Banking')}
+                      onClick={redirectToSignup}
                       className="cursor-pointer text-xs font-semibold text-[#52A5CE] hover:underline"
                     >
                       View all
@@ -908,7 +884,7 @@ export function LiveAppDashboardPreview() {
                         </div>
                         {/* Line 2 — the meta gets the full row; sharing it with the two
                             controls squeezed the date to "Sep …" in this column */}
-                        <p className="mt-0.5 truncate text-[10px] text-slate-400">
+                        <p className="mt-0.5 truncate text-[11px] text-slate-400">
                           {t.date} · {t.account}
                         </p>
                         {/* Line 3 — category and post, right-aligned */}
@@ -916,37 +892,23 @@ export function LiveAppDashboardPreview() {
                           <div className="relative shrink-0">
                             <button
                               type="button"
-                              onClick={() => setOpenCategoryDropdown(openCategoryDropdown === t.id ? null : t.id)}
-                              aria-expanded={openCategoryDropdown === t.id}
-                              className="inline-flex min-h-[36px] cursor-pointer items-center gap-1 rounded border border-slate-300 px-2 text-[10px] font-semibold text-slate-600 hover:bg-slate-100"
+                              onClick={redirectToSignup}
+                              aria-expanded={false}
+                              className="inline-flex min-h-[36px] cursor-pointer items-center gap-1 rounded border border-slate-300 px-2 text-[11px] font-semibold text-slate-600 hover:bg-slate-100"
                             >
                               <span className="max-w-[74px] truncate">{t.category}</span>
                               <ChevronDown className="h-3 w-3 shrink-0" />
                             </button>
-                            {openCategoryDropdown === t.id && (
-                              <div className="absolute right-0 z-20 mt-1 w-40 rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
-                                {['Groceries', 'Housing', 'Transportation', 'Entertainment', 'Income'].map((c) => (
-                                  <button
-                                    key={c}
-                                    type="button"
-                                    onClick={() => handleSelectCategory(t.id, c)}
-                                    className="block min-h-[36px] w-full cursor-pointer px-3 text-left text-[11px] font-medium text-slate-700 hover:bg-slate-50"
-                                  >
-                                    {c}
-                                  </button>
-                                ))}
-                              </div>
-                            )}
                           </div>
                           {t.posted ? (
-                            <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                            <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
                               Posted
                             </span>
                           ) : (
                             <button
                               type="button"
-                              onClick={() => handlePostTransaction(t.id, t.name)}
-                              className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded bg-[#52A5CE] px-2.5 text-[10px] font-bold text-white hover:bg-[#438fb6]"
+                              onClick={redirectToSignup}
+                              className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded bg-[#52A5CE] px-2.5 text-[11px] font-bold text-white hover:bg-[#438fb6]"
                             >
                               Post
                             </button>
@@ -959,12 +921,12 @@ export function LiveAppDashboardPreview() {
 
                 <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-4">
                   <div className="mb-3 flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                       Top Utilized Budgets
                     </span>
                     <button
                       type="button"
-                      onClick={() => setActiveNav('Budgeting')}
+                      onClick={redirectToSignup}
                       className="cursor-pointer text-xs font-semibold text-[#52A5CE] hover:underline"
                     >
                       View all
@@ -982,7 +944,7 @@ export function LiveAppDashboardPreview() {
                                 {b.name}
                               </span>
                               <span
-                                className={`shrink-0 whitespace-nowrap text-[10px] font-bold tabular-nums ${over ? 'text-red-600' : 'text-slate-500'}`}
+                                className={`shrink-0 whitespace-nowrap text-[11px] font-bold tabular-nums ${over ? 'text-red-600' : 'text-slate-500'}`}
                               >
                                 {money(b.spent)} / {money(b.budget)}
                               </span>
@@ -995,7 +957,7 @@ export function LiveAppDashboardPreview() {
                                 />
                               </div>
                               <span
-                                className={`shrink-0 whitespace-nowrap text-[10px] font-bold tabular-nums ${over ? 'text-red-600' : 'text-slate-500'}`}
+                                className={`shrink-0 whitespace-nowrap text-[11px] font-bold tabular-nums ${over ? 'text-red-600' : 'text-slate-500'}`}
                               >
                                 {pct}%
                               </span>
@@ -1025,7 +987,7 @@ export function LiveAppDashboardPreview() {
                       </p>
                       <button
                         type="button"
-                        onClick={() => setBudgetModalOpen(true)}
+                        onClick={redirectToSignup}
                         className="mt-4 inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#52A5CE] px-4 text-sm font-bold text-white shadow-2xs hover:bg-[#438fb6]"
                       >
                         <Sparkles className="h-4 w-4" />
@@ -1042,7 +1004,7 @@ export function LiveAppDashboardPreview() {
             <div data-dash-rail className="w-full lg:w-[330px] xl:w-[340px] shrink-0 space-y-4">
               {/* Card 1: Credit Score */}
               <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-4">
-                <span className="mb-2 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                <span className="mb-2 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                   Credit Score
                 </span>
                 <div className="flex flex-col items-center justify-center space-y-2 py-3 text-center">
@@ -1061,14 +1023,14 @@ export function LiveAppDashboardPreview() {
               <div className="space-y-3.5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
                 <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                   <div className="flex min-w-0 items-center gap-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">HOUSEHOLD</span>
-                    <span className="shrink-0 whitespace-nowrap rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">HOUSEHOLD</span>
+                    <span className="shrink-0 whitespace-nowrap rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-bold text-slate-600">
                       {HOUSEHOLD.length} members
                     </span>
                   </div>
                   <button
                     type="button"
-                    onClick={() => showToast('Opening all household profiles')}
+                    onClick={redirectToSignup}
                     className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded-lg px-2 text-xs font-semibold text-[#52A5CE] hover:bg-sky-50 hover:text-[#388bb4]"
                   >
                     View all →
@@ -1082,7 +1044,7 @@ export function LiveAppDashboardPreview() {
                       <button
                         key={m.id}
                         type="button"
-                        onClick={() => showToast(`Opening ${m.name}'s parental view · ${starBalances[m.id]} stars`)}
+                        onClick={redirectToSignup}
                         title={`${m.name} — ${starBalances[m.id]} Stars (Click to open parental view)`}
                         className="group flex shrink-0 cursor-pointer flex-col items-center gap-1.5 transition-transform active:scale-95"
                       >
@@ -1108,7 +1070,7 @@ export function LiveAppDashboardPreview() {
 
                   <button
                     type="button"
-                    onClick={() => showToast('Opening the add family member form')}
+                    onClick={redirectToSignup}
                     title="Add Family Member"
                     aria-label="Add family member"
                     className="group flex shrink-0 cursor-pointer flex-col items-center gap-1.5"
@@ -1134,11 +1096,11 @@ export function LiveAppDashboardPreview() {
                   <div className="flex w-full items-center justify-between sm:w-auto lg:w-full">
                     <div className="flex shrink-0 items-center gap-2">
                       <CalendarIcon className="h-3.5 w-3.5 text-[#52A5CE]" />
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">CALENDAR</span>
+                      <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">CALENDAR</span>
                     </div>
                     <button
                       type="button"
-                      onClick={() => setActiveNav('Calendar')}
+                      onClick={redirectToSignup}
                       className="inline-flex min-h-[36px] shrink-0 cursor-pointer items-center rounded-lg px-2 text-xs font-semibold text-[#52A5CE] hover:bg-sky-50 hover:text-[#388bb4] sm:hidden lg:inline-flex"
                     >
                       View all →
@@ -1162,7 +1124,7 @@ export function LiveAppDashboardPreview() {
                       <span className="whitespace-nowrap text-xs font-semibold text-slate-700 sm:hidden">{calShortLabel}</span>
                       <span className="hidden whitespace-nowrap text-xs font-semibold text-slate-700 sm:inline">{calLabel}</span>
                       {calDayOffset === 0 && (
-                        <span className="whitespace-nowrap rounded-full bg-[#52A5CE]/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#52A5CE]">
+                        <span className="whitespace-nowrap rounded-full bg-[#52A5CE]/10 px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-[#52A5CE]">
                           Today
                         </span>
                       )}
@@ -1180,7 +1142,7 @@ export function LiveAppDashboardPreview() {
 
                   <button
                     type="button"
-                    onClick={() => setActiveNav('Calendar')}
+                    onClick={redirectToSignup}
                     className="hidden min-h-[36px] shrink-0 cursor-pointer items-center rounded-lg px-2 text-xs font-semibold text-[#52A5CE] hover:bg-sky-50 hover:text-[#388bb4] sm:inline-flex lg:hidden"
                   >
                     View all →
@@ -1192,7 +1154,7 @@ export function LiveAppDashboardPreview() {
                   <div className="space-y-3 rounded-2xl border border-slate-200/70 bg-slate-50/30 p-3.5">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                        <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                           {activePlanningMeal.toUpperCase()} · {calShortLabel.toUpperCase()}
                         </p>
                         <h3 className="mt-0.5 text-sm font-semibold leading-tight text-slate-800">Plan this meal</h3>
@@ -1230,11 +1192,11 @@ export function LiveAppDashboardPreview() {
                         <button
                           key={dish}
                           type="button"
-                          onClick={() => handlePlanMeal(activePlanningMeal, dish)}
+                          onClick={() => handlePlanMeal()}
                           className="flex min-h-[36px] w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-slate-200/80 bg-white px-3 py-2 text-left shadow-2xs transition hover:border-[#52A5CE] hover:bg-sky-50/40"
                         >
                           <span className="min-w-0 flex-1 truncate text-xs font-semibold text-slate-700">{dish}</span>
-                          <span className="shrink-0 text-[10px] font-semibold text-[#52A5CE]">Add →</span>
+                          <span className="shrink-0 text-[11px] font-semibold text-[#52A5CE]">Add →</span>
                         </button>
                       ))}
                     </div>
@@ -1248,7 +1210,7 @@ export function LiveAppDashboardPreview() {
                           <Utensils className="h-3.5 w-3.5 text-[#f59e0b]" />
                           <span>Meals</span>
                         </span>
-                        <span className="text-[10px] font-medium text-[#52A5CE]">Plan</span>
+                        <button type="button" onClick={redirectToSignup} className="cursor-pointer text-[11px] font-medium text-[#52A5CE] hover:underline">Plan</button>
                       </div>
 
                       {/* Same card-width story as the header above: three across only
@@ -1264,11 +1226,11 @@ export function LiveAppDashboardPreview() {
                             >
                               <button
                                 type="button"
-                                onClick={() => { setActivePlanningMeal(slot); setMealCourseTab('Entree'); }}
+                                onClick={redirectToSignup}
                                 className="min-h-[36px] min-w-0 flex-1 cursor-pointer pr-1 text-left"
                               >
                                 <span className="block text-xs font-semibold leading-tight text-slate-700">{slot}</span>
-                                <span className="mt-0.5 block truncate text-[10px] font-normal italic text-slate-400">
+                                <span className="mt-0.5 block truncate text-[11px] font-normal italic text-slate-400">
                                   {planned || 'Not planned'}
                                 </span>
                               </button>
@@ -1276,17 +1238,17 @@ export function LiveAppDashboardPreview() {
                                 {planned && (
                                   <button
                                     type="button"
-                                    onClick={() => handleClearMeal(slot)}
+                                    onClick={redirectToSignup}
                                     title={`Remove ${slot}`}
                                     aria-label={`Remove ${slot}`}
-                                    className="flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-[10px] font-bold text-slate-400 shadow-xs transition hover:bg-red-500 hover:text-white"
+                                    className="flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-[11px] font-bold text-slate-400 shadow-xs transition hover:bg-red-500 hover:text-white"
                                   >
                                     ✕
                                   </button>
                                 )}
-                                <span className="whitespace-nowrap text-[10px] font-medium text-[#52A5CE] group-hover:underline">
+                                <button type="button" onClick={redirectToSignup} className="cursor-pointer whitespace-nowrap text-[11px] font-medium text-[#52A5CE] group-hover:underline">
                                   Plan →
-                                </span>
+                                </button>
                               </span>
                             </div>
                           );
@@ -1302,7 +1264,7 @@ export function LiveAppDashboardPreview() {
                           <span>Events</span>
                         </span>
                         {activeEvents.length > 0 ? (
-                          <span className="rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600">
+                          <span className="rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
                             {activeEvents.length}
                           </span>
                         ) : (
@@ -1310,7 +1272,7 @@ export function LiveAppDashboardPreview() {
                             type="button"
                             onClick={handleAddEvent}
                             aria-label="Add event"
-                            className="cursor-pointer text-[10px] font-medium text-[#10b981] hover:underline"
+                            className="cursor-pointer text-[11px] font-medium text-[#10b981] hover:underline"
                           >
                             + Add
                           </button>
@@ -1336,13 +1298,13 @@ export function LiveAppDashboardPreview() {
                                 <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: ev.color }} />
                                 <span className="min-w-0 flex-1 truncate text-xs font-medium text-slate-700">{ev.title}</span>
                                 {ev.allDay && (
-                                  <span className="shrink-0 whitespace-nowrap rounded-md bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-slate-600">
+                                  <span className="shrink-0 whitespace-nowrap rounded-md bg-slate-100 px-1.5 py-0.5 text-[11px] font-medium uppercase tracking-wider text-slate-600">
                                     All day
                                   </span>
                                 )}
                                 <button
                                   type="button"
-                                  onClick={() => handleRemoveEvent(ev.id, ev.title)}
+                                  onClick={() => handleRemoveEvent()}
                                   title="Remove event"
                                   aria-label={`Remove ${ev.title}`}
                                   className="inline-flex min-h-[36px] min-w-[36px] shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-300 transition hover:bg-red-50 hover:text-red-600"
@@ -1364,7 +1326,7 @@ export function LiveAppDashboardPreview() {
                           <span>Tasks</span>
                         </span>
                         {tasks.length > 0 && (
-                          <span className="whitespace-nowrap rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600">
+                          <span className="whitespace-nowrap rounded-full border border-slate-200/50 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
                             {tasks.length} due
                           </span>
                         )}
@@ -1393,7 +1355,7 @@ export function LiveAppDashboardPreview() {
                                 >
                                   <span className="flex min-w-0 items-center gap-2.5">
                                     <span
-                                      className="flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-full text-[10px] font-semibold text-white shadow-2xs"
+                                      className="flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-full text-[11px] font-semibold text-white shadow-2xs"
                                       style={{ backgroundColor: member.color }}
                                     >
                                       {member.initials}
@@ -1402,7 +1364,7 @@ export function LiveAppDashboardPreview() {
                                       <span className="block truncate text-xs font-semibold leading-tight text-slate-800">
                                         {member.name}
                                       </span>
-                                      <span className="mt-0.5 block whitespace-nowrap text-[10px] font-medium text-emerald-600">
+                                      <span className="mt-0.5 block whitespace-nowrap text-[11px] font-medium text-emerald-600">
                                         {completed}/{list.length} completed
                                       </span>
                                     </span>
@@ -1433,7 +1395,7 @@ export function LiveAppDashboardPreview() {
                                             >
                                               {task.title}
                                             </span>
-                                            <span className="mt-1 block select-none whitespace-nowrap text-[10px] font-semibold text-amber-600">
+                                            <span className="mt-1 block select-none whitespace-nowrap text-[11px] font-semibold text-amber-600">
                                               +{task.stars} {task.stars === 1 ? 'star' : 'stars'}
                                             </span>
                                           </span>
@@ -1441,14 +1403,14 @@ export function LiveAppDashboardPreview() {
 
                                         <div className="shrink-0">
                                           {task.status === 'approved' ? (
-                                            <span className="select-none whitespace-nowrap rounded-lg border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                                            <span className="select-none whitespace-nowrap rounded-lg border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">
                                               Approved
                                             </span>
                                           ) : task.status === 'pending' ? (
                                             <button
                                               type="button"
-                                              onClick={() => handleApproveTask(task.id)}
-                                              className="inline-flex min-h-[36px] cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg border border-amber-200 bg-amber-50 px-2 text-[10px] font-bold text-amber-600 transition hover:bg-amber-100"
+                                              onClick={() => handleApproveTask()}
+                                              className="inline-flex min-h-[36px] cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg border border-amber-200 bg-amber-50 px-2 text-[11px] font-bold text-amber-600 transition hover:bg-amber-100"
                                             >
                                               <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
                                               <span>Award</span>
@@ -1456,8 +1418,8 @@ export function LiveAppDashboardPreview() {
                                           ) : (
                                             <button
                                               type="button"
-                                              onClick={() => handleToggleTask(task.id)}
-                                              className="inline-flex min-h-[36px] cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg border border-slate-200 bg-slate-50 px-2 text-[10px] font-bold text-slate-500 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700"
+                                              onClick={() => handleToggleTask()}
+                                              className="inline-flex min-h-[36px] cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg border border-slate-200 bg-slate-50 px-2 text-[11px] font-bold text-slate-500 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700"
                                             >
                                               <Check className="h-3 w-3" />
                                               <span>Mark done</span>

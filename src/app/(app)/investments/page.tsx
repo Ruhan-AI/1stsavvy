@@ -44,7 +44,7 @@ export default function InvestmentsPage() {
         <div className="flex items-center gap-3">
           <div className="text-xs text-slate-500 flex items-center gap-1.5 bg-white dark:bg-slate-800 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
             <Clock className="w-3.5 h-3.5 text-brand-sky" />
-            <span>Prices as of Market Close • Vanguard IRA</span>
+            <span>Prices as of Market Close • Market Index IRA</span>
           </div>
         </div>
       </div>

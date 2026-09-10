@@ -35,7 +35,7 @@ export function AppHeader({ onOpenMobileMenu }: AppHeaderProps) {
     router.push('/dashboard');
   };
 
-  const switchToEmmaView = () => {
+  const switchToLeoView = () => {
     const childProfile = state.profiles.find((p) => p.isChild) || state.profiles[0];
     if (childProfile) {
       setActiveProfile(childProfile.id);
@@ -73,7 +73,7 @@ export function AppHeader({ onOpenMobileMenu }: AppHeaderProps) {
           </button>
         </div>
 
-        {/* Right Side: View Switcher (Parent View vs Child View Emma) & Profile */}
+        {/* Right Side: View Switcher (Parent View vs Child View Leo) & Profile */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* View Mode Switcher Pills */}
           <div className="flex items-center gap-1.5 bg-[#091524] p-1 rounded-full border border-[#172C46]">
@@ -94,7 +94,7 @@ export function AppHeader({ onOpenMobileMenu }: AppHeaderProps) {
 
             {/* Child View Button */}
             <button
-              onClick={switchToEmmaView}
+              onClick={switchToLeoView}
               className={`inline-flex items-center justify-center min-h-[36px] px-3 sm:px-4 rounded-full text-xs font-bold gap-1.5 whitespace-nowrap transition-all ${
                 isKidView
                   ? 'bg-amber-400 text-slate-950 shadow-sm shadow-amber-400/30'
@@ -103,7 +103,7 @@ export function AppHeader({ onOpenMobileMenu }: AppHeaderProps) {
             >
               <Star className={`w-3.5 h-3.5 shrink-0 ${isKidView ? 'fill-slate-950 text-slate-950' : 'text-amber-400'}`} />
               <span className="lg:hidden">Child</span>
-              <span className="hidden lg:inline">Child View (Emma)</span>
+              <span className="hidden lg:inline">Child View (Leo)</span>
             </button>
           </div>
 

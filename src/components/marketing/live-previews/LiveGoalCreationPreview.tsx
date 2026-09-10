@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Gift, ImagePlus } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Gift } from 'lucide-react';
 import {
   AssignTo,
   CHILDREN,
@@ -10,18 +11,9 @@ import {
   Field,
   IconAndColor,
   INPUT,
-  Note,
+  ScheduleSelect,
   StarStepper,
 } from './childDialogParts';
-
-/**
- * Marketing stand-in for the app's New Goal dialog
- * (`src/components/children/GoalDialog.jsx`): Title, Description, Icon & Color, Star
- * Cost, Assign to, an optional image, then Cancel / Create Goal.
- *
- * It differs from New Task in exactly the ways the real dialog does — star cost instead
- * of stars, an image slot instead of a schedule, and a rule under the title.
- */
 
 const LOOKS = [
   { name: 'Gift', color: '#EFCE7B' },
@@ -30,93 +22,147 @@ const LOOKS = [
   { name: 'Ticket', color: '#0F766E' },
 ];
 
+const TIMELINE_OPTIONS = [
+  { value: 'milestone', label: 'Milestone Goal' },
+  { value: 'end_of_month', label: 'By End of Month' },
+  { value: 'summer_break', label: 'By Summer Break' },
+  { value: 'holiday', label: 'Next Holiday' },
+];
+
 export function LiveGoalCreationPreview() {
+  const router = useRouter();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [look, setLook] = useState(0);
   const [cost, setCost] = useState(10);
+  const [timeline, setTimeline] = useState('milestone');
   const [selected, setSelected] = useState<string[]>([CHILDREN[0].id]);
-  const [note, setNote] = useState<string | null>(null);
+  const [showClickGuide, setShowClickGuide] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
-  const say = (message: string) => {
-    setNote(message);
-    window.setTimeout(() => setNote((current) => (current === message ? null : current)), 2800);
-  };
+  // Auto-fill animation on scroll into view
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || hasAnimated) return;
 
-  const create = () => {
-    const who = selected.length
-      ? CHILDREN.filter((c) => selected.includes(c.id)).map((c) => c.name).join(' and ')
-      : 'nobody yet';
-    say(`"${title.trim() || 'Extra screen time'}" — ${cost} stars for ${who}`);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+
+          const targetTitle = 'Weekend Theme Park Trip';
+          const targetDesc = 'Family celebration trip once milestone stars are reached!';
+
+          // Animate title typing (slight delay after task)
+          setTimeout(() => {
+            let tIndex = 0;
+            const titleInterval = setInterval(() => {
+              if (tIndex <= targetTitle.length) {
+                setTitle(targetTitle.slice(0, tIndex));
+                tIndex++;
+              } else {
+                clearInterval(titleInterval);
+
+                // Animate description typing
+                let dIndex = 0;
+                const descInterval = setInterval(() => {
+                  if (dIndex <= targetDesc.length) {
+                    setDescription(targetDesc.slice(0, dIndex));
+                    dIndex++;
+                  } else {
+                    clearInterval(descInterval);
+                    // Animate star cost up to 50
+                    setCost(50);
+                    // Select both children
+                    setSelected(CHILDREN.map((c) => c.id));
+                    // Activate one-shot click animation guide on button
+                    setTimeout(() => {
+                      setShowClickGuide(true);
+                    }, 400);
+                  }
+                }, 20);
+              }
+            }, 30);
+          }, 150);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  const handleRedirect = () => {
+    router.push('/signup');
   };
 
   return (
-    <DialogFrame title="New Goal" rule onClose={() => say('Closed without creating a goal')}>
-      <Field label="Title">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          maxLength={100}
-          placeholder="e.g., Extra screen time"
-          aria-label="Goal title"
-          className={INPUT}
-        />
-      </Field>
+    <div ref={containerRef} className="h-full">
+      <DialogFrame
+        title="New Goal"
+        onClose={handleRedirect}
+        footer={
+          <DialogFooter
+            submitLabel="Create Goal"
+            showClickGuide={showClickGuide}
+            onGuideComplete={() => setShowClickGuide(false)}
+            onCancel={handleRedirect}
+            onSubmit={handleRedirect}
+          />
+        }
+      >
+        <Field label="Title">
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            maxLength={100}
+            placeholder="e.g., Extra screen time"
+            aria-label="Goal title"
+            className={INPUT}
+          />
+        </Field>
 
-      <Field label="Description" optional optionalLowercase>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={3}
-          placeholder="Add details about this goal.."
-          aria-label="Goal description"
-          className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3 py-2 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none sm:text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-        />
-      </Field>
+        <Field label="Description" optional optionalLowercase>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={2}
+            placeholder="Add details about this goal.."
+            aria-label="Goal description"
+            className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+          />
+        </Field>
 
-      <Field label="Icon & Color">
-        <IconAndColor
-          name={LOOKS[look].name}
-          color={LOOKS[look].color}
-          icon={Gift}
-          onClick={() => setLook((i) => (i + 1) % LOOKS.length)}
-        />
-      </Field>
+        <Field label="Icon & Color">
+          <IconAndColor
+            name={LOOKS[look].name}
+            color={LOOKS[look].color}
+            icon={Gift}
+            onClick={() => setLook((i) => (i + 1) % LOOKS.length)}
+          />
+        </Field>
 
-      <Field label="Star Cost">
-        <StarStepper value={cost} onChange={setCost} />
-      </Field>
+        <Field label="Star Cost">
+          <StarStepper value={cost} onChange={setCost} />
+        </Field>
 
-      <Field label="Assign to">
-        <AssignTo
-          selected={selected}
-          onToggle={(id) =>
-            setSelected((current) => (current.includes(id) ? current.filter((x) => x !== id) : [...current, id]))
-          }
-          onToggleAll={(all) => setSelected(all ? CHILDREN.map((c) => c.id) : [])}
-        />
-      </Field>
+        <Field label="Target Timeline">
+          <ScheduleSelect value={timeline} onChange={setTimeline} options={TIMELINE_OPTIONS} />
+        </Field>
 
-      <div className="space-y-1.5">
-        <p className="text-sm font-semibold text-slate-800 dark:text-white">
-          Image <span className="font-normal text-slate-400">(optional)</span>
-        </p>
-        <p className="text-xs text-slate-400">Upload an image to replace the icon. Max 5MB.</p>
-        <div className="flex items-center gap-3 pt-1">
-          <button
-            type="button"
-            onClick={() => say('The file picker opens here in the app')}
-            className="flex h-14 w-14 cursor-pointer flex-col items-center justify-center gap-0.5 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 text-slate-400 transition-colors hover:border-slate-400 hover:text-slate-500 dark:border-slate-700 dark:bg-slate-800/50"
-          >
-            <ImagePlus className="h-4 w-4" />
-            <span className="text-[11px] font-medium">Upload</span>
-          </button>
-        </div>
-      </div>
-
-      <DialogFooter submitLabel="Create Goal" onCancel={() => say('Cancelled')} onSubmit={create} />
-
-      <Note text={note} />
-    </DialogFrame>
+        <Field label="Assign to">
+          <AssignTo
+            selected={selected}
+            onToggle={(id) =>
+              setSelected((current) => (current.includes(id) ? current.filter((x) => x !== id) : [...current, id]))
+            }
+            onToggleAll={(all) => setSelected(all ? CHILDREN.map((c) => c.id) : [])}
+          />
+        </Field>
+      </DialogFrame>
+    </div>
   );
 }

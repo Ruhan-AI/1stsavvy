@@ -15,7 +15,6 @@ export function MarketingHeader() {
     { name: 'Family', href: '/family' },
     { name: 'Personal Finance', href: '/personal-finance' },
     { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   // Close the drawer whenever the route changes
