@@ -91,7 +91,7 @@ export function LiveTaskCreationPreview() {
   };
 
   return (
-    <div ref={containerRef} className="h-full">
+    <div ref={containerRef} className="h-full w-full min-w-0">
       <DialogFrame
         title="New Task"
         onClose={handleRedirect}
@@ -123,7 +123,7 @@ export function LiveTaskCreationPreview() {
             rows={2}
             placeholder="Add details about the task..."
             aria-label="Task description"
-            className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+            className="min-h-[88px] w-full min-w-0 resize-y rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none sm:text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-white"
           />
         </Field>
 

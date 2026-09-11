@@ -123,7 +123,7 @@ export default function FamilyPage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="right" className="lg:col-span-7 min-w-0">
+          <ScrollReveal direction="right" className="mx-auto w-full max-w-xl lg:col-span-7 lg:max-w-none min-w-0">
             <LiveTaskCreationPreview />
           </ScrollReveal>
         </div>
@@ -153,7 +153,7 @@ export default function FamilyPage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="left" className="lg:order-1 lg:col-span-7 min-w-0">
+          <ScrollReveal direction="left" className="mx-auto w-full max-w-xl lg:order-1 lg:col-span-7 lg:max-w-none min-w-0">
             <LiveGoalCreationPreview />
           </ScrollReveal>
         </div>
@@ -161,7 +161,7 @@ export default function FamilyPage() {
 
       {/* 4. SECTION: THEIR EXPERIENCE AND YOUR VISIBILITY */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-4 sm:p-6 lg:p-12 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-slate-800 shadow-sm">
           <ScrollReveal direction="left" className="lg:col-span-5 min-w-0 space-y-3 sm:space-y-4 text-center">
             <span className="block text-xs font-bold uppercase tracking-widest text-brand-sky">
               Different Access. Same Family.
@@ -180,7 +180,7 @@ export default function FamilyPage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="right" className="lg:col-span-7 min-w-0">
+          <ScrollReveal direction="right" className="mx-auto w-full max-w-xl lg:col-span-7 lg:max-w-none min-w-0">
             <LiveGoalCreationPreview />
           </ScrollReveal>
         </div>
@@ -189,7 +189,7 @@ export default function FamilyPage() {
       {/* 5. EARLY ACCESS CTA */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="p-6 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#070B10] border border-slate-700/80 text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="p-4 sm:p-6 lg:p-12 rounded-3xl bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#070B10] border border-slate-700/80 text-white text-center space-y-6 relative overflow-hidden shadow-2xl">
             {/* 3D Canvas Background */}
             <div className="absolute inset-0 opacity-35 pointer-events-none -z-0">
               <CanvasErrorBoundary>
@@ -210,7 +210,7 @@ export default function FamilyPage() {
                 Join our early access program and begin building lasting financial habits with your family today.
               </p>
               <div className="pt-4">
-                <WaitlistForm />
+                <WaitlistForm placeholder="Your email address" />
               </div>
             </div>
           </div>

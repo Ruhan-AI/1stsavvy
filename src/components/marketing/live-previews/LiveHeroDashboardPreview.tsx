@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { amountClass } from './DemoAppPages';
 import { FamilyDemoChildView } from './FamilyDemoChildView';
 import { FamilyDemoDialogs } from './FamilyDemoDialogs';
@@ -120,6 +120,26 @@ export function LiveHeroDashboardPreview() {
   const contentRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMobileNavOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && mobileNavOpen) {
+        setMobileNavOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    desktop.addEventListener('change', closeOnDesktop);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      desktop.removeEventListener('change', closeOnDesktop);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [mobileNavOpen]);
+
   // Chores & Star Balances
   const starBalances: Record<string, number> = { leo: 42, maya: 28 };
   const tasks: DemoTask[] = [
@@ -234,12 +254,12 @@ export function LiveHeroDashboardPreview() {
   ];
 
   return (
-    <div data-mock-preview role="region" aria-label="Interactive family dashboard demo" className="relative w-full select-none text-left font-sans transition-all duration-300">
+    <div data-mock-preview data-demo-shell role="region" aria-label="Interactive family dashboard demo" className="relative min-w-0 w-full scroll-mt-20 select-none text-left font-sans transition-all duration-300">
       {/* Dynamic Ambient Background Glow */}
       <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-brand-sky/25 via-blue-600/20 to-teal-400/20 rounded-3xl -z-10 blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Main Glass Mockup Container */}
-      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#101926] border border-slate-700/80 shadow-2xl transition-all duration-700 ease-out cursor-default flex flex-col">
+      <div className="relative h-[min(540px,75svh)] min-h-[min(300px,calc(100svh-5rem))] lg:h-[640px] overflow-hidden rounded-2xl sm:rounded-3xl bg-[#101926] border border-slate-700/80 shadow-2xl transition-all duration-700 ease-out cursor-default flex flex-col">
         {/* In-Container Modal Popups */}
         <FamilyDemoDialogs
           task={completeTask}
@@ -249,7 +269,7 @@ export function LiveHeroDashboardPreview() {
           onSignup={redirectToSignup}
         />
         {/* macOS Style Window Chrome Header */}
-        <div className="relative z-20 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 px-3 sm:px-5 py-2.5 bg-slate-900/95 border-b border-slate-800/90">
+        <div className="relative z-20 flex shrink-0 flex-wrap sm:flex-nowrap items-center justify-center sm:justify-between gap-2.5 px-3 sm:px-5 py-2.5 bg-slate-900/95 border-b border-slate-800/90">
           {/* Left: macOS Dots */}
           <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 shrink-0">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500/90 shadow-xs ring-1 ring-rose-600/30 inline-block" />
@@ -308,7 +328,7 @@ export function LiveHeroDashboardPreview() {
         </div>
 
         {/* WebApp Workspace Split: Exact Homepage Hero Web App Shell */}
-        <div className="relative flex h-[540px] sm:h-[570px] w-full overflow-hidden border-t border-slate-200 bg-[#f8fafc] text-left font-sans text-slate-800">
+        <div className="relative flex flex-1 min-h-0 w-full overflow-hidden border-t border-slate-200 bg-[#f8fafc] text-left font-sans text-slate-800">
           {/* 1. LEFT SIDEBAR (Exact deep navy #2c4a6b from First Savvy Web App Layout.jsx & LiveAppDashboardPreview) */}
           {mobileNavOpen && (
             <button
@@ -373,7 +393,7 @@ export function LiveHeroDashboardPreview() {
             </div>
 
             {/* Nav Items */}
-            <nav className="flex-1 min-h-0 py-3 px-2 space-y-0.5 overflow-y-auto">
+            <nav data-lenis-prevent className="flex-1 min-h-0 py-3 px-2 space-y-0.5 overflow-y-auto overscroll-contain">
               {navLinks.map((item) => {
                 const Icon = item.icon;
                 const isActive = item.name === 'Dashboard';
@@ -386,11 +406,12 @@ export function LiveHeroDashboardPreview() {
                       isActive
                         ? 'bg-[#1e3550] text-white shadow-xs font-semibold'
                         : accountMode === 'child' ? 'text-slate-400/40 hover:bg-slate-700/50 hover:text-white' : 'text-slate-300 hover:bg-slate-700/50 hover:text-white'
-                    } ${sidebarCollapsed ? 'justify-center px-1.5' : 'justify-start'}`}
+                    } ${sidebarCollapsed ? 'lg:justify-center lg:px-1.5' : 'justify-start'}`}
                     title={item.name}
+                    aria-label={item.name}
                   >
-                    <Icon className={`w-4 h-4 lg:w-3.5 lg:h-3.5 shrink-0 mr-2.5 ${sidebarCollapsed ? 'mr-0' : ''}`} />
-                    <span className={`truncate text-left text-xs ${sidebarCollapsed ? 'hidden' : 'block'}`}>
+                    <Icon className={`w-4 h-4 lg:w-3.5 lg:h-3.5 shrink-0 mr-2.5 ${sidebarCollapsed ? 'lg:mr-0' : ''}`} />
+                    <span className={`block text-left text-xs ${sidebarCollapsed ? 'lg:hidden' : ''}`}>
                       {item.name}
                     </span>
                   </button>
@@ -403,7 +424,7 @@ export function LiveHeroDashboardPreview() {
               <button
                 type="button"
                 onClick={toggleAccountMode}
-                className={`w-full text-left rounded-xl bg-[#1e3550] hover:bg-[#182c44] border border-slate-600/50 transition-all cursor-pointer group ${sidebarCollapsed ? 'p-1.5' : 'p-2.5'}`}
+                className={`w-full p-2.5 text-left rounded-xl bg-[#1e3550] hover:bg-[#182c44] border border-slate-600/50 transition-all cursor-pointer group ${sidebarCollapsed ? 'lg:p-1.5' : ''}`}
                 title="Click to switch between Parent and Child view"
                 aria-label={`Switch to ${accountMode === 'parent' ? 'Child' : 'Parent'} View`}
               >
@@ -419,10 +440,10 @@ export function LiveHeroDashboardPreview() {
                     {accountMode === 'parent' ? 'SM' : 'LM'}
                   </div>
                   <div className={`min-w-0 flex-1 ${sidebarCollapsed ? 'lg:hidden' : ''}`}>
-                    <div className="text-xs font-bold text-white truncate">
+                    <div className="break-words text-xs font-bold text-white">
                       {accountMode === 'parent' ? 'Sarah Miller (Admin)' : 'Leo Miller (Kid)'}
                     </div>
-                    <div className="text-[10px] text-sky-200 truncate">
+                    <div className="text-[11px] text-sky-200">
                       {accountMode === 'parent' ? 'All Accounts Active' : `⭐ ${starBalances.leo} Stars Balance`}
                     </div>
                   </div>
@@ -434,7 +455,7 @@ export function LiveHeroDashboardPreview() {
           {/* 2. MAIN CONTENT AREA */}
           <div className="flex-1 flex flex-col h-full min-h-0 min-w-0 bg-[#f8fafc] overflow-hidden">
             {/* Top Header Bar */}
-            <header className="bg-white px-3 sm:px-5 py-2 border-b border-slate-200 flex flex-wrap items-center justify-between gap-1 shrink-0">
+            <header className="bg-white px-2 sm:px-5 py-1.5 border-b border-slate-200 flex items-center justify-between gap-1 shrink-0">
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 <button
                   ref={menuButtonRef}
@@ -449,12 +470,12 @@ export function LiveHeroDashboardPreview() {
                 </button>
                 {/* 320px has no room for the greeting alongside the name and the actions. */}
                 <span className="hidden sm:inline shrink-0 text-xs text-slate-500 font-normal">Welcome,</span>
-                <span className="truncate text-xs font-semibold text-slate-900">
+                <span className="hidden sm:block text-xs font-semibold text-slate-900">
                   Sarah Miller
                 </span>
               </div>
 
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex shrink-0 items-center gap-0.5 sm:gap-2">
                 {/* Referral Button */}
                 <button
                   type="button"
@@ -502,17 +523,17 @@ export function LiveHeroDashboardPreview() {
             </header>
 
             {/* Open family profiles also switch the preview locally. */}
-            <div className="relative flex shrink-0 items-center gap-1 border-b-2 border-slate-200 bg-white px-3 pt-2 sm:px-5">
+            <div className="relative flex shrink-0 items-center gap-1 border-b-2 border-slate-200 bg-white px-2 pt-2 sm:px-5">
               {(['parent', 'child'] as const).map((mode) => (
                 <button
                   key={mode}
                   type="button"
                   onClick={() => switchAccountMode(mode)}
                   aria-pressed={accountMode === mode}
-                  className={`-mb-[2px] inline-flex min-w-0 items-center gap-2 rounded-t-xl border-x-2 border-t-2 px-2.5 py-1.5 text-[11px] sm:px-3 sm:text-xs ${accountMode === mode ? 'border-slate-300 bg-[#f4f9fd] font-semibold text-slate-900' : 'border-transparent bg-slate-100 text-slate-500'}`}
+                  className={`-mb-[2px] inline-flex flex-1 sm:flex-none min-w-0 items-center justify-center gap-2 rounded-t-xl border-x-2 border-t-2 px-2 py-1.5 text-[11px] sm:px-3 sm:text-xs ${accountMode === mode ? 'border-slate-300 bg-[#f4f9fd] font-semibold text-slate-900' : 'border-transparent bg-slate-100 text-slate-500'}`}
                 >
-                  <span className="truncate">{mode === 'parent' ? 'Sarah Miller' : 'Leo Miller'}</span>
-                  <X aria-hidden="true" className="h-3 w-3 shrink-0" />
+                  <span>{mode === 'parent' ? 'Sarah Miller' : 'Leo Miller'}</span>
+                  <X aria-hidden="true" className="hidden sm:block h-3 w-3 shrink-0" />
                 </button>
               ))}
               <button
@@ -545,7 +566,7 @@ export function LiveHeroDashboardPreview() {
             </div>
 
             {/* Scrollable Content Area */}
-            <div ref={contentRef} className={`p-2 sm:p-3 flex-1 min-h-0 min-w-0 overflow-y-auto overscroll-contain ${accountMode === 'child' ? 'bg-[#f4f8fb]' : ''}`}>
+            <div ref={contentRef} data-lenis-prevent className={`p-2 sm:p-3 flex-1 min-h-0 min-w-0 overflow-y-auto overscroll-contain ${accountMode === 'child' ? 'bg-[#f4f8fb]' : ''}`}>
               {accountMode === 'child' ? (
                 <FamilyDemoChildView
                   starBalance={starBalances.leo}
@@ -556,13 +577,13 @@ export function LiveHeroDashboardPreview() {
                 />
               ) : (
                 /* PARENT VIEW MODE: Exact Homepage Dashboard with Concise Details */
-                <div className="flex flex-col lg:flex-row gap-3.5 items-start">
+                <div className="flex flex-col lg:flex-row lg:flex-wrap gap-3.5 items-start">
                   {/* ============ LEFT COLUMN ============ */}
-                  <div className="flex-1 min-w-0 w-full space-y-3.5">
+                  <div className="lg:flex-[999_1_420px] min-w-0 w-full space-y-3.5">
                     {/* Top: Net Worth Chart */}
                     <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-3.5 sm:p-4">
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                        <div className="inline-flex items-center gap-1 rounded-lg border border-slate-200/60 bg-slate-100 p-0.5">
+                        <div className="flex min-w-0 flex-wrap items-center gap-1 rounded-lg border border-slate-200/60 bg-slate-100 p-0.5">
                           {(Object.keys(TAB_LABELS) as ChartTab[]).map((t) => (
                             <button
                               key={t}
@@ -607,7 +628,7 @@ export function LiveHeroDashboardPreview() {
                           {chart.ticks.map((t) => (
                             <span
                               key={t.v}
-                              className="absolute right-0 -translate-y-1/2 whitespace-nowrap text-[10px] font-medium tabular-nums text-slate-400"
+                              className="absolute right-0 -translate-y-1/2 whitespace-nowrap text-[11px] font-medium tabular-nums text-slate-400"
                               style={{ top: `${(t.y / chart.H) * 100}%` }}
                             >
                               {compact(t.v, chart.range)}
@@ -657,7 +678,7 @@ export function LiveHeroDashboardPreview() {
 
                           <div className="mt-0.5 flex justify-between">
                             {chart.labels.map((l) => (
-                              <span key={l} className="text-[10px] font-medium text-slate-400">
+                              <span key={l} className="text-[11px] font-medium text-slate-400">
                                 {l}
                               </span>
                             ))}
@@ -666,13 +687,13 @@ export function LiveHeroDashboardPreview() {
                       </div>
 
                       {/* Timeframe Pills */}
-                      <div className="mt-2 flex items-center gap-1 overflow-x-auto no-scrollbar">
+                      <div className="mt-2 flex flex-wrap items-center gap-1">
                         {TIMEFRAMES.map((t) => (
                           <button
                             key={t}
                             type="button"
                             onClick={redirectToSignup}
-                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold transition-colors cursor-pointer ${
+                            className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold transition-colors cursor-pointer ${
                               timeframe === t ? 'bg-emerald-600 text-white' : 'text-slate-500 hover:bg-slate-100'
                             }`}
                           >
@@ -683,10 +704,10 @@ export function LiveHeroDashboardPreview() {
                     </div>
 
                     {/* Bottom Row: Recent Transactions + Top Budgets */}
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-3">
                       {/* Recent Transactions */}
                       <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-3 space-y-2">
-                        <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                        <div className="flex flex-wrap items-center justify-between gap-x-2 border-b border-slate-100 pb-1.5">
                           <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                             Recent Transactions
                           </span>
@@ -708,11 +729,11 @@ export function LiveHeroDashboardPreview() {
                               className="w-full p-2 text-left rounded-lg bg-slate-50 hover:bg-slate-100/80 border border-slate-100 flex items-center justify-between gap-2 cursor-pointer transition-colors"
                             >
                               <div className="min-w-0">
-                                <div className="text-xs font-semibold text-slate-900 truncate">{t.name}</div>
-                                <div className="text-[10px] text-slate-400">{t.date} • {t.category}</div>
+                                <div className="break-words text-xs font-semibold text-slate-900">{t.name}</div>
+                                <div className="text-[11px] text-slate-400">{t.date} • {t.category}</div>
                               </div>
                               <div className="text-right shrink-0">
-                                <div className={`text-xs font-bold ${amountClass(t.amount)}`}>{t.amount}</div>
+                                <div className={`whitespace-nowrap text-xs font-bold tabular-nums ${amountClass(t.amount)}`}>{t.amount}</div>
                                 <span className={`text-[11px] font-bold px-1 rounded ${t.posted ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
                                   {t.posted ? 'Posted' : 'Pending'}
                                 </span>
@@ -724,7 +745,7 @@ export function LiveHeroDashboardPreview() {
 
                       {/* Top Utilized Budgets */}
                       <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-3 space-y-2">
-                        <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                        <div className="flex flex-wrap items-center justify-between gap-x-2 border-b border-slate-100 pb-1.5">
                           <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                             Top Utilized Budgets
                           </span>
@@ -742,9 +763,9 @@ export function LiveHeroDashboardPreview() {
                             const pct = Math.round((b.spent / b.budget) * 100);
                             return (
                               <div key={b.id} className="space-y-1">
-                                <div className="flex justify-between text-[11px]">
-                                  <span className="font-semibold text-slate-800 truncate">{b.name}</span>
-                                  <span className="text-slate-500 tabular-nums">
+                                <div className="flex flex-wrap justify-between gap-x-2 text-[11px]">
+                                  <span className="break-words font-semibold text-slate-800">{b.name}</span>
+                                  <span className="shrink-0 whitespace-nowrap text-slate-500 tabular-nums">
                                     {money(b.spent)} / {money(b.budget)}
                                   </span>
                                 </div>
@@ -763,13 +784,13 @@ export function LiveHeroDashboardPreview() {
                   </div>
 
                   {/* ============ RIGHT RAIL ============ */}
-                  <div className="w-full lg:w-72 xl:w-80 shrink-0 space-y-3.5">
+                  <div className="w-full min-w-0 lg:flex-[1_1_260px] space-y-3.5">
                     {/* Household Card */}
                     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-2xs space-y-2.5">
-                      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                      <div className="flex flex-wrap items-center justify-between gap-x-2 border-b border-slate-100 pb-2">
                         <div className="flex items-center gap-1.5">
                           <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">HOUSEHOLD</span>
-                          <span className="rounded-full bg-slate-100 px-1.5 py-0.2 text-[10px] font-bold text-slate-600">
+                          <span className="rounded-full bg-slate-100 px-1.5 py-0.2 text-[11px] font-bold text-slate-600">
                             2 kids
                           </span>
                         </div>
@@ -809,7 +830,7 @@ export function LiveHeroDashboardPreview() {
 
                     {/* Chores & Tasks Summary Card */}
                     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-2xs space-y-2.5">
-                      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                      <div className="flex flex-wrap items-center justify-between gap-x-2 border-b border-slate-100 pb-2">
                         <div className="flex items-center gap-1.5">
                           <CheckSquare className="w-3.5 h-3.5 text-[#52A5CE]" />
                           <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
@@ -845,7 +866,7 @@ export function LiveHeroDashboardPreview() {
                                 >
                                   {isDone && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                                 </div>
-                                <span className={`text-xs truncate ${isDone ? 'line-through text-slate-400' : 'text-slate-800 font-medium'}`}>
+                                <span className={`break-words text-xs ${isDone ? 'line-through text-slate-400' : 'text-slate-800 font-medium'}`}>
                                   {t.title}
                                 </span>
                               </div>

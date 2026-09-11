@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useId, useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
 import { MapPin, Minus, Plus, ShoppingBag, Sparkles, Star, X } from 'lucide-react';
 
 interface FamilyDemoDialogsProps {
@@ -12,7 +12,7 @@ interface FamilyDemoDialogsProps {
 }
 
 const fieldClassName =
-  'w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#52a5ce] focus:ring-2 focus:ring-[#52a5ce]/15 transition-all';
+  'min-h-11 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-base sm:text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#52a5ce] focus:ring-2 focus:ring-[#52a5ce]/15 transition-all';
 const focusClassName =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#52a5ce] focus-visible:ring-offset-2';
 
@@ -34,7 +34,7 @@ function CashInForm({
         onSignup();
       }}
     >
-      <div className="space-y-4 p-5 sm:p-6">
+      <div className="space-y-4 p-4 sm:p-6">
         {/* Regular Stars Balance Banner */}
         <div className="flex items-center justify-between gap-3 rounded-xl border border-amber-300/80 bg-amber-50/90 px-4 py-3 text-xs font-semibold text-amber-900">
           <span>Regular stars</span>
@@ -83,11 +83,11 @@ function CashInForm({
               aria-label="Use one fewer star"
               disabled={stars <= 1}
               onClick={() => changeStars(stars - 1)}
-              className={`flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer ${focusClassName}`}
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer ${focusClassName}`}
             >
               <Minus aria-hidden="true" className="h-4 w-4" />
             </button>
-            <div className="flex h-10 w-28 items-center justify-center gap-1.5 rounded-xl border border-slate-200 px-3 text-slate-800 bg-white">
+            <div className="flex h-11 min-w-0 w-28 items-center justify-center gap-1.5 rounded-xl border border-slate-200 px-3 text-slate-800 bg-white">
               <Star aria-hidden="true" className="h-4 w-4 shrink-0 text-slate-500" />
               <input
                 id={`${fieldId}-stars`}
@@ -97,7 +97,7 @@ function CashInForm({
                 max={maximum}
                 value={stars}
                 onChange={(event) => changeStars(event.target.valueAsNumber)}
-                className="w-12 appearance-none bg-transparent text-center text-sm font-bold outline-none [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                className="min-h-11 min-w-0 w-12 appearance-none bg-transparent text-center text-base sm:text-sm font-bold outline-none [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               />
             </div>
             <button
@@ -105,7 +105,7 @@ function CashInForm({
               aria-label="Use one more star"
               disabled={stars >= maximum}
               onClick={() => changeStars(stars + 1)}
-              className={`flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer ${focusClassName}`}
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer ${focusClassName}`}
             >
               <Plus aria-hidden="true" className="h-4 w-4" />
             </button>
@@ -123,17 +123,17 @@ function CashInForm({
       </div>
 
       {/* Footer Buttons */}
-      <div className="flex items-center justify-end gap-3 border-t border-slate-100 px-6 py-4">
+      <div className="flex flex-col-reverse items-stretch justify-end gap-2 border-t border-slate-100 px-4 py-4 sm:flex-row sm:items-center sm:gap-3 sm:px-6">
         <button
           type="button"
           onClick={onClose}
-          className={`rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer ${focusClassName}`}
+          className={`min-h-11 rounded-xl px-4 py-2.5 text-sm sm:text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer ${focusClassName}`}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className={`inline-flex items-center justify-center gap-2 rounded-xl bg-[#ff6582] hover:bg-[#e84f6d] px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all cursor-pointer ${focusClassName}`}
+          className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#ff6582] hover:bg-[#e84f6d] px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all cursor-pointer ${focusClassName}`}
         >
           <ShoppingBag aria-hidden="true" className="h-4 w-4 shrink-0 text-white" />
           Request {stars} {stars === 1 ? 'Star' : 'Stars'}
@@ -152,29 +152,59 @@ export function FamilyDemoDialogs({
 }: FamilyDemoDialogsProps) {
   const open = Boolean(task) || cashInOpen;
   const notesId = useId();
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
 
   React.useEffect(() => {
     if (!open) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const shell = panelRef.current?.closest<HTMLElement>('[data-demo-shell]');
+    const bounds = shell?.getBoundingClientRect();
+    if (window.innerWidth < 1024 && bounds && (bounds.top < 80 || bounds.bottom > window.innerHeight)) {
+      shell?.scrollIntoView?.({ block: 'nearest', behavior: 'instant' });
+    }
+    const focusable = () => Array.from(panelRef.current?.querySelectorAll<HTMLElement>(
+      'button:not(:disabled), input:not(:disabled), textarea:not(:disabled), [tabindex="0"]'
+    ) ?? []);
+    focusable()[0]?.focus({ preventScroll: true });
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeRef.current();
+      }
+      if (event.key !== 'Tab') return;
+      const controls = focusable();
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first?.focus();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [open, onClose]);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      opener?.focus({ preventScroll: true });
+    };
+  }, [open]);
 
   if (!open) return null;
 
   return (
     <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={task ? 'Complete Task' : 'Cash In Stars'}
       onClick={onClose}
-      className="absolute inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+      className="absolute inset-0 z-50 flex min-h-0 items-center justify-center p-2 sm:p-4 bg-slate-950/70 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
     >
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={task ? 'Complete Task' : 'Cash In Stars'}
+        data-lenis-prevent
         onClick={(event) => event.stopPropagation()}
-        className={`relative w-full max-h-[92%] overflow-y-auto overscroll-contain rounded-2xl bg-white font-sans text-slate-800 shadow-2xl outline-none border border-slate-100 animate-in zoom-in-95 duration-200 ${
+        className={`relative w-full min-w-0 max-h-full overflow-y-auto overscroll-contain rounded-2xl bg-white font-sans text-slate-800 shadow-2xl outline-none border border-slate-100 animate-in zoom-in-95 duration-200 ${
           task ? 'max-w-[430px]' : 'max-w-[390px]'
         }`}
       >
@@ -186,10 +216,10 @@ export function FamilyDemoDialogs({
                 <Star aria-hidden="true" className="h-4 w-4 fill-white text-white" />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="text-[9px] font-bold uppercase tracking-wider text-white/90 block">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/90 block">
                   COMPLETE TASK
                 </span>
-                <p className="mt-0.5 text-sm sm:text-base font-bold leading-tight truncate text-white">
+                <p className="mt-0.5 break-words text-sm sm:text-base font-bold leading-tight text-white">
                   {task.title}
                 </p>
               </div>
@@ -201,7 +231,7 @@ export function FamilyDemoDialogs({
                 type="button"
                 onClick={onClose}
                 aria-label="Close Complete Task"
-                className={`rounded-lg p-1 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer ${focusClassName}`}
+                className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg p-1 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer ${focusClassName}`}
               >
                 <X aria-hidden="true" className="h-4 w-4" />
               </button>
@@ -223,21 +253,21 @@ export function FamilyDemoDialogs({
                   name="notes"
                   rows={3}
                   placeholder="Any notes for your parent? (optional)"
-                  className="w-full rounded-xl border border-slate-200 bg-[#f8fafc] focus:bg-white p-3 text-xs sm:text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#52a5ce] focus:ring-2 focus:ring-[#52a5ce]/20 min-h-[90px] resize-none transition-all shadow-2xs"
+                  className="w-full rounded-xl border border-slate-200 bg-[#f8fafc] focus:bg-white p-3 text-base sm:text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#52a5ce] focus:ring-2 focus:ring-[#52a5ce]/20 min-h-[90px] resize-none transition-all shadow-2xs"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 border-t border-slate-100 px-5 py-3">
+              <div className="flex flex-col-reverse items-stretch justify-end gap-2.5 border-t border-slate-100 px-4 py-3 sm:flex-row sm:items-center sm:px-5">
                 <button
                   type="button"
                   onClick={onClose}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer ${focusClassName}`}
+                  className={`min-h-11 rounded-lg px-3 py-1.5 text-sm sm:text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer ${focusClassName}`}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className={`inline-flex items-center gap-1.5 rounded-xl bg-[#52a5ce] hover:bg-[#4194bd] px-4 py-2 text-xs font-bold text-white shadow-2xs transition-all cursor-pointer ${focusClassName}`}
+                  className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[#52a5ce] hover:bg-[#4194bd] px-4 py-2 text-xs font-bold text-white shadow-2xs transition-all cursor-pointer ${focusClassName}`}
                 >
                   <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-white" />
                   Submit for Approval
@@ -248,7 +278,7 @@ export function FamilyDemoDialogs({
         ) : (
           <>
             {/* Header Matching Screenshot 3 */}
-            <div className="flex items-start gap-3 border-b border-slate-100 p-4 sm:p-4.5">
+            <div className="flex items-start gap-3 border-b border-slate-100 p-4 sm:p-5">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose-50 border border-rose-100 text-[#ff6582]">
                 <ShoppingBag aria-hidden="true" className="h-4 w-4" />
               </div>
@@ -264,7 +294,7 @@ export function FamilyDemoDialogs({
                 type="button"
                 onClick={onClose}
                 aria-label="Close Cash In Stars"
-                className={`rounded-lg p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer ${focusClassName}`}
+                className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer ${focusClassName}`}
               >
                 <X aria-hidden="true" className="h-4 w-4" />
               </button>
@@ -277,4 +307,3 @@ export function FamilyDemoDialogs({
     </div>
   );
 }
-

@@ -28,22 +28,23 @@ function ChildDemo({ onSignup }: { onSignup: () => void }) {
   );
 }
 
-afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+// Keep the shared browser API implementations from setup.ts between cases.
+afterEach(() => { cleanup(); vi.clearAllMocks(); });
 
 describe('family hero child demo', () => {
   it('lets visitors explore tasks, claimed goals and the activity log while keeping their 42-star preview', () => {
     const onSignup = vi.fn();
     render(<ChildDemo onSignup={onSignup} />);
 
-    expect(screen.getByRole('tab', { name: 'Tasks', selected: true })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Tasks', pressed: true })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Gardening/ })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('tab', { name: 'Goals' }));
-    expect(screen.getByRole('tab', { name: 'Goals', selected: true })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Goals' }));
+    expect(screen.getByRole('button', { name: 'Goals', pressed: true })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Preparation for Tug of war/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Do gym daily/ })).toBeInTheDocument();
     expect(screen.getAllByText(/Claimed 8\/19\/2026/)).toHaveLength(2);
 
-    fireEvent.click(screen.getByRole('tab', { name: 'Activity' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Activity' }));
     expect(screen.getByRole('heading', { name: 'Activity Log' })).toBeInTheDocument();
     const table = within(screen.getByRole('table'));
     expect(table.getAllByRole('columnheader').map((column) => column.textContent)).toEqual(['Date & Time', 'Event', 'Type', 'Stars', 'Balance']);
@@ -53,7 +54,7 @@ describe('family hero child demo', () => {
     expect(newest[3]).toHaveTextContent('+10');
     expect(newest[4]).toHaveTextContent('42');
 
-    fireEvent.click(screen.getByRole('tab', { name: 'Tasks' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Tasks' }));
     expect(screen.getByRole('button', { name: /Brush Your teeth/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Cash in stars, 42 stars available' })).toHaveTextContent('42');
     expect(onSignup).not.toHaveBeenCalled();
@@ -148,7 +149,7 @@ describe('family hero child demo', () => {
     render(<ChildDemo onSignup={onSignup} />);
     fireEvent.click(screen.getByRole('button', { name: /Clean bedroom & organize desk/ }));
     expect(onSignup).toHaveBeenCalledOnce();
-    fireEvent.click(screen.getByRole('tab', { name: 'Goals' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Goals' }));
     fireEvent.click(screen.getByRole('button', { name: /Preparation for Tug of war/ }));
     fireEvent.click(screen.getByRole('button', { name: /Do gym daily/ }));
     expect(onSignup).toHaveBeenCalledTimes(3);

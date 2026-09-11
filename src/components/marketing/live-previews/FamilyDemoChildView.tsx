@@ -86,20 +86,20 @@ export function FamilyDemoChildView({
   return (
     <section
       aria-label="Leo Miller's kid space"
-      className="w-full bg-[#f4f8fb] text-[#17324f] p-2.5 sm:p-3.5 flex flex-col justify-between"
+      className="w-full min-w-0 bg-[#f4f8fb] text-[#17324f] p-1 sm:p-3.5 flex flex-col justify-between"
     >
       <div>
         {/* Center Profile Row: Avatar, Greeting & Star Balance Badge */}
-        <div className="mx-auto max-w-[560px] flex items-center justify-between gap-3 mb-3.5">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-11 h-11 rounded-full bg-[#5a6b82] text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-2xs">
+        <div className="mx-auto max-w-[560px] flex items-center justify-between gap-2 sm:gap-3 mb-3.5">
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#5a6b82] text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-2xs">
               LM
             </div>
             <div className="min-w-0">
-              <h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight leading-tight truncate">
+              <h2 className="break-words text-base sm:text-lg font-black text-slate-900 tracking-tight leading-tight">
                 Hi, Leo Miller!
               </h2>
-              <p className="text-[11px] text-slate-400 truncate">
+              <p className="mt-0.5 text-[11px] leading-relaxed text-slate-500">
                 Ready to earn some stars?
               </p>
             </div>
@@ -111,7 +111,7 @@ export function FamilyDemoChildView({
             onClick={onCashIn}
             aria-label={`Cash in stars, ${starBalance} stars available`}
             title="Click to Cash In Stars"
-            className="relative flex items-center justify-center min-h-[42px] min-w-[80px] sm:min-w-[92px] px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#ea580c] hover:from-[#d97706] hover:to-[#c2410c] text-white shadow-xs hover:shadow-sm transition-all cursor-pointer group"
+            className="relative flex shrink-0 items-center justify-center min-h-[44px] min-w-[56px] sm:min-w-[80px] px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#ea580c] hover:from-[#d97706] hover:to-[#c2410c] text-white shadow-xs hover:shadow-sm transition-all cursor-pointer group"
           >
             <span className="text-xl sm:text-2xl font-black tracking-tight tabular-nums">
               {starBalance}
@@ -125,7 +125,7 @@ export function FamilyDemoChildView({
         {/* Segmented Tab Switcher */}
         <div className="mx-auto max-w-[560px] mb-3">
           <div
-            role="tablist"
+            role="group"
             aria-label="Kid space sections"
             className="grid grid-cols-3 gap-1 rounded-xl border border-slate-200 bg-white p-0.5 shadow-2xs"
           >
@@ -135,10 +135,9 @@ export function FamilyDemoChildView({
                 <button
                   key={label}
                   type="button"
-                  role="tab"
-                  aria-selected={isActive}
+                  aria-pressed={isActive}
                   onClick={() => setKidTab(label)}
-                  className={`inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  className={`inline-flex min-w-0 min-h-11 lg:min-h-8 items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1 sm:px-2 rounded-lg text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                     isActive
                       ? 'bg-[#3b82f6] text-white shadow-2xs font-bold'
                       : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
@@ -162,18 +161,18 @@ export function FamilyDemoChildView({
                   key={task.title}
                   type="button"
                   onClick={() => onCompleteTask({ title: task.title, stars: task.stars })}
-                  className="flex w-full items-center justify-between gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 border-[#52a5ce] bg-white text-left shadow-2xs hover:shadow-xs hover:border-[#3d91b7] hover:bg-sky-50/40 transition-all cursor-pointer group"
+                  className="flex min-h-16 w-full items-center justify-between gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 border-[#52a5ce] bg-white text-left shadow-2xs hover:shadow-xs hover:border-[#3d91b7] hover:bg-sky-50/40 transition-all cursor-pointer group"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#52a5ce] text-white shadow-2xs group-hover:scale-105 transition-transform">
                       <Star className="h-4 w-4 fill-white text-white" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs sm:text-[13px] font-bold text-slate-800 truncate leading-snug">
+                      <div className="break-words text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">
                         {task.title}
                       </div>
                       {task.description && (
-                        <div className="text-[10px] text-slate-400 leading-tight">
+                        <div className="mt-0.5 text-[11px] text-slate-500 leading-relaxed">
                           {task.description}
                         </div>
                       )}
@@ -190,17 +189,17 @@ export function FamilyDemoChildView({
               <button
                 type="button"
                 onClick={onSignup}
-                className="flex w-full items-center justify-between gap-2.5 p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-left shadow-2xs hover:bg-slate-50 transition-all cursor-pointer group"
+                className="flex min-h-16 w-full items-center justify-between gap-2 p-2.5 sm:p-3 rounded-xl border border-slate-200 bg-white text-left shadow-2xs hover:bg-slate-50 transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-300 text-white">
                     <Star className="h-4 w-4 fill-white text-white" />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xs sm:text-[13px] font-semibold text-slate-600 truncate leading-snug">
+                    <div className="break-words text-xs sm:text-[13px] font-semibold text-slate-600 leading-snug">
                       Clean bedroom & organize desk
                     </div>
-                    <div className="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                    <div className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
                       <Star className="h-2.5 w-2.5 text-slate-400" />
                       <span>5 stars</span>
                     </div>
@@ -228,15 +227,15 @@ export function FamilyDemoChildView({
                       <Gift className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs sm:text-[13px] font-bold text-slate-900 truncate leading-snug">
+                      <div className="break-words text-xs sm:text-[13px] font-bold text-slate-900 leading-snug">
                         {goal.title}
                       </div>
-                      <div className="mt-0.5 flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-emerald-100/70 px-1.5 py-0.2 text-[9px] font-semibold text-emerald-700">
-                          <Check className="h-2.5 w-2.5" /> Claimed {goal.claimedDate}
+                      <div className="mt-1 flex flex-col items-start gap-1">
+                        <span className="inline-flex flex-wrap items-center gap-1 rounded-full border border-emerald-300 bg-emerald-100/70 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">
+                          <Check className="h-2.5 w-2.5 shrink-0" /> Claimed {goal.claimedDate}
                         </span>
                         {goal.description && (
-                          <span className="text-[10px] text-slate-500 truncate">
+                          <span className="text-[11px] leading-relaxed text-slate-500">
                             {goal.description}
                           </span>
                         )}
@@ -257,8 +256,8 @@ export function FamilyDemoChildView({
             <div aria-label="Activity Log">
               <h3 className="text-xs font-bold text-slate-900 mb-2">Activity Log</h3>
               <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-[11px]">
+                <div data-lenis-prevent className="overflow-x-auto overscroll-x-contain" tabIndex={0} role="region" aria-label="Activity history, scroll horizontally to see all columns">
+                  <table className="w-full min-w-[560px] text-left text-[11px]">
                     <thead className="border-b border-slate-200 bg-slate-50 text-slate-500 font-medium">
                       <tr>
                         <th scope="col" className="px-2.5 py-1.5 whitespace-nowrap">Date &amp; Time</th>
@@ -282,7 +281,7 @@ export function FamilyDemoChildView({
                             onClick={onSignup}
                             className="hover:bg-slate-50/80 transition-colors cursor-pointer"
                           >
-                            <td className="whitespace-nowrap px-2.5 py-1.5 text-slate-500 text-[10px]">{row.when}</td>
+                            <td className="whitespace-nowrap px-2.5 py-2.5 text-slate-500 text-[11px]">{row.when}</td>
                             <td className="px-2 py-1.5 font-semibold text-slate-800">
                               <span className="flex items-center gap-1.5">
                                 <Icon
@@ -294,12 +293,12 @@ export function FamilyDemoChildView({
                                       : 'text-amber-500'
                                   }`}
                                 />
-                                <span className="truncate max-w-[170px]">{row.event}</span>
+                                <span className="min-w-[130px] max-w-[190px] break-words">{row.event}</span>
                               </span>
                             </td>
                             <td className="px-2 py-1.5">
                               <span
-                                className={`inline-block rounded-full border px-1.5 py-0.2 text-[9px] font-medium leading-tight ${ACTIVITY_STYLES[row.type]}`}
+                                className={`inline-block min-w-[70px] rounded-lg border px-1.5 py-0.5 text-[11px] font-medium leading-tight ${ACTIVITY_STYLES[row.type]}`}
                               >
                                 {row.type}
                               </span>
@@ -331,4 +330,3 @@ export function FamilyDemoChildView({
     </section>
   );
 }
-

@@ -11,7 +11,7 @@ export const CHILDREN = [
 export const LABEL = 'text-xs font-semibold uppercase tracking-wider text-slate-500';
 export const BOX = 'w-full rounded-xl border border-slate-200 bg-white';
 export const INPUT =
-  'h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-white';
+  'min-h-[44px] w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3.5 text-base sm:text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-slate-300 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-white';
 
 export function Field({
   label,
@@ -25,7 +25,7 @@ export function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-1.5">
+    <div className="min-w-0 space-y-1.5">
       <p className={LABEL}>
         {label}
         {optional && (
@@ -54,16 +54,16 @@ export function DialogFrame({
   return (
     <div
       data-mock-preview
-      className="relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 text-left font-sans shadow-xl sm:p-6 dark:border-slate-800 dark:bg-slate-900"
+      className="relative flex h-full w-full min-w-0 flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-4 text-left font-sans shadow-xl sm:p-6 dark:border-slate-800 dark:bg-slate-900"
     >
       <div>
-        <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3 dark:border-slate-800">
+        <div className="mb-4 flex min-w-0 items-center justify-between gap-2 border-b border-slate-100 pb-3 dark:border-slate-800">
           <h3 className="text-base font-bold text-slate-900 dark:text-white">{title}</h3>
           <button
             type="button"
             onClick={onClose}
             aria-label={`Close ${title}`}
-            className="-mr-1 -mt-1 flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800"
+            className="-mr-1 -mt-1 flex min-h-[44px] min-w-[44px] shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800"
           >
             <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden="true">
               <path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -93,16 +93,16 @@ export function IconAndColor({
     <button
       type="button"
       onClick={onClick}
-      className={`${BOX} flex cursor-pointer items-center justify-between p-2.5 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800`}
+      className={`${BOX} flex min-w-0 cursor-pointer items-center justify-between gap-2 p-2.5 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800`}
     >
-      <span className="flex items-center gap-3">
+      <span className="flex min-w-0 items-center gap-3">
         <span
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white shadow-2xs"
           style={{ backgroundColor: color }}
         >
           <Icon className="h-4 w-4" />
         </span>
-        <span className="flex flex-col justify-center text-left">
+        <span className="flex min-w-0 flex-col justify-center break-words text-left">
           <span className="text-xs font-semibold text-slate-800 dark:text-white">{name}</span>
           <span className="text-[11px] font-medium text-slate-400">Click to change</span>
         </span>
@@ -117,13 +117,13 @@ export function IconAndColor({
 
 export function StarStepper({ value, onChange }: { value: number; onChange: (n: number) => void }) {
   const btn =
-    'flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800';
+    'flex min-h-[44px] min-w-[44px] shrink-0 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-slate-600 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800';
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex min-w-0 items-center gap-2">
       <button type="button" onClick={() => onChange(Math.max(1, value - 1))} disabled={value <= 1} aria-label="Decrease" className={btn}>
         <Minus className="h-4 w-4 text-slate-500" />
       </button>
-      <div className="flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 dark:border-slate-700 dark:bg-slate-900">
+      <div className="flex min-h-[44px] min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 dark:border-slate-700 dark:bg-slate-900">
         <Star className="h-4 w-4 shrink-0 fill-amber-500 text-amber-500" />
         <span className="text-center text-sm font-semibold tabular-nums text-slate-800 dark:text-white">{value}</span>
       </div>
@@ -154,7 +154,7 @@ export function ScheduleSelect({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label="Schedule"
-        className="h-10 w-full cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white pl-3 pr-10 text-xs font-semibold text-slate-700 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+        className="min-h-[44px] w-full min-w-0 cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white pl-3.5 pr-10 text-base font-semibold text-slate-700 focus:outline-none sm:text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -180,11 +180,11 @@ export function AssignTo({
 }) {
   const allChecked = selected.length === CHILDREN.length;
   const box =
-    'h-4 w-4 shrink-0 cursor-pointer rounded border-slate-300 accent-[#52A5CE]';
+    'h-5 w-5 shrink-0 cursor-pointer rounded border-slate-300 accent-[#52A5CE]';
 
   return (
     <div className="space-y-2 rounded-xl border border-slate-200/80 bg-white p-2.5 dark:border-slate-700 dark:bg-slate-900">
-      <label className="flex cursor-pointer select-none items-center gap-2.5">
+      <label className="flex min-h-[44px] min-w-0 cursor-pointer select-none items-center gap-2.5">
         <input type="checkbox" checked={allChecked} onChange={(e) => onToggleAll(e.target.checked)} className={box} />
         <span className="text-xs font-bold text-slate-800 dark:text-white">All Children</span>
       </label>
@@ -194,16 +194,16 @@ export function AssignTo({
       {CHILDREN.map((c) => (
         <label
           key={c.id}
-          className="flex cursor-pointer select-none items-center gap-2.5 rounded-lg p-0.5 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50"
+          className="flex min-h-[44px] min-w-0 cursor-pointer select-none items-center gap-2.5 rounded-lg p-0.5 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/50"
         >
           <input type="checkbox" checked={selected.includes(c.id)} onChange={() => onToggle(c.id)} className={box} />
           <span
-            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-extrabold uppercase text-white shadow-xs"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-extrabold uppercase text-white shadow-xs"
             style={{ backgroundColor: c.color }}
           >
             {c.initials}
           </span>
-          <span className="text-xs font-semibold text-slate-800 dark:text-white">{c.name}</span>
+          <span className="min-w-0 break-words text-xs font-semibold text-slate-800 dark:text-white">{c.name}</span>
         </label>
       ))}
     </div>
@@ -302,20 +302,20 @@ export function DialogFooter({
   const [isSimulatedClicking, setIsSimulatedClicking] = useState(false);
 
   return (
-    <div className="flex w-full flex-row items-center justify-end gap-2.5 border-t border-slate-100 pt-3.5 dark:border-slate-800">
+    <div className="flex w-full min-w-0 flex-col items-stretch justify-end gap-2.5 border-t border-slate-100 pt-3.5 sm:flex-row sm:items-center dark:border-slate-800">
       <button
         type="button"
         onClick={onCancel}
-        className="inline-flex h-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 px-5 text-xs font-semibold text-slate-600 shadow-xs transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+        className="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-lg border border-slate-200 px-4 text-xs font-semibold text-slate-600 shadow-xs transition-colors hover:bg-slate-50 sm:w-auto sm:px-5 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
       >
         Cancel
       </button>
 
-      <div className="relative inline-flex">
+      <div className="relative inline-flex w-full min-w-0 sm:w-auto">
         <button
           type="button"
           onClick={onSubmit}
-          className={`relative inline-flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-[#52A5CE] px-6 text-xs font-semibold text-white shadow-xs transition-all duration-200 hover:bg-[#4194bd] active:scale-95 ${
+          className={`relative inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-[#52A5CE] px-4 text-xs font-semibold text-white shadow-xs transition-all duration-200 hover:bg-[#4194bd] active:scale-95 sm:w-auto sm:px-6 ${
             isSimulatedClicking ? 'scale-95 bg-[#3a86ad] shadow-inner' : 'hover:scale-105'
           }`}
         >
